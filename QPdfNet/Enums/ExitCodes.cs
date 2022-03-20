@@ -1,5 +1,5 @@
 ﻿//
-// Class1.cs
+// ExitCodes.cs
 //
 // Author: Kees van Spelde <sicos2002@hotmail.com>
 //
@@ -24,15 +24,28 @@
 // THE SOFTWARE.
 //
 
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace QPdfNet
+namespace QPdfNet.Enums
 {
-    public class Class1
+    public enum ExitCodes
     {
+        /// <summary>
+        ///     No errors or warnings were found
+        /// </summary>
+        Success = 0,
+
+        /// <summary>
+        ///     Not used
+        /// </summary>
+        NotUsed = 1,
+
+        /// <summary>
+        ///     Errors were found; the file was not processed
+        /// </summary>
+        ErrorsFoundFileNotProcessed = 2,
+
+        /// <summary>
+        ///     Warnings were found without errors and the file is processed
+        /// </summary>
+        WarningsWereFoundFileProcessed = 3
     }
 }

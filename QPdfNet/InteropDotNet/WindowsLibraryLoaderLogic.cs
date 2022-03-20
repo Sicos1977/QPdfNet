@@ -26,6 +26,7 @@
 
 using System;
 using System.Runtime.InteropServices;
+using QPdfNet.Loggers;
 
 namespace QPdfNet.InteropDotNet
 {

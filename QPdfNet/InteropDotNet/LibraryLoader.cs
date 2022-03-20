@@ -28,8 +28,8 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Reflection;
+using QPdfNet.Loggers;
 using File = System.IO.File;
-using OperatingSystem = QPdfNet.InteropDotNet.OperatingSystem;
 
 // ReSharper disable UnusedMember.Global
 

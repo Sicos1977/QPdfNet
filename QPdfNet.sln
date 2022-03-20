@@ -5,6 +5,8 @@ VisualStudioVersion = 17.1.32228.430
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QPdfNet", "QPdfNet\QPdfNet.csproj", "{1184D7CF-D69F-4707-AA76-55B846D32ACC}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QpdfNetTest", "QpdfNetTest\QpdfNetTest.csproj", "{1C702B8C-5945-4F57-8A80-3BCBA47EC468}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{1184D7CF-D69F-4707-AA76-55B846D32ACC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1184D7CF-D69F-4707-AA76-55B846D32ACC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1184D7CF-D69F-4707-AA76-55B846D32ACC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1C702B8C-5945-4F57-8A80-3BCBA47EC468}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1C702B8C-5945-4F57-8A80-3BCBA47EC468}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1C702B8C-5945-4F57-8A80-3BCBA47EC468}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1C702B8C-5945-4F57-8A80-3BCBA47EC468}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
