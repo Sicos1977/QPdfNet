@@ -1,3 +1,6 @@
+THIS IS STILL WORK IN PROGRESS SO NO FINISHED PRODUCT YET !!!!!
+=================
+
 What is QPdfNet
 =========
 A C# wrapper for qpdf
