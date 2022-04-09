@@ -1,6 +1,5 @@
 ﻿using System;
 using Newtonsoft.Json;
-using QPdfNet.Enums;
 
 namespace QPdfNet
 {
@@ -57,24 +56,23 @@ namespace QPdfNet
 
             switch (options.GetType().Name)
             {
-                case "Encryption40bit":
+                case "Encryption40Bit":
                     _options40 = options;
                     Options = _options40;
                     break;
 
-                case "Encryption128bit":
+                case "Encryption128Bit":
                     _options128 = options;
                     Options = _options40;
                     break;
 
-                case "Encryption256bit":
+                case "Encryption256Bit":
                     _options256 = options;
                     Options = _options40;
                     break;
 
                 default:
-                    throw new ArgumentException(
-                        "User either the class Encryption40Bit, Encryption128Bit or Encryption256Bit");
+                    throw new ArgumentException("User either the class Encryption40Bit, Encryption128Bit or Encryption256Bit");
             }
         }
         #endregion

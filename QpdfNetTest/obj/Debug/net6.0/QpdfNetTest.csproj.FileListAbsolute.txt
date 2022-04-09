@@ -109,3 +109,5 @@ D:\Progsoft\_GitHub_\QPdfNet\QpdfNetTest\bin\Debug\net6.0\x86\msvcp140.dll
 D:\Progsoft\_GitHub_\QPdfNet\QpdfNetTest\bin\Debug\net6.0\x86\qpdf.exe
 D:\Progsoft\_GitHub_\QPdfNet\QpdfNetTest\bin\Debug\net6.0\x86\qpdf28.dll
 D:\Progsoft\_GitHub_\QPdfNet\QpdfNetTest\bin\Debug\net6.0\x86\vcruntime140.dll
+D:\Progsoft\_GitHub_\QPdfNet\QpdfNetTest\bin\Debug\net6.0\TestFiles\test.pdf
+D:\Progsoft\_GitHub_\QPdfNet\QpdfNetTest\bin\Debug\net6.0\TestFiles\acrobat_8_help.pdf

@@ -88,9 +88,9 @@
   <ItemGroup>
     <Compile Include="EncryptionOptions.cs" />
     <Compile Include="Encryption.cs" />
-    <Compile Include="Encryption128bit.cs" />
-    <Compile Include="Encryption256.cs" />
-    <Compile Include="Encryption40bit.cs" />
+    <Compile Include="Encryption128Bit.cs" />
+    <Compile Include="Encryption256Bit.cs" />
+    <Compile Include="Encryption40Bit.cs" />
     <Compile Include="Enums\EncryptionModify.cs" />
     <Compile Include="Enums\EncryptionPrint.cs" />
     <Compile Include="Job.cs" />
@@ -115,6 +115,12 @@
   <ItemGroup>
     <None Include="app.config" />
     <None Include="packages.config" />
+    <None Include="TestFiles\acrobat_8_help.pdf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="TestFiles\test.pdf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Content Include="x64\msvcp140.dll">
