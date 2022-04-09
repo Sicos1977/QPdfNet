@@ -52,7 +52,7 @@ namespace QpdfNetTest
             var result = job.InputFile(Path.Combine("TestFiles", "test.pdf"))
                 .OutputFile(outputFile)
                 .Encrypt("user", "owner", new Encryption40Bit())
-                .WithLinearize()
+                .Linearize()
                 .Run();
 
             Assert.AreEqual(ExitCodes.Success, result);
@@ -68,7 +68,7 @@ namespace QpdfNetTest
             var result = job.InputFile(Path.Combine("TestFiles", "test.pdf"))
                 .OutputFile(outputFile)
                 .Encrypt("user", "owner", new Encryption128Bit())
-                .WithLinearize()
+                .Linearize()
                 .Run();
 
             Assert.AreEqual(ExitCodes.Success, result);
@@ -84,7 +84,7 @@ namespace QpdfNetTest
             var result = job.InputFile(Path.Combine("TestFiles", "test.pdf"))
                 .OutputFile(outputFile)
                 .Encrypt("user", "owner", new Encryption256Bit())
-                .WithLinearize()
+                .Linearize()
                 .Run();
 
             Assert.AreEqual(ExitCodes.Success, result);

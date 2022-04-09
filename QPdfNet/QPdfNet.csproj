@@ -91,6 +91,7 @@
     <Compile Include="Encryption128Bit.cs" />
     <Compile Include="Encryption256Bit.cs" />
     <Compile Include="Encryption40Bit.cs" />
+    <Compile Include="Enums\PasswordMode.cs" />
     <Compile Include="Enums\EncryptionModify.cs" />
     <Compile Include="Enums\EncryptionPrint.cs" />
     <Compile Include="Job.cs" />
