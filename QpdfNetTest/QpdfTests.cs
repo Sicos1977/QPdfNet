@@ -37,6 +37,10 @@ namespace QpdfNetTest
             var job = new Job();
             var result = job.InputFile(Path.Combine("TestFiles", "test.pdf"))
                 .OutputFile(outputFile)
+                .SuppressRecovery()
+                .IgnoreXrefStreams()
+                .NoOriginalObjectIds()
+                .Decrypt()
                 .Run();
 
             Assert.AreEqual(ExitCodes.Success, result);

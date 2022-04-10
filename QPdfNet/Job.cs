@@ -28,6 +28,7 @@ using System.IO;
 using Newtonsoft.Json;
 using QPdfNet.Enums;
 using QPdfNet.Interop;
+// ReSharper disable UnusedMember.Global
 
 namespace QPdfNet;
 
@@ -41,7 +42,6 @@ public class Job
 {
     #region Fields
     [JsonProperty("inputFile")] private string _inputFile;
-
     [JsonProperty("outputFile")] private string _outputFile;
     [JsonProperty("replaceInput")] private string _replaceInput;
     [JsonProperty("warningExit0")] private string _warningExit0;
@@ -51,12 +51,25 @@ public class Job
     [JsonProperty("deterministicId")] private string _deterministicId;
     [JsonProperty("allowWeakCrypto")] private string _allowWeakCrypto;
     [JsonProperty("passwordIsHexKey")] private string _passwordIsHexKey;
-    [JsonProperty("suppressPasswordRecovery")] private string _suppressPasswordRecovery;
+
+    [JsonProperty("suppressPasswordRecovery")]
+    private string _suppressPasswordRecovery;
+
     [JsonProperty("passwordMode")] private PasswordMode _passwordMode;
     [JsonProperty("suppressRecovery")] private string _suppressRecovery;
     [JsonProperty("ignoreXrefStreams")] private string _ignoreXrefStreams;
     [JsonProperty("linearize")] private string _linearize;
     [JsonProperty("encrypt")] private Encryption _encryption;
+    [JsonProperty("decrypt")] private string _decrypt;
+    [JsonProperty("copyEncryption")] private string _copyEncryption;
+
+    [JsonProperty("encryptionFilePassword")]
+    private string _encryptionFilePassword;
+
+    [JsonProperty("qpdf")] private string _qpdf;
+    [JsonProperty("noOriginalObjectIds")] private string _noOriginalObjectIds;
+    [JsonProperty("compressStreams")] private CompressStreams _compressStreams;
+    [JsonProperty("decodeLevel")] private DecodeLevel _decodeLevel;
     [JsonProperty("splitPages")] private string _splitPages;
     #endregion
 
@@ -272,7 +285,9 @@ public class Job
 
     #region SuppressRecovery
     /// <summary>
-    /// Prevents qpdf from attempting to reconstruct a file’s cross reference table when there are errors reading objects from the file. Recovery is triggered by a variety of situations. While usually successful, it uses heuristics that don’t work on all files. If this option is given, qpdf fails on the first error it encounters.
+    ///     Prevents qpdf from attempting to reconstruct a file’s cross reference table when there are errors reading objects
+    ///     from the file. Recovery is triggered by a variety of situations. While usually successful, it uses heuristics that
+    ///     don’t work on all files. If this option is given, qpdf fails on the first error it encounters.
     /// </summary>
     /// <see cref="Job" />
     public Job SuppressRecovery()
@@ -284,7 +299,13 @@ public class Job
 
     #region IgnoreXrefStreams
     /// <summary>
-    /// Tells qpdf to ignore any cross-reference streams, falling back to any embedded cross-reference tables or triggering document recovery. Ordinarily, qpdf reads cross-reference streams when they are present in a PDF file. If this option is specified, qpdf will ignore any cross-reference streams for hybrid PDF files. The purpose of hybrid files is to make some content available to viewers that are not aware of cross-reference streams. It is almost never desirable to ignore them. The only time when you might want to use this feature is if you are testing creation of hybrid PDF files and wish to see how a PDF consumer that doesn’t understand object and cross-reference streams would interpret such a file.
+    ///     Tells qpdf to ignore any cross-reference streams, falling back to any embedded cross-reference tables or triggering
+    ///     document recovery. Ordinarily, qpdf reads cross-reference streams when they are present in a PDF file. If this
+    ///     option is specified, qpdf will ignore any cross-reference streams for hybrid PDF files. The purpose of hybrid files
+    ///     is to make some content available to viewers that are not aware of cross-reference streams. It is almost never
+    ///     desirable to ignore them. The only time when you might want to use this feature is if you are testing creation of
+    ///     hybrid PDF files and wish to see how a PDF consumer that doesn’t understand object and cross-reference streams
+    ///     would interpret such a file.
     /// </summary>
     /// <see cref="Job" />
     public Job IgnoreXrefStreams()
@@ -296,7 +317,9 @@ public class Job
 
     #region Linearize
     /// <summary>
-    ///     Create linearized (web-optimized) output files. Linearized files are formatted in a way that allows compliant readers to begin displaying a PDF file before it is fully downloaded. Ordinarily, the entire file must be present before it can be rendered because important cross-reference information typically appears at the end of the file.
+    ///     Create linearized (web-optimized) output files. Linearized files are formatted in a way that allows compliant
+    ///     readers to begin displaying a PDF file before it is fully downloaded. Ordinarily, the entire file must be present
+    ///     before it can be rendered because important cross-reference information typically appears at the end of the file.
     /// </summary>
     /// <returns>
     ///     <see cref="Job" />
@@ -325,7 +348,139 @@ public class Job
     }
     #endregion
 
-    // https://qpdf.readthedocs.io/en/stable/cli.html?highlight=ranges#option-decrypt
+    #region Decrypt
+    /// <summary>
+    ///     Create an output file with no encryption even if the input file is encrypted. This option overrides the default
+    ///     behavior of preserving whatever encryption was present on the input file. This functionality is not intended to be
+    ///     used for bypassing copyright restrictions or other restrictions placed on files by their producers. See also
+    ///     --copy-encryption.
+    /// </summary>
+    /// <returns>
+    ///     <see cref="Job" />
+    /// </returns>
+    public Job Decrypt()
+    {
+        _decrypt = string.Empty;
+        return this;
+    }
+    #endregion
+
+    #region CopyEncryption
+    /// <summary>
+    ///     Copy all encryption parameters, including the user password, the owner password, and all security restrictions,
+    ///     from the specified file instead of preserving the encryption details from the input file. This works even if only
+    ///     one of the user password or owner password is known. If the encryption file requires a password, use the
+    ///     --encryption-file-password option to set it. Note that copying the encryption parameters from a file also copies
+    ///     the first half of /ID from the file since this is part of the encryption parameters. This option can be useful if
+    ///     you need to decrypt a file to make manual changes to it or to change it outside of qpdf, and then want to restore
+    ///     the original encryption on the file without having to manual specify all the individual settings. See also
+    ///     --decrypt.
+    /// </summary>
+    /// <param name="fileName">The file with full path</param>
+    /// <returns>
+    ///     <see cref="Job" />
+    /// </returns>
+    /// <exception cref="FileNotFoundException"></exception>
+    public Job CopyEncryption(string fileName)
+    {
+        if (!File.Exists(fileName))
+            throw new FileNotFoundException(fileName);
+
+        _copyEncryption = string.Empty;
+        return this;
+    }
+    #endregion
+
+    #region EncryptionFilePassword
+    /// <summary>
+    ///     f the file specified with <see cref="CopyEncryption" /> requires a password, supply the password using this option.
+    ///     This option is necessary because the --password option applies to the input file, not the file from which
+    ///     encryption is being copied.
+    /// </summary>
+    /// <param name="password"></param>
+    /// <returns>
+    ///     <see cref="Job" />
+    /// </returns>
+    public Job EncryptionFilePassword(string password)
+    {
+        _encryptionFilePassword = password;
+        return this;
+    }
+    #endregion
+
+    #region QPdf
+    /// <summary>
+    ///     Create a PDF file suitable for viewing and editing in a text editor. This is to edit the PDF code, not the page
+    ///     contents. To edit a QDF file, your text editor must preserve binary data. In a QDF file, all streams that can be
+    ///     uncompressed are uncompressed, and content streams are normalized, among other changes. The companion tool fix-qdf
+    ///     can be used to repair hand-edited QDF files. QDF is a feature specific to the qpdf tool. For additional
+    ///     information, see QDF Mode. Note that <see cref="Linearize" /> disables QDF mode.
+    /// </summary>
+    /// <returns>
+    ///     <see cref="Job" />
+    /// </returns>
+    public Job QPdf()
+    {
+        _qpdf = string.Empty;
+        return this;
+    }
+    #endregion
+
+    #region NoOriginalObjectIds
+    /// <summary>
+    ///     Suppresses inclusion of original object ID comments in QDF files. This can be useful when generating QDF files for
+    ///     test purposes, particularly when comparing them to determine whether two PDF files have identical content. The
+    ///     original object ID comment is there by default because it makes it easier to trace objects back to the original
+    ///     file.
+    /// </summary>
+    /// <returns>
+    ///     <see cref="Job" />
+    /// </returns>
+    public Job NoOriginalObjectIds()
+    {
+        _noOriginalObjectIds = string.Empty;
+        return this;
+    }
+    #endregion
+
+    #region CompressStreams
+    /// <summary>
+    ///     By default, or with <see cref="CompressStreams" /> = <see cref="Enums.CompressStreams.Yes" />, qpdf will compress
+    ///     streams using the flate compression algorithm (used by zip and gzip) unless those streams are compressed in some
+    ///     other way. This analysis is made after qpdf attempts to uncompress streams and is therefore closely related to
+    ///     <see cref="DecodeLevel" />. To suppress this behavior and leave streams streams uncompressed, use
+    ///     <see cref="CompressStreams" /> = <see cref="Enums.CompressStreams.No" />. In QDF
+    ///     mode (see QDF Mode and --qdf), the default is to leave streams uncompressed.
+    /// </summary>
+    /// <param name="compressStreams">
+    ///     <see cref="CompressStreams" />
+    /// </param>
+    /// <returns>
+    ///     <see cref="Job" />
+    /// </returns>
+    public Job CompressStreams(CompressStreams compressStreams = Enums.CompressStreams.Yes)
+    {
+        _compressStreams = compressStreams;
+        return this;
+    }
+    #endregion
+
+    #region DecodeLevel
+    /// <summary>
+    ///     Controls which streams qpdf tries to decode. The default is <see cref="Enums.DecodeLevel.Generalized" />.
+    /// </summary>
+    /// <param name="decodeLevel">
+    ///     <see cref="DecodeLevel" />
+    /// </param>
+    /// <returns></returns>
+    public Job DecodeLevel(DecodeLevel decodeLevel = Enums.DecodeLevel.Generalized)
+    {
+        _decodeLevel = decodeLevel;
+        return this;
+    }
+    #endregion
+
+    // https://qpdf.readthedocs.io/en/stable/cli.html?highlight=ranges#option-stream-data
 
     #region SplitPages
     /// <summary>
