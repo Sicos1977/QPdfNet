@@ -24,10 +24,12 @@
 // THE SOFTWARE.
 //
 
+using System;
 using System.IO;
 using Newtonsoft.Json;
 using QPdfNet.Enums;
 using QPdfNet.Interop;
+
 // ReSharper disable UnusedMember.Global
 
 namespace QPdfNet;
@@ -68,8 +70,13 @@ public class Job
 
     [JsonProperty("qpdf")] private string _qpdf;
     [JsonProperty("noOriginalObjectIds")] private string _noOriginalObjectIds;
-    [JsonProperty("compressStreams")] private CompressStreams _compressStreams;
+    [JsonProperty("compressStreams")] private YesNo _compressStreams;
     [JsonProperty("decodeLevel")] private DecodeLevel _decodeLevel;
+    [JsonProperty("streamData")] private StreamData _streamData;
+    [JsonProperty("recompressFlate")] private string _recompressFlate;
+    [JsonProperty("compressionLevel")] private string _compressionLevel;
+    [JsonProperty("normalizeContent")] private YesNo _normalizeContent;
+    [JsonProperty("objectStreams")] private ObjectStreams _objectStreams;
     [JsonProperty("splitPages")] private string _splitPages;
     #endregion
 
@@ -445,22 +452,22 @@ public class Job
 
     #region CompressStreams
     /// <summary>
-    ///     By default, or with <see cref="CompressStreams" /> = <see cref="Enums.CompressStreams.Yes" />, qpdf will compress
+    ///     By default, or with <see cref="CompressStreams" /> = <see cref="YesNo.Yes" />, qpdf will compress
     ///     streams using the flate compression algorithm (used by zip and gzip) unless those streams are compressed in some
     ///     other way. This analysis is made after qpdf attempts to uncompress streams and is therefore closely related to
     ///     <see cref="DecodeLevel" />. To suppress this behavior and leave streams streams uncompressed, use
-    ///     <see cref="CompressStreams" /> = <see cref="Enums.CompressStreams.No" />. In QDF
+    ///     <see cref="CompressStreams" /> = <see cref="YesNo.No" />. In QDF
     ///     mode (see QDF Mode and --qdf), the default is to leave streams uncompressed.
     /// </summary>
-    /// <param name="compressStreams">
-    ///     <see cref="CompressStreams" />
+    /// <param name="answer">
+    ///     <see cref="YesNo" />
     /// </param>
     /// <returns>
     ///     <see cref="Job" />
     /// </returns>
-    public Job CompressStreams(CompressStreams compressStreams = Enums.CompressStreams.Yes)
+    public Job CompressStreams(YesNo answer = YesNo.Yes)
     {
-        _compressStreams = compressStreams;
+        _compressStreams = answer;
         return this;
     }
     #endregion
@@ -472,7 +479,9 @@ public class Job
     /// <param name="decodeLevel">
     ///     <see cref="DecodeLevel" />
     /// </param>
-    /// <returns></returns>
+    /// <returns>
+    ///     <see cref="Job" />
+    /// </returns>
     public Job DecodeLevel(DecodeLevel decodeLevel = Enums.DecodeLevel.Generalized)
     {
         _decodeLevel = decodeLevel;
@@ -480,7 +489,109 @@ public class Job
     }
     #endregion
 
-    // https://qpdf.readthedocs.io/en/stable/cli.html?highlight=ranges#option-stream-data
+    #region StreamData
+    /// <summary>
+    ///     Controls transformation of stream data. This option predates the <see cref="CompressStreams" /> and
+    ///     <see cref="DecodeLevel" /> options. Those options can be used to achieve the same effect with more control
+    /// </summary>
+    /// <param name="streamData"></param>
+    /// <returns>
+    ///     <see cref="Job" />
+    /// </returns>
+    public Job StreamData(StreamData streamData = Enums.StreamData.Compress)
+    {
+        _streamData = streamData;
+        return this;
+    }
+    #endregion
+
+    #region RecompressFlate
+    /// <summary>
+    ///     The default generalized compression scheme used by PDF is flate (/FlateDecode), which is the same as used by zip
+    ///     and gzip. Usually qpdf just leaves these alone. This option tells qpdf to uncompress and recompress streams
+    ///     compressed with flate. This can be useful when combined with <see cref="CompressionLevel" />. Using this option may
+    ///     make qpdf
+    ///     much slower when writing output files.
+    /// </summary>
+    /// <returns>
+    ///     <see cref="Job" />
+    /// </returns>
+    public Job RecompressFlate()
+    {
+        _recompressFlate = string.Empty;
+        return this;
+    }
+    #endregion
+
+    #region CompressionLevel
+    /// <summary>
+    ///     When writing new streams that are compressed with /FlateDecode, use the specified compression
+    ///     <paramref name="level" />. The value of
+    ///     <paramref name="level" /> should be a number from 1 to 9 and is passed directly to zlib, which implements deflate
+    ///     compression. Lower
+    ///     numbers compress less and are faster; higher numbers compress more and are slower. Note that qpdf doesn’t
+    ///     uncompress and recompress streams compressed with flate by default. To have this option apply to already compressed
+    ///     streams, you should also specify <see cref="RecompressFlate" />. If your goal is to shrink the size of PDF files,
+    ///     you should
+    ///     also use <see cref="ObjectStream" />. If you omit this option, qpdf defers to the compression library’s default
+    ///     behavior.
+    /// </summary>
+    /// <returns>
+    ///     <see cref="Job" />
+    /// </returns>
+    public Job CompressionLevel(int level)
+    {
+        if (level is < 1 or > 9)
+            throw new ArgumentOutOfRangeException(nameof(level), "Should be in the range 1 to 9");
+
+        _compressionLevel = level.ToString();
+        return this;
+    }
+    #endregion
+
+    #region NormalizeContent
+    /// <summary>
+    ///     Enables or disables normalization of newlines in PDF content streams to UNIX-style newlines, which is useful for
+    ///     viewing files in a programmer-friendly text edit across multiple platforms. Content normalization is off by
+    ///     default, but is automatically enabled by <see cref="QPdf" /> (see also QDF Mode). It is not recommended to use this
+    ///     option for
+    ///     production use. If qpdf runs into any lexical errors while normalizing content, it will print a warning indicating
+    ///     that content may be damaged.
+    /// </summary>
+    /// <param name="answer">
+    ///     <see cref="YesNo" />
+    /// </param>
+    /// <returns>
+    ///     <see cref="Job" />
+    /// </returns>
+    public Job NormalizeContent(YesNo answer)
+    {
+        _normalizeContent = answer;
+        return this;
+    }
+    #endregion
+
+    #region ObjectStreams
+    /// <summary>
+    ///     Controls handling of object streams. Object streams are PDF streams that contain other objects. Putting objects
+    ///     into object streams allows the PDF objects themselves to be compressed, which can result in much smaller PDF files.
+    ///     Combining this option with <see cref="CompressionLevel" /> and <see cref="RecompressFlate" /> can often result in
+    ///     the creation of smaller PDF files.
+    /// </summary>
+    /// <param name="objectStreams">
+    ///     <see cref="ObjectStreams" />
+    /// </param>
+    /// <returns>
+    ///     <see cref="Job" />
+    /// </returns>
+    public Job ObjectStreams(ObjectStreams objectStreams)
+    {
+        _objectStreams = objectStreams;
+        return this;
+    }
+    #endregion
+
+    // https://qpdf.readthedocs.io/en/stable/cli.html?highlight=ranges#option-preserve-unreferenced
 
     #region SplitPages
     /// <summary>
@@ -496,12 +607,20 @@ public class Job
     ///     Page ranges are a single number in the case of single-page groups or two numbers separated by a dash otherwise.for
     ///     testing
     /// </summary>
+    /// <param name="n">
+    ///     A value greater than zero
+    /// </param>
     /// <returns>
     ///     <see cref="Job" />
     /// </returns>
     public Job SplitPages(string n)
     {
-        _splitPages = n;
+        if (!int.TryParse(n, out var result)) throw new ArgumentOutOfRangeException(n, "Value should be an integer");
+
+        if (result <= 0)
+            throw new ArgumentOutOfRangeException(n, "Value should be greater than zero");
+
+        _splitPages = result.ToString();
         return this;
     }
     #endregion

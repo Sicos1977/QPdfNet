@@ -3,9 +3,9 @@
 namespace QPdfNet.Enums
 {
     /// <summary>
-    ///     Compress streams
+    ///     Yes or no
     /// </summary>
-    public enum CompressStreams
+    public enum YesNo
     {
         /// <summary>
         ///     Yes
