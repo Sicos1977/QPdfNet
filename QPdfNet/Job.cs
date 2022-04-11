@@ -763,8 +763,6 @@ public class Job
 
     // TODO: https://qpdf.readthedocs.io/en/stable/cli.html?highlight=ranges#option-pages
 
-    // https://qpdf.readthedocs.io/en/stable/cli.html?highlight=ranges#option-preserve-unreferenced
-
     #region SplitPages
     /// <summary>
     ///     Write each group of <paramref name="n" /> pages to a separate  <see cref="OutputFile" />. If <paramref name="n" />
