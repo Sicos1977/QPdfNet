@@ -1,5 +1,6 @@
 ﻿using System;
 using Newtonsoft.Json;
+using QPdfNet.Interfaces;
 
 namespace QPdfNet
 {
@@ -13,13 +14,13 @@ namespace QPdfNet
         ///     The encryption options
         /// </summary>
         [JsonProperty("40bit")]
-        private EncryptionOptions _options40;
+        private IEncryption _options40;
 
         [JsonProperty("128bit")]
-        private EncryptionOptions _options128;
+        private IEncryption _options128;
 
         [JsonProperty("256bit")]
-        private EncryptionOptions _options256;
+        private IEncryption _options256;
         #endregion
 
         #region Properties
@@ -36,7 +37,7 @@ namespace QPdfNet
         public string OwnerPassword { get; private set; }
 
         [JsonIgnore]
-        public EncryptionOptions Options;
+        public IEncryption Options;
         #endregion
 
         #region Constructor
@@ -45,11 +46,11 @@ namespace QPdfNet
         /// </summary>
         /// <param name="userPassword">The user password</param>
         /// <param name="ownerPassword">The owner password</param>
-        /// <param name="options"><see cref="EncryptionOptions"/></param>
+        /// <param name="options"><see cref="IEncryption"/></param>
         internal Encryption(
             string userPassword, 
-            string ownerPassword, 
-            EncryptionOptions options)
+            string ownerPassword,
+            IEncryption options)
         {
             UserPassword = userPassword;
             OwnerPassword = ownerPassword;
@@ -63,12 +64,12 @@ namespace QPdfNet
 
                 case "Encryption128Bit":
                     _options128 = options;
-                    Options = _options40;
+                    Options = _options128;
                     break;
 
                 case "Encryption256Bit":
                     _options256 = options;
-                    Options = _options40;
+                    Options = _options256;
                     break;
 
                 default:

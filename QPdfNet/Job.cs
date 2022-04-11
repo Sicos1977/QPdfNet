@@ -1,5 +1,5 @@
 ﻿//
-// Class1.cs
+// Job.cs
 //
 // Author: Kees van Spelde <sicos2002@hotmail.com>
 //
@@ -26,8 +26,10 @@
 
 using System;
 using System.IO;
+using System.Text;
 using Newtonsoft.Json;
 using QPdfNet.Enums;
+using QPdfNet.Interfaces;
 using QPdfNet.Interop;
 
 // ReSharper disable UnusedMember.Global
@@ -310,7 +312,7 @@ public class Job
     /// <returns>
     ///     <see cref="Job" />
     /// </returns>
-    public Job Encrypt(string userPassword, string ownerPassword, EncryptionOptions options)
+    public Job Encrypt(string userPassword, string ownerPassword, IEncryption options)
     {
         _encryption = new Encryption(userPassword, ownerPassword, options);
         return this;
@@ -421,15 +423,13 @@ public class Job
     ///     <see cref="CompressStreams" /> = <see cref="YesNo.No" />. In QDF
     ///     mode (see QDF Mode and <see cref="QPdf"/>), the default is to leave streams uncompressed.
     /// </summary>
-    /// <param name="answer">
-    ///     <see cref="YesNo" />
-    /// </param>
+    /// <param name="compress"><c>true</c> or <c>false</c></param>
     /// <returns>
     ///     <see cref="Job" />
     /// </returns>
-    public Job CompressStreams(YesNo answer = YesNo.Yes)
+    public Job CompressStreams(bool compress)
     {
-        _compressStreams = answer;
+        _compressStreams = compress ? "y" : "n";
         return this;
     }
     #endregion
@@ -518,15 +518,13 @@ public class Job
     ///     indicating
     ///     that content may be damaged.
     /// </summary>
-    /// <param name="answer">
-    ///     <see cref="YesNo" />
-    /// </param>
+    /// <param name="normalize"><c>true</c> or <c>false</c></param>
     /// <returns>
     ///     <see cref="Job" />
     /// </returns>
-    public Job NormalizeContent(YesNo answer)
+    public Job NormalizeContent(bool normalize)
     {
-        _normalizeContent = answer;
+        _normalizeContent = normalize ? "y" : "n";
         return this;
     }
     #endregion
@@ -1007,9 +1005,16 @@ public class Job
     /// </returns>
     public ExitCodes Run()
     {
-        var settings = new JsonSerializerSettings { DefaultValueHandling = DefaultValueHandling.Ignore };
+        var settings = new JsonSerializerSettings { DefaultValueHandling = DefaultValueHandling.Ignore, Formatting = Formatting.Indented };
+        settings.Converters.Add(new Newtonsoft.Json.Converters.StringEnumConverter());
         var json = JsonConvert.SerializeObject(this, settings);
-        return QPdfApi.Native.RunFromJSON(json);
+
+        using var memoryStream = new MemoryStream();
+        Console.SetOut(new StreamWriter(memoryStream));
+
+        var result = QPdfApi.Native.RunFromJSON(json);
+        var test = Encoding.UTF8.GetString(memoryStream.ToArray());
+        return result;
     }
     #endregion
 
@@ -1041,12 +1046,12 @@ public class Job
 
     [JsonProperty("qpdf")] private string _qpdf;
     [JsonProperty("noOriginalObjectIds")] private string _noOriginalObjectIds;
-    [JsonProperty("compressStreams")] private YesNo _compressStreams;
+    [JsonProperty("compressStreams")] private string _compressStreams;
     [JsonProperty("decodeLevel")] private DecodeLevel _decodeLevel;
     [JsonProperty("streamData")] private StreamData _streamData;
     [JsonProperty("recompressFlate")] private string _recompressFlate;
     [JsonProperty("compressionLevel")] private string _compressionLevel;
-    [JsonProperty("normalizeContent")] private YesNo _normalizeContent;
+    [JsonProperty("normalizeContent")] private string _normalizeContent;
     [JsonProperty("objectStreams")] private ObjectStreams _objectStreams;
     [JsonProperty("preserveUnreferenced")] private string _preserveUnreferenced;
 

@@ -1,5 +1,5 @@
 ﻿//
-// FlattenAnnotations.cs
+// Print.cs
 //
 // Author: Kees van Spelde <sicos2002@hotmail.com>
 //
@@ -30,9 +30,9 @@ using System.Runtime.Serialization;
 namespace QPdfNet.Enums;
 
 /// <summary>
-///     Flatten Annotation Parameters
+///     Values for print
 /// </summary>
-public enum FlattenAnnotations
+public enum Print
 {
     /// <summary>
     ///     No value is set
@@ -40,20 +40,20 @@ public enum FlattenAnnotations
     NotSet,
 
     /// <summary>
-    ///     Include all annotations that are not marked invisible or hidden
+    ///     Disallow printing
     /// </summary>
-    [EnumMember(Value = "all")]
-    All,
+    [EnumMember(Value = "none")]
+    None,
 
     /// <summary>
-    ///     Only include annotations that should appear when the page is printed
+    ///     Allow only low-resolution printing
     /// </summary>
-    [EnumMember(Value = "print")]
-    Print,
+    [EnumMember(Value = "low")]
+    Low,
 
     /// <summary>
-    ///     Omit annotations that should not appear on the screen
+    ///     Allow full printing
     /// </summary>
-    [EnumMember(Value = "screen")]
-    Screen
+    [EnumMember(Value = "full")]
+    Full
 }

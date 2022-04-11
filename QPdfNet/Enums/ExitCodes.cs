@@ -24,28 +24,27 @@
 // THE SOFTWARE.
 //
 
-namespace QPdfNet.Enums
+namespace QPdfNet.Enums;
+
+public enum ExitCodes
 {
-    public enum ExitCodes
-    {
-        /// <summary>
-        ///     No errors or warnings were found
-        /// </summary>
-        Success = 0,
+    /// <summary>
+    ///     No errors or warnings were found
+    /// </summary>
+    Success = 0,
 
-        /// <summary>
-        ///     Not used
-        /// </summary>
-        NotUsed = 1,
+    /// <summary>
+    ///     Not used
+    /// </summary>
+    NotUsed = 1,
 
-        /// <summary>
-        ///     Errors were found; the file was not processed
-        /// </summary>
-        ErrorsFoundFileNotProcessed = 2,
+    /// <summary>
+    ///     Errors were found; the file was not processed
+    /// </summary>
+    ErrorsFoundFileNotProcessed = 2,
 
-        /// <summary>
-        ///     Warnings were found without errors and the file is processed
-        /// </summary>
-        WarningsWereFoundFileProcessed = 3
-    }
+    /// <summary>
+    ///     Warnings were found without errors and the file is processed
+    /// </summary>
+    WarningsWereFoundFileProcessed = 3
 }

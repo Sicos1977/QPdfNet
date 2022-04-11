@@ -1,5 +1,5 @@
 ﻿//
-// FlattenAnnotations.cs
+// Modify.cs
 //
 // Author: Kees van Spelde <sicos2002@hotmail.com>
 //
@@ -30,9 +30,9 @@ using System.Runtime.Serialization;
 namespace QPdfNet.Enums;
 
 /// <summary>
-///     Flatten Annotation Parameters
+///     Values for modify
 /// </summary>
-public enum FlattenAnnotations
+public enum Modify
 {
     /// <summary>
     ///     No value is set
@@ -40,20 +40,32 @@ public enum FlattenAnnotations
     NotSet,
 
     /// <summary>
-    ///     Include all annotations that are not marked invisible or hidden
+    ///     Options for 128-bit or 256-bit Encryption
+    /// </summary>
+    [EnumMember(Value = "none")]
+    None,
+
+    /// <summary>
+    ///     Allow document assembly only
+    /// </summary>
+    [EnumMember(Value = "assembly")]
+    Assembly,
+
+    /// <summary>
+    ///     <see cref="Assembly"/> permissions plus filling in form fields and signing
+    /// </summary>
+    [EnumMember(Value = "form")]
+    Form,
+
+    /// <summary>
+    ///    <see cref="Form"/> permissions plus commenting and modifying forms
+    /// </summary>
+    [EnumMember(Value = "annotate")]
+    Annotate,
+
+    /// <summary>
+    ///    Allow full document modification
     /// </summary>
     [EnumMember(Value = "all")]
-    All,
-
-    /// <summary>
-    ///     Only include annotations that should appear when the page is printed
-    /// </summary>
-    [EnumMember(Value = "print")]
-    Print,
-
-    /// <summary>
-    ///     Omit annotations that should not appear on the screen
-    /// </summary>
-    [EnumMember(Value = "screen")]
-    Screen
+    All
 }

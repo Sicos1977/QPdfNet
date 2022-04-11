@@ -40,6 +40,7 @@ namespace QpdfNetTest
                 .SuppressRecovery()
                 .IgnoreXrefStreams()
                 .NoOriginalObjectIds()
+                .PasswordMode(PasswordMode.Auto)
                 .Decrypt()
                 .Run();
 
@@ -55,7 +56,7 @@ namespace QpdfNetTest
             var job = new Job();
             var result = job.InputFile(Path.Combine("TestFiles", "test.pdf"))
                 .OutputFile(outputFile)
-                .Encrypt("user", "owner", new Encryption40Bit())
+                .Encrypt("user", "owner", new Encryption40Bit(false))
                 .Linearize()
                 .Run();
 
@@ -71,7 +72,7 @@ namespace QpdfNetTest
             var job = new Job();
             var result = job.InputFile(Path.Combine("TestFiles", "test.pdf"))
                 .OutputFile(outputFile)
-                .Encrypt("user", "owner", new Encryption128Bit())
+                .Encrypt("user", "owner", new Encryption128Bit(false, false))
                 .Linearize()
                 .Run();
 
@@ -87,7 +88,7 @@ namespace QpdfNetTest
             var job = new Job();
             var result = job.InputFile(Path.Combine("TestFiles", "test.pdf"))
                 .OutputFile(outputFile)
-                .Encrypt("user", "owner", new Encryption256Bit())
+                .Encrypt("user", "owner", new Encryption256Bit(true, true, true, true, true, true, Modify.None, Print.None))
                 .Linearize()
                 .Run();
 
@@ -103,7 +104,7 @@ namespace QpdfNetTest
             var job = new Job();
             var result = job.InputFile(Path.Combine("TestFiles", "acrobat_8_help.pdf"))
                 .OutputFile(outputFile)
-                .SplitPages("100")
+                .SplitPages(100)
                 .Run();
 
             Assert.AreEqual(ExitCodes.Success, result);
