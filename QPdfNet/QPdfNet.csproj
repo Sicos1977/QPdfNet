@@ -91,9 +91,12 @@
     <Compile Include="Encryption128Bit.cs" />
     <Compile Include="Encryption256Bit.cs" />
     <Compile Include="Encryption40Bit.cs" />
+    <Compile Include="Enums\Rotation.cs" />
+    <Compile Include="Enums\FlattenAnnotations.cs" />
     <Compile Include="Enums\ObjectStreams.cs" />
     <Compile Include="Enums\StreamData.cs" />
     <Compile Include="Enums\Decodelevel.cs" />
+    <Compile Include="Enums\AutoYesNo.cs" />
     <Compile Include="Enums\YesNo.cs" />
     <Compile Include="Enums\PasswordMode.cs" />
     <Compile Include="Enums\EncryptionModify.cs" />
