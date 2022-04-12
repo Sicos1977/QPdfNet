@@ -1008,7 +1008,12 @@ public class Job
         var json = JsonConvert.SerializeObject(this, settings);
 
         using var memoryStream = new MemoryStream();
+        Console.SetError(new StreamWriter(memoryStream));
         Console.SetOut(new StreamWriter(memoryStream));
+        var t = Console.IsErrorRedirected;
+        var tt = Console.IsOutputRedirected;
+
+        // https://code-examples.net/en/q/ee192e
 
         var result = QPdfApi.Native.RunFromJSON(json);
         var test = Encoding.UTF8.GetString(memoryStream.ToArray());

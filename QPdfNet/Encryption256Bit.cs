@@ -34,8 +34,8 @@ namespace QPdfNet
         [JsonProperty("print")]
         private Print _print;
 
-        //[JsonProperty("cleartextMetadata")]
-        //internal string CleartextMetadata;
+        [JsonProperty("cleartextMetadata")]
+        private string _cleartextMetadata;
         #endregion
 
         #region Constructor
@@ -59,8 +59,8 @@ namespace QPdfNet
             bool form = true, 
             bool modifyOther = true,
             Modify modify = Modify.All,
-            Print print = Print.Full)
-            //bool cleartextMetaData = true)
+            Print print = Print.Full,
+            bool cleartextMetaData = false)
         {
             _accessibility = accessibility ? "y" : "n";
             _annotate = annotate ? "y" : "n";
@@ -70,7 +70,9 @@ namespace QPdfNet
             _modifyOther = modifyOther ? "y" : "n";
             _modify = modify;
             _print = print;
-            //CleartextMetadata = cleartextMetaData ? "y" : "n";
+
+            //if (cleartextMetaData)
+                _cleartextMetadata = "y";
         }
     }
     #endregion
