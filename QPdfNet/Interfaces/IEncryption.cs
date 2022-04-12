@@ -1,5 +1,5 @@
 ﻿//
-// ObjectStream.cs
+// IEncryption.cs
 //
 // Author: Kees van Spelde <sicos2002@hotmail.com>
 //
@@ -24,36 +24,8 @@
 // THE SOFTWARE.
 //
 
+namespace QPdfNet.Interfaces;
 
-using System.Runtime.Serialization;
-
-namespace QPdfNet.Enums;
-
-/// <summary>
-///     Controls handling of object streams
-/// </summary>
-public enum ObjectStreams
+public interface IEncryption
 {
-    /// <summary>
-    ///     No value is set
-    /// </summary>
-    NotSet,
-
-    /// <summary>
-    ///     Preserve original object streams, if any (the default)
-    /// </summary>
-    [EnumMember(Value = "preserve")]
-    Preserve,
-
-    /// <summary>
-    ///     Create output files with no object streams
-    /// </summary>
-    [EnumMember(Value = "disable")]
-    Disable,
-
-    /// <summary>
-    ///     Create object streams, and compress objects when possible
-    /// </summary>
-    [EnumMember(Value = "generate")]
-    Generate
 }

@@ -1,5 +1,5 @@
 ﻿//
-// ObjectStream.cs
+// Modify.cs
 //
 // Author: Kees van Spelde <sicos2002@hotmail.com>
 //
@@ -30,9 +30,9 @@ using System.Runtime.Serialization;
 namespace QPdfNet.Enums;
 
 /// <summary>
-///     Controls handling of object streams
+///     Values for modify
 /// </summary>
-public enum ObjectStreams
+public enum Modify
 {
     /// <summary>
     ///     No value is set
@@ -40,20 +40,32 @@ public enum ObjectStreams
     NotSet,
 
     /// <summary>
-    ///     Preserve original object streams, if any (the default)
+    ///     Options for 128-bit or 256-bit Encryption
     /// </summary>
-    [EnumMember(Value = "preserve")]
-    Preserve,
+    [EnumMember(Value = "none")]
+    None,
 
     /// <summary>
-    ///     Create output files with no object streams
+    ///     Allow document assembly only
     /// </summary>
-    [EnumMember(Value = "disable")]
-    Disable,
+    [EnumMember(Value = "assembly")]
+    Assembly,
 
     /// <summary>
-    ///     Create object streams, and compress objects when possible
+    ///     <see cref="Assembly"/> permissions plus filling in form fields and signing
     /// </summary>
-    [EnumMember(Value = "generate")]
-    Generate
+    [EnumMember(Value = "form")]
+    Form,
+
+    /// <summary>
+    ///    <see cref="Form"/> permissions plus commenting and modifying forms
+    /// </summary>
+    [EnumMember(Value = "annotate")]
+    Annotate,
+
+    /// <summary>
+    ///    Allow full document modification
+    /// </summary>
+    [EnumMember(Value = "all")]
+    All
 }

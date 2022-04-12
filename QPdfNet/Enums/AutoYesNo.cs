@@ -1,5 +1,5 @@
 ﻿//
-// ObjectStream.cs
+// AutoYesNo.cs
 //
 // Author: Kees van Spelde <sicos2002@hotmail.com>
 //
@@ -30,9 +30,9 @@ using System.Runtime.Serialization;
 namespace QPdfNet.Enums;
 
 /// <summary>
-///     Controls handling of object streams
+///     Auto, yes or no
 /// </summary>
-public enum ObjectStreams
+public enum AutoYesNo
 {
     /// <summary>
     ///     No value is set
@@ -40,20 +40,20 @@ public enum ObjectStreams
     NotSet,
 
     /// <summary>
-    ///     Preserve original object streams, if any (the default)
+    ///     Auto
     /// </summary>
-    [EnumMember(Value = "preserve")]
-    Preserve,
+    [EnumMember(Value = "auto")]
+    Auto,
 
     /// <summary>
-    ///     Create output files with no object streams
+    ///     Yes
     /// </summary>
-    [EnumMember(Value = "disable")]
-    Disable,
+    [EnumMember(Value = "y")]
+    Yes,
 
     /// <summary>
-    ///     Create object streams, and compress objects when possible
+    ///     no
     /// </summary>
-    [EnumMember(Value = "generate")]
-    Generate
+    [EnumMember(Value = "n")]
+    No
 }

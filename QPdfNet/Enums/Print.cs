@@ -1,5 +1,5 @@
 ﻿//
-// ObjectStream.cs
+// Print.cs
 //
 // Author: Kees van Spelde <sicos2002@hotmail.com>
 //
@@ -30,9 +30,9 @@ using System.Runtime.Serialization;
 namespace QPdfNet.Enums;
 
 /// <summary>
-///     Controls handling of object streams
+///     Values for print
 /// </summary>
-public enum ObjectStreams
+public enum Print
 {
     /// <summary>
     ///     No value is set
@@ -40,20 +40,20 @@ public enum ObjectStreams
     NotSet,
 
     /// <summary>
-    ///     Preserve original object streams, if any (the default)
+    ///     Disallow printing
     /// </summary>
-    [EnumMember(Value = "preserve")]
-    Preserve,
+    [EnumMember(Value = "none")]
+    None,
 
     /// <summary>
-    ///     Create output files with no object streams
+    ///     Allow only low-resolution printing
     /// </summary>
-    [EnumMember(Value = "disable")]
-    Disable,
+    [EnumMember(Value = "low")]
+    Low,
 
     /// <summary>
-    ///     Create object streams, and compress objects when possible
+    ///     Allow full printing
     /// </summary>
-    [EnumMember(Value = "generate")]
-    Generate
+    [EnumMember(Value = "full")]
+    Full
 }

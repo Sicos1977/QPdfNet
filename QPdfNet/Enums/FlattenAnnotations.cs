@@ -1,5 +1,5 @@
 ﻿//
-// ObjectStream.cs
+// FlattenAnnotations.cs
 //
 // Author: Kees van Spelde <sicos2002@hotmail.com>
 //
@@ -30,9 +30,9 @@ using System.Runtime.Serialization;
 namespace QPdfNet.Enums;
 
 /// <summary>
-///     Controls handling of object streams
+///     Flatten Annotation Parameters
 /// </summary>
-public enum ObjectStreams
+public enum FlattenAnnotations
 {
     /// <summary>
     ///     No value is set
@@ -40,20 +40,20 @@ public enum ObjectStreams
     NotSet,
 
     /// <summary>
-    ///     Preserve original object streams, if any (the default)
+    ///     Include all annotations that are not marked invisible or hidden
     /// </summary>
-    [EnumMember(Value = "preserve")]
-    Preserve,
+    [EnumMember(Value = "all")]
+    All,
 
     /// <summary>
-    ///     Create output files with no object streams
+    ///     Only include annotations that should appear when the page is printed
     /// </summary>
-    [EnumMember(Value = "disable")]
-    Disable,
+    [EnumMember(Value = "print")]
+    Print,
 
     /// <summary>
-    ///     Create object streams, and compress objects when possible
+    ///     Omit annotations that should not appear on the screen
     /// </summary>
-    [EnumMember(Value = "generate")]
-    Generate
+    [EnumMember(Value = "screen")]
+    Screen
 }

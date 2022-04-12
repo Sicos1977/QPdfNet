@@ -1,5 +1,5 @@
 ﻿//
-// ObjectStream.cs
+// Rotation.cs
 //
 // Author: Kees van Spelde <sicos2002@hotmail.com>
 //
@@ -25,14 +25,12 @@
 //
 
 
-using System.Runtime.Serialization;
-
 namespace QPdfNet.Enums;
 
 /// <summary>
-///     Controls handling of object streams
+///     Rotation angle
 /// </summary>
-public enum ObjectStreams
+public enum Rotation
 {
     /// <summary>
     ///     No value is set
@@ -40,20 +38,37 @@ public enum ObjectStreams
     NotSet,
 
     /// <summary>
-    ///     Preserve original object streams, if any (the default)
+    ///     0 degrees clockwise
     /// </summary>
-    [EnumMember(Value = "preserve")]
-    Preserve,
+    Rotate0,
 
     /// <summary>
-    ///     Create output files with no object streams
+    ///     90 degrees clockwise
     /// </summary>
-    [EnumMember(Value = "disable")]
-    Disable,
+    Rotate90,
 
     /// <summary>
-    ///     Create object streams, and compress objects when possible
+    ///     90 degrees counter clockwise
     /// </summary>
-    [EnumMember(Value = "generate")]
-    Generate
+    RotateMinus90,
+
+    /// <summary>
+    ///     180 degrees clockwise
+    /// </summary>
+    Rotate180,
+
+    /// <summary>
+    ///     180 degrees counter clockwise
+    /// </summary>
+    RotateMinus180,
+
+    /// <summary>
+    ///     270 degrees clockwise
+    /// </summary>
+    Rotate270,
+
+    /// <summary>
+    ///     270 degrees counter clockwise
+    /// </summary>
+    RotateMinus270
 }
