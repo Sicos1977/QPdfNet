@@ -24,6 +24,7 @@
 // THE SOFTWARE.
 //
 
+using System;
 using System.Runtime.InteropServices;
 using QPdfNet.Enums;
 using QPdfNet.InteropDotNet;
@@ -45,6 +46,29 @@ namespace QPdfNet.Interop
     {
         /// <summary>
         ///     Returns the current version
+        /// </summary>
+        /// <returns></returns>
+        [RuntimeDllImport(Constants.QPdfDllName, CallingConvention = CallingConvention.Cdecl, EntryPoint = "qpdf_get_qpdf_version")]
+        [return: MarshalAs(UnmanagedType.LPTStr)]
+        string GetQPdfVersion();
+
+        [RuntimeDllImport(Constants.QPdfDllName, CallingConvention = CallingConvention.Cdecl, EntryPoint = "qpdf_init")]
+        IntPtr Init();
+
+        [RuntimeDllImport(Constants.QPdfDllName, CallingConvention = CallingConvention.Cdecl, EntryPoint = "qpdf_init")]
+        IntPtr Cleanup(IntPtr instance);
+
+        [RuntimeDllImport(Constants.QPdfDllName, CallingConvention = CallingConvention.Cdecl, EntryPoint = "qpdf_more_warnings")]
+        bool MoreWarnings(IntPtr instance);
+        
+        [RuntimeDllImport(Constants.QPdfDllName, CallingConvention = CallingConvention.Cdecl, EntryPoint = "qpdf_has_error")]
+        bool HasError(IntPtr instance);
+
+        [RuntimeDllImport(Constants.QPdfDllName, CallingConvention = CallingConvention.Cdecl, EntryPoint = "qpdf_get_error_full_text")]
+        IntPtr GetErrorFullText(IntPtr instance);
+
+        /// <summary>
+        ///     Runs the given json
         /// </summary>
         /// <returns></returns>
         [RuntimeDllImport(Constants.QPdfDllName, CallingConvention = CallingConvention.Cdecl, EntryPoint = "qpdfjob_run_from_json")]

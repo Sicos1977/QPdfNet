@@ -25,8 +25,8 @@
 //
 
 using System;
+using System.Diagnostics;
 using System.IO;
-using System.Text;
 using Newtonsoft.Json;
 using QPdfNet.Enums;
 using QPdfNet.Interfaces;
@@ -1007,20 +1007,19 @@ public class Job
         settings.Converters.Add(new Newtonsoft.Json.Converters.StringEnumConverter());
         var json = JsonConvert.SerializeObject(this, settings);
 
-        using var memoryStream = new MemoryStream();
-        Console.SetError(new StreamWriter(memoryStream));
-        Console.SetOut(new StreamWriter(memoryStream));
-        var t = Console.IsErrorRedirected;
-        var tt = Console.IsOutputRedirected;
-
-        // https://code-examples.net/en/q/ee192e
-
+        var instance = QPdfApi.Native.Init();
         var result = QPdfApi.Native.RunFromJSON(json);
-        var test = Encoding.UTF8.GetString(memoryStream.ToArray());
+        var warning = QPdfApi.Native.MoreWarnings(instance);
+        var hasError = QPdfApi.Native.HasError(instance);
+        if (hasError)
+        {
+            var error = QPdfApi.Native.GetErrorFullText(instance);
+        }
+
         return result;
     }
     #endregion
-
+    
     #region Fields
     [JsonProperty("inputFile")] private string _inputFile;
     [JsonProperty("outputFile")] private string _outputFile;
