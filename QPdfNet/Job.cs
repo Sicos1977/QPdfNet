@@ -95,8 +95,7 @@ public class Job
     #region WarningExit0
     /// <summary>
     ///     If there were warnings only and no errors, exit with exit code 0 instead of 3. When combined with
-    ///     <see cref="NoWarn" />, the effect
-    ///     is for qpdf to completely ignore warnings.
+    ///     <see cref="NoWarn" />, the effect is for qpdf to completely ignore warnings.
     /// </summary>
     /// <returns>
     ///     <see cref="Job" />
@@ -113,7 +112,7 @@ public class Job
     ///     Specifies a password for accessing encrypted, password-protected files. To read the password from a file or
     ///     standard input
     /// </summary>
-    /// <param name="password">The password to open the file</param>
+    /// <param name="password">The password to open the <see cref="InputFile"/></param>
     /// <returns>
     ///     <see cref="Job" />
     /// </returns>
@@ -126,31 +125,43 @@ public class Job
 
     #region PasswordFile
     /// <summary>
-    ///     Reads the first line from the specified file and uses it as the password for accessing encrypted files
+    ///     Reads the first line from the specified <paramref name="file"/> and uses it as the password for accessing encrypted files
     /// </summary>
-    /// <param name="fileName">The file with full path</param>
+    /// <param name="file">The file with full path</param>
     /// <returns>
     ///     <see cref="Job" />
     /// </returns>
     /// <exception cref="FileNotFoundException"></exception>
-    public Job PasswordFile(string fileName)
+    public Job PasswordFile(string file)
     {
-        if (!File.Exists(fileName))
-            throw new FileNotFoundException(fileName);
+        if (!File.Exists(file))
+            throw new FileNotFoundException(file);
 
         _passwordFile = string.Empty;
         return this;
     }
     #endregion
 
-    // TODO: Figure out how to make NoWarn work
+    #region Verbose
+    /// <summary>
+    ///     Increase verbosity of output. This includes information about files created, image optimization, and several other operations.
+    ///     In some cases, it also displays additional information when inspection options (see PDF Inspection) are used.
+    /// </summary>
+    /// <returns>
+    ///     <see cref="Job" />
+    /// </returns>
+    public Job Verbose()
+    {
+        _verbose = string.Empty;
+        return this;
+    }
+    #endregion
 
     #region NoWarn
     /// <summary>
     ///     Suppress writing of warnings to stderr. If warnings were detected and suppressed, qpdf will still exit with exit
     ///     code 3. To completely ignore warnings, also specify <see cref="WarningExit0" />. Use with caution as qpdf is not
-    ///     always
-    ///     successful in recovering from situations that cause warnings to be issued.
+    ///     always successful in recovering from situations that cause warnings to be issued.
     /// </summary>
     /// <returns>
     ///     <see cref="Job" />
@@ -196,6 +207,46 @@ public class Job
     public Job AllowWeakCrypto()
     {
         _allowWeakCrypto = string.Empty;
+        return this;
+    }
+    #endregion
+
+    #region KeepFilesOpen
+    /// <summary>
+    ///     This option controls whether qpdf keeps individual files open while merging. By default, qpdf keeps files open when
+    ///     merging unless more than 200 files are specified, in which case files are opened as needed and closed when finished.
+    ///     Repeatedly opening and closing files may impose a large performance penalty with some file systems, especially networked
+    ///     file systems. If you know that you have a large enough open file limit and are suffering from performance problems, or
+    ///     if you have an open file limit smaller than 200, you can use this option to override the default behavior by specifying
+    ///     <see cref="KeepFilesOpen"/> = <c>true</c> to force qpdf to keep files open or <see cref="KeepFilesOpen"/> = <c>false</c>
+    ///     to force it to only open files as needed. See also <see cref="KeepFilesOpenThreshold"/>.
+    /// </summary>
+    /// <param name="keepOpen"><c>true</c> or <c>false</c></param>
+    /// <returns>
+    ///     <see cref="Job" />
+    /// </returns>
+    public Job KeepFilesOpen(bool keepOpen)
+    {
+        _keepFilesOpen = keepOpen ? "y" : "n";
+        return this;
+    }
+    #endregion
+
+    #region KeepFilesOpen
+    /// <summary>
+    ///     If specified, overrides the default value of <c>200</c> used as the threshold for qpdf deciding whether or not to keep
+    ///     files open. See <see cref="KeepFilesOpen"/> for details.
+    /// </summary>
+    /// <param name="count">The amount of files to keep open</param>
+    /// <returns>
+    ///     <see cref="Job" />
+    /// </returns>
+    public Job KeepFilesOpenThreshold(int count = 200)
+    {
+        if (count < 1)
+            throw new ArgumentOutOfRangeException(nameof(count), "Needs to be a value of 1 or greater");
+
+        _keepFilesOpenThreshold = count.ToString();
         return this;
     }
     #endregion
@@ -330,7 +381,7 @@ public class Job
     ///     Create an output file with no encryption even if the input file is encrypted. This option overrides the default
     ///     behavior of preserving whatever encryption was present on the input file. This functionality is not intended to be
     ///     used for bypassing copyright restrictions or other restrictions placed on files by their producers. See also
-    ///     --copy-encryption.
+    ///     <see cref="CopyEncryption"/>.
     /// </summary>
     /// <returns>
     ///     <see cref="Job" />
@@ -348,21 +399,20 @@ public class Job
     ///     from the specified file instead of preserving the encryption details from the input file. This works even if only
     ///     one of the user password or owner password is known. If the encryption file requires a password, use the
     ///     <see cref="EncryptionFilePassword" /> option to set it. Note that copying the encryption parameters from a file
-    ///     also copies
-    ///     the first half of /ID from the file since this is part of the encryption parameters. This option can be useful if
-    ///     you need to decrypt a file to make manual changes to it or to change it outside of qpdf, and then want to restore
-    ///     the original encryption on the file without having to manual specify all the individual settings. See also
-    ///     --decrypt.
+    ///     also copies the first half of /ID from the file since this is part of the encryption parameters. This option can
+    ///     be useful if you need to decrypt a file to make manual changes to it or to change it outside of qpdf, and then want
+    ///     to restore the original encryption on the file without having to manual specify all the individual settings. See also
+    ///     <see cref="Decrypt"/>.
     /// </summary>
-    /// <param name="fileName">The file with full path</param>
+    /// <param name="file">The file with full path</param>
     /// <returns>
     ///     <see cref="Job" />
     /// </returns>
     /// <exception cref="FileNotFoundException"></exception>
-    public Job CopyEncryption(string fileName)
+    public Job CopyEncryption(string file)
     {
-        if (!File.Exists(fileName))
-            throw new FileNotFoundException(fileName);
+        if (!File.Exists(file))
+            throw new FileNotFoundException(file);
 
         _copyEncryption = string.Empty;
         return this;
@@ -371,11 +421,11 @@ public class Job
 
     #region EncryptionFilePassword
     /// <summary>
-    ///     f the file specified with <see cref="CopyEncryption" /> requires a password, supply the password using this option.
-    ///     This option is necessary because the --password option applies to the input file, not the file from which
-    ///     encryption is being copied.
+    ///     If the file specified with <see cref="CopyEncryption" /> requires a password, supply the password using this option.
+    ///     This option is necessary because the <see cref="Password"/> option applies to the <see cref="InputFile"/>, not the
+    ///     file from which encryption is being copied.
     /// </summary>
-    /// <param name="password"></param>
+    /// <param name="password">The password</param>
     /// <returns>
     ///     <see cref="Job" />
     /// </returns>
@@ -426,8 +476,8 @@ public class Job
     ///     By default, or with use <paramref name="compress" /> = true, qpdf will compress streams using the flate compression
     ///     algorithm (used by zip and gzip) unless those streams are compressed in some other way. This analysis is
     ///     made after qpdf attempts to uncompress streams and is therefore closely related to <see cref="DecodeLevel" />.
-    ///     To suppress this behavior and leave streams streams uncompressed, use <paramref name="compress" /> = false. In QDF
-    ///     mode (see QDF Mode and <see cref="QPdf" />), the default is to leave streams uncompressed.
+    ///     To suppress this behavior and leave streams streams uncompressed, use <paramref name="compress" /> = <c>false</c>.
+    ///     In QDF mode (see QDF Mode and <see cref="QPdf" />), the default is to leave streams uncompressed.
     /// </summary>
     /// <param name="compress"><c>true</c> or <c>false</c></param>
     /// <returns>
@@ -462,7 +512,7 @@ public class Job
     ///     Controls transformation of stream data. This option predates the <see cref="CompressStreams" /> and
     ///     <see cref="DecodeLevel" /> options. Those options can be used to achieve the same effect with more control
     /// </summary>
-    /// <param name="streamData"></param>
+    /// <param name="streamData"><see cref="Enums.StreamData"/></param>
     /// <returns>
     ///     <see cref="Job" />
     /// </returns>
@@ -494,14 +544,13 @@ public class Job
     /// <summary>
     ///     When writing new streams that are compressed with /FlateDecode, use the specified compression
     ///     <paramref name="level" />. The value of <paramref name="level" /> should be a number from 1 to 9 and is passed
-    ///     directly to zlib, which implements deflate
-    ///     compression. Lower numbers compress less and are faster; higher numbers compress more and are slower. Note that
-    ///     qpdf doesn’t
-    ///     uncompress and recompress streams compressed with flate by default. To have this option apply to already compressed
-    ///     streams, you should also specify <see cref="RecompressFlate" />. If your goal is to shrink the size of PDF files,
-    ///     you should also use <see cref="ObjectStreams" />. If you omit this option, qpdf defers to the compression library’s
-    ///     default behavior.
+    ///     directly to zlib, which implements deflate compression. Lower numbers compress less and are faster; higher
+    ///     numbers compress more and are slower. Note that qpdf doesn’t uncompress and recompress streams compressed with flate
+    ///     by default. To have this option apply to already compressed streams, you should also specify <see cref="RecompressFlate" />.
+    ///     If your goal is to shrink the size of PDF files, you should also use <see cref="ObjectStreams" />. If you omit this option,
+    ///     qpdf defers to the compression library’s default behavior.
     /// </summary>
+    /// <param name="level">A value in the range 1 to 9</param>
     /// <returns>
     ///     <see cref="Job" />
     /// </returns>
@@ -518,11 +567,10 @@ public class Job
     #region NormalizeContent
     /// <summary>
     ///     Enables or disables normalization of newlines in PDF content streams to UNIX-style newlines, which is useful for
-    ///     viewing files in a programmer-friendly text edit across multiple platforms. Content normalization is off by
-    ///     default, but is automatically enabled by <see cref="QPdf" /> (see also QDF Mode). It is not recommended to use this
+    ///     viewing files in a programmer-friendly text edit across multiple platforms. Content normalization is off by default,
+    ///     but is automatically enabled by <see cref="QPdf" /> (see also QDF Mode). It is not recommended to use this
     ///     option for production use. If qpdf runs into any lexical errors while normalizing content, it will print a warning
-    ///     indicating
-    ///     that content may be damaged.
+    ///     indicating that content may be damaged.
     /// </summary>
     /// <param name="normalize"><c>true</c> or <c>false</c></param>
     /// <returns>
@@ -543,7 +591,7 @@ public class Job
     ///     the creation of smaller PDF files.
     /// </summary>
     /// <param name="objectStreams">
-    ///     <see cref="ObjectStreams" />
+    ///     <see cref="Enums.ObjectStreams" />
     /// </param>
     /// <returns>
     ///     <see cref="Job" />
@@ -604,9 +652,9 @@ public class Job
     #region PreserveUnreferencedResources
     /// <summary>
     ///     This is a synonym for <see cref="RemoveUnreferencedResources" /> = <see cref="AutoYesNo.No" />. See
-    ///     <see cref="RemoveUnreferencedResources" />.
-    ///     See also <see cref="PreserveUnreferenced" />, which does something completely different. To reduce confusion, you
-    ///     should use <see cref="RemoveUnreferencedResources" /> = <see cref="AutoYesNo.No" /> instead.
+    ///     <see cref="RemoveUnreferencedResources" />. See also <see cref="PreserveUnreferenced" />, which does
+    ///     something completely different. To reduce confusion, you should use <see cref="RemoveUnreferencedResources" />
+    ///     = <see cref="AutoYesNo.No" /> instead.
     /// </summary>
     /// <returns>
     ///     <see cref="Job" />
@@ -657,9 +705,8 @@ public class Job
     #region ExternalizeInlineImages
     /// <summary>
     ///     Convert inline images to regular images. By default, images whose data is at least 1,024 bytes are converted when
-    ///     this option is selected.
-    ///     Use <see cref="IiMinBytes" /> to change the size threshold. This option is implicitly selected when
-    ///     <see cref="OptimizeImages" /> is selected unless <see cref="KeepInlineImages" /> is also specified.
+    ///     this option is selected. Use <see cref="IiMinBytes" /> to change the size threshold. This option is implicitly
+    ///     selected when <see cref="OptimizeImages" /> is selected unless <see cref="KeepInlineImages" /> is also specified.
     /// </summary>
     /// <returns>
     ///     <see cref="Job" />
@@ -674,7 +721,7 @@ public class Job
     #region IiMinBytes
     /// <summary>
     ///     Avoid converting inline images whose size is below the specified minimum size to regular images. The default is
-    ///     1,024 bytes. Use 0 for no minimum.
+    ///     <b>1024</b> bytes. Use <b>0</b> for no minimum.
     /// </summary>
     /// <param name="size">The minimum size</param>
     /// <returns>
@@ -695,11 +742,10 @@ public class Job
     ///     Force the PDF version of the output file to be at least version. In other words, if the input file has a lower
     ///     version than the specified version, the specified version will be used. If the input file has a higher version, the
     ///     input file’s original version will be used. It is seldom necessary to use this option since qpdf will automatically
-    ///     increase the version as needed when adding features that require newer PDF readers.
-    ///     The version number may be expressed in the form major.minor[.extension-level]. If .extension-level, is given,
-    ///     version is interpreted as major.minor at extension level extension-level. For example, version 1.7.8 represents
-    ///     version 1.7 at extension level 8. Note that minimal syntax checking is done on the command line. qpdf does not
-    ///     check whether the specified version is actually required.
+    ///     increase the version as needed when adding features that require newer PDF readers. The version number may be expressed
+    ///     in the form major.minor[.extension-level]. If .extension-level, is given, version is interpreted as major.minor at
+    ///     extension level extension-level. For example, version 1.7.8 represents version 1.7 at extension level 8. Note that
+    ///     minimal syntax checking is done on the command line. qpdf does not check whether the specified version is actually required.
     /// </summary>
     /// <param name="version">The minimum version</param>
     /// <returns>
@@ -726,11 +772,10 @@ public class Job
     ///     object streams are disabled if less than 1.5, 128-bit encryption keys are disabled if less than 1.4, and all
     ///     encryption is disabled if less than 1.3. Even with these precautions, qpdf won’t be able to do things like
     ///     eliminate use of newer image compression schemes, transparency groups, or other features that may have been added
-    ///     in more recent versions of PDF.
-    ///     As a general rule, with the exception of big structural things like the use of object streams or AES encryption,
-    ///     PDF viewers are supposed to ignore features they don’t support. This means that forcing the version to a lower
-    ///     version may make it possible to open your PDF file with an older version, though bear in mind that some of the
-    ///     original document’s functionality may be lost.
+    ///     in more recent versions of PDF. As a general rule, with the exception of big structural things like the use of object
+    ///     streams or AES encryption, PDF viewers are supposed to ignore features they don’t support. This means that forcing the
+    ///     version to a lower version may make it possible to open your PDF file with an older version, though bear in mind that
+    ///     some of the original document’s functionality may be lost.
     /// </summary>
     /// <param name="version">The forced version</param>
     /// <returns>
@@ -749,7 +794,7 @@ public class Job
     #region Collate
     /// <summary>
     ///     This option causes qpdf to collate rather than concatenate pages specified with --pages. With a numeric parameter,
-    ///     collate in groups of <paramref name="n" />. The default is 1.
+    ///     collate in groups of <paramref name="n" />. The default is <b>1</b>.
     /// </summary>
     /// <param name="n">
     ///     A value greater than zero
@@ -772,7 +817,7 @@ public class Job
     #region SplitPages
     /// <summary>
     ///     Write each group of <paramref name="n" /> pages to a separate  <see cref="OutputFile" />. If <paramref name="n" />
-    ///     is not specified, create single pages. Output file names are generated as follows:
+    ///     is not specified, create single pages. Output file names are generated as follows:<br/>
     ///     If the string %d appears in the <see cref="OutputFile" /> name, it is replaced with a range of zero-padded page
     ///     numbers starting from 1. Otherwise, if the output file name ends in .pdf(case insensitive), a zero-padded page
     ///     range, preceded by a dash, is inserted before the file extension. Otherwise, the file name is appended with a
@@ -853,8 +898,7 @@ public class Job
     ///     <see cref="Rotation" />
     /// </param>
     /// <param name="pageRange">
-    ///     The page range or <c>null</c>, see
-    ///     https://qpdf.readthedocs.io/en/stable/cli.html?highlight=ranges#page-ranges
+    ///     The page range or <c>null</c>, see https://qpdf.readthedocs.io/en/stable/cli.html?highlight=ranges#page-ranges
     /// </param>
     /// <returns></returns>
     public Job Rotate(Rotation angle, string pageRange = null)
@@ -900,10 +944,9 @@ public class Job
     ///     This flag causes qpdf to recompress all images that are not compressed with DCT (JPEG) using DCT compression as
     ///     long as doing so decreases the size in bytes of the image data and the image does not fall below minimum specified
     ///     dimensions. Useful information is provided when used in combination with <see cref="Verbose" />. See also the
-    ///     <see cref="OiMinWidth" />,
-    ///     <see cref="OiMinHeight" />, and <see cref="OiMinArea" /> options. By default, inline images are converted to
-    ///     regular images and optimized
-    ///     as well. Use --keep-inline-images to prevent inline images from being included.
+    ///     <see cref="OiMinWidth" />, <see cref="OiMinHeight" />, and <see cref="OiMinArea" /> options. By default, inline
+    ///     images are converted to regular images and optimized as well. Use <see cref="KeepInlineImages"/> to prevent inline
+    ///     images from being included.
     /// </summary>
     /// <returns>
     ///     <see cref="Job" />
@@ -917,8 +960,8 @@ public class Job
 
     #region OiMinWidth
     /// <summary>
-    ///     Avoid optimizing images whose width is below the specified amount. If omitted, the default is 128 pixels. Use 0 for
-    ///     no minimum.
+    ///     Avoid optimizing images whose width is below the specified amount. If omitted, the default is <b>128</b> pixels. Use
+    ///     <b>0</b> for no minimum.
     /// </summary>
     /// <param name="width">The width</param>
     /// <returns>
@@ -936,8 +979,8 @@ public class Job
 
     #region OiMinHeight
     /// <summary>
-    ///     Avoid optimizing images whose height is below the specified amount. If omitted, the default is 128 pixels. Use 0
-    ///     for no minimum.
+    ///     Avoid optimizing images whose height is below the specified amount. If omitted, the default is <b>128</b> pixels. Use
+    ///     <b>0</b> for no minimum.
     /// </summary>
     /// <param name="height">The height</param>
     /// <returns>
@@ -956,9 +999,9 @@ public class Job
     #region OiMinArea
     /// <summary>
     ///     Avoid optimizing images whose pixel count (width × height) is below the specified amount. If omitted, the default
-    ///     is 16,384 pixels. Use 0 for no minimum.
+    ///     is <b>16384</b> pixels. Use <b>0</b> for no minimum.
     /// </summary>
-    /// <param name="pixels">Pixels</param>
+    /// <param name="pixels">The amount of pixels</param>
     /// <returns>
     ///     <see cref="Job" />
     /// </returns>
@@ -988,7 +1031,7 @@ public class Job
 
     #region RemovePageLabels
     /// <summary>
-    ///     Exclude page labels (explicit page numbers) from the output file.
+    ///     Exclude page labels (explicit page numbers) from the <see cref="OutputFile"/>.
     /// </summary>
     /// <returns>
     ///     <see cref="Job" />
@@ -1006,7 +1049,8 @@ public class Job
     /// <summary>
     ///     This option can be used for password-protected files even if you don’t know the password.
     ///     This option is useful for shell scripts.Other options are ignored if this is given.This option is mutually
-    ///     exclusive with --requires-password.Both this option and --requires-password exit with status 2 for non-encrypted
+    ///     exclusive with <see cref="RequiresPassword"/>.Both this option and <see cref="RequiresPassword"/> exit with
+    ///     status <see cref="ExitCodeIsEncrypted.NotEncrypted"/> for non-encrypted
     ///     files.
     /// </summary>
     /// <returns>
@@ -1047,19 +1091,13 @@ public class Job
     ///     programmatically validate files in bulk, it is safe to run without output redirected to /dev/null and just check
     ///     for a 0 exit code. A file for which <see cref="Check" /> reports no errors may still have errors in stream data
     ///     content or may contain constructs that don’t conform to the PDF specification, but it should be syntactically
-    ///     valid.
-    ///     If <see cref="Check" /> reports any errors, qpdf will exit with a status of
-    ///     <see cref="ExitCode.ErrorsFoundFileNotProcessed" />.
-    ///     There are some recoverable conditions that <see cref="Check" /> detects. These are issued as warnings instead of
-    ///     errors.
-    ///     If qpdf finds no errors but finds warnings, it will exit with a status of
-    ///     <see cref="ExitCode.WarningsWereFoundFileProcessed" />.
-    ///     When <see cref="Check" /> is combined with other options, checks are always performed before any other options are
-    ///     processed.
-    ///     For erroneous files, <see cref="Check" /> will cause qpdf to attempt to recover, after which other options are
-    ///     effectively
-    ///     operating on the recovered file. Combining <see cref="Check" /> with other options in this way can be useful for
-    ///     manually
+    ///     valid. If <see cref="Check" /> reports any errors, qpdf will exit with a status of
+    ///     <see cref="ExitCode.ErrorsFoundFileNotProcessed" />. There are some recoverable conditions that <see cref="Check" />
+    ///     detects. These are issued as warnings instead of errors. If qpdf finds no errors but finds warnings, it will exit
+    ///     with a status of <see cref="ExitCode.WarningsWereFoundFileProcessed" />. When <see cref="Check" /> is combined with
+    ///     other options, checks are always performed before any other options are processed. For erroneous files,
+    ///     <see cref="Check" /> will cause qpdf to attempt to recover, after which other options are effectively operating on
+    ///     the recovered file. Combining <see cref="Check" /> with other options in this way can be useful for manually
     ///     recovering severely damaged files.
     /// </summary>
     /// <returns>
@@ -1093,10 +1131,10 @@ public class Job
     /// <summary>
     ///     When encryption information is being displayed, as when <see cref="Check" /> or <see cref="ShowEncryption" /> is
     ///     given, display the computed or retrieved encryption key as a hexadecimal string. This value is not ordinarily
-    ///     useful to users, but it can be used as the parameter to <see cref="Password" /> if the
-    ///     <see cref="PasswordIsHexKey" /> is specified. Note that, when PDF files are encrypted, passwords and other metadata
-    ///     are used only to compute an encryption key, and the encryption key is what is actually used for encryption. This
-    ///     enables retrieval of that key. See PDF Encryption for a technical discussion.
+    ///     useful to users, but it can be used as the parameter to <see cref="Password" /> if the <see cref="PasswordIsHexKey" />
+    ///     is specified. Note that, when PDF files are encrypted, passwords and other metadata are used only to compute an encryption
+    ///     key, and the encryption key is what is actually used for encryption. This enables retrieval of that key. See PDF Encryption
+    ///     for a technical discussion.
     /// </summary>
     /// <returns>
     ///     <see cref="Job" />
@@ -1191,16 +1229,12 @@ public class Job
     #region FilteredStreamData
     /// <summary>
     ///     When used with <see cref="ShowObject" />, if the object is a stream, write the filtered (uncompressed, potentially
-    ///     binary)
-    ///     stream data to standard output instead of the object’s contents. If the stream is filtered using filters that qpdf
-    ///     does not support, an error will be issued. This option acts as if <see cref="DecodeLevel" />
-    ///     <see cref="QPdfNet.Enums.DecodeLevel.All" />
-    ///     was specified, so it will uncompress images compressed with supported lossy compression schemes. Avoid combining
-    ///     this with other inspection options to avoid commingling the stream data with other output. This option may be
-    ///     combined with
-    ///     <see cref="NormalizeContent" />.If you do this, qpdf will attempt to run content normalization even if the stream
-    ///     is not a
-    ///     content stream, which will probably produce unusable results.
+    ///     binary) stream data to standard output instead of the object’s contents. If the stream is filtered using filters
+    ///     that qpdf does not support, an error will be issued. This option acts as if <see cref="DecodeLevel" />
+    ///     <see cref="Enums.DecodeLevel.All" /> was specified, so it will uncompress images compressed with supported
+    ///     lossy compression schemes. Avoid combining this with other inspection options to avoid commingling the stream data
+    ///     with other output. This option may be combined with <see cref="NormalizeContent" />.If you do this, qpdf will attempt
+    ///     to run content normalization even if the stream is not a content stream, which will probably produce unusable results.
     /// </summary>
     /// <returns>
     ///     <see cref="Job" />
@@ -1327,7 +1361,8 @@ public class Job
 
     #region JsonObject
     /// <summary>
-    ///     This option is repeatable. If given, only specified objects will be shown in the “objects” key of the JSON output. Otherwise, all objects will be shown.
+    ///     This option is repeatable. If given, only specified objects will be shown in the “objects” key of the JSON output.
+    ///     Otherwise, all objects will be shown.
     /// </summary>
     /// <returns>
     ///     <see cref="Job" />
@@ -1341,7 +1376,9 @@ public class Job
 
     #region StaticId
     /// <summary>
-    ///     Use a fixed value for the document ID (/ID in the trailer). This is intended for testing only. Never use it for production files. If you are trying to get the same ID each time for a given file and you are not generating encrypted files, consider using the <see cref="DeterministicId"/> option.
+    ///     Use a fixed value for the document ID (/ID in the trailer). This is intended for testing only. <b>Never</b> use it for
+    ///     production files. If you are trying to get the same ID each time for a given file and you are not generating encrypted files,
+    ///     consider using the <see cref="DeterministicId"/> option.
     /// </summary>
     /// <returns>
     ///     <see cref="Job" />
@@ -1355,7 +1392,10 @@ public class Job
 
     #region StaticAesIv
     /// <summary>
-    ///     Use a static initialization vector for AES-CBC. This is intended for testing only so that output files can be reproducible. Never use it for production files. This option in particular is not secure since it significantly weakens the encryption. When combined with --static-id and using the three-step process described in Idempotency, it is possible to create byte-for-byte idempotent output with PDF files that use 256-bit encryption to assist with creating reproducible test suites.
+    ///     Use a static initialization vector for AES-CBC. This is intended for testing only so that output files can be reproducible.
+    ///     <b>Never</b> use it for production files. This option in particular is not secure since it significantly weakens the encryption.
+    ///     When combined with --static-id and using the three-step process described in Idempotency, it is possible to create byte-for-byte
+    ///     idempotent output with PDF files that use 256-bit encryption to assist with creating reproducible test suites.
     /// </summary>
     /// <returns>
     ///     <see cref="Job" />
@@ -1369,7 +1409,10 @@ public class Job
 
     #region LinearizePass1
     /// <summary>
-    ///     Use a static initialization vector for AES-CBC. This is intended for testing only so that output files can be reproducible. Never use it for production files. This option in particular is not secure since it significantly weakens the encryption. When combined with --static-id and using the three-step process described in Idempotency, it is possible to create byte-for-byte idempotent output with PDF files that use 256-bit encryption to assist with creating reproducible test suites.
+    ///     Use a static initialization vector for AES-CBC. This is intended for testing only so that output files can be reproducible.
+    ///     <b>Never</b> use it for production files. This option in particular is not secure since it significantly weakens the encryption.
+    ///     When combined with <see cref="StaticId"/> and using the three-step process described in Idempotency, it is possible to create
+    ///     byte-for-byte idempotent output with PDF files that use 256-bit encryption to assist with creating reproducible test suites.
     /// </summary>
     /// <returns>
     ///     <see cref="Job" />
@@ -1480,14 +1523,14 @@ public class Job
     [JsonProperty("warningExit0")] private string _warningExit0;
     [JsonProperty("password")] private string _password;
     [JsonProperty("passwordFile")] private string _passwordFile;
+    [JsonProperty("verbose")] private string _verbose;
     [JsonProperty("noWarn")] private string _noWarn;
     [JsonProperty("deterministicId")] private string _deterministicId;
     [JsonProperty("allowWeakCrypto")] private string _allowWeakCrypto;
+    [JsonProperty("keepFilesOpen")] private string _keepFilesOpen;
+    [JsonProperty("keepFilesOpenThreshold")] private string _keepFilesOpenThreshold;
     [JsonProperty("passwordIsHexKey")] private string _passwordIsHexKey;
-
-    [JsonProperty("suppressPasswordRecovery")]
-    private string _suppressPasswordRecovery;
-
+    [JsonProperty("suppressPasswordRecovery")] private string _suppressPasswordRecovery;
     [JsonProperty("passwordMode")] private PasswordMode _passwordMode;
     [JsonProperty("suppressRecovery")] private string _suppressRecovery;
     [JsonProperty("ignoreXrefStreams")] private string _ignoreXrefStreams;
@@ -1495,10 +1538,7 @@ public class Job
     [JsonProperty("encrypt")] private Encryption _encryption;
     [JsonProperty("decrypt")] private string _decrypt;
     [JsonProperty("copyEncryption")] private string _copyEncryption;
-
-    [JsonProperty("encryptionFilePassword")]
-    private string _encryptionFilePassword;
-
+    [JsonProperty("encryptionFilePassword")] private string _encryptionFilePassword;
     [JsonProperty("qpdf")] private string _qpdf;
     [JsonProperty("noOriginalObjectIds")] private string _noOriginalObjectIds;
     [JsonProperty("compressStreams")] private string _compressStreams;
@@ -1509,21 +1549,11 @@ public class Job
     [JsonProperty("normalizeContent")] private string _normalizeContent;
     [JsonProperty("objectStreams")] private ObjectStreams _objectStreams;
     [JsonProperty("preserveUnreferenced")] private string _preserveUnreferenced;
-
-    [JsonProperty("removeUnreferencedResources")]
-    private AutoYesNo _removeUnreferencedResources;
-
-    [JsonProperty("preserveUnreferencedResources")]
-    private string _preserveUnreferencedResources;
-
-    [JsonProperty("newlineBeforeEndStream")]
-    private string _newlineBeforeEndStream;
-
+    [JsonProperty("removeUnreferencedResources")] private AutoYesNo _removeUnreferencedResources;
+    [JsonProperty("preserveUnreferencedResources")] private string _preserveUnreferencedResources;
+    [JsonProperty("newlineBeforeEndStream")] private string _newlineBeforeEndStream;
     [JsonProperty("coalesceContents")] private string _coalesceContents;
-
-    [JsonProperty("externalizeInlineImages")]
-    private string _externalizeInlineImages;
-
+    [JsonProperty("externalizeInlineImages")] private string _externalizeInlineImages;
     [JsonProperty("iiMinBytes")] private string _iiMinBytes;
     [JsonProperty("minVersion")] private string _minVersion;
     [JsonProperty("forceVersion")] private string _forceVersion;

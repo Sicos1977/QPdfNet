@@ -56,6 +56,8 @@ namespace QpdfNetTest
 
             var job = new Job();
             var result = job.InputFile(Path.Combine("TestFiles", "test.pdf"))
+                .Check()
+                .NoWarn()
                 .Run(out var output);
 
             Assert.IsTrue(!string.IsNullOrEmpty(output));
