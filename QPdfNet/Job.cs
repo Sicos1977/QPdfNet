@@ -148,7 +148,8 @@ public class Job
     #region NoWarn
     /// <summary>
     ///     Suppress writing of warnings to stderr. If warnings were detected and suppressed, qpdf will still exit with exit
-    ///     code 3. To completely ignore warnings, also specify <see cref="WarningExit0"/>. Use with caution as qpdf is not always
+    ///     code 3. To completely ignore warnings, also specify <see cref="WarningExit0" />. Use with caution as qpdf is not
+    ///     always
     ///     successful in recovering from situations that cause warnings to be issued.
     /// </summary>
     /// <returns>
@@ -171,7 +172,7 @@ public class Job
     ///     of the significant parts of the content of the output PDF file. This means that a given qpdf operation should
     ///     generate the same ID each time it is run, which can be useful when caching results or for generation of some test
     ///     data. Use of this flag is not compatible with creation of encrypted files. This option can be useful for testing.
-    ///     See also <see cref="StaticId"/>.
+    ///     See also <see cref="StaticId" />.
     /// </summary>
     /// <returns>
     ///     <see cref="Job" />
@@ -1021,12 +1022,12 @@ public class Job
     #region RequiresPassword
     /// <summary>
     ///     Silently exit with a code indicating the file’s password status. If a password is supplied with the method
-    ///     <see cref="InputFile"/> and the password parameter set, that password is used to open the file just as with
+    ///     <see cref="InputFile" /> and the password parameter set, that password is used to open the file just as with
     ///     any normal invocation of qpdf. That means that using this option can be used to check the correctness of
-    ///     the password. This option is mutually exclusive with <see cref="IsEncrypted"/>.
+    ///     the password. This option is mutually exclusive with <see cref="IsEncrypted" />.
     /// </summary>
     /// <remarks>
-    ///     Use with the method <see cref="Password"/> method
+    ///     Use with the method <see cref="Password" /> method
     /// </remarks>
     /// <returns>
     ///     <see cref="Job" />
@@ -1045,13 +1046,20 @@ public class Job
     ///     <see cref="Check" /> writes nothing to standard error when everything is valid, so if you are using this to
     ///     programmatically validate files in bulk, it is safe to run without output redirected to /dev/null and just check
     ///     for a 0 exit code. A file for which <see cref="Check" /> reports no errors may still have errors in stream data
-    ///     content or may contain constructs that don’t conform to the PDF specification, but it should be syntactically valid.
-    ///     If <see cref="Check" /> reports any errors, qpdf will exit with a status of <see cref="ExitCode.ErrorsFoundFileNotProcessed"/>.
-    ///     There are some recoverable conditions that <see cref="Check" /> detects. These are issued as warnings instead of errors.
-    ///     If qpdf finds no errors but finds warnings, it will exit with a status of <see cref="ExitCode.WarningsWereFoundFileProcessed"/>.
-    ///     When <see cref="Check" /> is combined with other options, checks are always performed before any other options are processed.
-    ///     For erroneous files, <see cref="Check" /> will cause qpdf to attempt to recover, after which other options are effectively
-    ///     operating on the recovered file. Combining <see cref="Check" /> with other options in this way can be useful for manually
+    ///     content or may contain constructs that don’t conform to the PDF specification, but it should be syntactically
+    ///     valid.
+    ///     If <see cref="Check" /> reports any errors, qpdf will exit with a status of
+    ///     <see cref="ExitCode.ErrorsFoundFileNotProcessed" />.
+    ///     There are some recoverable conditions that <see cref="Check" /> detects. These are issued as warnings instead of
+    ///     errors.
+    ///     If qpdf finds no errors but finds warnings, it will exit with a status of
+    ///     <see cref="ExitCode.WarningsWereFoundFileProcessed" />.
+    ///     When <see cref="Check" /> is combined with other options, checks are always performed before any other options are
+    ///     processed.
+    ///     For erroneous files, <see cref="Check" /> will cause qpdf to attempt to recover, after which other options are
+    ///     effectively
+    ///     operating on the recovered file. Combining <see cref="Check" /> with other options in this way can be useful for
+    ///     manually
     ///     recovering severely damaged files.
     /// </summary>
     /// <returns>
@@ -1083,7 +1091,12 @@ public class Job
 
     #region ShowEncryptionKey
     /// <summary>
-    ///     When encryption information is being displayed, as when <see cref="Check"/> or <see cref="ShowEncryption"/> is given, display the computed or retrieved encryption key as a hexadecimal string. This value is not ordinarily useful to users, but it can be used as the parameter to <see cref="Password"/> if the <see cref="PasswordIsHexKey"/> is specified. Note that, when PDF files are encrypted, passwords and other metadata are used only to compute an encryption key, and the encryption key is what is actually used for encryption. This enables retrieval of that key. See PDF Encryption for a technical discussion.
+    ///     When encryption information is being displayed, as when <see cref="Check" /> or <see cref="ShowEncryption" /> is
+    ///     given, display the computed or retrieved encryption key as a hexadecimal string. This value is not ordinarily
+    ///     useful to users, but it can be used as the parameter to <see cref="Password" /> if the
+    ///     <see cref="PasswordIsHexKey" /> is specified. Note that, when PDF files are encrypted, passwords and other metadata
+    ///     are used only to compute an encryption key, and the encryption key is what is actually used for encryption. This
+    ///     enables retrieval of that key. See PDF Encryption for a technical discussion.
     /// </summary>
     /// <returns>
     ///     <see cref="Job" />
@@ -1097,7 +1110,9 @@ public class Job
 
     #region CheckLinearization
     /// <summary>
-    ///     Check to see whether a file is linearized and, if so, whether the linearization hint tables are correct. qpdf does not check all aspects of linearization. A linearized PDF file with linearization errors that is otherwise correct is almost always readable by a PDF viewer. As such, “errors” in PDF linearization are treated by qpdf as warnings.
+    ///     Check to see whether a file is linearized and, if so, whether the linearization hint tables are correct. qpdf does
+    ///     not check all aspects of linearization. A linearized PDF file with linearization errors that is otherwise correct
+    ///     is almost always readable by a PDF viewer. As such, “errors” in PDF linearization are treated by qpdf as warnings.
     /// </summary>
     /// <returns>
     ///     <see cref="Job" />
@@ -1125,7 +1140,11 @@ public class Job
 
     #region ShowXref
     /// <summary>
-    ///     Show the contents of the cross-reference table or stream in a human-readable form. The cross-reference data gives the offset of regular objects and the object stream ID and 0-based index within the object stream for compressed objects. This is especially useful for files with cross-reference streams, which are stored in a binary format. If the file is invalid and cross reference table reconstruction is performed, this option will show the information in the reconstructed table.
+    ///     Show the contents of the cross-reference table or stream in a human-readable form. The cross-reference data gives
+    ///     the offset of regular objects and the object stream ID and 0-based index within the object stream for compressed
+    ///     objects. This is especially useful for files with cross-reference streams, which are stored in a binary format. If
+    ///     the file is invalid and cross reference table reconstruction is performed, this option will show the information in
+    ///     the reconstructed table.
     /// </summary>
     /// <returns>
     ///     <see cref="Job" />
@@ -1139,14 +1158,225 @@ public class Job
 
     #region ShowObject
     /// <summary>
-    ///     Show the contents of the cross-reference table or stream in a human-readable form. The cross-reference data gives the offset of regular objects and the object stream ID and 0-based index within the object stream for compressed objects. This is especially useful for files with cross-reference streams, which are stored in a binary format. If the file is invalid and cross reference table reconstruction is performed, this option will show the information in the reconstructed table.
+    ///     Show the contents of the given object. This is especially useful for inspecting objects that are inside of object
+    ///     streams (also known as “compressed objects”).
+    /// </summary>
+    /// <param name="obj">The object to show</param>
+    /// <returns>
+    ///     <see cref="Job" />
+    /// </returns>
+    public Job ShowObject(string obj)
+    {
+        _showObject = obj;
+        return this;
+    }
+    #endregion
+
+    #region RawStreamData
+    /// <summary>
+    ///     When used with <see cref="ShowObject" />, if the object is a stream, write the raw (compressed) binary stream data
+    ///     to standard output instead of the object’s contents. Avoid combining this with other inspection options to avoid
+    ///     commingling the stream data with other output. See also <see cref="FilteredStreamData" />.
     /// </summary>
     /// <returns>
     ///     <see cref="Job" />
     /// </returns>
-    public Job ShowObject()
+    public Job RawStreamData()
     {
-        _showXref = string.Empty;
+        _rawStreamData = string.Empty;
+        return this;
+    }
+    #endregion
+
+    #region FilteredStreamData
+    /// <summary>
+    ///     When used with <see cref="ShowObject" />, if the object is a stream, write the filtered (uncompressed, potentially
+    ///     binary)
+    ///     stream data to standard output instead of the object’s contents. If the stream is filtered using filters that qpdf
+    ///     does not support, an error will be issued. This option acts as if <see cref="DecodeLevel" />
+    ///     <see cref="QPdfNet.Enums.DecodeLevel.All" />
+    ///     was specified, so it will uncompress images compressed with supported lossy compression schemes. Avoid combining
+    ///     this with other inspection options to avoid commingling the stream data with other output. This option may be
+    ///     combined with
+    ///     <see cref="NormalizeContent" />.If you do this, qpdf will attempt to run content normalization even if the stream
+    ///     is not a
+    ///     content stream, which will probably produce unusable results.
+    /// </summary>
+    /// <returns>
+    ///     <see cref="Job" />
+    /// </returns>
+    public Job FilteredStreamData()
+    {
+        _filteredStreamData = string.Empty;
+        return this;
+    }
+    #endregion
+
+    #region ShowNPages
+    /// <summary>
+    ///     Print the number of pages in the input file on a line by itself. Since the number of pages appears by itself on a
+    ///     line, this option can be useful for scripting if you need to know the number of pages in a file.
+    /// </summary>
+    /// <returns>
+    ///     <see cref="Job" />
+    /// </returns>
+    public Job ShowNPages()
+    {
+        _showNpages = string.Empty;
+        return this;
+    }
+    #endregion
+
+    #region ShowPages
+    /// <summary>
+    ///     Show the object and generation number for each page dictionary object and for each content stream associated with
+    ///     the page. Having this information makes it more convenient to inspect objects from a particular page.
+    /// </summary>
+    /// <remarks>
+    ///     See also <see cref="WithImages" />.
+    /// </remarks>
+    /// <returns>
+    ///     <see cref="Job" />
+    /// </returns>
+    public Job ShowPages()
+    {
+        _showPages = string.Empty;
+        return this;
+    }
+    #endregion
+
+    #region WithImages
+    /// <summary>
+    ///     When used with <see cref="ShowPages" />, also shows the object and generation numbers for the image objects on each
+    ///     page.
+    /// </summary>
+    /// <returns>
+    ///     <see cref="Job" />
+    /// </returns>
+    public Job WithImages()
+    {
+        _withImages = string.Empty;
+        return this;
+    }
+    #endregion
+
+    #region ListAttachments
+    /// <summary>
+    ///     Show the key and stream number for each embedded file. With <see cref="Verbose" />, additional information,
+    ///     including preferred file name, description, dates, and more are also displayed. The key is usually but not always
+    ///     equal to the file name and is needed by some of the other options.
+    /// </summary>
+    /// <returns>
+    ///     <see cref="Job" />
+    /// </returns>
+    public Job ListAttachments()
+    {
+        _listAttachments = string.Empty;
+        return this;
+    }
+    #endregion
+
+    #region ShowAttachments
+    /// <summary>
+    ///     Write the contents of the specified attachment to standard output as binary data. The key should match one of the
+    ///     keys shown by --list-attachments. If this option is given more than once, only the last attachment will be shown.
+    /// </summary>
+    /// <returns>
+    ///     <see cref="Job" />
+    /// </returns>
+    public Job ShowAttachments(string key)
+    {
+        _showAttachment = key;
+        return this;
+    }
+    #endregion
+
+    #region Json
+    /// <summary>
+    ///     Generate a JSON representation of the file. This is described in depth in QPDF JSON. The version parameter can be
+    ///     used to specify which version of the qpdf JSON format should be output. The only supported value is 1, but it’s
+    ///     possible that a new JSON output version will be added in a future version. You can also specify latest to use the
+    ///     latest JSON version. For backward compatibility, the default value will remain 1 until qpdf version 11, after which
+    ///     point it will become latest. In all case, you can tell what version of the JSON output you have from the "version"
+    ///     key in the output.
+    /// </summary>
+    /// <returns>
+    ///     <see cref="Job" />
+    /// </returns>
+    public Job Json()
+    {
+        _json = string.Empty;
+        return this;
+    }
+    #endregion
+
+    #region JsonKey
+    /// <summary>
+    ///     This option is repeatable. If given, only the specified top-level keys will be included in the JSON output.
+    ///     Otherwise, all keys will be included. <b>version</b> and <b>parameters</b> will always appear in the output.
+    /// </summary>
+    /// <returns>
+    ///     <see cref="Job" />
+    /// </returns>
+    public Job JsonKey(string key)
+    {
+        _jsonKey = key;
+        return this;
+    }
+    #endregion
+
+    #region JsonObject
+    /// <summary>
+    ///     This option is repeatable. If given, only specified objects will be shown in the “objects” key of the JSON output. Otherwise, all objects will be shown.
+    /// </summary>
+    /// <returns>
+    ///     <see cref="Job" />
+    /// </returns>
+    public Job JsonObject(string obj)
+    {
+        _jsonObject = obj;
+        return this;
+    }
+    #endregion
+
+    #region StaticId
+    /// <summary>
+    ///     Use a fixed value for the document ID (/ID in the trailer). This is intended for testing only. Never use it for production files. If you are trying to get the same ID each time for a given file and you are not generating encrypted files, consider using the <see cref="DeterministicId"/> option.
+    /// </summary>
+    /// <returns>
+    ///     <see cref="Job" />
+    /// </returns>
+    public Job StaticId()
+    {
+        _staticId = string.Empty;
+        return this;
+    }
+    #endregion
+
+    #region StaticAesIv
+    /// <summary>
+    ///     Use a static initialization vector for AES-CBC. This is intended for testing only so that output files can be reproducible. Never use it for production files. This option in particular is not secure since it significantly weakens the encryption. When combined with --static-id and using the three-step process described in Idempotency, it is possible to create byte-for-byte idempotent output with PDF files that use 256-bit encryption to assist with creating reproducible test suites.
+    /// </summary>
+    /// <returns>
+    ///     <see cref="Job" />
+    /// </returns>
+    public Job StaticAesIv()
+    {
+        _staticAesIv = string.Empty;
+        return this;
+    }
+    #endregion
+
+    #region LinearizePass1
+    /// <summary>
+    ///     Use a static initialization vector for AES-CBC. This is intended for testing only so that output files can be reproducible. Never use it for production files. This option in particular is not secure since it significantly weakens the encryption. When combined with --static-id and using the three-step process described in Idempotency, it is possible to create byte-for-byte idempotent output with PDF files that use 256-bit encryption to assist with creating reproducible test suites.
+    /// </summary>
+    /// <returns>
+    ///     <see cref="Job" />
+    /// </returns>
+    public Job LinearizePass1(string fileName)
+    {
+        _linearizePass1 = fileName;
         return this;
     }
     #endregion
@@ -1172,11 +1402,16 @@ public class Job
 
         var outResult = Marshal.PtrToStringAnsi(outPointer);
         var errorResult = Marshal.PtrToStringAnsi(errorPointer);
+        outResult = outResult?.Trim();
+        errorResult = errorResult?.Trim();
 
         Marshal.FreeCoTaskMem(outPointer);
         Marshal.FreeCoTaskMem(errorPointer);
 
-        output = $"{outResult}{Environment.NewLine}{errorResult}";
+        output = outResult;
+
+        if (!string.IsNullOrWhiteSpace(errorResult))
+            output += Environment.NewLine + errorResult;
 
         return result;
     }
@@ -1184,7 +1419,7 @@ public class Job
 
     #region Run
     /// <summary>
-    ///     Runs the <see cref="Job"/> with the given parameters
+    ///     Runs the <see cref="Job" /> with the given parameters
     /// </summary>
     /// <param name="output">Returns any output that is generated by qpdf</param>
     /// <returns>
@@ -1196,7 +1431,8 @@ public class Job
             throw new ArgumentException("Use the method 'RunIsEncrypted' when the IsEncrypted method is used");
 
         if (_requiresPassword == string.Empty)
-            throw new ArgumentException("Use the method 'RunRequiresPassword' when the RequiresPassword method is used");
+            throw new ArgumentException(
+                "Use the method 'RunRequiresPassword' when the RequiresPassword method is used");
 
         return (ExitCode)InternalRun(out output);
     }
@@ -1204,7 +1440,7 @@ public class Job
 
     #region RunIsEncrypted
     /// <summary>
-    ///     Runs the <see cref="Job"/> with the given parameters
+    ///     Runs the <see cref="Job" /> with the given parameters
     /// </summary>
     /// <param name="output">Returns any output that is generated by qpdf</param>
     /// <returns>
@@ -1213,7 +1449,8 @@ public class Job
     public ExitCodeIsEncrypted RunIsEncrypted(out string output)
     {
         if (_requiresPassword == string.Empty)
-            throw new ArgumentException("Use the method 'RunRequiresPassword' when the RequiresPassword method is used");
+            throw new ArgumentException(
+                "Use the method 'RunRequiresPassword' when the RequiresPassword method is used");
 
         return (ExitCodeIsEncrypted)InternalRun(out output);
     }
@@ -1221,7 +1458,7 @@ public class Job
 
     #region RunRequiresPassword
     /// <summary>
-    ///     Runs the <see cref="Job"/> with the given parameters
+    ///     Runs the <see cref="Job" /> with the given parameters
     /// </summary>
     /// <param name="output">Returns any output that is generated by qpdf</param>
     /// <returns>
@@ -1311,5 +1548,18 @@ public class Job
     [JsonProperty("showLinearization")] private string _showLinearization;
     [JsonProperty("showXref")] private string _showXref;
     [JsonProperty("showObject")] private string _showObject;
+    [JsonProperty("rawStreamData")] private string _rawStreamData;
+    [JsonProperty("filteredStreamData")] private string _filteredStreamData;
+    [JsonProperty("showNpages")] private string _showNpages;
+    [JsonProperty("showPages")] private string _showPages;
+    [JsonProperty("withImages")] private string _withImages;
+    [JsonProperty("listAttachments")] private string _listAttachments;
+    [JsonProperty("showAttachment")] private string _showAttachment;
+    [JsonProperty("json")] private string _json;
+    [JsonProperty("jsonKey")] private string _jsonKey;
+    [JsonProperty("jsonObject")] private string _jsonObject;
+    [JsonProperty("staticId")] private string _staticId;
+    [JsonProperty("staticAesIv")] private string _staticAesIv;
+    [JsonProperty("linearizePass1")] private string _linearizePass1;
     #endregion
 }

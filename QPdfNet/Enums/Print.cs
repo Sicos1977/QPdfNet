@@ -1,5 +1,5 @@
 ﻿//
-// ShowObject.cs
+// Print.cs
 //
 // Author: Kees van Spelde <sicos2002@hotmail.com>
 //
@@ -29,10 +29,7 @@ using System.Runtime.Serialization;
 
 namespace QPdfNet.Enums;
 
-/// <summary>
-///     Show the contents of the given object
-/// </summary>
-public enum Showobject
+public enum Print
 {
     /// <summary>
     ///     No value is set

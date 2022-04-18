@@ -98,7 +98,6 @@
     <Compile Include="Encryption40Bit.cs" />
     <Compile Include="Enums\ExitCodeRequiresPassword.cs" />
     <Compile Include="Enums\ExitCodeIsEncrypted.cs" />
-    <Compile Include="Enums\ShowObject.cs" />
     <Compile Include="Enums\Print.cs" />
     <Compile Include="Enums\Modify.cs" />
     <Compile Include="Enums\Rotation.cs" />
