@@ -50,14 +50,12 @@ public class Job
     ///     The input PDF file
     /// </summary>
     /// <param name="fileName">The input file</param>
-    /// <param name="password">The password to open the file or <c>null</c></param>
     /// <returns>
     ///     <see cref="Job" />
     /// </returns>
-    public Job InputFile(string fileName, string password = null)
+    public Job InputFile(string fileName)
     {
         _inputFile = fileName;
-        _password = password;
         return this;
     }
     #endregion
@@ -115,12 +113,13 @@ public class Job
     ///     Specifies a password for accessing encrypted, password-protected files. To read the password from a file or
     ///     standard input
     /// </summary>
+    /// <param name="password">The password to open the file</param>
     /// <returns>
     ///     <see cref="Job" />
     /// </returns>
-    public Job Password()
+    public Job Password(string password)
     {
-        _password = string.Empty;
+        _password = password;
         return this;
     }
     #endregion
@@ -144,10 +143,12 @@ public class Job
     }
     #endregion
 
+    // TODO: Figure out how to make NoWarn work
+
     #region NoWarn
     /// <summary>
     ///     Suppress writing of warnings to stderr. If warnings were detected and suppressed, qpdf will still exit with exit
-    ///     code 3. To completely ignore warnings, also specify --warning-exit-0. Use with caution as qpdf is not always
+    ///     code 3. To completely ignore warnings, also specify <see cref="WarningExit0"/>. Use with caution as qpdf is not always
     ///     successful in recovering from situations that cause warnings to be issued.
     /// </summary>
     /// <returns>
@@ -170,7 +171,7 @@ public class Job
     ///     of the significant parts of the content of the output PDF file. This means that a given qpdf operation should
     ///     generate the same ID each time it is run, which can be useful when caching results or for generation of some test
     ///     data. Use of this flag is not compatible with creation of encrypted files. This option can be useful for testing.
-    ///     See also --static-id.
+    ///     See also <see cref="StaticId"/>.
     /// </summary>
     /// <returns>
     ///     <see cref="Job" />
@@ -1025,7 +1026,7 @@ public class Job
     ///     the password. This option is mutually exclusive with <see cref="IsEncrypted"/>.
     /// </summary>
     /// <remarks>
-    ///     Use with the method <see cref="InputFile"/> and the password parameter set
+    ///     Use with the method <see cref="Password"/> method
     /// </remarks>
     /// <returns>
     ///     <see cref="Job" />
@@ -1076,6 +1077,76 @@ public class Job
     public Job ShowEncryption()
     {
         _showEncryption = string.Empty;
+        return this;
+    }
+    #endregion
+
+    #region ShowEncryptionKey
+    /// <summary>
+    ///     When encryption information is being displayed, as when <see cref="Check"/> or <see cref="ShowEncryption"/> is given, display the computed or retrieved encryption key as a hexadecimal string. This value is not ordinarily useful to users, but it can be used as the parameter to <see cref="Password"/> if the <see cref="PasswordIsHexKey"/> is specified. Note that, when PDF files are encrypted, passwords and other metadata are used only to compute an encryption key, and the encryption key is what is actually used for encryption. This enables retrieval of that key. See PDF Encryption for a technical discussion.
+    /// </summary>
+    /// <returns>
+    ///     <see cref="Job" />
+    /// </returns>
+    public Job ShowEncryptionKey()
+    {
+        _showEncryptionKey = string.Empty;
+        return this;
+    }
+    #endregion
+
+    #region CheckLinearization
+    /// <summary>
+    ///     Check to see whether a file is linearized and, if so, whether the linearization hint tables are correct. qpdf does not check all aspects of linearization. A linearized PDF file with linearization errors that is otherwise correct is almost always readable by a PDF viewer. As such, “errors” in PDF linearization are treated by qpdf as warnings.
+    /// </summary>
+    /// <returns>
+    ///     <see cref="Job" />
+    /// </returns>
+    public Job CheckLinearization()
+    {
+        _checkLinearization = string.Empty;
+        return this;
+    }
+    #endregion
+
+    #region ShowLinearization
+    /// <summary>
+    ///     Check and display all data in the linearization hint tables.
+    /// </summary>
+    /// <returns>
+    ///     <see cref="Job" />
+    /// </returns>
+    public Job ShowLinearization()
+    {
+        _showLinearization = string.Empty;
+        return this;
+    }
+    #endregion
+
+    #region ShowXref
+    /// <summary>
+    ///     Show the contents of the cross-reference table or stream in a human-readable form. The cross-reference data gives the offset of regular objects and the object stream ID and 0-based index within the object stream for compressed objects. This is especially useful for files with cross-reference streams, which are stored in a binary format. If the file is invalid and cross reference table reconstruction is performed, this option will show the information in the reconstructed table.
+    /// </summary>
+    /// <returns>
+    ///     <see cref="Job" />
+    /// </returns>
+    public Job ShowXref()
+    {
+        _showXref = string.Empty;
+        return this;
+    }
+    #endregion
+
+    #region ShowObject
+    /// <summary>
+    ///     Show the contents of the cross-reference table or stream in a human-readable form. The cross-reference data gives the offset of regular objects and the object stream ID and 0-based index within the object stream for compressed objects. This is especially useful for files with cross-reference streams, which are stored in a binary format. If the file is invalid and cross reference table reconstruction is performed, this option will show the information in the reconstructed table.
+    /// </summary>
+    /// <returns>
+    ///     <see cref="Job" />
+    /// </returns>
+    public Job ShowObject()
+    {
+        _showXref = string.Empty;
         return this;
     }
     #endregion
@@ -1235,5 +1306,10 @@ public class Job
     [JsonProperty("requiresPassword")] private string _requiresPassword;
     [JsonProperty("check")] private string _check;
     [JsonProperty("showEncryption")] private string _showEncryption;
+    [JsonProperty("showEncryptionKey")] private string _showEncryptionKey;
+    [JsonProperty("checkLinearization")] private string _checkLinearization;
+    [JsonProperty("showLinearization")] private string _showLinearization;
+    [JsonProperty("showXref")] private string _showXref;
+    [JsonProperty("showObject")] private string _showObject;
     #endregion
 }
