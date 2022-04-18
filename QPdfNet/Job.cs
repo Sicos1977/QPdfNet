@@ -25,9 +25,10 @@
 //
 
 using System;
-using System.Diagnostics;
 using System.IO;
+using System.Runtime.InteropServices;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
 using QPdfNet.Enums;
 using QPdfNet.Interfaces;
 using QPdfNet.Interop;
@@ -244,6 +245,9 @@ public class Job
     ///     hex-bytes mode also applies to passwords specified for reading files. For additional discussion of the supported
     ///     password modes and when you might want to use them, see Unicode Passwords
     /// </summary>
+    /// <param name="mode">
+    ///     <see cref="PasswordMode" />
+    /// </param>
     /// <returns>
     ///     <see cref="Job" />
     /// </returns>
@@ -341,7 +345,8 @@ public class Job
     ///     Copy all encryption parameters, including the user password, the owner password, and all security restrictions,
     ///     from the specified file instead of preserving the encryption details from the input file. This works even if only
     ///     one of the user password or owner password is known. If the encryption file requires a password, use the
-    ///     <see cref="EncryptionFilePassword"/> option to set it. Note that copying the encryption parameters from a file also copies
+    ///     <see cref="EncryptionFilePassword" /> option to set it. Note that copying the encryption parameters from a file
+    ///     also copies
     ///     the first half of /ID from the file since this is part of the encryption parameters. This option can be useful if
     ///     you need to decrypt a file to make manual changes to it or to change it outside of qpdf, and then want to restore
     ///     the original encryption on the file without having to manual specify all the individual settings. See also
@@ -416,12 +421,11 @@ public class Job
 
     #region CompressStreams
     /// <summary>
-    ///     By default, or with <see cref="CompressStreams" /> = <see cref="YesNo.Yes" />, qpdf will compress
-    ///     streams using the flate compression algorithm (used by zip and gzip) unless those streams are compressed in some
-    ///     other way. This analysis is made after qpdf attempts to uncompress streams and is therefore closely related to
-    ///     <see cref="DecodeLevel" />. To suppress this behavior and leave streams streams uncompressed, use
-    ///     <see cref="CompressStreams" /> = <see cref="YesNo.No" />. In QDF
-    ///     mode (see QDF Mode and <see cref="QPdf"/>), the default is to leave streams uncompressed.
+    ///     By default, or with use <paramref name="compress" /> = true, qpdf will compress streams using the flate compression
+    ///     algorithm (used by zip and gzip) unless those streams are compressed in some other way. This analysis is
+    ///     made after qpdf attempts to uncompress streams and is therefore closely related to <see cref="DecodeLevel" />.
+    ///     To suppress this behavior and leave streams streams uncompressed, use <paramref name="compress" /> = false. In QDF
+    ///     mode (see QDF Mode and <see cref="QPdf" />), the default is to leave streams uncompressed.
     /// </summary>
     /// <param name="compress"><c>true</c> or <c>false</c></param>
     /// <returns>
@@ -968,7 +972,7 @@ public class Job
 
     #region KeepInlineImages
     /// <summary>
-    ///    Prevent inline images from being included in image optimization done by <see cref="OptimizeImages"/>.
+    ///     Prevent inline images from being included in image optimization done by <see cref="OptimizeImages" />.
     /// </summary>
     /// <returns>
     ///     <see cref="Job" />
@@ -982,7 +986,7 @@ public class Job
 
     #region RemovePageLabels
     /// <summary>
-    ///    Exclude page labels (explicit page numbers) from the output file.
+    ///     Exclude page labels (explicit page numbers) from the output file.
     /// </summary>
     /// <returns>
     ///     <see cref="Job" />
@@ -994,32 +998,173 @@ public class Job
     }
     #endregion
 
-    #region Run
+    // TODO: https://qpdf.readthedocs.io/en/stable/cli.html?highlight=ranges#page-selection
+
+    #region IsEncrypted
+    /// <summary>
+    ///     This option can be used for password-protected files even if you don’t know the password.
+    ///     This option is useful for shell scripts.Other options are ignored if this is given.This option is mutually
+    ///     exclusive with --requires-password.Both this option and --requires-password exit with status 2 for non-encrypted
+    ///     files.
+    /// </summary>
+    /// <returns>
+    ///     <see cref="Job" />
+    /// </returns>
+    public Job IsEncrypted()
+    {
+        _isEncrypted = string.Empty;
+        return this;
+    }
+    #endregion
+
+    #region RequiresPassword
+    /// <summary>
+    ///     Silently exit with a code indicating the file’s password status. If a password is supplied with the method
+    ///     <see cref="InputFile"/> and the password parameter set, that password is used to open the file just as with
+    ///     any normal invocation of qpdf. That means that using this option can be used to check the correctness of
+    ///     the password. This option is mutually exclusive with <see cref="IsEncrypted"/>.
+    /// </summary>
+    /// <remarks>
+    ///     Use with the method <see cref="InputFile"/> and the password parameter set
+    /// </remarks>
+    /// <returns>
+    ///     <see cref="Job" />
+    /// </returns>
+    public Job RequiresPassword()
+    {
+        _requiresPassword = string.Empty;
+        return this;
+    }
+    #endregion
+
+    #region Check
+    /// <summary>
+    ///     Check the file’s structure as well as encryption, linearization, and encoding of stream data, and write information
+    ///     about the file to standard output. An exit status of 0 indicates syntactic correctness of the PDF file. Note that
+    ///     <see cref="Check" /> writes nothing to standard error when everything is valid, so if you are using this to
+    ///     programmatically validate files in bulk, it is safe to run without output redirected to /dev/null and just check
+    ///     for a 0 exit code. A file for which <see cref="Check" /> reports no errors may still have errors in stream data
+    ///     content or may contain constructs that don’t conform to the PDF specification, but it should be syntactically valid.
+    ///     If <see cref="Check" /> reports any errors, qpdf will exit with a status of <see cref="ExitCode.ErrorsFoundFileNotProcessed"/>.
+    ///     There are some recoverable conditions that <see cref="Check" /> detects. These are issued as warnings instead of errors.
+    ///     If qpdf finds no errors but finds warnings, it will exit with a status of <see cref="ExitCode.WarningsWereFoundFileProcessed"/>.
+    ///     When <see cref="Check" /> is combined with other options, checks are always performed before any other options are processed.
+    ///     For erroneous files, <see cref="Check" /> will cause qpdf to attempt to recover, after which other options are effectively
+    ///     operating on the recovered file. Combining <see cref="Check" /> with other options in this way can be useful for manually
+    ///     recovering severely damaged files.
+    /// </summary>
+    /// <returns>
+    ///     <see cref="Job" />
+    /// </returns>
+    public Job Check()
+    {
+        _check = string.Empty;
+        return this;
+    }
+    #endregion
+
+    #region ShowEncryption
+    /// <summary>
+    ///     This option shows document encryption parameters. It also shows the document’s user password if the owner password
+    ///     is given and the file was encrypted using older encryption formats that allow user password recovery. (See PDF
+    ///     Encryption for a technical discussion of this feature.) The output of <see cref="ShowEncryption" /> is included in
+    ///     the output of <see cref="Check" />.
+    /// </summary>
+    /// <returns>
+    ///     <see cref="Job" />
+    /// </returns>
+    public Job ShowEncryption()
+    {
+        _showEncryption = string.Empty;
+        return this;
+    }
+    #endregion
+
+    #region InternalRun
     /// <summary>
     ///     Runs the job with the given parameters
     /// </summary>
-    /// <returns>
-    ///     <see cref="ExitCodes" />
-    /// </returns>
-    public ExitCodes Run()
+    /// <param name="output">Returns any output that is generated by qpdf</param>
+    private int InternalRun(out string output)
     {
-        var settings = new JsonSerializerSettings { DefaultValueHandling = DefaultValueHandling.Ignore, Formatting = Formatting.Indented };
-        settings.Converters.Add(new Newtonsoft.Json.Converters.StringEnumConverter());
+        var settings = new JsonSerializerSettings
+        {
+            DefaultValueHandling = DefaultValueHandling.Ignore,
+            Formatting = Formatting.Indented
+        };
+
+        settings.Converters.Add(new StringEnumConverter());
+
         var json = JsonConvert.SerializeObject(this, settings);
 
-        var instance = QPdfApi.Native.Init();
-        var result = QPdfApi.Native.RunFromJSON(json);
-        var warning = QPdfApi.Native.MoreWarnings(instance);
-        var hasError = QPdfApi.Native.HasError(instance);
-        if (hasError)
-        {
-            var error = QPdfApi.Native.GetErrorFullText(instance);
-        }
+        var result = QPdfApi.Native.RunFromJSONWithResult(json, out var outPointer, out var errorPointer);
+
+        var outResult = Marshal.PtrToStringAnsi(outPointer);
+        var errorResult = Marshal.PtrToStringAnsi(errorPointer);
+
+        Marshal.FreeCoTaskMem(outPointer);
+        Marshal.FreeCoTaskMem(errorPointer);
+
+        output = $"{outResult}{Environment.NewLine}{errorResult}";
 
         return result;
     }
     #endregion
-    
+
+    #region Run
+    /// <summary>
+    ///     Runs the <see cref="Job"/> with the given parameters
+    /// </summary>
+    /// <param name="output">Returns any output that is generated by qpdf</param>
+    /// <returns>
+    ///     <see cref="ExitCode" />
+    /// </returns>
+    public ExitCode Run(out string output)
+    {
+        if (_isEncrypted == string.Empty)
+            throw new ArgumentException("Use the method 'RunIsEncrypted' when the IsEncrypted method is used");
+
+        if (_requiresPassword == string.Empty)
+            throw new ArgumentException("Use the method 'RunRequiresPassword' when the RequiresPassword method is used");
+
+        return (ExitCode)InternalRun(out output);
+    }
+    #endregion
+
+    #region RunIsEncrypted
+    /// <summary>
+    ///     Runs the <see cref="Job"/> with the given parameters
+    /// </summary>
+    /// <param name="output">Returns any output that is generated by qpdf</param>
+    /// <returns>
+    ///     <see cref="ExitCode" />
+    /// </returns>
+    public ExitCodeIsEncrypted RunIsEncrypted(out string output)
+    {
+        if (_requiresPassword == string.Empty)
+            throw new ArgumentException("Use the method 'RunRequiresPassword' when the RequiresPassword method is used");
+
+        return (ExitCodeIsEncrypted)InternalRun(out output);
+    }
+    #endregion
+
+    #region RunRequiresPassword
+    /// <summary>
+    ///     Runs the <see cref="Job"/> with the given parameters
+    /// </summary>
+    /// <param name="output">Returns any output that is generated by qpdf</param>
+    /// <returns>
+    ///     <see cref="ExitCode" />
+    /// </returns>
+    public ExitCodeIsEncrypted RunRequiresPassword(out string output)
+    {
+        if (_isEncrypted == string.Empty)
+            throw new ArgumentException("Use the method 'RunIsEncrypted' when the IsEncrypted method is used");
+
+        return (ExitCodeIsEncrypted)InternalRun(out output);
+    }
+    #endregion
+
     #region Fields
     [JsonProperty("inputFile")] private string _inputFile;
     [JsonProperty("outputFile")] private string _outputFile;
@@ -1086,5 +1231,9 @@ public class Job
     [JsonProperty("oiMinArea")] private string _oiMinArea;
     [JsonProperty("keepInlineImages")] private string _keepInlineImages;
     [JsonProperty("removePageLabels")] private string _removePageLabels;
+    [JsonProperty("isEncrypted")] private string _isEncrypted;
+    [JsonProperty("requiresPassword")] private string _requiresPassword;
+    [JsonProperty("check")] private string _check;
+    [JsonProperty("showEncryption")] private string _showEncryption;
     #endregion
 }

@@ -40,12 +40,27 @@ namespace QpdfNetTest
                 .SuppressRecovery()
                 .IgnoreXrefStreams()
                 .NoOriginalObjectIds()
+                .Check()
                 .PasswordMode(PasswordMode.Auto)
                 .Decrypt()
-                .Run();
+                .Run(out var output);
 
-            Assert.AreEqual(ExitCodes.Success, result);
+            Assert.AreEqual(ExitCode.Success, result);
             Assert.IsTrue(File.Exists(outputFile));
+        }
+
+        [TestMethod]
+        public void TestInputOutput2()
+        {
+            var outputFile = Path.Combine(_testFolder, "output.pdf");
+
+            var job = new Job();
+            var result = job.InputFile(Path.Combine("TestFiles", "test.pdf"))
+                .Check()
+                .Run(out var output);
+
+            Assert.IsTrue(!string.IsNullOrEmpty(output));
+            Assert.AreEqual(ExitCode.WarningsWereFoundFileProcessed, result);
         }
 
         [TestMethod]
@@ -58,9 +73,9 @@ namespace QpdfNetTest
                 .OutputFile(outputFile)
                 .Encrypt("user", "owner", new Encryption40Bit(false))
                 .Linearize()
-                .Run();
+                .Run(out var output);
 
-            Assert.AreEqual(ExitCodes.Success, result);
+            Assert.AreEqual(ExitCode.Success, result);
             Assert.IsTrue(File.Exists(outputFile));
         }
 
@@ -74,9 +89,9 @@ namespace QpdfNetTest
                 .OutputFile(outputFile)
                 .Encrypt("user", "owner", new Encryption128Bit(false, false))
                 .Linearize()
-                .Run();
+                .Run(out var output);
 
-            Assert.AreEqual(ExitCodes.Success, result);
+            Assert.AreEqual(ExitCode.Success, result);
             Assert.IsTrue(File.Exists(outputFile));
         }
 
@@ -90,9 +105,9 @@ namespace QpdfNetTest
                 .OutputFile(outputFile)
                 .Encrypt("user", "owner", new Encryption256Bit(true, true, true, true, true, true, Modify.None, Print.None))
                 .Linearize()
-                .Run();
+                .Run(out var output);
 
-            Assert.AreEqual(ExitCodes.Success, result);
+            Assert.AreEqual(ExitCode.Success, result);
             Assert.IsTrue(File.Exists(outputFile));
         }
 
@@ -105,9 +120,9 @@ namespace QpdfNetTest
             var result = job.InputFile(Path.Combine("TestFiles", "acrobat_8_help.pdf"))
                 .OutputFile(outputFile)
                 .SplitPages(100)
-                .Run();
+                .Run(out var output);
 
-            Assert.AreEqual(ExitCodes.Success, result);
+            Assert.AreEqual(ExitCode.Success, result);
         }
     }
 }

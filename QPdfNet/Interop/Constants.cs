@@ -31,6 +31,6 @@ namespace QPdfNet.Interop
     /// </summary>
     internal static class Constants
     {
-        public const string QPdfDllName = "qpdf28.dll";
+        public const string QPdfDllName = "qpdf29.dll";
     }
 }

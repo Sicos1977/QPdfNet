@@ -5,16 +5,14 @@
     <Nullable>enable</Nullable>
 
     <IsPackable>false</IsPackable>
+
+    <AllowUnsafeBlocks>False</AllowUnsafeBlocks>
   </PropertyGroup>
 
   <ItemGroup>
     <None Remove="x64\msvcp140.dll" />
-    <None Remove="x64\qpdf.exe" />
-    <None Remove="x64\qpdf28.dll" />
     <None Remove="x64\vcruntime140.dll" />
     <None Remove="x86\msvcp140.dll" />
-    <None Remove="x86\qpdf.exe" />
-    <None Remove="x86\qpdf28.dll" />
     <None Remove="x86\vcruntime140.dll" />
   </ItemGroup>
 
@@ -22,22 +20,10 @@
     <Content Include="x64\msvcp140.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="x64\qpdf.exe">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="x64\qpdf28.dll">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
     <Content Include="x64\vcruntime140.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="x86\msvcp140.dll">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="x86\qpdf.exe">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="x86\qpdf28.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="x86\vcruntime140.dll">
@@ -62,6 +48,12 @@
 
   <ItemGroup>
     <Folder Include="TestFiles\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="x64\qpdf29.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
 
 </Project>

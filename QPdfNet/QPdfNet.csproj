@@ -25,6 +25,8 @@
     <WarningLevel>4</WarningLevel>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <LangVersion>latest</LangVersion>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <RunCodeAnalysis>false</RunCodeAnalysis>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -34,6 +36,10 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <LangVersion>latest</LangVersion>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+  </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject />
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.Bcl.AsyncInterfaces, Version=6.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
@@ -90,6 +96,8 @@
     <Compile Include="Encryption128Bit.cs" />
     <Compile Include="Encryption256Bit.cs" />
     <Compile Include="Encryption40Bit.cs" />
+    <Compile Include="Enums\ExitCodeRequiresPassword.cs" />
+    <Compile Include="Enums\ExitCodeIsEncrypted.cs" />
     <Compile Include="Enums\Print.cs" />
     <Compile Include="Enums\Modify.cs" />
     <Compile Include="Enums\Rotation.cs" />
@@ -101,7 +109,7 @@
     <Compile Include="Enums\PasswordMode.cs" />
     <Compile Include="Interfaces\IEncryption.cs" />
     <Compile Include="Job.cs" />
-    <Compile Include="Enums\ExitCodes.cs" />
+    <Compile Include="Enums\ExitCode.cs" />
     <Compile Include="InteropDotNet\ILibraryLoaderLogic.cs" />
     <Compile Include="InteropDotNet\InteropRuntimeImplementer.cs" />
     <Compile Include="InteropDotNet\LibraryLoader.cs" />
@@ -133,24 +141,14 @@
     <Content Include="x64\msvcp140.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="x64\qpdf.exe">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="x64\qpdf28.dll">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
+    <Content Include="x64\qpdf29.dll" />
     <Content Include="x64\vcruntime140.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="x86\msvcp140.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="x86\qpdf.exe">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="x86\qpdf28.dll">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
+    <Content Include="x86\qpdf29.dll" />
     <Content Include="x86\vcruntime140.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

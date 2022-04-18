@@ -1,0 +1,9 @@
+{
+  "profiles": {
+    "QpdfNetTest": {
+      "commandName": "Project",
+      "remoteDebugEnabled": false,
+      "nativeDebugging": false
+    }
+  }
+}

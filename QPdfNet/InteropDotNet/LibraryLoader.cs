@@ -98,8 +98,7 @@ namespace QPdfNet.InteropDotNet
                 if (_loadedAssemblies.ContainsKey(fileName)) 
                     return _loadedAssemblies[fileName];
                 
-                if (platformName == null)
-                    platformName = SystemManager.GetPlatformName();
+                platformName ??= SystemManager.GetPlatformName();
                 
                 Logger.LogInformation($"Current platform is {platformName}");
 

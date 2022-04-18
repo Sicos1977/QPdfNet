@@ -52,27 +52,26 @@ namespace QPdfNet.Interop
         [return: MarshalAs(UnmanagedType.LPTStr)]
         string GetQPdfVersion();
 
-        [RuntimeDllImport(Constants.QPdfDllName, CallingConvention = CallingConvention.Cdecl, EntryPoint = "qpdf_init")]
-        IntPtr Init();
-
-        [RuntimeDllImport(Constants.QPdfDllName, CallingConvention = CallingConvention.Cdecl, EntryPoint = "qpdf_init")]
-        IntPtr Cleanup(IntPtr instance);
-
-        [RuntimeDllImport(Constants.QPdfDllName, CallingConvention = CallingConvention.Cdecl, EntryPoint = "qpdf_more_warnings")]
-        bool MoreWarnings(IntPtr instance);
-        
-        [RuntimeDllImport(Constants.QPdfDllName, CallingConvention = CallingConvention.Cdecl, EntryPoint = "qpdf_has_error")]
-        bool HasError(IntPtr instance);
-
-        [RuntimeDllImport(Constants.QPdfDllName, CallingConvention = CallingConvention.Cdecl, EntryPoint = "qpdf_get_error_full_text")]
-        IntPtr GetErrorFullText(IntPtr instance);
-
         /// <summary>
         ///     Runs the given json
         /// </summary>
         /// <returns></returns>
         [RuntimeDllImport(Constants.QPdfDllName, CallingConvention = CallingConvention.Cdecl, EntryPoint = "qpdfjob_run_from_json")]
-        ExitCodes RunFromJSON(string json);
+        int RunFromJSON(string json);
+
+        /// <summary>
+        ///     Runs the given json and returns the result from cout and cerr
+        /// </summary>
+        /// <returns></returns>
+        [RuntimeDllImport(Constants.QPdfDllName, CallingConvention = CallingConvention.Cdecl, EntryPoint = "qpdfjob_run_from_json_with_result")]
+        int RunFromJSONWithResult(string json, out IntPtr out_result, out IntPtr err_result);
+
+        /// <summary>
+        ///     Runs the given json and returns the result from cout and cerr
+        /// </summary>
+        /// <returns></returns>
+        [RuntimeDllImport(Constants.QPdfDllName, CallingConvention = CallingConvention.Cdecl, EntryPoint = "qpdfjob_run_from_json_with_result_free_string")]
+        int RunFromJSONWithResultFreeString(IntPtr str);
     }
 
     public static class QPdfApi
