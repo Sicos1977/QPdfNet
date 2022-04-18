@@ -45,6 +45,83 @@ namespace QPdfNet;
 /// </remarks>
 public class Job
 {
+    #region Fields
+    [JsonProperty("inputFile")] private string _inputFile;
+    [JsonProperty("outputFile")] private string _outputFile;
+    [JsonProperty("replaceInput")] private string _replaceInput;
+    [JsonProperty("warningExit0")] private string _warningExit0;
+    [JsonProperty("password")] private string _password;
+    [JsonProperty("passwordFile")] private string _passwordFile;
+    [JsonProperty("verbose")] private string _verbose;
+    [JsonProperty("noWarn")] private string _noWarn;
+    [JsonProperty("deterministicId")] private string _deterministicId;
+    [JsonProperty("allowWeakCrypto")] private string _allowWeakCrypto;
+    [JsonProperty("keepFilesOpen")] private string _keepFilesOpen;
+    [JsonProperty("keepFilesOpenThreshold")] private string _keepFilesOpenThreshold;
+    [JsonProperty("passwordIsHexKey")] private string _passwordIsHexKey;
+    [JsonProperty("suppressPasswordRecovery")] private string _suppressPasswordRecovery;
+    [JsonProperty("passwordMode")] private PasswordMode _passwordMode;
+    [JsonProperty("suppressRecovery")] private string _suppressRecovery;
+    [JsonProperty("ignoreXrefStreams")] private string _ignoreXrefStreams;
+    [JsonProperty("linearize")] private string _linearize;
+    [JsonProperty("encrypt")] private Encryption _encryption;
+    [JsonProperty("decrypt")] private string _decrypt;
+    [JsonProperty("copyEncryption")] private string _copyEncryption;
+    [JsonProperty("encryptionFilePassword")] private string _encryptionFilePassword;
+    [JsonProperty("qpdf")] private string _qpdf;
+    [JsonProperty("noOriginalObjectIds")] private string _noOriginalObjectIds;
+    [JsonProperty("compressStreams")] private string _compressStreams;
+    [JsonProperty("decodeLevel")] private DecodeLevel _decodeLevel;
+    [JsonProperty("streamData")] private StreamData _streamData;
+    [JsonProperty("recompressFlate")] private string _recompressFlate;
+    [JsonProperty("compressionLevel")] private string _compressionLevel;
+    [JsonProperty("normalizeContent")] private string _normalizeContent;
+    [JsonProperty("objectStreams")] private ObjectStreams _objectStreams;
+    [JsonProperty("preserveUnreferenced")] private string _preserveUnreferenced;
+    [JsonProperty("removeUnreferencedResources")] private AutoYesNo _removeUnreferencedResources;
+    [JsonProperty("preserveUnreferencedResources")] private string _preserveUnreferencedResources;
+    [JsonProperty("newlineBeforeEndstream")] private string _newlineBeforeEndstream;
+    [JsonProperty("coalesceContents")] private string _coalesceContents;
+    [JsonProperty("externalizeInlineImages")] private string _externalizeInlineImages;
+    [JsonProperty("iiMinBytes")] private string _iiMinBytes;
+    [JsonProperty("minVersion")] private string _minVersion;
+    [JsonProperty("forceVersion")] private string _forceVersion;
+    [JsonProperty("collate")] private string _collate;
+    [JsonProperty("splitPages")] private string _splitPages;
+    [JsonProperty("flattenRotation")] private string _flattenRotation;
+    [JsonProperty("flattenAnnotations")] private FlattenAnnotations _flattenAnnotation;
+    [JsonProperty("rotate")] private string _rotate;
+    [JsonProperty("generateAppearances")] private string _generateAppearances;
+    [JsonProperty("optimizeImages")] private string _optimizeImages;
+    [JsonProperty("oiMinWidth")] private string _oiMinWidth;
+    [JsonProperty("oiMinHeight")] private string _oiMinHeight;
+    [JsonProperty("oiMinArea")] private string _oiMinArea;
+    [JsonProperty("keepInlineImages")] private string _keepInlineImages;
+    [JsonProperty("removePageLabels")] private string _removePageLabels;
+    [JsonProperty("isEncrypted")] private string _isEncrypted;
+    [JsonProperty("requiresPassword")] private string _requiresPassword;
+    [JsonProperty("check")] private string _check;
+    [JsonProperty("showEncryption")] private string _showEncryption;
+    [JsonProperty("showEncryptionKey")] private string _showEncryptionKey;
+    [JsonProperty("checkLinearization")] private string _checkLinearization;
+    [JsonProperty("showLinearization")] private string _showLinearization;
+    [JsonProperty("showXref")] private string _showXref;
+    [JsonProperty("showObject")] private string _showObject;
+    [JsonProperty("rawStreamData")] private string _rawStreamData;
+    [JsonProperty("filteredStreamData")] private string _filteredStreamData;
+    [JsonProperty("showNpages")] private string _showNpages;
+    [JsonProperty("showPages")] private string _showPages;
+    [JsonProperty("withImages")] private string _withImages;
+    [JsonProperty("listAttachments")] private string _listAttachments;
+    [JsonProperty("showAttachment")] private string _showAttachment;
+    [JsonProperty("json")] private string _json;
+    [JsonProperty("jsonKey")] private string _jsonKey;
+    [JsonProperty("jsonObject")] private string _jsonObject;
+    [JsonProperty("staticId")] private string _staticId;
+    [JsonProperty("staticAesIv")] private string _staticAesIv;
+    [JsonProperty("linearizePass1")] private string _linearizePass1;
+    #endregion
+
     #region InputFile
     /// <summary>
     ///     The input PDF file
@@ -232,7 +309,7 @@ public class Job
     }
     #endregion
 
-    #region KeepFilesOpen
+    #region KeepFilesOpenThreshold
     /// <summary>
     ///     If specified, overrides the default value of <c>200</c> used as the threshold for qpdf deciding whether or not to keep
     ///     files open. See <see cref="KeepFilesOpen"/> for details.
@@ -666,7 +743,7 @@ public class Job
     }
     #endregion
 
-    #region NewlineBeforeEndStream
+    #region NewlineBeforeEndstream
     /// <summary>
     ///     Tell qpdf to insert a newline before the endstream keyword, not counted in the length, after any stream content
     ///     even if the last character of the stream was a newline. This may result in two newlines in some cases. This is a
@@ -676,9 +753,9 @@ public class Job
     /// <returns>
     ///     <see cref="Job" />
     /// </returns>
-    public Job NewlineBeforeEndStream()
+    public Job NewlineBeforeEndstream()
     {
-        _newlineBeforeEndStream = string.Empty;
+        _newlineBeforeEndstream = string.Empty;
         return this;
     }
     #endregion
@@ -793,7 +870,7 @@ public class Job
 
     #region Collate
     /// <summary>
-    ///     This option causes qpdf to collate rather than concatenate pages specified with --pages. With a numeric parameter,
+    ///     This option causes qpdf to collate rather than concatenate pages specified with <see cref="Pages"/>. With a numeric parameter,
     ///     collate in groups of <paramref name="n" />. The default is <b>1</b>.
     /// </summary>
     /// <param name="n">
@@ -1440,11 +1517,10 @@ public class Job
         settings.Converters.Add(new StringEnumConverter());
 
         var json = JsonConvert.SerializeObject(this, settings);
-
         var result = QPdfApi.Native.RunFromJSONWithResult(json, out var outPointer, out var errorPointer);
-
         var outResult = Marshal.PtrToStringAnsi(outPointer);
         var errorResult = Marshal.PtrToStringAnsi(errorPointer);
+        
         outResult = outResult?.Trim();
         errorResult = errorResult?.Trim();
 
@@ -1454,7 +1530,12 @@ public class Job
         output = outResult;
 
         if (!string.IsNullOrWhiteSpace(errorResult))
-            output += Environment.NewLine + errorResult;
+        {
+            if (string.IsNullOrWhiteSpace(output))
+                output = errorResult;
+            else
+                output += Environment.NewLine + errorResult;
+        }
 
         return result;
     }
@@ -1514,82 +1595,5 @@ public class Job
 
         return (ExitCodeIsEncrypted)InternalRun(out output);
     }
-    #endregion
-
-    #region Fields
-    [JsonProperty("inputFile")] private string _inputFile;
-    [JsonProperty("outputFile")] private string _outputFile;
-    [JsonProperty("replaceInput")] private string _replaceInput;
-    [JsonProperty("warningExit0")] private string _warningExit0;
-    [JsonProperty("password")] private string _password;
-    [JsonProperty("passwordFile")] private string _passwordFile;
-    [JsonProperty("verbose")] private string _verbose;
-    [JsonProperty("noWarn")] private string _noWarn;
-    [JsonProperty("deterministicId")] private string _deterministicId;
-    [JsonProperty("allowWeakCrypto")] private string _allowWeakCrypto;
-    [JsonProperty("keepFilesOpen")] private string _keepFilesOpen;
-    [JsonProperty("keepFilesOpenThreshold")] private string _keepFilesOpenThreshold;
-    [JsonProperty("passwordIsHexKey")] private string _passwordIsHexKey;
-    [JsonProperty("suppressPasswordRecovery")] private string _suppressPasswordRecovery;
-    [JsonProperty("passwordMode")] private PasswordMode _passwordMode;
-    [JsonProperty("suppressRecovery")] private string _suppressRecovery;
-    [JsonProperty("ignoreXrefStreams")] private string _ignoreXrefStreams;
-    [JsonProperty("linearize")] private string _linearize;
-    [JsonProperty("encrypt")] private Encryption _encryption;
-    [JsonProperty("decrypt")] private string _decrypt;
-    [JsonProperty("copyEncryption")] private string _copyEncryption;
-    [JsonProperty("encryptionFilePassword")] private string _encryptionFilePassword;
-    [JsonProperty("qpdf")] private string _qpdf;
-    [JsonProperty("noOriginalObjectIds")] private string _noOriginalObjectIds;
-    [JsonProperty("compressStreams")] private string _compressStreams;
-    [JsonProperty("decodeLevel")] private DecodeLevel _decodeLevel;
-    [JsonProperty("streamData")] private StreamData _streamData;
-    [JsonProperty("recompressFlate")] private string _recompressFlate;
-    [JsonProperty("compressionLevel")] private string _compressionLevel;
-    [JsonProperty("normalizeContent")] private string _normalizeContent;
-    [JsonProperty("objectStreams")] private ObjectStreams _objectStreams;
-    [JsonProperty("preserveUnreferenced")] private string _preserveUnreferenced;
-    [JsonProperty("removeUnreferencedResources")] private AutoYesNo _removeUnreferencedResources;
-    [JsonProperty("preserveUnreferencedResources")] private string _preserveUnreferencedResources;
-    [JsonProperty("newlineBeforeEndStream")] private string _newlineBeforeEndStream;
-    [JsonProperty("coalesceContents")] private string _coalesceContents;
-    [JsonProperty("externalizeInlineImages")] private string _externalizeInlineImages;
-    [JsonProperty("iiMinBytes")] private string _iiMinBytes;
-    [JsonProperty("minVersion")] private string _minVersion;
-    [JsonProperty("forceVersion")] private string _forceVersion;
-    [JsonProperty("collate")] private string _collate;
-    [JsonProperty("splitPages")] private string _splitPages;
-    [JsonProperty("flattenRotation")] private string _flattenRotation;
-    [JsonProperty("flattenAnnotations")] private FlattenAnnotations _flattenAnnotation;
-    [JsonProperty("rotate")] private string _rotate;
-    [JsonProperty("generateAppearances")] private string _generateAppearances;
-    [JsonProperty("optimizeImages")] private string _optimizeImages;
-    [JsonProperty("oiMinWidth")] private string _oiMinWidth;
-    [JsonProperty("oiMinHeight")] private string _oiMinHeight;
-    [JsonProperty("oiMinArea")] private string _oiMinArea;
-    [JsonProperty("keepInlineImages")] private string _keepInlineImages;
-    [JsonProperty("removePageLabels")] private string _removePageLabels;
-    [JsonProperty("isEncrypted")] private string _isEncrypted;
-    [JsonProperty("requiresPassword")] private string _requiresPassword;
-    [JsonProperty("check")] private string _check;
-    [JsonProperty("showEncryption")] private string _showEncryption;
-    [JsonProperty("showEncryptionKey")] private string _showEncryptionKey;
-    [JsonProperty("checkLinearization")] private string _checkLinearization;
-    [JsonProperty("showLinearization")] private string _showLinearization;
-    [JsonProperty("showXref")] private string _showXref;
-    [JsonProperty("showObject")] private string _showObject;
-    [JsonProperty("rawStreamData")] private string _rawStreamData;
-    [JsonProperty("filteredStreamData")] private string _filteredStreamData;
-    [JsonProperty("showNpages")] private string _showNpages;
-    [JsonProperty("showPages")] private string _showPages;
-    [JsonProperty("withImages")] private string _withImages;
-    [JsonProperty("listAttachments")] private string _listAttachments;
-    [JsonProperty("showAttachment")] private string _showAttachment;
-    [JsonProperty("json")] private string _json;
-    [JsonProperty("jsonKey")] private string _jsonKey;
-    [JsonProperty("jsonObject")] private string _jsonObject;
-    [JsonProperty("staticId")] private string _staticId;
-    [JsonProperty("staticAesIv")] private string _staticAesIv;
-    [JsonProperty("linearizePass1")] private string _linearizePass1;
     #endregion
 }

@@ -35,33 +35,63 @@ namespace QpdfNetTest
             var outputFile = Path.Combine(_testFolder, "output.pdf");
 
             var job = new Job();
-            var result = job.InputFile(Path.Combine("TestFiles", "test.pdf"))
+            var result = job
+                .InputFile(Path.Combine("TestFiles", "test.pdf"))
                 .OutputFile(outputFile)
-                .SuppressRecovery()
-                .IgnoreXrefStreams()
-                .NoOriginalObjectIds()
-                .StaticId()
-                .PasswordMode(PasswordMode.Auto)
-                .Decrypt()
                 .Run(out var output);
 
             Assert.AreEqual(ExitCode.Success, result);
+            Assert.IsTrue(string.IsNullOrEmpty(output));
             Assert.IsTrue(File.Exists(outputFile));
         }
 
         [TestMethod]
-        public void TestInputOutput2()
+        public void TestInputOutputWithParameters()
         {
             var outputFile = Path.Combine(_testFolder, "output.pdf");
 
             var job = new Job();
-            var result = job.InputFile(Path.Combine("TestFiles", "test.pdf"))
-                .Check()
+            var result = job
+                .InputFile(Path.Combine("TestFiles", "test.pdf"))
+                .OutputFile(outputFile)
+                .WarningExit0()
+                .Verbose()
                 .NoWarn()
+                .DeterministicId()
+                .AllowWeakCrypto()
+                .SuppressRecovery()
+                .IgnoreXrefStreams()
+                .Linearize()
+                .NoOriginalObjectIds()
+                .CompressStreams(true)
+                .DecodeLevel()
+                .StreamData()
+                .RecompressFlate()
+                .CompressionLevel(9)
+                .NormalizeContent(true)
+                .ObjectStreams(ObjectStreams.Generate)
+                .PreserveUnreferenced()
+                .PreserveUnreferencedResources()
+                .NewlineBeforeEndstream()
+                .CoalesceContents()
+                .ExternalizeInlineImages()
+                .IiMinBytes()
+                .Collate()
+                .FlattenRotation()
+                .FlattenAnnotations(FlattenAnnotations.All)
+                .Rotate(Rotation.Rotate0)
+                .GenerateAppearances()
+                .OptimizeImages()
+                .OiMinWidth()
+                .OiMinHeight()
+                .OiMinArea()
+                .KeepInlineImages()
+                .RemovePageLabels()
                 .Run(out var output);
 
-            Assert.IsTrue(!string.IsNullOrEmpty(output));
-            Assert.AreEqual(ExitCode.WarningsWereFoundFileProcessed, result);
+            Assert.AreEqual(ExitCode.Success, result);
+            Assert.IsTrue(string.IsNullOrEmpty(output));
+            Assert.IsTrue(File.Exists(outputFile));
         }
 
         [TestMethod]
