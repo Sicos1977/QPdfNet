@@ -870,8 +870,6 @@ public class Job
     }
     #endregion
 
-    // TODO: https://qpdf.readthedocs.io/en/stable/cli.html?highlight=ranges#option-pages
-
     #region Pages
     /// <summary>
     ///     This method starts page selection options, which are used to select pages from one or more input files to perform
