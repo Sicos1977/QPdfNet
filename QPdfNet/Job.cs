@@ -90,6 +90,8 @@ public class Job
     [JsonProperty("collate")] private string _collate;
     [JsonProperty("pages")] private List<Pages> _pages;
     [JsonProperty("splitPages")] private string _splitPages;
+    [JsonProperty("overlay")] private List<Layer> _overlay;
+    [JsonProperty("underlay")] private List<Layer> _underlay;
     [JsonProperty("flattenRotation")] private string _flattenRotation;
     [JsonProperty("flattenAnnotations")] private FlattenAnnotations _flattenAnnotation;
     [JsonProperty("rotate")] private string _rotate;
@@ -941,9 +943,79 @@ public class Job
     }
     #endregion
 
-    // TODO: https://qpdf.readthedocs.io/en/stable/cli.html?highlight=ranges#option-overlay
+    #region Overlay
+    /// <summary>
+    ///     <see cref="Overlay"/> options are processed late, so they can be combined with other options like merging and will
+    ///     apply to the final output. The <see cref="Underlay"/> options work the same way, except <see cref="Underlay"/> pages
+    ///     are drawn underneath the page to which they are applied, possibly obscured by the original page, and
+    ///     <see cref="Overlay"/> files are drawn on top of the page to which they are applied, possibly obscuring the page. You
+    ///     can combine both, but you can only specify each option at most one time. The default behavior of <see cref="Overlay"/>
+    ///     and <see cref="Underlay"/> is that pages are taken from the <see cref="Overlay"/>/<see cref="Underlay"/> file in
+    ///     sequence and applied to corresponding pages in the output until there are no more output pages.If the
+    ///     <see cref="Overlay"/> or <see cref="Underlay"/> file runs out of pages, remaining output pages are left alone
+    /// </summary>
+    /// <param name="to">
+    ///     Specify a page range (see Page Ranges) that indicates which pages in the output should have the
+    ///     <see cref="Overlay"/>/<see cref="Underlay"/> applied. If not specified, <see cref="Overlay"/>/<see cref="Underlay"/>
+    ///     are applied to all pages.
+    /// </param>
+    /// <param name="from">
+    ///     Specify a page range that indicates which pages in the <see cref="Overlay"/>/<see cref="Underlay"/> file will be used
+    ///     for <see cref="Overlay"/> or <see cref="Underlay"/>. If not specified, all pages will be used. The
+    ///     <paramref name="from"/> pages are used until they are exhausted, after which any pages specified with
+    ///     <paramref name="repeat" /> are used. If you are using the <paramref name="repeat" /> option, you can use
+    ///     <paramref name="from"/> to provide an empty set of <paramref name="from"/> pages.
+    /// </param>
+    /// <param name="repeat">
+    ///     Specify an optional page range that indicates which pages in the <see cref="Overlay"/>/<see cref="Underlay"/> file
+    ///     will be repeated after the <paramref name="from"/> pages are used up. If you want to apply a repeat a range of
+    ///     pages starting with the first page of output, you can explicitly use <paramref name="from"/>.
+    /// </param>
+    /// <returns></returns>
+    public Job Overlay(string to, string from, string repeat = null)
+    {
+        _overlay ??= new List<Layer>();
+        _overlay.Add(new Layer(to, from, repeat));
+        return this;
+    }
+    #endregion
 
-    // TODO: https://qpdf.readthedocs.io/en/stable/cli.html?highlight=ranges#option-underlay
+    #region Underlay
+    /// <summary>
+    ///     <see cref="Overlay"/> options are processed late, so they can be combined with other options like merging and will
+    ///     apply to the final output. The <see cref="Underlay"/> options work the same way, except <see cref="Underlay"/> pages
+    ///     are drawn underneath the page to which they are applied, possibly obscured by the original page, and
+    ///     <see cref="Overlay"/> files are drawn on top of the page to which they are applied, possibly obscuring the page. You
+    ///     can combine both, but you can only specify each option at most one time. The default behavior of <see cref="Overlay"/>
+    ///     and <see cref="Underlay"/> is that pages are taken from the <see cref="Overlay"/>/<see cref="Underlay"/> file in
+    ///     sequence and applied to corresponding pages in the output until there are no more output pages.If the
+    ///     <see cref="Overlay"/> or <see cref="Underlay"/> file runs out of pages, remaining output pages are left alone
+    /// </summary>
+    /// <param name="to">
+    ///     Specify a page range (see Page Ranges) that indicates which pages in the output should have the
+    ///     <see cref="Overlay"/>/<see cref="Underlay"/> applied. If not specified, <see cref="Overlay"/>/<see cref="Underlay"/>
+    ///     are applied to all pages.
+    /// </param>
+    /// <param name="from">
+    ///     Specify a page range that indicates which pages in the <see cref="Overlay"/>/<see cref="Underlay"/> file will be used
+    ///     for <see cref="Overlay"/> or <see cref="Underlay"/>. If not specified, all pages will be used. The
+    ///     <paramref name="from"/> pages are used until they are exhausted, after which any pages specified with
+    ///     <paramref name="repeat" /> are used. If you are using the <paramref name="repeat" /> option, you can use
+    ///     <paramref name="from"/> to provide an empty set of <paramref name="from"/> pages.
+    /// </param>
+    /// <param name="repeat">
+    ///     Specify an optional page range that indicates which pages in the <see cref="Overlay"/>/<see cref="Underlay"/> file
+    ///     will be repeated after the <paramref name="from"/> pages are used up. If you want to apply a repeat a range of
+    ///     pages starting with the first page of output, you can explicitly use <paramref name="from"/>.
+    /// </param>
+    /// <returns></returns>
+    public Job Underlay(string to, string from, string repeat = null)
+    {
+        _underlay ??= new List<Layer>();
+        _underlay.Add(new Layer(to, from, repeat));
+        return this;
+    }
+    #endregion
 
     #region FlattenRotation
     /// <summary>
