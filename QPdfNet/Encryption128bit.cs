@@ -19,7 +19,6 @@ namespace QPdfNet
         /// <param name="modify">Control <see cref="Enums.Modify"/> access by level</param>
         /// <param name="print">Control printing access</param>
         /// <param name="cleartextMetaData">Prevent encryption of metadata</param>
-
         public Encryption128Bit(
             bool accessibility = true,
             bool annotate = true,
@@ -28,7 +27,8 @@ namespace QPdfNet
             bool form = true,
             bool modifyOther = true,
             Modify modify = Modify.All,
-            Print print = Print.Full) :
+            Print print = Print.Full,
+            bool cleartextMetaData = false) :
             base(
                 accessibility,
                 annotate,
@@ -37,7 +37,8 @@ namespace QPdfNet
                 form,
                 modifyOther,
                 modify,
-                print)
+                print, 
+                cleartextMetaData)
         {
 
         }

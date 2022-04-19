@@ -10,32 +10,15 @@ namespace QPdfNet
     public class Encryption256Bit : IEncryption
     {
         #region Fields
-        [JsonProperty("accessibility")]
-        private string _accessibility;
-
-        [JsonProperty("annotate")]
-        private string _annotate;
-
-        [JsonProperty("assemble")]
-        private string _assemble;
-
-        [JsonProperty("extract")]
-        private string _extract;
-
-        [JsonProperty("form")]
-        private string _form;
-
-        [JsonProperty("modifyOther")]
-        private string _modifyOther;
-        
-        [JsonProperty("modify")]
-        private Modify _modify;
-        
-        [JsonProperty("print")]
-        private Print _print;
-
-        [JsonProperty("cleartextMetadata")]
-        private string _cleartextMetadata;
+        [JsonProperty("accessibility")] private string _accessibility;
+        [JsonProperty("annotate")] private string _annotate;
+        [JsonProperty("assemble")] private string _assemble;
+        [JsonProperty("extract")] private string _extract;
+        [JsonProperty("form")] private string _form;
+        [JsonProperty("modifyOther")] private string _modifyOther;
+        [JsonProperty("modify")] private Modify _modify;
+        [JsonProperty("print")] private Print _print;
+        [JsonProperty("cleartextMetadata")] private string _cleartextMetadata;
         #endregion
 
         #region Constructor
@@ -71,8 +54,8 @@ namespace QPdfNet
             _modify = modify;
             _print = print;
 
-            //if (cleartextMetaData)
-                _cleartextMetadata = "y";
+            if (cleartextMetaData)
+                _cleartextMetadata = string.Empty;
         }
     }
     #endregion

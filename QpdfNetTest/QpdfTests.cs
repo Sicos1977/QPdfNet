@@ -95,6 +95,22 @@ namespace QpdfNetTest
         }
 
         [TestMethod]
+        public void TestPages()
+        {
+            var outputFile = Path.Combine(_testFolder, "output.pdf");
+
+            var job = new Job();
+            var result = job.InputFile(Path.Combine("TestFiles", "test.pdf"))
+                .OutputFile(outputFile)
+                .Pages(".", "1")
+                .Pages("d:\\acrobat_8_help.pdf", "1-4")
+                .Run(out var output);
+
+            Assert.AreEqual(ExitCode.Success, result);
+            Assert.IsTrue(File.Exists(outputFile));
+        }
+
+        [TestMethod]
         public void TestEncryption40Bit()
         {
             var outputFile = Path.Combine(_testFolder, "output_encryption_40_bit.pdf");

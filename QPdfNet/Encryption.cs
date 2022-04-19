@@ -10,17 +10,9 @@ namespace QPdfNet
     internal class Encryption
     {
         #region Fields
-        /// <summary>
-        ///     The encryption options
-        /// </summary>
-        [JsonProperty("40bit")]
-        private IEncryption _options40;
-
-        [JsonProperty("128bit")]
-        private IEncryption _options128;
-
-        [JsonProperty("256bit")]
-        private IEncryption _options256;
+        [JsonProperty("40bit")] private IEncryption _options40;
+        [JsonProperty("128bit")] private IEncryption _options128;
+        [JsonProperty("256bit")] private IEncryption _options256;
         #endregion
 
         #region Properties

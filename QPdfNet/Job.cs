@@ -25,6 +25,7 @@
 //
 
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Runtime.InteropServices;
 using Newtonsoft.Json;
@@ -87,6 +88,7 @@ public class Job
     [JsonProperty("minVersion")] private string _minVersion;
     [JsonProperty("forceVersion")] private string _forceVersion;
     [JsonProperty("collate")] private string _collate;
+    [JsonProperty("pages")] private List<Pages> _pages;
     [JsonProperty("splitPages")] private string _splitPages;
     [JsonProperty("flattenRotation")] private string _flattenRotation;
     [JsonProperty("flattenAnnotations")] private FlattenAnnotations _flattenAnnotation;
@@ -841,8 +843,8 @@ public class Job
     #region ForceVersion
     /// <summary>
     ///     This option forces the PDF version to be the exact version specified even when the file may have content that is
-    ///     not supported in that version. The version number is interpreted in the same way as with --min-version so that
-    ///     extension levels can be set. In some cases, forcing the output file’s PDF version to be lower than that of the
+    ///     not supported in that version. The version number is interpreted in the same way as with <see cref="MinVersion"/>
+    ///     so that extension levels can be set. In some cases, forcing the output file’s PDF version to be lower than that of the
     ///     input file will cause qpdf to disable certain features of the document. Specifically, 256-bit keys are disabled if
     ///     the version is less than 1.7 with extension level 8 (except the deprecated, unsupported “R5” format is allowed with
     ///     extension levels 3 through 7), AES encryption is disabled if the version is less than 1.6, clear text metadata and
@@ -868,6 +870,30 @@ public class Job
     }
     #endregion
 
+    // TODO: https://qpdf.readthedocs.io/en/stable/cli.html?highlight=ranges#option-pages
+
+    #region Pages
+    /// <summary>
+    ///     This method starts page selection options, which are used to select pages from one or more input files to perform
+    ///     operations such as splitting, merging, and collating files.
+    /// </summary>
+    /// <remarks>
+    ///     See https://qpdf.readthedocs.io/en/stable/cli.html#page-selection about how this method works
+    /// </remarks>
+    /// <param name="file">The file</param>
+    /// <param name="range">The page range</param>
+    /// <param name="password">The password or <c>null</c> when not needed</param>
+    /// <returns>
+    ///     <see cref="Job" />
+    /// </returns>
+    public Job Pages(string file, string range, string password = null)
+    {
+        _pages ??= new List<Pages>();
+        _pages.Add(new Pages(file, range, password));
+        return this;
+    }
+    #endregion
+
     #region Collate
     /// <summary>
     ///     This option causes qpdf to collate rather than concatenate pages specified with <see cref="Pages"/>. With a numeric parameter,
@@ -888,8 +914,6 @@ public class Job
         return this;
     }
     #endregion
-
-    // TODO: https://qpdf.readthedocs.io/en/stable/cli.html?highlight=ranges#option-pages
 
     #region SplitPages
     /// <summary>
