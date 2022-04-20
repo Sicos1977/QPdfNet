@@ -26,6 +26,22 @@ QPdfNet is Copyright (C) 2021-2022 Magic-Sessions and is licensed under the MIT 
     OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
     THE SOFTWARE.
 
+## Microsoft Visual C++ runtimes
+
+The DLL's Tesseract51.dll (and exe) and leptonica-1.82.0.dll are compiled with Visual Studio 2022 you need these C++ runtimes for it on your server
+
+- X86: https://aka.ms/vs/17/release/vc_redist.x86.exe
+- X64: https://aka.ms/vs/17/release/vc_redist.x64.exe
+
+Installing via NuGet
+====================
+
+The easiest way to install MSGReader is via NuGet.
+
+In Visual Studio's Package Manager Console, simply enter the following command:
+
+    Install-Package QPdfNet
+
 Core Team
 =========
     Sicos1977 (Kees van Spelde)
