@@ -33,7 +33,7 @@ QPdfNet is Copyright (C) 2021-2022 Magic-Sessions and is licensed under the MIT 
 
 ## Microsoft Visual C++ runtimes
 
-The DLL's Tesseract51.dll (and exe) and leptonica-1.82.0.dll are compiled with Visual Studio 2022 you need these C++ runtimes for it on your server
+The DLL qpdf29.dll is compiled with Visual Studio 2022 you need these C++ runtimes for it on your computer
 
 - X86: https://aka.ms/vs/17/release/vc_redist.x86.exe
 - X64: https://aka.ms/vs/17/release/vc_redist.x64.exe
