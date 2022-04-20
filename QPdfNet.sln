@@ -7,8 +7,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QPdfNet", "QPdfNet\QPdfNet.
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "QpdfNetTest", "QpdfNetTest\QpdfNetTest.csproj", "{1C702B8C-5945-4F57-8A80-3BCBA47EC468}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QPdfNetConsole", "QPdfNetConsole\QPdfNetConsole.csproj", "{7FC61CAC-A2D4-4F4F-99FD-C667A9AE5CF4}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -23,10 +21,6 @@ Global
 		{1C702B8C-5945-4F57-8A80-3BCBA47EC468}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1C702B8C-5945-4F57-8A80-3BCBA47EC468}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1C702B8C-5945-4F57-8A80-3BCBA47EC468}.Release|Any CPU.Build.0 = Release|Any CPU
-		{7FC61CAC-A2D4-4F4F-99FD-C667A9AE5CF4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{7FC61CAC-A2D4-4F4F-99FD-C667A9AE5CF4}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{7FC61CAC-A2D4-4F4F-99FD-C667A9AE5CF4}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{7FC61CAC-A2D4-4F4F-99FD-C667A9AE5CF4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
