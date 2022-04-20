@@ -3,7 +3,12 @@ THIS IS STILL WORK IN PROGRESS SO NO FINISHED PRODUCT YET !!!!!
 
 What is QPdfNet
 =========
-A C# wrapper for qpdf
+A C# wrapper for QPDF that exposes all the functionality that is available through the QPDF command-line tool
+
+It supports linearization, encryption, and numerous other features. It can also be used for splitting and merging files, creating PDF files (but you have to supply all the content yourself), and inspecting files for study or analysis. QPDF does not render PDFs or perform text extraction, and it does not contain higher-level interfaces for working with page contents. It is a low-level tool for working with the structure of PDF files and can be a valuable tool for anyone who wants to do programmatic or command-line-based manipulation of PDF files.
+
+The QPDF Manual is hosted online at https://qpdf.readthedocs.io. The project website is https://qpdf.sourceforge.io. The source code repository is hosted at GitHub: https://github.com/qpdf/qpdf.
+
 ## License Information
 
 QPdfNet is Copyright (C) 2021-2022 Magic-Sessions and is licensed under the MIT license:
@@ -25,6 +30,22 @@ QPdfNet is Copyright (C) 2021-2022 Magic-Sessions and is licensed under the MIT 
     LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
     OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
     THE SOFTWARE.
+
+## Microsoft Visual C++ runtimes
+
+The DLL qpdf29.dll is compiled with Visual Studio 2022 you need these C++ runtimes for it on your computer
+
+- X86: https://aka.ms/vs/17/release/vc_redist.x86.exe
+- X64: https://aka.ms/vs/17/release/vc_redist.x64.exe
+
+Installing via NuGet
+====================
+
+The easiest way to install MSGReader is via NuGet.
+
+In Visual Studio's Package Manager Console, simply enter the following command:
+
+    Install-Package QPdfNet
 
 Core Team
 =========
