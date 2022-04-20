@@ -49,6 +49,7 @@ public class Job
     #region Fields
     [JsonProperty("inputFile")] private string _inputFile;
     [JsonProperty("outputFile")] private string _outputFile;
+    [JsonProperty("empty")] private string _empty;
     [JsonProperty("replaceInput")] private string _replaceInput;
     [JsonProperty("warningExit0")] private string _warningExit0;
     [JsonProperty("password")] private string _password;
@@ -69,7 +70,7 @@ public class Job
     [JsonProperty("decrypt")] private string _decrypt;
     [JsonProperty("copyEncryption")] private string _copyEncryption;
     [JsonProperty("encryptionFilePassword")] private string _encryptionFilePassword;
-    [JsonProperty("qpdf")] private string _qpdf;
+    [JsonProperty("qdf")] private string _qdf;
     [JsonProperty("noOriginalObjectIds")] private string _noOriginalObjectIds;
     [JsonProperty("compressStreams")] private string _compressStreams;
     [JsonProperty("decodeLevel")] private DecodeLevel _decodeLevel;
@@ -152,6 +153,21 @@ public class Job
     public Job OutputFile(string fileName)
     {
         _outputFile = fileName;
+        return this;
+    }
+    #endregion
+
+    #region Empty
+    /// <summary>
+    ///     This option may be given in place of infile. This causes qpdf to use a dummy input file that contains zero pages.
+    ///     This option is useful in conjunction with <see cref="Pages"/>. See Page Selection for details.
+    /// </summary>
+    /// <returns>
+    ///     <see cref="Job" />
+    /// </returns>
+    public Job Empty()
+    {
+        _empty = string.Empty;
         return this;
     }
     #endregion
@@ -517,7 +533,7 @@ public class Job
     }
     #endregion
 
-    #region QPdf
+    #region Qdf
     /// <summary>
     ///     Create a PDF file suitable for viewing and editing in a text editor. This is to edit the PDF code, not the page
     ///     contents. To edit a QDF file, your text editor must preserve binary data. In a QDF file, all streams that can be
@@ -528,9 +544,9 @@ public class Job
     /// <returns>
     ///     <see cref="Job" />
     /// </returns>
-    public Job QPdf()
+    public Job Qdf()
     {
-        _qpdf = string.Empty;
+        _qdf = string.Empty;
         return this;
     }
     #endregion
@@ -1213,9 +1229,7 @@ public class Job
         return this;
     }
     #endregion
-
-    // TODO: https://qpdf.readthedocs.io/en/stable/cli.html?highlight=ranges#page-selection
-
+    
     #region IsEncrypted
     /// <summary>
     ///     This option can be used for password-protected files even if you don’t know the password.
@@ -1237,9 +1251,9 @@ public class Job
     #region RequiresPassword
     /// <summary>
     ///     Silently exit with a code indicating the file’s password status. If a password is supplied with the method
-    ///     <see cref="InputFile" /> and the password parameter set, that password is used to open the file just as with
-    ///     any normal invocation of qpdf. That means that using this option can be used to check the correctness of
-    ///     the password. This option is mutually exclusive with <see cref="IsEncrypted" />.
+    ///     <see cref="InputFile" /> and the <see cref="Password"/> parameter set, that password is used to open the
+    ///     file just as with any normal invocation of qpdf. That means that using this option can be used to check
+    ///     the correctness of the password. This option is mutually exclusive with <see cref="IsEncrypted" />.
     /// </summary>
     /// <remarks>
     ///     Use with the method <see cref="Password" /> method
@@ -1682,12 +1696,12 @@ public class Job
     /// <returns>
     ///     <see cref="ExitCode" />
     /// </returns>
-    public ExitCodeIsEncrypted RunRequiresPassword(out string output)
+    public ExitCodeRequiresPassword RunRequiresPassword(out string output)
     {
         if (_isEncrypted == string.Empty)
             throw new ArgumentException("Use the method 'RunIsEncrypted' when the IsEncrypted method is used");
 
-        return (ExitCodeIsEncrypted)InternalRun(out output);
+        return (ExitCodeRequiresPassword)InternalRun(out output);
     }
     #endregion
 }

@@ -1,9 +1,3 @@
-D:\Progsoft\_GitHub_\QPdfNet\QPdfNet\bin\Debug\x64\msvcp140.dll
-D:\Progsoft\_GitHub_\QPdfNet\QPdfNet\bin\Debug\x64\vcruntime140.dll
-D:\Progsoft\_GitHub_\QPdfNet\QPdfNet\bin\Debug\x86\msvcp140.dll
-D:\Progsoft\_GitHub_\QPdfNet\QPdfNet\bin\Debug\x86\vcruntime140.dll
-D:\Progsoft\_GitHub_\QPdfNet\QPdfNet\bin\Debug\TestFiles\acrobat_8_help.pdf
-D:\Progsoft\_GitHub_\QPdfNet\QPdfNet\bin\Debug\TestFiles\test.pdf
 D:\Progsoft\_GitHub_\QPdfNet\QPdfNet\bin\Debug\QPdfNet.dll.config
 D:\Progsoft\_GitHub_\QPdfNet\QPdfNet\bin\Debug\QPdfNet.dll
 D:\Progsoft\_GitHub_\QPdfNet\QPdfNet\bin\Debug\QPdfNet.pdb
