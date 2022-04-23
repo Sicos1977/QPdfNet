@@ -179,7 +179,119 @@ namespace QpdfNetTest
             Assert.AreEqual(ExitCode.Success, result);
         }
 
-        // TODO: Add test from CheckLinearization
+        [TestMethod]
+        public void TestCheckLinearization()
+        {
+            var job = new Job();
+            var result = job.InputFile(Path.Combine("TestFiles", "test.pdf"))
+                .CheckLinearization()
+                .Run(out _);
+
+            Assert.AreEqual(ExitCode.Success, result);
+        }
+
+        [TestMethod]
+        public void TestShowLinearization()
+        {
+            var job = new Job();
+            var result = job.InputFile(Path.Combine("TestFiles", "test.pdf"))
+                .ShowLinearization()
+                .Run(out var output);
+
+            Assert.IsTrue(output.Contains("file_size: 180701"));
+            Assert.AreEqual(ExitCode.Success, result);
+        }
+
+        [TestMethod]
+        public void TestShowXref()
+        {
+            var job = new Job();
+            var result = job.InputFile(Path.Combine("TestFiles", "test.pdf"))
+                .ShowXref()
+                .Run(out var output);
+
+            Assert.IsTrue(output.Contains("1/0: uncompressed; offset = 176168"));
+            Assert.AreEqual(ExitCode.Success, result);
+        }
+
+        [TestMethod]
+        public void TestShowObject()
+        {
+            var job = new Job();
+            var result = job.InputFile(Path.Combine("TestFiles", "test.pdf"))
+                .ShowObject("trailer")
+                .Run(out var output);
+
+            Assert.IsTrue(output.Contains("<< /ID [ <abfecb2b8e80721668392435f5aa76a6> <abfecb2b8e80721668392435f5aa76a6> ] /Info 3 0 R /Prev 180512 /Root 8 0 R /Size 19 >>"));
+            Assert.AreEqual(ExitCode.Success, result);
+        }
+
+        [TestMethod]
+        public void TestRawStreamData()
+        {
+            var outputFile = Path.Combine("TestFiles", "output.pdf");
+
+            var job = new Job();
+            var result = job.InputFile(Path.Combine("TestFiles", "test.pdf"))
+                .OutputFile(outputFile)
+                .RawStreamData()
+                .Run(out _);
+
+            Assert.IsTrue(File.Exists(outputFile));
+            Assert.AreEqual(ExitCode.Success, result);
+        }
+
+        [TestMethod]
+        public void TestFilteredStreamData()
+        {
+            var outputFile = Path.Combine("TestFiles", "output.pdf");
+
+            var job = new Job();
+            var result = job.InputFile(Path.Combine("TestFiles", "test.pdf"))
+                .OutputFile(outputFile)
+                .RawStreamData()
+                .Run(out _);
+
+            Assert.IsTrue(File.Exists(outputFile));
+            Assert.AreEqual(ExitCode.Success, result);
+        }
+
+        [TestMethod]
+        public void TestShowNPages()
+        {
+            var job = new Job();
+            var result = job.InputFile(Path.Combine("TestFiles", "20_pages.pdf"))
+                .ShowNPages()
+                .Run(out var output);
+
+            Assert.AreEqual(ExitCode.Success, result);
+            Assert.AreEqual(output, "20");
+        }
+
+        [TestMethod]
+        public void TestShowPages()
+        {
+            var job = new Job();
+            var result = job.InputFile(Path.Combine("TestFiles", "20_pages.pdf"))
+                .ShowPages()
+                .Run(out var output);
+
+            Assert.IsTrue(output.Contains("page 12: 29 0 R"));
+            Assert.AreEqual(ExitCode.Success, result);
+        }
+
+        [TestMethod]
+        public void TestWithImages()
+        {
+            var job = new Job();
+            var result = job.InputFile(Path.Combine("TestFiles", "test.pdf"))
+                .ShowPages()
+                .WithImages()
+                .Run(out var output);
+
+            Assert.IsTrue(output.Contains("/R10: 14 0 R, 1484 x 989"));
+            Assert.AreEqual(ExitCode.Success, result);
+        }
 
         [TestMethod]
         public void TestQdf()
@@ -232,17 +344,6 @@ namespace QpdfNetTest
 
             Assert.AreEqual(ExitCode.Success, result);
             Assert.AreEqual(output, "40");
-        }
-
-        [TestMethod]
-        public void TestShowNPages()
-        {
-            var job = new Job();
-            var result = job.InputFile(Path.Combine("TestFiles", "20_pages.pdf"))
-                .ShowNPages().Run(out var output);
-
-            Assert.AreEqual(ExitCode.Success, result);
-            Assert.AreEqual(output, "20");
         }
 
         [TestMethod]
