@@ -124,7 +124,7 @@ public class Job
     [JsonProperty("showAttachment")] private string _showAttachment;
     [JsonProperty("json")] private string _json;
     [JsonProperty("jsonKey")] private string _jsonKey;
-    [JsonProperty("jsonObject")] private string _jsonObject;
+    [JsonProperty("jsonObject")] private List<string> _jsonObject;
     [JsonProperty("staticId")] private string _staticId;
     [JsonProperty("staticAesIv")] private string _staticAesIv;
     [JsonProperty("linearizePass1")] private string _linearizePass1;
@@ -1594,8 +1594,7 @@ public class Job
 
     #region WithImages
     /// <summary>
-    ///     When used with <see cref="ShowPages" />, also shows the object and generation numbers for the image objects on each
-    ///     page.
+    ///     When used with <see cref="ShowPages" />, also shows the object and generation numbers for the image objects on each page.
     /// </summary>
     /// <returns>
     ///     <see cref="Job" />
@@ -1682,7 +1681,8 @@ public class Job
     /// </returns>
     public Job JsonObject(string obj)
     {
-        _jsonObject = obj;
+        _jsonObject ??= new List<string>();
+        _jsonObject.Add(obj);
         return this;
     }
     #endregion
@@ -1707,8 +1707,8 @@ public class Job
     /// <summary>
     ///     Use a static initialization vector for AES-CBC. This is intended for testing only so that output files can be reproducible.
     ///     <b>Never</b> use it for production files. This option in particular is not secure since it significantly weakens the encryption.
-    ///     When combined with --static-id and using the three-step process described in Idempotency, it is possible to create byte-for-byte
-    ///     idempotent output with PDF files that use 256-bit encryption to assist with creating reproducible test suites.
+    ///     When combined with <see cref="StaticId"/> and using the three-step process described in Idempotency, it is possible to create
+    ///     byte-for-byte idempotent output with PDF files that use 256-bit encryption to assist with creating reproducible test suites.
     /// </summary>
     /// <returns>
     ///     <see cref="Job" />

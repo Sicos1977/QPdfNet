@@ -233,11 +233,11 @@ namespace QpdfNetTest
 
             var job = new Job();
             var result = job.InputFile(Path.Combine("TestFiles", "test.pdf"))
-                .OutputFile(outputFile)
+                .ShowObject("20-pages.pdf")
                 .RawStreamData()
-                .Run(out _);
+                .Run(out var output);
 
-            Assert.IsTrue(File.Exists(outputFile));
+            Assert.IsTrue(output.Length > 4);
             Assert.AreEqual(ExitCode.Success, result);
         }
 
