@@ -93,6 +93,9 @@ public class Job
     [JsonProperty("splitPages")] private string _splitPages;
     [JsonProperty("overlay")] private List<Layer> _overlay;
     [JsonProperty("underlay")] private List<Layer> _underlay;
+    [JsonProperty("addAttachment")] private List<AddAttachment> _addAttachment;
+    [JsonProperty("copyAttachments")] private List<CopyAttachment> _copyAttachments;
+    [JsonProperty("removeAttachment")] private List<string> _removeAttachment;
     [JsonProperty("flattenRotation")] private string _flattenRotation;
     [JsonProperty("flattenAnnotations")] private FlattenAnnotations _flattenAnnotation;
     [JsonProperty("rotate")] private string _rotate;
@@ -574,7 +577,7 @@ public class Job
     ///     algorithm (used by zip and gzip) unless those streams are compressed in some other way. This analysis is
     ///     made after qpdf attempts to uncompress streams and is therefore closely related to <see cref="DecodeLevel" />.
     ///     To suppress this behavior and leave streams streams uncompressed, use <paramref name="compress" /> = <c>false</c>.
-    ///     In QDF mode (see QDF Mode and <see cref="QPdf" />), the default is to leave streams uncompressed.
+    ///     In QDF mode (see QDF Mode and <see cref="Qdf" />), the default is to leave streams uncompressed.
     /// </summary>
     /// <param name="compress"><c>true</c> or <c>false</c></param>
     /// <returns>
@@ -665,7 +668,7 @@ public class Job
     /// <summary>
     ///     Enables or disables normalization of newlines in PDF content streams to UNIX-style newlines, which is useful for
     ///     viewing files in a programmer-friendly text edit across multiple platforms. Content normalization is off by default,
-    ///     but is automatically enabled by <see cref="QPdf" /> (see also QDF Mode). It is not recommended to use this
+    ///     but is automatically enabled by <see cref="Qdf" /> (see also QDF Mode). It is not recommended to use this
     ///     option for production use. If qpdf runs into any lexical errors while normalizing content, it will print a warning
     ///     indicating that content may be damaged.
     /// </summary>
@@ -987,7 +990,9 @@ public class Job
     ///     will be repeated after the <paramref name="from"/> pages are used up. If you want to apply a repeat a range of
     ///     pages starting with the first page of output, you can explicitly use <paramref name="from"/>.
     /// </param>
-    /// <returns></returns>
+    /// <returns>
+    ///     <see cref="Job" />
+    /// </returns>
     public Job Overlay(string to, string from, string repeat = null)
     {
         _overlay ??= new List<Layer>();
@@ -1024,11 +1029,134 @@ public class Job
     ///     will be repeated after the <paramref name="from"/> pages are used up. If you want to apply a repeat a range of
     ///     pages starting with the first page of output, you can explicitly use <paramref name="from"/>.
     /// </param>
-    /// <returns></returns>
+    /// <returns>
+    ///     <see cref="Job" />
+    /// </returns>
     public Job Underlay(string to, string from, string repeat = null)
     {
         _underlay ??= new List<Layer>();
         _underlay.Add(new Layer(to, from, repeat));
+        return this;
+    }
+    #endregion
+
+    #region AddAttachment
+    /// <summary>
+    ///     This flag starts add attachment options, which are used to add attachments to a file.
+    ///     The  flag and its options may be repeated to add multiple attachments
+    /// </summary>
+    /// <param name="fileName">
+    ///     Specify the filename to be used for the attachment. This is what is usually displayed to the
+    ///     user and is the name most graphical PDF viewers will use when saving a file. It defaults to the last element of the
+    ///     attached file’s filename.
+    /// </param>
+    /// <param name="description">Supply descriptive text for the attachment, displayed by some PDF viewers.</param>
+    /// <param name="replace">
+    ///     Indicate that any existing attachment with the same key should be replaced by the new attachment.
+    ///     Otherwise, qpdf gives an error if an attachment with that key is already present.
+    /// </param>
+    /// <returns>
+    ///     <see cref="Job" />
+    /// </returns>
+    /// <exception cref="FileNotFoundException"></exception>
+    public Job AddAttachment(
+        string fileName, 
+        string description = null, 
+        bool replace = false)
+    {
+        var addAttachment = new AddAttachment(fileName, description, replace);
+        _addAttachment ??= new List<AddAttachment>();
+        _addAttachment.Add(addAttachment);
+        return this;
+    }
+
+    /// <summary>
+    ///     This flag starts add attachment options, which are used to add attachments to a file.
+    ///     The  flag and its options may be repeated to add multiple attachments
+    /// </summary>
+    /// <param name="file">The file with it's full path</param>
+    /// <param name="key">
+    ///     Specify the key to use for the attachment in the embedded files table. It defaults to the last
+    ///     element of the attached file’s filename.
+    /// </param>
+    /// <param name="fileName">
+    ///     Specify the filename to be used for the attachment. This is what is usually displayed to the
+    ///     user and is the name most graphical PDF viewers will use when saving a file. It defaults to the last element of the
+    ///     attached file’s filename.
+    /// </param>
+    /// <param name="creationDate">Specify the attachment’s creation date in PDF format; defaults to the current time</param>
+    /// <param name="modData">Specify the attachment’s modification date in PDF format; defaults to the current time.</param>
+    /// <param name="mimeType">
+    ///     Specify the mime type for the attachment, such as text/plain, application/pdf, image/png, etc.
+    ///     The qpdf library does not automatically determine the mime type.
+    /// </param>
+    /// <param name="description">Supply descriptive text for the attachment, displayed by some PDF viewers.</param>
+    /// <param name="replace">
+    ///     Indicate that any existing attachment with the same key should be replaced by the new attachment.
+    ///     Otherwise, qpdf gives an error if an attachment with that key is already present.
+    /// </param>
+    /// <returns>
+    ///     <see cref="Job" />
+    /// </returns>
+    /// <exception cref="FileNotFoundException"></exception>
+    public Job AddAttachment(
+        string file,
+        string key,
+        string fileName,
+        DateTime creationDate,
+        DateTime modData,
+        string mimeType,
+        string description = null,
+        bool replace = false)
+    {
+        var addAttachment = new AddAttachment(file, key, fileName, creationDate, modData, mimeType, description: description, replace: replace);
+        _addAttachment ??= new List<AddAttachment>();
+        _addAttachment.Add(addAttachment);
+        return this;
+    }
+    #endregion
+
+    #region CopyAttachmentsFrom
+    /// <summary>
+    ///     This flag starts add attachment options, which are used to add attachments to a file.
+    ///     The  flag and its options may be repeated to add multiple attachments
+    /// </summary>
+    /// <param name="file">The file to copy from with its full path</param>
+    /// <param name="prefix">
+    ///     Only required if the file from which attachments are being copied has attachments with keys that
+    ///     conflict with attachments already in the file. In this case, the specified prefix will be prepended to each key.
+    ///     This affects only the key in the embedded files table, not the file name. The PDF specification doesn’t preclude
+    ///     multiple attachments having the same file name.
+    /// </param>
+    /// <returns>
+    ///     <see cref="Job" />
+    /// </returns>
+    public Job CopyAttachmentsFrom(
+        string file,
+        string prefix = null)
+    {
+        _copyAttachments ??= new List<CopyAttachment>();
+        _copyAttachments.Add(new CopyAttachment(file, prefix));
+        return this;
+    }
+    #endregion
+
+    #region RemoveAttachment
+    /// <summary>
+    ///     Remove the specified attachment. This doesn’t only remove the attachment from the embedded files table but
+    ///     also clears out the file specification to ensure that the attachment is actually not present in the output
+    ///     file. That means that any potential internal links to the attachment will be broken. Run with <see cref="Verbose"/>
+    ///     to see status of the removal. Use <see cref="ListAttachments"/> to find the attachment key. This option may
+    ///     be repeated to remove multiple attachments.
+    /// </summary>
+    /// <param name="key">The key of the attachment</param>
+    /// <returns>
+    ///     <see cref="Job" />
+    /// </returns>
+    public Job RemoveAttachment(string key)
+    {
+        _removeAttachment ??= new List<string>();
+        _removeAttachment.Add(key);
         return this;
     }
     #endregion
@@ -1495,15 +1623,15 @@ public class Job
     }
     #endregion
 
-    #region ShowAttachments
+    #region ShowAttachment
     /// <summary>
     ///     Write the contents of the specified attachment to standard output as binary data. The key should match one of the
-    ///     keys shown by --list-attachments. If this option is given more than once, only the last attachment will be shown.
+    ///     keys shown by <see cref="ListAttachments"/>. If this option is given more than once, only the last attachment will be shown.
     /// </summary>
     /// <returns>
     ///     <see cref="Job" />
     /// </returns>
-    public Job ShowAttachments(string key)
+    public Job ShowAttachment(string key)
     {
         _showAttachment = key;
         return this;
@@ -1628,7 +1756,7 @@ public class Job
         var result = QPdfApi.Native.RunFromJSONWithResult(json, out var outPointer, out var errorPointer);
         var outResult = Marshal.PtrToStringAnsi(outPointer);
         var errorResult = Marshal.PtrToStringAnsi(errorPointer);
-        
+
         outResult = outResult?.Trim();
         errorResult = errorResult?.Trim();
 

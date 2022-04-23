@@ -110,3 +110,4 @@ D:\Progsoft\_GitHub_\QPdfNet\QpdfNetTest\bin\Debug\net6.0\x64\qpdf29.dll
 D:\Progsoft\_GitHub_\QPdfNet\QpdfNetTest\bin\Debug\net6.0\TestFiles\acrobat_8_help.pdf
 D:\Progsoft\_GitHub_\QPdfNet\QpdfNetTest\bin\Debug\net6.0\TestFiles\20_pages.pdf
 D:\Progsoft\_GitHub_\QPdfNet\QpdfNetTest\bin\Debug\net6.0\TestFiles\encryption_256_bit.pdf
+D:\Progsoft\_GitHub_\QPdfNet\QpdfNetTest\bin\Debug\net6.0\TestFiles\withattachment.pdf

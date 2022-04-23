@@ -37,6 +37,9 @@
     <None Update="TestFiles\test.pdf">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Update="TestFiles\withattachment.pdf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="x64\qpdf29.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

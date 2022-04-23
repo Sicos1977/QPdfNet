@@ -92,6 +92,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CopyAttachment.cs" />
     <Compile Include="Encryption.cs" />
     <Compile Include="Encryption128Bit.cs" />
     <Compile Include="Encryption256Bit.cs" />
@@ -121,11 +122,13 @@
     <Compile Include="Interop\Helper.cs" />
     <Compile Include="Interop\MarshalHelper.cs" />
     <Compile Include="Interop\QPdfApi.cs" />
+    <Compile Include="AddAttachment.cs" />
     <Compile Include="Loggers\Console.cs" />
     <Compile Include="Loggers\File.cs" />
     <Compile Include="Loggers\Logger.cs" />
     <Compile Include="Loggers\Stream.cs" />
     <Compile Include="Layer.cs" />
+    <Compile Include="Helpers\MimeTypes.cs" />
     <Compile Include="Pages.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

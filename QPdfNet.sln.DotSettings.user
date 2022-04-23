@@ -42,6 +42,9 @@
     &lt;TestId&gt;MSTest::1C702B8C-5945-4F57-8A80-3BCBA47EC468::net6.0::QpdfNetTest.QpdfTests.TestFilteredStreamData&lt;/TestId&gt;&#xD;
     &lt;TestId&gt;MSTest::1C702B8C-5945-4F57-8A80-3BCBA47EC468::net6.0::QpdfNetTest.QpdfTests.TestShowPages&lt;/TestId&gt;&#xD;
     &lt;TestId&gt;MSTest::1C702B8C-5945-4F57-8A80-3BCBA47EC468::net6.0::QpdfNetTest.QpdfTests.TestWithImages&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;MSTest::1C702B8C-5945-4F57-8A80-3BCBA47EC468::net6.0::QpdfNetTest.QpdfTests.TestAddAttachment&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;MSTest::1C702B8C-5945-4F57-8A80-3BCBA47EC468::net6.0::QpdfNetTest.QpdfTests.TestListAttachments&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;MSTest::1C702B8C-5945-4F57-8A80-3BCBA47EC468::net6.0::QpdfNetTest.QpdfTests.TestShowAttachments&lt;/TestId&gt;&#xD;
   &lt;/TestAncestor&gt;&#xD;
 &lt;/SessionState&gt;</s:String>
 	<s:Boolean x:Key="/Default/UserDictionary/Words/=linearization/@EntryIndexedValue">True</s:Boolean></wpf:ResourceDictionary>

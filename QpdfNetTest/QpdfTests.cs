@@ -100,7 +100,7 @@ namespace QpdfNetTest
                 .OiMinArea()
                 .KeepInlineImages()
                 .RemovePageLabels()
-                .Run(out var output);
+                .Run(out _);
 
             Assert.AreEqual(ExitCode.Success, result);
             Assert.IsTrue(File.Exists(outputFile));
@@ -187,7 +187,7 @@ namespace QpdfNetTest
                 .CheckLinearization()
                 .Run(out _);
 
-            Assert.AreEqual(ExitCode.Success, result);
+            Assert.AreEqual(ExitCode.WarningsWereFoundFileProcessed, result);
         }
 
         [TestMethod]
@@ -480,5 +480,45 @@ namespace QpdfNetTest
                 .Run(out _);
         }
 
+        [TestMethod]
+        public void TestAddAttachment()
+        {
+            var outputFile = Path.Combine(_testFolder, "output.pdf");
+
+            var job = new Job();
+            var result = job.InputFile(Path.Combine("TestFiles", "test.pdf"))
+                .OutputFile(outputFile)
+                .AddAttachment(Path.Combine("TestFiles", "20_pages.pdf"))
+                .Run(out _);
+
+            Assert.IsTrue(new FileInfo(outputFile).Length == 222126);
+            Assert.AreEqual(ExitCode.Success, result);
+        }
+
+        [TestMethod]
+        public void TestListAttachments()
+        {
+            var job = new Job();
+            var result = job.InputFile(Path.Combine("TestFiles", "withattachment.pdf"))
+                .ListAttachments()
+                .Run(out var output);
+
+            Assert.IsTrue(output.Contains("20_pages.pdf -> 10,0"));
+            Assert.AreEqual(ExitCode.Success, result);
+        }
+
+        [TestMethod]
+        public void TestShowAttachments()
+        {
+            var job = new Job();
+            var result = job.InputFile(Path.Combine("TestFiles", "withattachment.pdf"))
+                .ShowAttachment("20_pages.pdf")
+                .Run(out var output);
+
+            File.WriteAllText("d:\\rrr.pdf", output);
+
+            Assert.IsTrue(output.Contains("20_pages.pdf -> 10,0"));
+            Assert.AreEqual(ExitCode.Success, result);
+        }
     }
 }
