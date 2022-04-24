@@ -39,7 +39,7 @@ using QPdfNet.Interop;
 namespace QPdfNet;
 
 /// <summary>
-///     Represent a qpdf job
+///     Represents a qpdf job
 /// </summary>
 /// <remarks>
 ///     https://qpdf.readthedocs.io/en/stable/qpdf-job.html
