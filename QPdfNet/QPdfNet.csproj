@@ -127,7 +127,6 @@
     <Compile Include="Loggers\File.cs" />
     <Compile Include="Loggers\Logger.cs" />
     <Compile Include="Loggers\Stream.cs" />
-    <Compile Include="Layer.cs" />
     <Compile Include="Helpers\MimeTypes.cs" />
     <Compile Include="Pages.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
