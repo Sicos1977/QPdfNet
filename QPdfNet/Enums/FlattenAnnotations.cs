@@ -24,6 +24,7 @@
 // THE SOFTWARE.
 //
 
+// ReSharper disable UnusedMember.Global
 
 using System.Runtime.Serialization;
 

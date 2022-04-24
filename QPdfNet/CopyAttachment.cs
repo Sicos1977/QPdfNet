@@ -1,7 +1,5 @@
-﻿using System;
-using System.IO;
+﻿using System.IO;
 using Newtonsoft.Json;
-using QPdfNet.Helpers;
 
 namespace QPdfNet;
 

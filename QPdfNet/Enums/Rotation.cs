@@ -24,6 +24,7 @@
 // THE SOFTWARE.
 //
 
+// ReSharper disable UnusedMember.Global
 
 namespace QPdfNet.Enums;
 

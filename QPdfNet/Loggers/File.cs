@@ -24,6 +24,8 @@
 // THE SOFTWARE.
 //
 
+// ReSharper disable UnusedMember.Global
+
 using Microsoft.Extensions.Logging;
 
 namespace QPdfNet.Loggers
