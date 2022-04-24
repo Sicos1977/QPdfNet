@@ -91,8 +91,8 @@ public class Job
     [JsonProperty("collate")] private string _collate;
     [JsonProperty("pages")] private List<Pages> _pages;
     [JsonProperty("splitPages")] private string _splitPages;
-    [JsonProperty("overlay")] private List<Layer> _overlay;
-    [JsonProperty("underlay")] private List<Layer> _underlay;
+    [JsonProperty("overlay")] private Dictionary<string, string> _overlay;
+    [JsonProperty("underlay")] private Dictionary<string, string> _underlay;
     [JsonProperty("addAttachment")] private List<AddAttachment> _addAttachment;
     [JsonProperty("copyAttachments")] private List<CopyAttachment> _copyAttachments;
     [JsonProperty("removeAttachment")] private List<string> _removeAttachment;
@@ -123,7 +123,7 @@ public class Job
     [JsonProperty("listAttachments")] private string _listAttachments;
     [JsonProperty("showAttachment")] private string _showAttachment;
     [JsonProperty("json")] private string _json;
-    [JsonProperty("jsonKey")] private string _jsonKey;
+    [JsonProperty("jsonKey")] private List<string> _jsonKey;
     [JsonProperty("jsonObject")] private List<string> _jsonObject;
     [JsonProperty("staticId")] private string _staticId;
     [JsonProperty("staticAesIv")] private string _staticAesIv;
@@ -973,6 +973,7 @@ public class Job
     ///     sequence and applied to corresponding pages in the output until there are no more output pages.If the
     ///     <see cref="Overlay"/> or <see cref="Underlay"/> file runs out of pages, remaining output pages are left alone
     /// </summary>
+    /// <param name="file">The file with it's full path</param>
     /// <param name="to">
     ///     Specify a page range (see Page Ranges) that indicates which pages in the output should have the
     ///     <see cref="Overlay"/>/<see cref="Underlay"/> applied. If not specified, <see cref="Overlay"/>/<see cref="Underlay"/>
@@ -993,10 +994,22 @@ public class Job
     /// <returns>
     ///     <see cref="Job" />
     /// </returns>
-    public Job Overlay(string to, string from, string repeat = null)
+    public Job Overlay(string file, string to = null, string from = null, string repeat = null)
     {
-        _overlay ??= new List<Layer>();
-        _overlay.Add(new Layer(to, from, repeat));
+        if (!File.Exists(file))
+            throw new FileNotFoundException($"The file '{file}' could not be found");
+
+        _overlay = new Dictionary<string, string> { { "file", file } };
+
+        if (!string.IsNullOrWhiteSpace(to))
+            _overlay.Add("to", to);
+
+        if (!string.IsNullOrWhiteSpace(from))
+            _overlay.Add("from", from);
+
+        if (!string.IsNullOrWhiteSpace(repeat))
+            _overlay.Add("repeat", repeat);
+
         return this;
     }
     #endregion
@@ -1012,6 +1025,7 @@ public class Job
     ///     sequence and applied to corresponding pages in the output until there are no more output pages.If the
     ///     <see cref="Overlay"/> or <see cref="Underlay"/> file runs out of pages, remaining output pages are left alone
     /// </summary>
+    /// <param name="file">The file with it's full path</param>
     /// <param name="to">
     ///     Specify a page range (see Page Ranges) that indicates which pages in the output should have the
     ///     <see cref="Overlay"/>/<see cref="Underlay"/> applied. If not specified, <see cref="Overlay"/>/<see cref="Underlay"/>
@@ -1032,10 +1046,22 @@ public class Job
     /// <returns>
     ///     <see cref="Job" />
     /// </returns>
-    public Job Underlay(string to, string from, string repeat = null)
+    public Job Underlay(string file, string to = null, string from = null, string repeat = null)
     {
-        _underlay ??= new List<Layer>();
-        _underlay.Add(new Layer(to, from, repeat));
+        if (!File.Exists(file))
+            throw new FileNotFoundException($"The file '{file}' could not be found");
+
+        _underlay = new Dictionary<string, string> { { "file", file } };
+
+        if (!string.IsNullOrWhiteSpace(to))
+            _underlay.Add("to", to);
+
+        if (!string.IsNullOrWhiteSpace(from))
+            _underlay.Add("from", from);
+
+        if (!string.IsNullOrWhiteSpace(repeat))
+            _underlay.Add("repeat", repeat);
+
         return this;
     }
     #endregion
@@ -1666,7 +1692,8 @@ public class Job
     /// </returns>
     public Job JsonKey(string key)
     {
-        _jsonKey = key;
+        _jsonKey ??= new List<string>();
+        _jsonKey.Add(key);
         return this;
     }
     #endregion

@@ -74,6 +74,7 @@ namespace QpdfNetTest
                 .DeterministicId()
                 .AllowWeakCrypto()
                 .SuppressRecovery()
+                .SuppressPasswordRecovery()
                 .IgnoreXrefStreams()
                 .Linearize()
                 .NoOriginalObjectIds()
@@ -459,25 +460,29 @@ namespace QpdfNetTest
         [TestMethod]
         public void TestOverlay()
         {
-            var outputFile = Path.Combine(_testFolder, "%d.pdf");
+            var outputFile = Path.Combine(_testFolder, "output.pdf");
 
             var job = new Job();
-            var result = job.InputFile(Path.Combine("TestFiles", "acrobat_8_help.pdf"))
+            var result = job.InputFile(Path.Combine("TestFiles", "20_pages.pdf"))
                 .OutputFile(outputFile)
-                .SplitPages(100)
+                .Overlay(Path.Combine("TestFiles", "test.pdf"), "1-20", null, "1")
                 .Run(out _);
+
+            Assert.AreEqual(ExitCode.Success, result);
         }
 
         [TestMethod]
         public void TestUnderlay()
         {
-            var outputFile = Path.Combine(_testFolder, "%d.pdf");
+            var outputFile = Path.Combine(_testFolder, "output.pdf");
 
             var job = new Job();
-            var result = job.InputFile(Path.Combine("TestFiles", "acrobat_8_help.pdf"))
+            var result = job.InputFile(Path.Combine("TestFiles", "20_pages.pdf"))
                 .OutputFile(outputFile)
-                .SplitPages(100)
-                .Run(out _);
+                .Underlay(Path.Combine("TestFiles", "test.pdf"))
+                .Run(out var output);
+
+            Assert.AreEqual(ExitCode.Success, result);
         }
 
         [TestMethod]
@@ -490,6 +495,22 @@ namespace QpdfNetTest
                 .OutputFile(outputFile)
                 .AddAttachment(Path.Combine("TestFiles", "20_pages.pdf"))
                 .Run(out _);
+
+            Assert.IsTrue(new FileInfo(outputFile).Length == 222126);
+            Assert.AreEqual(ExitCode.Success, result);
+        }
+
+        [TestMethod]
+        public void TestRemoveAttachment()
+        {
+            var outputFile = Path.Combine(_testFolder, "test.pdf");
+
+            var job = new Job();
+            var result = job.InputFile(Path.Combine("TestFiles", "withattachment.pdf"))
+                .OutputFile(outputFile)
+                .RemoveAttachment("20_pages.pdf")
+                .Verbose()
+                .Run(out var output);
 
             Assert.IsTrue(new FileInfo(outputFile).Length == 222126);
             Assert.AreEqual(ExitCode.Success, result);
@@ -515,9 +536,51 @@ namespace QpdfNetTest
                 .ShowAttachment("20_pages.pdf")
                 .Run(out var output);
 
-            File.WriteAllText("d:\\rrr.pdf", output);
-
             Assert.IsTrue(output.Contains("20_pages.pdf -> 10,0"));
+            Assert.AreEqual(ExitCode.Success, result);
+        }
+
+        [TestMethod]
+        public void TestJson()
+        {
+            var job = new Job();
+            var result = job.InputFile(Path.Combine("TestFiles", "withattachment.pdf"))
+                .Json()
+                .Run(out var output);
+
+            Assert.IsTrue(output.Length == 6951);
+            Assert.AreEqual(ExitCode.Success, result);
+        }
+
+        [TestMethod]
+        public void TestJsonKey()
+        {
+            var job = new Job();
+            var result = job.InputFile(Path.Combine("TestFiles", "withattachment.pdf"))
+                .Json()
+                .JsonKey("attachments")
+                .JsonKey("encrypt")
+                .Run(out var output);
+
+            Assert.IsTrue(output.Contains("attachment"));
+            Assert.IsTrue(output.Contains("encrypt"));
+            Assert.IsTrue(!output.Contains("objects"));
+            Assert.AreEqual(ExitCode.Success, result);
+        }
+
+        [TestMethod]
+        public void TestObjectKey()
+        {
+            var job = new Job();
+            var result = job.InputFile(Path.Combine("TestFiles", "withattachment.pdf"))
+                .Json()
+                .JsonObject("1 0 R")
+                .JsonObject("11 0 R")
+                .Run(out var output);
+
+            Assert.IsTrue(output.Contains("1 0 R"));
+            Assert.IsTrue(output.Contains("11 0 R"));
+            Assert.IsTrue(!output.Contains("14 0 R"));
             Assert.AreEqual(ExitCode.Success, result);
         }
     }

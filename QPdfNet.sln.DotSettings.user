@@ -45,6 +45,12 @@
     &lt;TestId&gt;MSTest::1C702B8C-5945-4F57-8A80-3BCBA47EC468::net6.0::QpdfNetTest.QpdfTests.TestAddAttachment&lt;/TestId&gt;&#xD;
     &lt;TestId&gt;MSTest::1C702B8C-5945-4F57-8A80-3BCBA47EC468::net6.0::QpdfNetTest.QpdfTests.TestListAttachments&lt;/TestId&gt;&#xD;
     &lt;TestId&gt;MSTest::1C702B8C-5945-4F57-8A80-3BCBA47EC468::net6.0::QpdfNetTest.QpdfTests.TestShowAttachments&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;MSTest::1C702B8C-5945-4F57-8A80-3BCBA47EC468::net6.0::QpdfNetTest.QpdfTests.TestRemoveAttachment&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;MSTest::1C702B8C-5945-4F57-8A80-3BCBA47EC468::net6.0::QpdfNetTest.QpdfTests.TestJson&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;MSTest::1C702B8C-5945-4F57-8A80-3BCBA47EC468::net6.0::QpdfNetTest.QpdfTests.TestJsonKey&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;MSTest::1C702B8C-5945-4F57-8A80-3BCBA47EC468::net6.0::QpdfNetTest.QpdfTests.TestObjectKey&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;MSTest::1C702B8C-5945-4F57-8A80-3BCBA47EC468::net6.0::QpdfNetTest.QpdfTests.TestOverlay&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;MSTest::1C702B8C-5945-4F57-8A80-3BCBA47EC468::net6.0::QpdfNetTest.QpdfTests.TestUnderlay&lt;/TestId&gt;&#xD;
   &lt;/TestAncestor&gt;&#xD;
 &lt;/SessionState&gt;</s:String>
 	<s:Boolean x:Key="/Default/UserDictionary/Words/=linearization/@EntryIndexedValue">True</s:Boolean></wpf:ResourceDictionary>
