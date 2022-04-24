@@ -124,7 +124,7 @@ namespace QpdfNetTest
             var job = new Job();
             var result = job.InputFile(Path.Combine("TestFiles", "encryption_256_bit.pdf"))
                 .RequiresPassword()
-                .RunRequiresPassword(out var output);
+                .RunRequiresPassword(out _);
 
             Assert.AreEqual(ExitCodeRequiresPassword.OtherPasswordRequired, result);
         }
@@ -230,8 +230,6 @@ namespace QpdfNetTest
         [TestMethod]
         public void TestRawStreamData()
         {
-            var outputFile = Path.Combine("TestFiles", "output.pdf");
-
             var job = new Job();
             var result = job.InputFile(Path.Combine("TestFiles", "test.pdf"))
                 .ShowObject("20-pages.pdf")
@@ -389,7 +387,7 @@ namespace QpdfNetTest
                 .OutputFile(outputFile)
                 .Encrypt("user", "owner", new Encryption256Bit(true, true, true, true, true, true, Modify.None, Print.None))
                 .Linearize()
-                .Run(out var output);
+                .Run(out _);
 
             Assert.AreEqual(ExitCode.Success, result);
             Assert.IsTrue(File.Exists(outputFile));
@@ -404,7 +402,7 @@ namespace QpdfNetTest
             var result = job.InputFile(Path.Combine("TestFiles", "encryption_256_bit.pdf"))
                 .OutputFile(outputFile)
                 .Password("user")
-                .Run(out var output);
+                .Run(out _);
 
             Assert.AreEqual(ExitCode.Success, result);
         }
@@ -480,7 +478,7 @@ namespace QpdfNetTest
             var result = job.InputFile(Path.Combine("TestFiles", "20_pages.pdf"))
                 .OutputFile(outputFile)
                 .Underlay(Path.Combine("TestFiles", "test.pdf"))
-                .Run(out var output);
+                .Run(out _);
 
             Assert.AreEqual(ExitCode.Success, result);
         }
@@ -510,7 +508,7 @@ namespace QpdfNetTest
                 .OutputFile(outputFile)
                 .RemoveAttachment("20_pages.pdf")
                 .Verbose()
-                .Run(out var output);
+                .Run(out _);
 
             Assert.IsTrue(new FileInfo(outputFile).Length == 222126);
             Assert.AreEqual(ExitCode.Success, result);
