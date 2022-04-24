@@ -10,7 +10,7 @@ internal class CopyAttachment
 {
     #region Fields
     [JsonProperty("file")] private string _file;
-    [JsonProperty("prefix")] private string _prefix;
+    [JsonProperty("prefix")] private string? _prefix;
     #endregion
 
     #region Constructor
@@ -25,7 +25,7 @@ internal class CopyAttachment
     ///     multiple attachments having the same file name.
     /// </param>
     /// <exception cref="FileNotFoundException"></exception>
-    public CopyAttachment(string file, string prefix = null)
+    public CopyAttachment(string file, string? prefix = null)
     {
         _file = file;
         _prefix = prefix;

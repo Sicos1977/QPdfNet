@@ -5,6 +5,12 @@
 		<Nullable>enable</Nullable>
 		<LangVersion>latest</LangVersion>
 		<AllowUnsafeBlocks>True</AllowUnsafeBlocks>
+		<Description>A C# wrapper around QPDF that gives you all the options thay you normally would have from the QPDF console app</Description>
+		<PackageProjectUrl>https://github.com/Sicos1977/QPdfNet</PackageProjectUrl>
+		<RepositoryUrl>https://github.com/Sicos1977/QPdfNet</RepositoryUrl>
+		<RepositoryType>git</RepositoryType>
+		<PackageTags>qpdf pdf</PackageTags>
+		<PackageReleaseNotes>First version</PackageReleaseNotes>
 	</PropertyGroup>
 
 	<ItemGroup>

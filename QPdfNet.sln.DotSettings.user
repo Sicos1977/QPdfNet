@@ -11,46 +11,7 @@
 &lt;/SessionState&gt;</s:String>
 	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=dcc07dd4_002D9555_002D4ce9_002D906c_002Deb44ba80317e/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" IsActive="True" Name="TestInputOutput2" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
   &lt;TestAncestor&gt;&#xD;
-    &lt;TestId&gt;MSTest::1C702B8C-5945-4F57-8A80-3BCBA47EC468::net6.0::QpdfNetTest.QpdfTests.TestInputOutput2&lt;/TestId&gt;&#xD;
-    &lt;TestId&gt;MSTest::1C702B8C-5945-4F57-8A80-3BCBA47EC468::net6.0::QpdfNetTest.QpdfTests.TestInputOutput&lt;/TestId&gt;&#xD;
-    &lt;TestId&gt;MSTest::1C702B8C-5945-4F57-8A80-3BCBA47EC468::net6.0::QpdfNetTest.QpdfTests.TestInputOutputWithParameters&lt;/TestId&gt;&#xD;
-    &lt;TestId&gt;MSTest::1C702B8C-5945-4F57-8A80-3BCBA47EC468::net6.0::QpdfNetTest.QpdfTests.TestPages&lt;/TestId&gt;&#xD;
-    &lt;TestId&gt;MSTest::1C702B8C-5945-4F57-8A80-3BCBA47EC468::net6.0::QpdfNetTest.QpdfTests.SplitPages&lt;/TestId&gt;&#xD;
-    &lt;TestId&gt;MSTest::1C702B8C-5945-4F57-8A80-3BCBA47EC468::net6.0::QpdfNetTest.QpdfTests.PageRange&lt;/TestId&gt;&#xD;
-    &lt;TestId&gt;MSTest::1C702B8C-5945-4F57-8A80-3BCBA47EC468::net6.0::QpdfNetTest.QpdfTests.TestEncryption256Bit&lt;/TestId&gt;&#xD;
-    &lt;TestId&gt;MSTest::1C702B8C-5945-4F57-8A80-3BCBA47EC468::net6.0::QpdfNetTest.QpdfTests.TestEncryption40Bit&lt;/TestId&gt;&#xD;
-    &lt;TestId&gt;MSTest::1C702B8C-5945-4F57-8A80-3BCBA47EC468::net6.0::QpdfNetTest.QpdfTests.TestEncryption128Bit&lt;/TestId&gt;&#xD;
-    &lt;TestId&gt;MSTest::1C702B8C-5945-4F57-8A80-3BCBA47EC468::net6.0::QpdfNetTest.QpdfTests.TestShowNPages&lt;/TestId&gt;&#xD;
-    &lt;TestId&gt;MSTest::1C702B8C-5945-4F57-8A80-3BCBA47EC468::net6.0::QpdfNetTest.QpdfTests.TestCollate&lt;/TestId&gt;&#xD;
-    &lt;TestId&gt;MSTest::1C702B8C-5945-4F57-8A80-3BCBA47EC468::net6.0::QpdfNetTest.QpdfTests.TestQPdf&lt;/TestId&gt;&#xD;
-    &lt;TestId&gt;MSTest::1C702B8C-5945-4F57-8A80-3BCBA47EC468::net6.0::QpdfNetTest.QpdfTests.TestQdf&lt;/TestId&gt;&#xD;
-    &lt;TestId&gt;MSTest::1C702B8C-5945-4F57-8A80-3BCBA47EC468::net6.0::QpdfNetTest.QpdfTests.TestEmpty&lt;/TestId&gt;&#xD;
-    &lt;TestId&gt;MSTest::1C702B8C-5945-4F57-8A80-3BCBA47EC468::net6.0::QpdfNetTest.QpdfTests.TestPasswordUser&lt;/TestId&gt;&#xD;
-    &lt;TestId&gt;MSTest::1C702B8C-5945-4F57-8A80-3BCBA47EC468::net6.0::QpdfNetTest.QpdfTests.TestPasswordOwner&lt;/TestId&gt;&#xD;
-    &lt;TestId&gt;MSTest::1C702B8C-5945-4F57-8A80-3BCBA47EC468::net6.0::QpdfNetTest.QpdfTests.TestDecrypt&lt;/TestId&gt;&#xD;
-    &lt;TestId&gt;MSTest::1C702B8C-5945-4F57-8A80-3BCBA47EC468::net6.0::QpdfNetTest.QpdfTests.TestIsEncrypted&lt;/TestId&gt;&#xD;
-    &lt;TestId&gt;MSTest::1C702B8C-5945-4F57-8A80-3BCBA47EC468::net6.0::QpdfNetTest.QpdfTests.TestRequiresPassword&lt;/TestId&gt;&#xD;
-    &lt;TestId&gt;MSTest::1C702B8C-5945-4F57-8A80-3BCBA47EC468::net6.0::QpdfNetTest.QpdfTests.TestCheck&lt;/TestId&gt;&#xD;
-    &lt;TestId&gt;MSTest::1C702B8C-5945-4F57-8A80-3BCBA47EC468::net6.0::QpdfNetTest.QpdfTests.TestShowEncryption&lt;/TestId&gt;&#xD;
-    &lt;TestId&gt;MSTest::1C702B8C-5945-4F57-8A80-3BCBA47EC468::net6.0::QpdfNetTest.QpdfTests.TestShowEncryption2&lt;/TestId&gt;&#xD;
-    &lt;TestId&gt;MSTest::1C702B8C-5945-4F57-8A80-3BCBA47EC468::net6.0::QpdfNetTest.QpdfTests.TestShowEncryptionKey&lt;/TestId&gt;&#xD;
-    &lt;TestId&gt;MSTest::1C702B8C-5945-4F57-8A80-3BCBA47EC468::net6.0::QpdfNetTest.QpdfTests.TestCheckLinearization&lt;/TestId&gt;&#xD;
-    &lt;TestId&gt;MSTest::1C702B8C-5945-4F57-8A80-3BCBA47EC468::net6.0::QpdfNetTest.QpdfTests.TestShowLinearization&lt;/TestId&gt;&#xD;
-    &lt;TestId&gt;MSTest::1C702B8C-5945-4F57-8A80-3BCBA47EC468::net6.0::QpdfNetTest.QpdfTests.TestShowXref&lt;/TestId&gt;&#xD;
-    &lt;TestId&gt;MSTest::1C702B8C-5945-4F57-8A80-3BCBA47EC468::net6.0::QpdfNetTest.QpdfTests.TestShowObject&lt;/TestId&gt;&#xD;
-    &lt;TestId&gt;MSTest::1C702B8C-5945-4F57-8A80-3BCBA47EC468::net6.0::QpdfNetTest.QpdfTests.TestRawStreamData&lt;/TestId&gt;&#xD;
-    &lt;TestId&gt;MSTest::1C702B8C-5945-4F57-8A80-3BCBA47EC468::net6.0::QpdfNetTest.QpdfTests.TestFilteredStreamData&lt;/TestId&gt;&#xD;
-    &lt;TestId&gt;MSTest::1C702B8C-5945-4F57-8A80-3BCBA47EC468::net6.0::QpdfNetTest.QpdfTests.TestShowPages&lt;/TestId&gt;&#xD;
-    &lt;TestId&gt;MSTest::1C702B8C-5945-4F57-8A80-3BCBA47EC468::net6.0::QpdfNetTest.QpdfTests.TestWithImages&lt;/TestId&gt;&#xD;
-    &lt;TestId&gt;MSTest::1C702B8C-5945-4F57-8A80-3BCBA47EC468::net6.0::QpdfNetTest.QpdfTests.TestAddAttachment&lt;/TestId&gt;&#xD;
-    &lt;TestId&gt;MSTest::1C702B8C-5945-4F57-8A80-3BCBA47EC468::net6.0::QpdfNetTest.QpdfTests.TestListAttachments&lt;/TestId&gt;&#xD;
-    &lt;TestId&gt;MSTest::1C702B8C-5945-4F57-8A80-3BCBA47EC468::net6.0::QpdfNetTest.QpdfTests.TestShowAttachments&lt;/TestId&gt;&#xD;
-    &lt;TestId&gt;MSTest::1C702B8C-5945-4F57-8A80-3BCBA47EC468::net6.0::QpdfNetTest.QpdfTests.TestRemoveAttachment&lt;/TestId&gt;&#xD;
-    &lt;TestId&gt;MSTest::1C702B8C-5945-4F57-8A80-3BCBA47EC468::net6.0::QpdfNetTest.QpdfTests.TestJson&lt;/TestId&gt;&#xD;
-    &lt;TestId&gt;MSTest::1C702B8C-5945-4F57-8A80-3BCBA47EC468::net6.0::QpdfNetTest.QpdfTests.TestJsonKey&lt;/TestId&gt;&#xD;
-    &lt;TestId&gt;MSTest::1C702B8C-5945-4F57-8A80-3BCBA47EC468::net6.0::QpdfNetTest.QpdfTests.TestObjectKey&lt;/TestId&gt;&#xD;
-    &lt;TestId&gt;MSTest::1C702B8C-5945-4F57-8A80-3BCBA47EC468::net6.0::QpdfNetTest.QpdfTests.TestOverlay&lt;/TestId&gt;&#xD;
-    &lt;TestId&gt;MSTest::1C702B8C-5945-4F57-8A80-3BCBA47EC468::net6.0::QpdfNetTest.QpdfTests.TestUnderlay&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;MSTest::1C702B8C-5945-4F57-8A80-3BCBA47EC468::net6.0::QpdfNetTest.QpdfTests&lt;/TestId&gt;&#xD;
   &lt;/TestAncestor&gt;&#xD;
 &lt;/SessionState&gt;</s:String>
 	<s:Boolean x:Key="/Default/UserDictionary/Words/=linearization/@EntryIndexedValue">True</s:Boolean></wpf:ResourceDictionary>

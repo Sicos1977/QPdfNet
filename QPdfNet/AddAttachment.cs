@@ -17,8 +17,8 @@ internal class AddAttachment
     [JsonProperty("creationdate")] private string _creationdate;
     [JsonProperty("moddate")] private string _moddate;
     [JsonProperty("mimetype")] private string _mimetype;
-    [JsonProperty("description")] private string _description;
-    [JsonProperty("replace")] private string _replace;
+    [JsonProperty("description")] private string? _description;
+    [JsonProperty("replace")] private string? _replace;
     #endregion
 
     #region Constructor
@@ -36,7 +36,7 @@ internal class AddAttachment
     ///     Otherwise, qpdf gives an error if an attachment with that key is already present.
     /// </param>
     /// <exception cref="FileNotFoundException"></exception>
-    public AddAttachment(string fileName, string description = null, bool replace = false)
+    public AddAttachment(string fileName, string? description = null, bool replace = false)
     {
         var file = new FileInfo(fileName);
 
@@ -79,12 +79,6 @@ internal class AddAttachment
     ///     Indicate that any existing attachment with the same key should be replaced by the new attachment.
     ///     Otherwise, qpdf gives an error if an attachment with that key is already present.
     /// </param>
-    /// <param name="prefix">
-    ///     Only required if the file from which attachments are being copied has attachments with keys that
-    ///     conflict with attachments already in the file. In this case, the specified prefix will be prepended to each key.
-    ///     This affects only the key in the embedded files table, not the file name. The PDF specification doesn’t preclude
-    ///     multiple attachments having the same file name.
-    /// </param>
     /// <exception cref="FileNotFoundException"></exception>
     public AddAttachment(
         string file,
@@ -93,7 +87,7 @@ internal class AddAttachment
         DateTime creationDate,
         DateTime modData,
         string mimeType,
-        string description = null,
+        string? description = null,
         bool replace = false)
     {
         if (!File.Exists(fileName))

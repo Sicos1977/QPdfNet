@@ -47,87 +47,87 @@ namespace QPdfNet;
 public class Job
 {
     #region Fields
-    [JsonProperty("inputFile")] private string _inputFile;
-    [JsonProperty("outputFile")] private string _outputFile;
-    [JsonProperty("empty")] private string _empty;
-    [JsonProperty("replaceInput")] private string _replaceInput;
-    [JsonProperty("warningExit0")] private string _warningExit0;
-    [JsonProperty("password")] private string _password;
-    [JsonProperty("passwordFile")] private string _passwordFile;
-    [JsonProperty("verbose")] private string _verbose;
-    [JsonProperty("noWarn")] private string _noWarn;
-    [JsonProperty("deterministicId")] private string _deterministicId;
-    [JsonProperty("allowWeakCrypto")] private string _allowWeakCrypto;
-    [JsonProperty("keepFilesOpen")] private string _keepFilesOpen;
-    [JsonProperty("keepFilesOpenThreshold")] private string _keepFilesOpenThreshold;
-    [JsonProperty("passwordIsHexKey")] private string _passwordIsHexKey;
-    [JsonProperty("suppressPasswordRecovery")] private string _suppressPasswordRecovery;
+    [JsonProperty("inputFile")] private string? _inputFile;
+    [JsonProperty("outputFile")] private string? _outputFile;
+    [JsonProperty("empty")] private string? _empty;
+    [JsonProperty("replaceInput")] private string? _replaceInput;
+    [JsonProperty("warningExit0")] private string? _warningExit0;
+    [JsonProperty("password")] private string? _password;
+    [JsonProperty("passwordFile")] private string? _passwordFile;
+    [JsonProperty("verbose")] private string? _verbose;
+    [JsonProperty("noWarn")] private string? _noWarn;
+    [JsonProperty("deterministicId")] private string? _deterministicId;
+    [JsonProperty("allowWeakCrypto")] private string? _allowWeakCrypto;
+    [JsonProperty("keepFilesOpen")] private string? _keepFilesOpen;
+    [JsonProperty("keepFilesOpenThreshold")] private string? _keepFilesOpenThreshold;
+    [JsonProperty("passwordIsHexKey")] private string? _passwordIsHexKey;
+    [JsonProperty("suppressPasswordRecovery")] private string? _suppressPasswordRecovery;
     [JsonProperty("passwordMode")] private PasswordMode _passwordMode;
-    [JsonProperty("suppressRecovery")] private string _suppressRecovery;
-    [JsonProperty("ignoreXrefStreams")] private string _ignoreXrefStreams;
-    [JsonProperty("linearize")] private string _linearize;
-    [JsonProperty("encrypt")] private Encryption _encryption;
-    [JsonProperty("decrypt")] private string _decrypt;
-    [JsonProperty("copyEncryption")] private string _copyEncryption;
-    [JsonProperty("encryptionFilePassword")] private string _encryptionFilePassword;
-    [JsonProperty("qdf")] private string _qdf;
-    [JsonProperty("noOriginalObjectIds")] private string _noOriginalObjectIds;
-    [JsonProperty("compressStreams")] private string _compressStreams;
+    [JsonProperty("suppressRecovery")] private string? _suppressRecovery;
+    [JsonProperty("ignoreXrefStreams")] private string? _ignoreXrefStreams;
+    [JsonProperty("linearize")] private string? _linearize;
+    [JsonProperty("encrypt")] private Encryption? _encryption;
+    [JsonProperty("decrypt")] private string? _decrypt;
+    [JsonProperty("copyEncryption")] private string? _copyEncryption;
+    [JsonProperty("encryptionFilePassword")] private string? _encryptionFilePassword;
+    [JsonProperty("qdf")] private string? _qdf;
+    [JsonProperty("noOriginalObjectIds")] private string? _noOriginalObjectIds;
+    [JsonProperty("compressStreams")] private string? _compressStreams;
     [JsonProperty("decodeLevel")] private DecodeLevel _decodeLevel;
     [JsonProperty("streamData")] private StreamData _streamData;
-    [JsonProperty("recompressFlate")] private string _recompressFlate;
-    [JsonProperty("compressionLevel")] private string _compressionLevel;
-    [JsonProperty("normalizeContent")] private string _normalizeContent;
+    [JsonProperty("recompressFlate")] private string? _recompressFlate;
+    [JsonProperty("compressionLevel")] private string? _compressionLevel;
+    [JsonProperty("normalizeContent")] private string? _normalizeContent;
     [JsonProperty("objectStreams")] private ObjectStreams _objectStreams;
-    [JsonProperty("preserveUnreferenced")] private string _preserveUnreferenced;
+    [JsonProperty("preserveUnreferenced")] private string? _preserveUnreferenced;
     [JsonProperty("removeUnreferencedResources")] private AutoYesNo _removeUnreferencedResources;
-    [JsonProperty("preserveUnreferencedResources")] private string _preserveUnreferencedResources;
-    [JsonProperty("newlineBeforeEndstream")] private string _newlineBeforeEndstream;
-    [JsonProperty("coalesceContents")] private string _coalesceContents;
-    [JsonProperty("externalizeInlineImages")] private string _externalizeInlineImages;
-    [JsonProperty("iiMinBytes")] private string _iiMinBytes;
-    [JsonProperty("minVersion")] private string _minVersion;
-    [JsonProperty("forceVersion")] private string _forceVersion;
-    [JsonProperty("collate")] private string _collate;
-    [JsonProperty("pages")] private List<Pages> _pages;
-    [JsonProperty("splitPages")] private string _splitPages;
-    [JsonProperty("overlay")] private Dictionary<string, string> _overlay;
-    [JsonProperty("underlay")] private Dictionary<string, string> _underlay;
-    [JsonProperty("addAttachment")] private List<AddAttachment> _addAttachment;
-    [JsonProperty("copyAttachments")] private List<CopyAttachment> _copyAttachments;
-    [JsonProperty("removeAttachment")] private List<string> _removeAttachment;
-    [JsonProperty("flattenRotation")] private string _flattenRotation;
+    [JsonProperty("preserveUnreferencedResources")] private string? _preserveUnreferencedResources;
+    [JsonProperty("newlineBeforeEndstream")] private string? _newlineBeforeEndstream;
+    [JsonProperty("coalesceContents")] private string? _coalesceContents;
+    [JsonProperty("externalizeInlineImages")] private string? _externalizeInlineImages;
+    [JsonProperty("iiMinBytes")] private string? _iiMinBytes;
+    [JsonProperty("minVersion")] private string? _minVersion;
+    [JsonProperty("forceVersion")] private string? _forceVersion;
+    [JsonProperty("collate")] private string? _collate;
+    [JsonProperty("pages")] private List<Pages>? _pages;
+    [JsonProperty("splitPages")] private string? _splitPages;
+    [JsonProperty("overlay")] private Dictionary<string, string>? _overlay;
+    [JsonProperty("underlay")] private Dictionary<string, string>? _underlay;
+    [JsonProperty("addAttachment")] private List<AddAttachment>? _addAttachment;
+    [JsonProperty("copyAttachments")] private List<CopyAttachment>? _copyAttachments;
+    [JsonProperty("removeAttachment")] private List<string>? _removeAttachment;
+    [JsonProperty("flattenRotation")] private string? _flattenRotation;
     [JsonProperty("flattenAnnotations")] private FlattenAnnotations _flattenAnnotation;
-    [JsonProperty("rotate")] private string _rotate;
-    [JsonProperty("generateAppearances")] private string _generateAppearances;
-    [JsonProperty("optimizeImages")] private string _optimizeImages;
-    [JsonProperty("oiMinWidth")] private string _oiMinWidth;
-    [JsonProperty("oiMinHeight")] private string _oiMinHeight;
-    [JsonProperty("oiMinArea")] private string _oiMinArea;
-    [JsonProperty("keepInlineImages")] private string _keepInlineImages;
-    [JsonProperty("removePageLabels")] private string _removePageLabels;
-    [JsonProperty("isEncrypted")] private string _isEncrypted;
-    [JsonProperty("requiresPassword")] private string _requiresPassword;
-    [JsonProperty("check")] private string _check;
-    [JsonProperty("showEncryption")] private string _showEncryption;
-    [JsonProperty("showEncryptionKey")] private string _showEncryptionKey;
-    [JsonProperty("checkLinearization")] private string _checkLinearization;
-    [JsonProperty("showLinearization")] private string _showLinearization;
-    [JsonProperty("showXref")] private string _showXref;
-    [JsonProperty("showObject")] private string _showObject;
-    [JsonProperty("rawStreamData")] private string _rawStreamData;
-    [JsonProperty("filteredStreamData")] private string _filteredStreamData;
-    [JsonProperty("showNpages")] private string _showNpages;
-    [JsonProperty("showPages")] private string _showPages;
-    [JsonProperty("withImages")] private string _withImages;
-    [JsonProperty("listAttachments")] private string _listAttachments;
-    [JsonProperty("showAttachment")] private string _showAttachment;
-    [JsonProperty("json")] private string _json;
-    [JsonProperty("jsonKey")] private List<string> _jsonKey;
-    [JsonProperty("jsonObject")] private List<string> _jsonObject;
-    [JsonProperty("staticId")] private string _staticId;
-    [JsonProperty("staticAesIv")] private string _staticAesIv;
-    [JsonProperty("linearizePass1")] private string _linearizePass1;
+    [JsonProperty("rotate")] private string? _rotate;
+    [JsonProperty("generateAppearances")] private string? _generateAppearances;
+    [JsonProperty("optimizeImages")] private string? _optimizeImages;
+    [JsonProperty("oiMinWidth")] private string? _oiMinWidth;
+    [JsonProperty("oiMinHeight")] private string? _oiMinHeight;
+    [JsonProperty("oiMinArea")] private string? _oiMinArea;
+    [JsonProperty("keepInlineImages")] private string? _keepInlineImages;
+    [JsonProperty("removePageLabels")] private string? _removePageLabels;
+    [JsonProperty("isEncrypted")] private string? _isEncrypted;
+    [JsonProperty("requiresPassword")] private string? _requiresPassword;
+    [JsonProperty("check")] private string? _check;
+    [JsonProperty("showEncryption")] private string? _showEncryption;
+    [JsonProperty("showEncryptionKey")] private string? _showEncryptionKey;
+    [JsonProperty("checkLinearization")] private string? _checkLinearization;
+    [JsonProperty("showLinearization")] private string? _showLinearization;
+    [JsonProperty("showXref")] private string? _showXref;
+    [JsonProperty("showObject")] private string? _showObject;
+    [JsonProperty("rawStreamData")] private string? _rawStreamData;
+    [JsonProperty("filteredStreamData")] private string? _filteredStreamData;
+    [JsonProperty("showNpages")] private string? _showNpages;
+    [JsonProperty("showPages")] private string? _showPages;
+    [JsonProperty("withImages")] private string? _withImages;
+    [JsonProperty("listAttachments")] private string? _listAttachments;
+    [JsonProperty("showAttachment")] private string? _showAttachment;
+    [JsonProperty("json")] private string? _json;
+    [JsonProperty("jsonKey")] private List<string>? _jsonKey;
+    [JsonProperty("jsonObject")] private List<string>? _jsonObject;
+    [JsonProperty("staticId")] private string? _staticId;
+    [JsonProperty("staticAesIv")] private string? _staticAesIv;
+    [JsonProperty("linearizePass1")] private string? _linearizePass1;
     #endregion
 
     #region InputFile
@@ -905,7 +905,7 @@ public class Job
     /// <returns>
     ///     <see cref="Job" />
     /// </returns>
-    public Job Pages(string file, string range, string password = null)
+    public Job Pages(string file, string range, string? password = null)
     {
         _pages ??= new List<Pages>();
         _pages.Add(new Pages(file, range, password));
@@ -994,7 +994,7 @@ public class Job
     /// <returns>
     ///     <see cref="Job" />
     /// </returns>
-    public Job Overlay(string file, string to = null, string from = null, string repeat = null)
+    public Job Overlay(string file, string? to = null, string? from = null, string? repeat = null)
     {
         if (!File.Exists(file))
             throw new FileNotFoundException($"The file '{file}' could not be found");
@@ -1046,7 +1046,7 @@ public class Job
     /// <returns>
     ///     <see cref="Job" />
     /// </returns>
-    public Job Underlay(string file, string to = null, string from = null, string repeat = null)
+    public Job Underlay(string file, string? to = null, string? from = null, string? repeat = null)
     {
         if (!File.Exists(file))
             throw new FileNotFoundException($"The file '{file}' could not be found");
@@ -1085,10 +1085,7 @@ public class Job
     ///     <see cref="Job" />
     /// </returns>
     /// <exception cref="FileNotFoundException"></exception>
-    public Job AddAttachment(
-        string fileName, 
-        string description = null, 
-        bool replace = false)
+    public Job AddAttachment(string fileName, string? description = null, bool replace = false)
     {
         var addAttachment = new AddAttachment(fileName, description, replace);
         _addAttachment ??= new List<AddAttachment>();
@@ -1132,7 +1129,7 @@ public class Job
         DateTime creationDate,
         DateTime modData,
         string mimeType,
-        string description = null,
+        string? description = null,
         bool replace = false)
     {
         var addAttachment = new AddAttachment(file, key, fileName, creationDate, modData, mimeType, description: description, replace: replace);
@@ -1157,9 +1154,7 @@ public class Job
     /// <returns>
     ///     <see cref="Job" />
     /// </returns>
-    public Job CopyAttachmentsFrom(
-        string file,
-        string prefix = null)
+    public Job CopyAttachmentsFrom(string file, string? prefix = null)
     {
         _copyAttachments ??= new List<CopyAttachment>();
         _copyAttachments.Add(new CopyAttachment(file, prefix));
@@ -1242,7 +1237,7 @@ public class Job
     ///     The page range or <c>null</c>, see https://qpdf.readthedocs.io/en/stable/cli.html?highlight=ranges#page-ranges
     /// </param>
     /// <returns></returns>
-    public Job Rotate(Rotation angle, string pageRange = null)
+    public Job Rotate(Rotation angle, string? pageRange = null)
     {
         var result = angle switch
         {
@@ -1769,7 +1764,7 @@ public class Job
     ///     Runs the job with the given parameters
     /// </summary>
     /// <param name="output">Returns any output that is generated by qpdf</param>
-    private int InternalRun(out string output)
+    private int InternalRun(out string? output)
     {
         var settings = new JsonSerializerSettings
         {
@@ -1812,7 +1807,7 @@ public class Job
     /// <returns>
     ///     <see cref="ExitCode" />
     /// </returns>
-    public ExitCode Run(out string output)
+    public ExitCode Run(out string? output)
     {
         if (_isEncrypted == string.Empty)
             throw new ArgumentException("Use the method 'RunIsEncrypted' when the IsEncrypted method is used");
@@ -1833,7 +1828,7 @@ public class Job
     /// <returns>
     ///     <see cref="ExitCode" />
     /// </returns>
-    public ExitCodeIsEncrypted RunIsEncrypted(out string output)
+    public ExitCodeIsEncrypted RunIsEncrypted(out string? output)
     {
         if (_requiresPassword == string.Empty)
             throw new ArgumentException(
@@ -1851,7 +1846,7 @@ public class Job
     /// <returns>
     ///     <see cref="ExitCode" />
     /// </returns>
-    public ExitCodeRequiresPassword RunRequiresPassword(out string output)
+    public ExitCodeRequiresPassword RunRequiresPassword(out string? output)
     {
         if (_isEncrypted == string.Empty)
             throw new ArgumentException("Use the method 'RunIsEncrypted' when the IsEncrypted method is used");

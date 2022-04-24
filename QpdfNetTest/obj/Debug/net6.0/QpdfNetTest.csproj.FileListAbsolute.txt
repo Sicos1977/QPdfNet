@@ -1,3 +1,4 @@
+D:\Progsoft\_GitHub_\QPdfNet\QpdfNetTest\bin\Debug\net6.0\CoverletSourceRootsMapping
 D:\Progsoft\_GitHub_\QPdfNet\QpdfNetTest\obj\Debug\net6.0\QpdfNetTest.csproj.AssemblyReference.cache
 D:\Progsoft\_GitHub_\QPdfNet\QpdfNetTest\obj\Debug\net6.0\QpdfNetTest.GeneratedMSBuildEditorConfig.editorconfig
 D:\Progsoft\_GitHub_\QPdfNet\QpdfNetTest\obj\Debug\net6.0\QpdfNetTest.AssemblyInfoInputs.cache
@@ -10,7 +11,12 @@ D:\Progsoft\_GitHub_\QPdfNet\QpdfNetTest\bin\Debug\net6.0\Microsoft.VisualStudio
 D:\Progsoft\_GitHub_\QPdfNet\QpdfNetTest\bin\Debug\net6.0\Microsoft.VisualStudio.TestPlatform.MSTestAdapter.PlatformServices.Interface.dll
 D:\Progsoft\_GitHub_\QPdfNet\QpdfNetTest\bin\Debug\net6.0\Microsoft.VisualStudio.TestPlatform.MSTestAdapter.PlatformServices.dll
 D:\Progsoft\_GitHub_\QPdfNet\QpdfNetTest\bin\Debug\net6.0\Microsoft.TestPlatform.AdapterUtilities.dll
+D:\Progsoft\_GitHub_\QPdfNet\QpdfNetTest\bin\Debug\net6.0\TestFiles\20_pages.pdf
+D:\Progsoft\_GitHub_\QPdfNet\QpdfNetTest\bin\Debug\net6.0\TestFiles\acrobat_8_help.pdf
+D:\Progsoft\_GitHub_\QPdfNet\QpdfNetTest\bin\Debug\net6.0\TestFiles\encryption_256_bit.pdf
 D:\Progsoft\_GitHub_\QPdfNet\QpdfNetTest\bin\Debug\net6.0\TestFiles\test.pdf
+D:\Progsoft\_GitHub_\QPdfNet\QpdfNetTest\bin\Debug\net6.0\TestFiles\withattachment.pdf
+D:\Progsoft\_GitHub_\QPdfNet\QpdfNetTest\bin\Debug\net6.0\x64\qpdf29.dll
 D:\Progsoft\_GitHub_\QPdfNet\QpdfNetTest\bin\Debug\net6.0\QpdfNetTest.deps.json
 D:\Progsoft\_GitHub_\QPdfNet\QpdfNetTest\bin\Debug\net6.0\QpdfNetTest.runtimeconfig.json
 D:\Progsoft\_GitHub_\QPdfNet\QpdfNetTest\bin\Debug\net6.0\QpdfNetTest.dll
@@ -106,9 +112,3 @@ D:\Progsoft\_GitHub_\QPdfNet\QpdfNetTest\obj\Debug\net6.0\refint\QpdfNetTest.dll
 D:\Progsoft\_GitHub_\QPdfNet\QpdfNetTest\obj\Debug\net6.0\QpdfNetTest.pdb
 D:\Progsoft\_GitHub_\QPdfNet\QpdfNetTest\obj\Debug\net6.0\QpdfNetTest.genruntimeconfig.cache
 D:\Progsoft\_GitHub_\QPdfNet\QpdfNetTest\obj\Debug\net6.0\ref\QpdfNetTest.dll
-D:\Progsoft\_GitHub_\QPdfNet\QpdfNetTest\bin\Debug\net6.0\x64\qpdf29.dll
-D:\Progsoft\_GitHub_\QPdfNet\QpdfNetTest\bin\Debug\net6.0\TestFiles\acrobat_8_help.pdf
-D:\Progsoft\_GitHub_\QPdfNet\QpdfNetTest\bin\Debug\net6.0\TestFiles\20_pages.pdf
-D:\Progsoft\_GitHub_\QPdfNet\QpdfNetTest\bin\Debug\net6.0\TestFiles\encryption_256_bit.pdf
-D:\Progsoft\_GitHub_\QPdfNet\QpdfNetTest\bin\Debug\net6.0\TestFiles\withattachment.pdf
-D:\Progsoft\_GitHub_\QPdfNet\QpdfNetTest\bin\Debug\net6.0\CoverletSourceRootsMapping
