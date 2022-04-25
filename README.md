@@ -1,5 +1,4 @@
-THIS IS STILL WORK IN PROGRESS SO NO FINISHED PRODUCT YET !!!!!
-=================
+![qpdf_c#](https://user-images.githubusercontent.com/6692947/165035710-ffc38a67-58bf-4ccf-a1f7-aa553d5e9af0.png)
 
 What is QPdfNet
 =========
