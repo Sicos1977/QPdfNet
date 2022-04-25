@@ -758,6 +758,7 @@ public class Job
     /// </returns>
     public Job ObjectStreams(ObjectStreams objectStreams)
     {
+        Logger.LogInformation($"Setting object stream handling to '{objectStreams}'");
         _objectStreams = objectStreams;
         return this;
     }
@@ -778,6 +779,7 @@ public class Job
     /// </returns>
     public Job PreserveUnreferenced()
     {
+        Logger.LogInformation("Preserving objects that are not referenced when writing the file");
         _preserveUnreferenced = string.Empty;
         return this;
     }
