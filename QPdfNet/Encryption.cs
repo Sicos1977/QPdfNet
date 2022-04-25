@@ -27,6 +27,7 @@
 using System;
 using Newtonsoft.Json;
 using QPdfNet.Interfaces;
+using QPdfNet.Loggers;
 
 namespace QPdfNet
 {
@@ -46,7 +47,7 @@ namespace QPdfNet
         ///     The user password
         /// </summary>
         [JsonProperty("userPassword")]
-        public string UserPassword { get; private set; }
+        public string? UserPassword { get; private set; }
 
         /// <summary>
         ///     The owner password
@@ -66,32 +67,41 @@ namespace QPdfNet
         /// <param name="ownerPassword">The owner password</param>
         /// <param name="options"><see cref="IEncryption"/></param>
         internal Encryption(
-            string userPassword, 
+            string? userPassword, 
             string ownerPassword,
             IEncryption options)
         {
             UserPassword = userPassword;
             OwnerPassword = ownerPassword;
 
+            Logger.LogInformation($"Creating encrypted PDF with user password '{new string('*', userPassword?.Length ?? 0)}' and owner password '{new string('*', ownerPassword.Length)}'");
+
             switch (options.GetType().Name)
             {
                 case "Encryption40Bit":
                     _options40 = options;
                     Options = _options40;
+                    Logger.LogInformation("Setting encryption to 40 bits");
                     break;
 
                 case "Encryption128Bit":
                     _options128 = options;
                     Options = _options128;
+                    Logger.LogInformation("Setting encryption to 128 bits");
                     break;
 
                 case "Encryption256Bit":
                     _options256 = options;
                     Options = _options256;
+                    Logger.LogInformation("Setting encryption to 256 bits");
                     break;
 
                 default:
-                    throw new ArgumentException("User either the class Encryption40Bit, Encryption128Bit or Encryption256Bit");
+                {
+                    const string message = "User either the class Encryption40Bit, Encryption128Bit or Encryption256Bit";
+                    Logger.LogError(message);
+                    throw new ArgumentException(message);
+                }
             }
         }
         #endregion

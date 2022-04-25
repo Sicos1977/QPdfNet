@@ -39,9 +39,9 @@ namespace QPdfNet.InteropDotNet
     {
         #region Fields
         private readonly ILibraryLoaderLogic _logic;
-        private readonly object _syncLock = new object();
-        private readonly Dictionary<string, IntPtr> _loadedAssemblies = new Dictionary<string, IntPtr>();
-        private static LibraryLoader _instance;
+        private readonly object _syncLock = new();
+        private readonly Dictionary<string, IntPtr> _loadedAssemblies = new();
+        private static LibraryLoader? _instance;
         #endregion
 
         #region Properties
@@ -90,7 +90,7 @@ namespace QPdfNet.InteropDotNet
         #endregion
 
         #region LoadLibrary
-        public IntPtr LoadLibrary(string fileName, string platformName = null)
+        public IntPtr LoadLibrary(string fileName, string? platformName = null)
         {
             fileName = FixUpLibraryName(fileName);
             lock (_syncLock)
@@ -140,6 +140,10 @@ namespace QPdfNet.InteropDotNet
 
             assemblyLocation = assemblyLocation.Substring(8);
             var baseDirectory = Path.GetDirectoryName(assemblyLocation);
+
+            if (baseDirectory == null)
+                throw new ArgumentException(nameof(baseDirectory));
+
             return InternalLoadLibrary(baseDirectory, platformName, fileName);
         }
         #endregion
@@ -156,6 +160,10 @@ namespace QPdfNet.InteropDotNet
             }
 
             var baseDirectory = Path.GetDirectoryName(assemblyLocation);
+
+            if (baseDirectory == null)
+                throw new ArgumentException(nameof(baseDirectory));
+
             return InternalLoadLibrary(baseDirectory, platformName, fileName);
         }
         #endregion

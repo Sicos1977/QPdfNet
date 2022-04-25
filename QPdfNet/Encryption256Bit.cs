@@ -27,6 +27,7 @@
 using Newtonsoft.Json;
 using QPdfNet.Enums;
 using QPdfNet.Interfaces;
+using QPdfNet.Loggers;
 
 namespace QPdfNet
 {
@@ -71,6 +72,11 @@ namespace QPdfNet
             Print print = Print.Full,
             bool cleartextMetaData = false)
         {
+            Logger.LogInformation($"Encryption options accessibility '{accessibility}', annotate '{annotate}', assemble '{assemble}'" +
+                                  $", extract '{extract}', form '{form}', modify other '{modifyOther}', modify '{modify}'" +
+                                  $", print '{print}' and cleartext meta-data '{cleartextMetaData}'");
+
+
             _accessibility = accessibility ? "y" : "n";
             _annotate = annotate ? "y" : "n";
             _assemble = assemble ? "y" : "n";

@@ -28,11 +28,13 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Runtime.InteropServices;
+using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 using QPdfNet.Enums;
 using QPdfNet.Interfaces;
 using QPdfNet.Interop;
+using QPdfNet.Loggers;
 
 // ReSharper disable UnusedMember.Global
 
@@ -130,6 +132,18 @@ public class Job
     [JsonProperty("linearizePass1")] private string? _linearizePass1;
     #endregion
 
+    #region Constructor
+    /// <summary>
+    ///     Makes this object
+    /// </summary>
+    /// <param name="logger">When set then logging is written to this interface</param>
+    public Job(ILogger? logger = null)
+    {
+        if (logger != null)
+            Logger.LoggerInterface = logger;
+    }
+    #endregion
+
     #region InputFile
     /// <summary>
     ///     The input PDF file
@@ -140,6 +154,7 @@ public class Job
     /// </returns>
     public Job InputFile(string fileName)
     {
+        Logger.LogInformation($"Opening PDF file '{fileName}'");
         _inputFile = fileName;
         return this;
     }
@@ -155,6 +170,7 @@ public class Job
     /// </returns>
     public Job OutputFile(string fileName)
     {
+        Logger.LogInformation($"Writing output to file '{fileName}'");
         _outputFile = fileName;
         return this;
     }
@@ -170,6 +186,7 @@ public class Job
     /// </returns>
     public Job Empty()
     {
+        Logger.LogInformation("Creating empty PDF");
         _empty = string.Empty;
         return this;
     }
@@ -187,6 +204,10 @@ public class Job
     /// </returns>
     public Job ReplaceInput()
     {
+        Logger.LogInformation(string.IsNullOrEmpty(_inputFile)
+            ? $"Replacing input file '{_inputFile}'"
+            : "Replacing input file");
+
         _replaceInput = string.Empty;
         return this;
     }
@@ -202,6 +223,7 @@ public class Job
     /// </returns>
     public Job WarningExit0()
     {
+        Logger.LogInformation("If there were warnings only and no errors, exit with exit code 0 instead of 3");
         _warningExit0 = string.Empty;
         return this;
     }
@@ -218,6 +240,7 @@ public class Job
     /// </returns>
     public Job Password(string password)
     {
+        Logger.LogInformation($"Setting password to '{new string('*', password.Length)}'");
         _password = password;
         return this;
     }
@@ -234,7 +257,9 @@ public class Job
     /// <exception cref="FileNotFoundException"></exception>
     public Job PasswordFile(string file)
     {
-        if (!File.Exists(file))
+        Logger.LogInformation($"Setting password file to '{file}'");
+
+        if (!System.IO.File.Exists(file))
             throw new FileNotFoundException(file);
 
         _passwordFile = string.Empty;
@@ -252,6 +277,7 @@ public class Job
     /// </returns>
     public Job Verbose()
     {
+        Logger.LogInformation("Increase verbosity of output");
         _verbose = string.Empty;
         return this;
     }
@@ -268,6 +294,7 @@ public class Job
     /// </returns>
     public Job NoWarn()
     {
+        Logger.LogInformation("Suppress writing of warnings to stderr");
         _noWarn = string.Empty;
         return this;
     }
@@ -290,6 +317,7 @@ public class Job
     /// </returns>
     public Job DeterministicId()
     {
+        Logger.LogInformation("Generate a secure, random document ID using deterministic values");
         _deterministicId = string.Empty;
         return this;
     }
@@ -306,6 +334,7 @@ public class Job
     /// </returns>
     public Job AllowWeakCrypto()
     {
+        Logger.LogInformation("Allowing weak crypto");
         _allowWeakCrypto = string.Empty;
         return this;
     }
@@ -327,6 +356,9 @@ public class Job
     /// </returns>
     public Job KeepFilesOpen(bool keepOpen)
     {
+        if (keepOpen)
+            Logger.LogInformation("Keeping files open");
+
         _keepFilesOpen = keepOpen ? "y" : "n";
         return this;
     }
@@ -346,6 +378,8 @@ public class Job
         if (count < 1)
             throw new ArgumentOutOfRangeException(nameof(count), "Needs to be a value of 1 or greater");
 
+        Logger.LogInformation($"Keeping files open threshold set to {count}");
+
         _keepFilesOpenThreshold = count.ToString();
         return this;
     }
@@ -357,19 +391,19 @@ public class Job
     ///     explicit specification of the encryption key. When this option is specified, the parameter to the
     ///     <see cref="Password" /> option is interpreted as a hexadecimal-encoded key value. This only applies to the password
     ///     used to open the main input file. It does not apply to other files opened by --pages or other options or to files
-    ///     being written.
-    ///     Most users will never have a need for this option, and no standard viewers support this mode of operation, but it
-    ///     can be useful for forensic or investigatory purposes. For example, if a PDF file is encrypted with an unknown
-    ///     password, a brute-force attack using the key directly is sometimes more efficient than one using the password.Also,
-    ///     if a file is heavily damaged, it may be possible to derive the encryption key and recover parts of the file using
-    ///     it directly.To expose the encryption key used by an encrypted file that you can open normally, use the
-    ///     <see cref="ShowEncryptionKey" /> option.
+    ///     being written. Most users will never have a need for this option, and no standard viewers support this mode of
+    ///     operation, but it can be useful for forensic or investigatory purposes. For example, if a PDF file is encrypted with
+    ///     an unknown password, a brute-force attack using the key directly is sometimes more efficient than one using the
+    ///     password.Also, if a file is heavily damaged, it may be possible to derive the encryption key and recover parts of
+    ///     the file using it directly.To expose the encryption key used by an encrypted file that you can open normally, use
+    ///     the <see cref="ShowEncryptionKey" /> option.
     /// </summary>
     /// <returns>
     ///     <see cref="Job" />
     /// </returns>
     public Job PasswordIsHexKey()
     {
+        Logger.LogInformation("Interpreting password as a hexadecimal-encoded key value");
         _passwordIsHexKey = string.Empty;
         return this;
     }
@@ -386,6 +420,7 @@ public class Job
     /// </returns>
     public Job SuppressPasswordRecovery()
     {
+        Logger.LogInformation("Suppressing password recovery");
         _suppressPasswordRecovery = string.Empty;
         return this;
     }
@@ -406,6 +441,7 @@ public class Job
     /// </returns>
     public Job PasswordMode(PasswordMode mode)
     {
+        Logger.LogInformation($"Setting password mode to '{mode}'");
         _passwordMode = mode;
         return this;
     }
@@ -420,6 +456,7 @@ public class Job
     /// <see cref="Job" />
     public Job SuppressRecovery()
     {
+        Logger.LogInformation("Preventing attempt to reconstruct a file’s cross reference table when there are errors reading objects from the file");
         _suppressRecovery = string.Empty;
         return this;
     }
@@ -438,6 +475,7 @@ public class Job
     /// <see cref="Job" />
     public Job IgnoreXrefStreams()
     {
+        Logger.LogInformation("Ignoring any cross-reference streams");
         _ignoreXrefStreams = string.Empty;
         return this;
     }
@@ -454,6 +492,7 @@ public class Job
     /// </returns>
     public Job Linearize()
     {
+        Logger.LogInformation("Create linearized (web-optimized) output files");
         _linearize = string.Empty;
         return this;
     }
@@ -469,7 +508,7 @@ public class Job
     /// <returns>
     ///     <see cref="Job" />
     /// </returns>
-    public Job Encrypt(string userPassword, string ownerPassword, IEncryption options)
+    public Job Encrypt(string? userPassword, string ownerPassword, IEncryption options)
     {
         _encryption = new Encryption(userPassword, ownerPassword, options);
         return this;
@@ -488,6 +527,7 @@ public class Job
     /// </returns>
     public Job Decrypt()
     {
+        Logger.LogInformation("Creating PDF output file with no encryption");
         _decrypt = string.Empty;
         return this;
     }
@@ -511,8 +551,13 @@ public class Job
     /// <exception cref="FileNotFoundException"></exception>
     public Job CopyEncryption(string file)
     {
-        if (!File.Exists(file))
+        if (!System.IO.File.Exists(file))
+        {
+            Logger.LogError($"The file '{file}' could not be found");
             throw new FileNotFoundException(file);
+        }
+
+        Logger.LogInformation($"Copying encryption from file '{file}'");
 
         _copyEncryption = string.Empty;
         return this;
@@ -531,6 +576,7 @@ public class Job
     /// </returns>
     public Job EncryptionFilePassword(string password)
     {
+        Logger.LogInformation($"Setting encryption file password to '{new string('*', password.Length)}'");
         _encryptionFilePassword = password;
         return this;
     }
@@ -549,6 +595,7 @@ public class Job
     /// </returns>
     public Job Qdf()
     {
+        Logger.LogInformation("Creating a PDF file suitable for viewing and editing in a text editor");
         _qdf = string.Empty;
         return this;
     }
@@ -566,6 +613,7 @@ public class Job
     /// </returns>
     public Job NoOriginalObjectIds()
     {
+        Logger.LogInformation("Suppresses inclusion of original object ID comments in QDF files");
         _noOriginalObjectIds = string.Empty;
         return this;
     }
@@ -585,6 +633,8 @@ public class Job
     /// </returns>
     public Job CompressStreams(bool compress)
     {
+        Logger.LogInformation(compress ? "Compressing streams" : "Disabling stream compression");
+
         _compressStreams = compress ? "y" : "n";
         return this;
     }
@@ -602,6 +652,7 @@ public class Job
     /// </returns>
     public Job DecodeLevel(DecodeLevel decodeLevel = Enums.DecodeLevel.Generalized)
     {
+        Logger.LogInformation($"Setting stream decode level to '{decodeLevel}'");
         _decodeLevel = decodeLevel;
         return this;
     }
@@ -618,6 +669,7 @@ public class Job
     /// </returns>
     public Job StreamData(StreamData streamData = Enums.StreamData.Compress)
     {
+        Logger.LogInformation($"Setting stream data to '{streamData}'");
         _streamData = streamData;
         return this;
     }
@@ -635,6 +687,7 @@ public class Job
     /// </returns>
     public Job RecompressFlate()
     {
+        Logger.LogInformation("Re compressing streams that are compressed with flate");
         _recompressFlate = string.Empty;
         return this;
     }
@@ -657,8 +710,12 @@ public class Job
     public Job CompressionLevel(int level)
     {
         if (level is < 1 or > 9)
+        {
+            Logger.LogError($"Compression level '{level}' should be in the range 1 to 9");
             throw new ArgumentOutOfRangeException(nameof(level), "Should be in the range 1 to 9");
+        }
 
+        Logger.LogInformation($"Setting compression level to {level}");
         _compressionLevel = level.ToString();
         return this;
     }
@@ -678,6 +735,9 @@ public class Job
     /// </returns>
     public Job NormalizeContent(bool normalize)
     {
+        if (normalize)
+            Logger.LogInformation("Normalizing newlines in PDF content stream to UNIX-style newlines");
+
         _normalizeContent = normalize ? "y" : "n";
         return this;
     }
@@ -996,7 +1056,7 @@ public class Job
     /// </returns>
     public Job Overlay(string file, string? to = null, string? from = null, string? repeat = null)
     {
-        if (!File.Exists(file))
+        if (!System.IO.File.Exists(file))
             throw new FileNotFoundException($"The file '{file}' could not be found");
 
         _overlay = new Dictionary<string, string> { { "file", file } };
@@ -1048,7 +1108,7 @@ public class Job
     /// </returns>
     public Job Underlay(string file, string? to = null, string? from = null, string? repeat = null)
     {
-        if (!File.Exists(file))
+        if (!System.IO.File.Exists(file))
             throw new FileNotFoundException($"The file '{file}' could not be found");
 
         _underlay = new Dictionary<string, string> { { "file", file } };

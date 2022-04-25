@@ -26,7 +26,6 @@
 
 using System;
 using System.Runtime.InteropServices;
-using QPdfNet.Enums;
 using QPdfNet.InteropDotNet;
 
 // ReSharper disable UnusedMember.Global
@@ -77,7 +76,7 @@ namespace QPdfNet.Interop
     public static class QPdfApi
     {
         #region Fields
-        private static IQPdfApiSignatures native;
+        private static IQPdfApiSignatures? native;
         #endregion
 
         #region Properties

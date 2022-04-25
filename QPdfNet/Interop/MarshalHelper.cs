@@ -39,9 +39,9 @@ namespace QPdfNet.Interop
         #endregion
 
         #region StringToPtr
-        internal static IntPtr StringToPtr(string value, Encoding encoding = null)
+        internal static IntPtr StringToPtr(string value, Encoding? encoding = null)
         {
-            encoding = encoding ?? DefaultEncoding;
+            encoding ??= DefaultEncoding;
             var length = encoding.GetByteCount(value);
 
             // The encoded value is null terminated that's the reason for the '+1'.
@@ -54,10 +54,12 @@ namespace QPdfNet.Interop
         #endregion
 
         #region PtrToString
-        internal static string PtrToString(IntPtr handle, Encoding encoding = null)
+        internal static string? PtrToString(IntPtr handle, Encoding? encoding = null)
         {
-            encoding = encoding ?? DefaultEncoding;
-            if (IntPtr.Zero == handle) return null;
+            encoding ??= DefaultEncoding;
+            if (IntPtr.Zero == handle) 
+                return null;
+
             var length = StrLength(handle);
             return new string((sbyte*)handle.ToPointer(), 0, length, encoding);
         }

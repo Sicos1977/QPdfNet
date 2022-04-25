@@ -36,7 +36,7 @@ namespace QPdfNet.Loggers
         ///     When set then logging is written to this ILogger instance
         /// </summary>
         [ThreadStatic]
-        private static ILogger _logger;
+        private static ILogger? _logger;
         #endregion
 
         #region Properties
@@ -44,7 +44,7 @@ namespace QPdfNet.Loggers
         ///     An unique id that can be used to identify the logging of the converter when
         ///     calling the code from multiple threads and writing all the logging to the same file
         /// </summary>
-        public static string InstanceId { get; set; }
+        public static string? InstanceId { get; set; }
 
         /// <summary>
         ///     Sets the logger interface
