@@ -170,7 +170,7 @@ public class Job
     /// </returns>
     public Job OutputFile(string fileName)
     {
-        Logger.LogInformation($"Writing output to file '{fileName}'");
+        Logger.LogInformation($"Writing output to PDF file '{fileName}'");
         _outputFile = fileName;
         return this;
     }
@@ -205,8 +205,8 @@ public class Job
     public Job ReplaceInput()
     {
         Logger.LogInformation(string.IsNullOrEmpty(_inputFile)
-            ? $"Replacing input file '{_inputFile}'"
-            : "Replacing input file");
+            ? $"Replacing input PDF file '{_inputFile}'"
+            : "Replacing input PDF file");
 
         _replaceInput = string.Empty;
         return this;
@@ -223,7 +223,7 @@ public class Job
     /// </returns>
     public Job WarningExit0()
     {
-        Logger.LogInformation("If there were warnings only and no errors, exit with exit code 0 instead of 3");
+        Logger.LogInformation($"If there were warnings only and no errors, exit with exit code '{ExitCode.Success}' instead of '{ExitCode.WarningsWereFoundFileProcessed}'");
         _warningExit0 = string.Empty;
         return this;
     }
@@ -240,7 +240,7 @@ public class Job
     /// </returns>
     public Job Password(string password)
     {
-        Logger.LogInformation($"Setting password to '{new string('*', password.Length)}'");
+        Logger.LogInformation($"Setting PDF password to '{new string('*', password.Length)}'");
         _password = password;
         return this;
     }
@@ -257,7 +257,7 @@ public class Job
     /// <exception cref="FileNotFoundException"></exception>
     public Job PasswordFile(string file)
     {
-        Logger.LogInformation($"Setting password file to '{file}'");
+        Logger.LogInformation($"Setting password file to '{file}' with on the first line the password of the PDF");
 
         if (!System.IO.File.Exists(file))
             throw new FileNotFoundException(file);
@@ -294,7 +294,7 @@ public class Job
     /// </returns>
     public Job NoWarn()
     {
-        Logger.LogInformation("Suppress writing of warnings to stderr");
+        Logger.LogInformation("Suppress writing of warnings to output");
         _noWarn = string.Empty;
         return this;
     }
@@ -357,7 +357,7 @@ public class Job
     public Job KeepFilesOpen(bool keepOpen)
     {
         if (keepOpen)
-            Logger.LogInformation("Keeping files open");
+            Logger.LogInformation("Keeping PDF files open");
 
         _keepFilesOpen = keepOpen ? "y" : "n";
         return this;
@@ -376,7 +376,10 @@ public class Job
     public Job KeepFilesOpenThreshold(int count = 200)
     {
         if (count < 1)
+        {
+            Logger.LogError($"KeepFilesOpenThreshold '{count}' needs to be a value of 1 or greater");
             throw new ArgumentOutOfRangeException(nameof(count), "Needs to be a value of 1 or greater");
+        }
 
         Logger.LogInformation($"Keeping files open threshold set to {count}");
 
@@ -553,8 +556,9 @@ public class Job
     {
         if (!System.IO.File.Exists(file))
         {
-            Logger.LogError($"The file '{file}' could not be found");
-            throw new FileNotFoundException(file);
+            var message = $"The PDF file '{file}' could not be found";
+            Logger.LogError(message);
+            throw new FileNotFoundException(message);
         }
 
         Logger.LogInformation($"Copying encryption from file '{file}'");
@@ -711,8 +715,9 @@ public class Job
     {
         if (level is < 1 or > 9)
         {
-            Logger.LogError($"Compression level '{level}' should be in the range 1 to 9");
-            throw new ArgumentOutOfRangeException(nameof(level), "Should be in the range 1 to 9");
+            var message = $"Compression level '{level}' should be in the range 1 to 9";
+            Logger.LogError(message);
+            throw new ArgumentOutOfRangeException(nameof(level), message);
         }
 
         Logger.LogInformation($"Setting compression level to {level}");
@@ -898,8 +903,9 @@ public class Job
     {
         if (size < 0)
         {
-            Logger.LogError("IiMinBytes should be 0 (for no minimum) or a value greater then 0");
-            throw new ArgumentOutOfRangeException(nameof(size));
+            var message = "IiMinBytes should be 0 (for no minimum) or a value greater then 0";
+            Logger.LogError(message);
+            throw new ArgumentOutOfRangeException(nameof(size), message);
         }
 
         Logger.LogInformation($"Avoiding converting inline images whose size is below {size} bytes to regular images");
@@ -927,8 +933,9 @@ public class Job
     {
         if (string.IsNullOrWhiteSpace(version))
         {
-            Logger.LogError("MinVersion can't be null or white space");
-            throw new ArgumentOutOfRangeException(nameof(version));
+            var message = "MinVersion can't be null or white space";
+            Logger.LogError(message);
+            throw new ArgumentOutOfRangeException(nameof(version), message);
         }
 
         Logger.LogInformation($"Forcing the PDF output file to be at least version '{version}'");
@@ -962,8 +969,9 @@ public class Job
     {
         if (string.IsNullOrWhiteSpace(version))
         {
-            Logger.LogError("ForceVersion can't be null or white space");
-            throw new ArgumentOutOfRangeException(nameof(version));
+            var message = "ForceVersion can't be null or white space";
+            Logger.LogError(message);
+            throw new ArgumentOutOfRangeException(nameof(version), message);
         }
 
         Logger.LogInformation($"Forcing the PDF output file to be the exact version '{version}' even when the file may have content that is not supported in this version");
@@ -1013,8 +1021,9 @@ public class Job
     {
         if (n <= 0)
         {
-            Logger.LogError("$Collate value '{n}' should be greater than zero");
-            throw new ArgumentOutOfRangeException(nameof(n), "Value should be greater than zero");
+            var message = "$Collate value '{n}' should be greater than zero";
+            Logger.LogError(message);
+            throw new ArgumentOutOfRangeException(nameof(n), message);
         }
 
         Logger.LogError($"$Collating pages with value '{n}'");
@@ -1045,8 +1054,9 @@ public class Job
     {
         if (n <= 0)
         {
-            Logger.LogError($"SplitPages value '{n}' should be greater than zero");
-            throw new ArgumentOutOfRangeException(nameof(n), "Value should be greater than zero");
+            var message = $"SplitPages value '{n}' should be greater than zero";
+            Logger.LogError(message);
+            throw new ArgumentOutOfRangeException(nameof(n), message);
         }
 
         Logger.LogError($"Splitting pages in groups of '{n}' page{(n == 1 ? "s" : string.Empty)}");
