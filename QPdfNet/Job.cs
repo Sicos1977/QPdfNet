@@ -806,6 +806,7 @@ public class Job
     /// </returns>
     public Job RemoveUnreferencedResources(AutoYesNo removeUnreferencedResources = AutoYesNo.Auto)
     {
+        Logger.LogInformation($"Setting removing unreferenced resources to '{removeUnreferencedResources}'");
         _removeUnreferencedResources = removeUnreferencedResources;
         return this;
     }
@@ -823,6 +824,7 @@ public class Job
     /// </returns>
     public Job PreserveUnreferencedResources()
     {
+        Logger.LogInformation("Setting removing unreferenced resources to 'Auto'");
         _preserveUnreferencedResources = string.Empty;
         return this;
     }
@@ -840,6 +842,7 @@ public class Job
     /// </returns>
     public Job NewlineBeforeEndstream()
     {
+        Logger.LogInformation("Inserting a newline before the endstream keyword, not counted in the length, after any stream content even if the last character of the stream was a newline");
         _newlineBeforeEndstream = string.Empty;
         return this;
     }
@@ -859,6 +862,7 @@ public class Job
     /// </returns>
     public Job CoalesceContents()
     {
+        Logger.LogInformation("Coalescing content to a single stream");
         _coalesceContents = string.Empty;
         return this;
     }
@@ -875,6 +879,7 @@ public class Job
     /// </returns>
     public Job ExternalizeInlineImages()
     {
+        Logger.LogInformation("Convert inline images to regular images");
         _externalizeInlineImages = string.Empty;
         return this;
     }
@@ -892,7 +897,12 @@ public class Job
     public Job IiMinBytes(int size = 1024)
     {
         if (size < 0)
+        {
+            Logger.LogError("IiMinBytes should be 0 (for no minimum) or a value greater then 0");
             throw new ArgumentOutOfRangeException(nameof(size));
+        }
+
+        Logger.LogInformation($"Avoiding converting inline images whose size is below {size} bytes to regular images");
 
         _iiMinBytes = size.ToString();
         return this;
@@ -916,7 +926,12 @@ public class Job
     public Job MinVersion(string version)
     {
         if (string.IsNullOrWhiteSpace(version))
+        {
+            Logger.LogError("MinVersion can't be null or white space");
             throw new ArgumentOutOfRangeException(nameof(version));
+        }
+
+        Logger.LogInformation($"Forcing the PDF output file to be at least version '{version}'");
 
         _minVersion = version;
         return this;
@@ -946,8 +961,13 @@ public class Job
     public Job ForceVersion(string version)
     {
         if (string.IsNullOrWhiteSpace(version))
+        {
+            Logger.LogError("ForceVersion can't be null or white space");
             throw new ArgumentOutOfRangeException(nameof(version));
+        }
 
+        Logger.LogInformation($"Forcing the PDF output file to be the exact version '{version}' even when the file may have content that is not supported in this version");
+        
         _forceVersion = version;
         return this;
     }
@@ -970,6 +990,9 @@ public class Job
     public Job Pages(string file, string range, string? password = null)
     {
         _pages ??= new List<Pages>();
+
+        Logger.LogInformation($"Setting page selection to file '{file}' with range '{range}' and password '{(password?.Length > 0 ? new string('*', password.Length) : string.Empty)}'");
+
         _pages.Add(new Pages(file, range, password));
         return this;
     }
@@ -989,8 +1012,12 @@ public class Job
     public Job Collate(int n = 1)
     {
         if (n <= 0)
+        {
+            Logger.LogError("$Collate value '{n}' should be greater than zero");
             throw new ArgumentOutOfRangeException(nameof(n), "Value should be greater than zero");
+        }
 
+        Logger.LogError($"$Collating pages with value '{n}'");
         _collate = n.ToString();
         return this;
     }
@@ -1017,8 +1044,12 @@ public class Job
     public Job SplitPages(int n = 1)
     {
         if (n <= 0)
+        {
+            Logger.LogError($"SplitPages value '{n}' should be greater than zero");
             throw new ArgumentOutOfRangeException(nameof(n), "Value should be greater than zero");
+        }
 
+        Logger.LogError($"Splitting pages in groups of '{n}' page{(n == 1 ? "s" : string.Empty)}");
         _splitPages = n.ToString();
         return this;
     }
@@ -1059,7 +1090,11 @@ public class Job
     public Job Overlay(string file, string? to = null, string? from = null, string? repeat = null)
     {
         if (!System.IO.File.Exists(file))
-            throw new FileNotFoundException($"The file '{file}' could not be found");
+        {
+            var message = $"The overlay PDF file '{file}' could not be found";
+            Logger.LogError(message);
+            throw new FileNotFoundException(message);
+        }
 
         _overlay = new Dictionary<string, string> { { "file", file } };
 
@@ -1071,6 +1106,8 @@ public class Job
 
         if (!string.IsNullOrWhiteSpace(repeat))
             _overlay.Add("repeat", repeat);
+
+        Logger.LogInformation($"Overlaying PDF file '{file}' from '{from}' to '{to}' and repeat '{repeat}'");
 
         return this;
     }
@@ -1111,7 +1148,11 @@ public class Job
     public Job Underlay(string file, string? to = null, string? from = null, string? repeat = null)
     {
         if (!System.IO.File.Exists(file))
-            throw new FileNotFoundException($"The file '{file}' could not be found");
+        {
+            var message = $"The underlay PDF file '{file}' could not be found";
+            Logger.LogError(message);
+            throw new FileNotFoundException(message);
+        }
 
         _underlay = new Dictionary<string, string> { { "file", file } };
 
@@ -1123,6 +1164,8 @@ public class Job
 
         if (!string.IsNullOrWhiteSpace(repeat))
             _underlay.Add("repeat", repeat);
+
+        Logger.LogInformation($"Under-laying PDF file '{file}' from '{from}' to '{to}' and repeat '{repeat}'");
 
         return this;
     }
