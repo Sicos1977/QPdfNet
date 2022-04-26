@@ -1,4 +1,0 @@
-checking d:\test.pdf
-PDF Version: 1.6
-File is not encrypted
-File is linearized
