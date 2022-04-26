@@ -1186,10 +1186,8 @@ public class Job
     ///     This flag starts add attachment options, which are used to add attachments to a file.
     ///     The  flag and its options may be repeated to add multiple attachments
     /// </summary>
-    /// <param name="fileName">
-    ///     Specify the filename to be used for the attachment. This is what is usually displayed to the
-    ///     user and is the name most graphical PDF viewers will use when saving a file. It defaults to the last element of the
-    ///     attached file’s filename.
+    /// <param name="file">
+    ///     Specify the file with it's full path to be used for the attachment.
     /// </param>
     /// <param name="description">Supply descriptive text for the attachment, displayed by some PDF viewers.</param>
     /// <param name="replace">
@@ -1199,10 +1197,24 @@ public class Job
     /// <returns>
     ///     <see cref="Job" />
     /// </returns>
+    /// <remarks>
+    ///     The key, file name, creation date, modify date and mime type will be read from the given <paramref name="file"/>.
+    ///     If you want to set them your self then use the other AddAttachment method
+    /// </remarks>
     /// <exception cref="FileNotFoundException"></exception>
-    public Job AddAttachment(string fileName, string? description = null, bool replace = false)
+    public Job AddAttachment(string file, string? description = null, bool replace = false)
     {
-        var addAttachment = new AddAttachment(fileName, description, replace);
+        if (!System.IO.File.Exists(file))
+        {
+            var message = $"The attachment file '{file}' could not be found";
+            Logger.LogError(message);
+            throw new FileNotFoundException(message);
+        }
+
+        var addAttachment = new AddAttachment(file, description, replace);
+
+        Logger.LogInformation($"Adding attachment '{file}', with description '{description}' and replace '{replace}'");
+
         _addAttachment ??= new List<AddAttachment>();
         _addAttachment.Add(addAttachment);
         return this;
@@ -1223,7 +1235,7 @@ public class Job
     ///     attached file’s filename.
     /// </param>
     /// <param name="creationDate">Specify the attachment’s creation date in PDF format; defaults to the current time</param>
-    /// <param name="modData">Specify the attachment’s modification date in PDF format; defaults to the current time.</param>
+    /// <param name="modDate">Specify the attachment’s modification date in PDF format; defaults to the current time.</param>
     /// <param name="mimeType">
     ///     Specify the mime type for the attachment, such as text/plain, application/pdf, image/png, etc.
     ///     The qpdf library does not automatically determine the mime type.
@@ -1242,12 +1254,22 @@ public class Job
         string key,
         string fileName,
         DateTime creationDate,
-        DateTime modData,
+        DateTime modDate,
         string mimeType,
         string? description = null,
         bool replace = false)
     {
-        var addAttachment = new AddAttachment(file, key, fileName, creationDate, modData, mimeType, description: description, replace: replace);
+        if (!System.IO.File.Exists(file))
+        {
+            var message = $"The attachment file '{file}' could not be found";
+            Logger.LogError(message);
+            throw new FileNotFoundException(message);
+        }
+
+        var addAttachment = new AddAttachment(file, key, fileName, creationDate, modDate, mimeType, description: description, replace: replace);
+
+        Logger.LogInformation($"Adding attachment '{file}', with key '{key}', file name '{fileName}', creation date '{creationDate}', modify date '{modDate}', mime type '{mimeType}' description '{description}' and replace '{replace}'");
+
         _addAttachment ??= new List<AddAttachment>();
         _addAttachment.Add(addAttachment);
         return this;
@@ -1271,8 +1293,18 @@ public class Job
     /// </returns>
     public Job CopyAttachmentsFrom(string file, string? prefix = null)
     {
+        if (!System.IO.File.Exists(file))
+        {
+            var message = $"The copy from attachment PDF file '{file}' could not be found";
+            Logger.LogError(message);
+            throw new FileNotFoundException(message);
+        }
+
         _copyAttachments ??= new List<CopyAttachment>();
         _copyAttachments.Add(new CopyAttachment(file, prefix));
+
+        Logger.LogInformation($"Copying attachments from PDF file '{file}' with prefix '{prefix}'");
+
         return this;
     }
     #endregion
