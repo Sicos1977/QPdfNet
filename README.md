@@ -40,7 +40,7 @@ The DLL qpdf29.dll is compiled with Visual Studio 2022 you need these C++ runtim
 How to use
 ==========
 
-##Getting the amount of pages
+## Getting the amount of pages
 
 ```c#
 var job = new Job();
@@ -52,7 +52,7 @@ Assert.AreEqual(ExitCode.Success, result);
 Assert.AreEqual(output, "20");
 ```
 
-##Encrypting a PDF file
+## Encrypting a PDF file
 
 ```c#
 var outputFile = Path.Combine(_testFolder, "output_encryption_256_bit.pdf");
@@ -67,7 +67,7 @@ var result = job.InputFile(Path.Combine("TestFiles", "test.pdf"))
 Assert.AreEqual(ExitCode.Success, result);
 ```
 
-##Checking if a file is encrypted
+## Checking if a file is encrypted
 
 ```c#
 var job = new Job();
