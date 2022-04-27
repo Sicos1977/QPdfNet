@@ -93,6 +93,8 @@ For example
 var logger = !string.IsNullOrWhiteSpace(<some logfile>)
                 ? new QPdfNet.Loggers.Stream(File.OpenWrite(<some logfile>))
                 : new QPdfNet.Loggers.Console();
+                
+var job = new Job(logger);                
 ```
 
 Installing via NuGet
