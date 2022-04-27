@@ -85,6 +85,12 @@ Logging
 
 QPdfNet uses the Microsoft ILogger interface (https://docs.microsoft.com/en-us/dotnet/api/microsoft.extensions.logging.ilogger?view=dotnet-plat-ext-5.0). You can use any logging library that uses this interface.
 
+The following 3 loglevels are used:
+
+- LogInformatie: Logs information about the usage of QPdfNet
+- LogError: Logs any errors that occurs
+- LogDebug: Logs debug information
+
 QPdfNet has some build in loggers that can be found in the ```QPdfNet.Logger``` namespace. 
 
 For example
