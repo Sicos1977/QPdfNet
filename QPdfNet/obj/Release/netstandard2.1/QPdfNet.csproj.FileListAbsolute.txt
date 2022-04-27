@@ -1,0 +1,13 @@
+D:\Progsoft\_GitHub_\QPdfNet\QPdfNet\bin\Release\netstandard2.1\QPdfNet.dll.config
+D:\Progsoft\_GitHub_\QPdfNet\QPdfNet\bin\Release\netstandard2.1\QPdfNet.deps.json
+D:\Progsoft\_GitHub_\QPdfNet\QPdfNet\bin\Release\netstandard2.1\QPdfNet.dll
+D:\Progsoft\_GitHub_\QPdfNet\QPdfNet\bin\Release\netstandard2.1\QPdfNet.pdb
+D:\Progsoft\_GitHub_\QPdfNet\QPdfNet\obj\Release\netstandard2.1\QPdfNet.csproj.AssemblyReference.cache
+D:\Progsoft\_GitHub_\QPdfNet\QPdfNet\obj\Release\netstandard2.1\QPdfNet.GeneratedMSBuildEditorConfig.editorconfig
+D:\Progsoft\_GitHub_\QPdfNet\QPdfNet\obj\Release\netstandard2.1\QPdfNet.AssemblyInfoInputs.cache
+D:\Progsoft\_GitHub_\QPdfNet\QPdfNet\obj\Release\netstandard2.1\QPdfNet.AssemblyInfo.cs
+D:\Progsoft\_GitHub_\QPdfNet\QPdfNet\obj\Release\netstandard2.1\QPdfNet.csproj.CoreCompileInputs.cache
+D:\Progsoft\_GitHub_\QPdfNet\QPdfNet\obj\Release\netstandard2.1\QPdfNet.dll
+D:\Progsoft\_GitHub_\QPdfNet\QPdfNet\obj\Release\netstandard2.1\QPdfNet.pdb
+D:\Progsoft\_GitHub_\QPdfNet\QPdfNet\bin\Release\netstandard2.1\x64\qpdf29.dll
+D:\Progsoft\_GitHub_\QPdfNet\QPdfNet\bin\Release\netstandard2.1\x86\qpdf29.dll
