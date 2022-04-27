@@ -903,7 +903,7 @@ public class Job
     {
         if (size < 0)
         {
-            var message = "IiMinBytes should be 0 (for no minimum) or a value greater then 0";
+            var message = $"IiMinBytes '{size}' should be 0 (for no minimum) or a value greater then 0";
             Logger.LogError(message);
             throw new ArgumentOutOfRangeException(nameof(size), message);
         }
@@ -933,7 +933,7 @@ public class Job
     {
         if (string.IsNullOrWhiteSpace(version))
         {
-            var message = "MinVersion can't be null or white space";
+            var message = $"MinVersion '{version}' can't be null or white space";
             Logger.LogError(message);
             throw new ArgumentOutOfRangeException(nameof(version), message);
         }
@@ -969,7 +969,7 @@ public class Job
     {
         if (string.IsNullOrWhiteSpace(version))
         {
-            var message = "ForceVersion can't be null or white space";
+            var message = $"ForceVersion '{version}' can't be null or white space";
             Logger.LogError(message);
             throw new ArgumentOutOfRangeException(nameof(version), message);
         }
@@ -1325,6 +1325,9 @@ public class Job
     {
         _removeAttachment ??= new List<string>();
         _removeAttachment.Add(key);
+
+        Logger.LogInformation($"Removing attachment with key '{key}'");
+
         return this;
     }
     #endregion
@@ -1341,6 +1344,7 @@ public class Job
     /// </returns>
     public Job FlattenRotation()
     {
+        Logger.LogInformation("Flatten rotation");
         _flattenRotation = string.Empty;
         return this;
     }
@@ -1368,6 +1372,7 @@ public class Job
     /// </returns>
     public Job FlattenAnnotations(FlattenAnnotations parameter)
     {
+        Logger.LogInformation("Flatten annotations");
         _flattenAnnotation = parameter;
         return this;
     }
@@ -1401,6 +1406,8 @@ public class Job
         if (pageRange != null)
             result += $":{pageRange}";
 
+        Logger.LogInformation($"Rotating pages with angle '{angle}' and page range '{pageRange}'");
+
         _rotate = result;
         return this;
     }
@@ -1417,6 +1424,7 @@ public class Job
     /// </returns>
     public Job GenerateAppearances()
     {
+        Logger.LogInformation("Regenerate appearances");
         _generateAppearances = string.Empty;
         return this;
     }
@@ -1436,6 +1444,7 @@ public class Job
     /// </returns>
     public Job OptimizeImages()
     {
+        Logger.LogInformation("Optimizing all images that are not compressed with DCT (JPEG)");
         _optimizeImages = string.Empty;
         return this;
     }
@@ -1453,7 +1462,13 @@ public class Job
     public Job OiMinWidth(int width = 128)
     {
         if (width < 0)
-            throw new ArgumentOutOfRangeException(nameof(width), "Needs to be a value of 0 or greater");
+        {
+            var message = $"OiMinWidth '{width}' needs to be a value of 0 or greater";
+            Logger.LogError(message);
+            throw new ArgumentOutOfRangeException(nameof(width), message);
+        }
+
+        Logger.LogInformation($"Avoiding optimizing images whose width is below '{width}' bytes");
 
         _oiMinWidth = width.ToString();
         return this;
@@ -1472,7 +1487,13 @@ public class Job
     public Job OiMinHeight(int height = 128)
     {
         if (height < 0)
-            throw new ArgumentOutOfRangeException(nameof(height), "Needs to be a value of 0 or greater");
+        {
+            var message = $"OiMinHeight '{height}' needs to be a value of 0 or greater";
+            Logger.LogError(message);
+            throw new ArgumentOutOfRangeException(nameof(height), message);
+        }
+
+        Logger.LogInformation($"Avoiding optimizing images whose height is below '{height}' bytes");
 
         _oiMinHeight = height.ToString();
         return this;
@@ -1491,7 +1512,13 @@ public class Job
     public Job OiMinArea(int pixels = 16384)
     {
         if (pixels < 0)
-            throw new ArgumentOutOfRangeException(nameof(pixels), "Needs to be a value of 0 or greater");
+        {
+            var message = $"OiMinArea '{pixels}' needs to be a value of 0 or greater";
+            Logger.LogError(message);
+            throw new ArgumentOutOfRangeException(nameof(pixels), message);
+        }
+
+        Logger.LogInformation($"Avoiding optimizing images whose pixel count (width x height) is below '{pixels}'");
 
         _oiMinArea = pixels.ToString();
         return this;
@@ -1507,6 +1534,7 @@ public class Job
     /// </returns>
     public Job KeepInlineImages()
     {
+        Logger.LogInformation("Prevent inline images from being included in image optimization done by 'OptimizeImages'");
         _keepInlineImages = string.Empty;
         return this;
     }
@@ -1521,6 +1549,7 @@ public class Job
     /// </returns>
     public Job RemovePageLabels()
     {
+        Logger.LogInformation("Exclude page labels (explicit page numbers) from the output file");
         _removePageLabels = string.Empty;
         return this;
     }
@@ -1529,8 +1558,8 @@ public class Job
     #region IsEncrypted
     /// <summary>
     ///     This option can be used for password-protected files even if you don’t know the password.
-    ///     This option is useful for shell scripts.Other options are ignored if this is given.This option is mutually
-    ///     exclusive with <see cref="RequiresPassword"/>.Both this option and <see cref="RequiresPassword"/> exit with
+    ///     This option is useful for shell scripts. Other options are ignored if this is given. This option is mutually
+    ///     exclusive with <see cref="RequiresPassword"/>. Both this option and <see cref="RequiresPassword"/> exit with
     ///     status <see cref="ExitCodeIsEncrypted.NotEncrypted"/> for non-encrypted
     ///     files.
     /// </summary>
@@ -1539,6 +1568,7 @@ public class Job
     /// </returns>
     public Job IsEncrypted()
     {
+        Logger.LogInformation("Checking if the input file is encrypted");
         _isEncrypted = string.Empty;
         return this;
     }
@@ -1559,6 +1589,7 @@ public class Job
     /// </returns>
     public Job RequiresPassword()
     {
+        Logger.LogInformation($"Silently exit with a '{nameof(ExitCodeIsEncrypted)}' indicating the file’s password status");
         _requiresPassword = string.Empty;
         return this;
     }
@@ -1586,6 +1617,7 @@ public class Job
     /// </returns>
     public Job Check()
     {
+        Logger.LogInformation("Checking the file’s structure as well as encryption, linearization, and encoding of stream data, and write information about the file to output");
         _check = string.Empty;
         return this;
     }
@@ -1603,6 +1635,7 @@ public class Job
     /// </returns>
     public Job ShowEncryption()
     {
+        Logger.LogInformation("Showing document encryption parameters");
         _showEncryption = string.Empty;
         return this;
     }
@@ -1622,6 +1655,7 @@ public class Job
     /// </returns>
     public Job ShowEncryptionKey()
     {
+        Logger.LogInformation("Displaying the computed or retrieved encryption key as a hexadecimal string");
         _showEncryptionKey = string.Empty;
         return this;
     }
@@ -1638,6 +1672,7 @@ public class Job
     /// </returns>
     public Job CheckLinearization()
     {
+        Logger.LogInformation("Checking to see whether a file is linearized and, if so, whether the linearization hint tables are correct");
         _checkLinearization = string.Empty;
         return this;
     }
@@ -1652,6 +1687,7 @@ public class Job
     /// </returns>
     public Job ShowLinearization()
     {
+        Logger.LogInformation("Check and display all data in the linearization hint tables");
         _showLinearization = string.Empty;
         return this;
     }
@@ -1670,6 +1706,7 @@ public class Job
     /// </returns>
     public Job ShowXref()
     {
+        Logger.LogInformation("Showing the contents of the cross-reference table or stream in a human-readable form");
         _showXref = string.Empty;
         return this;
     }
@@ -1686,6 +1723,7 @@ public class Job
     /// </returns>
     public Job ShowObject(string obj)
     {
+        Logger.LogInformation($"Showing the contents of object '{obj}'");
         _showObject = obj;
         return this;
     }
@@ -1702,6 +1740,7 @@ public class Job
     /// </returns>
     public Job RawStreamData()
     {
+        Logger.LogInformation("Writing the raw (compressed) binary stream data to output instead of the object’s contents");
         _rawStreamData = string.Empty;
         return this;
     }
@@ -1722,6 +1761,7 @@ public class Job
     /// </returns>
     public Job FilteredStreamData()
     {
+        Logger.LogInformation("Writing the filtered (uncompressed, potentially binary) stream data to standard output instead of the object’s contents");
         _filteredStreamData = string.Empty;
         return this;
     }
@@ -1737,6 +1777,7 @@ public class Job
     /// </returns>
     public Job ShowNPages()
     {
+        Logger.LogInformation("Printing the number of pages in the input file on a line by itself");
         _showNpages = string.Empty;
         return this;
     }
@@ -1755,6 +1796,7 @@ public class Job
     /// </returns>
     public Job ShowPages()
     {
+        Logger.LogInformation("Showing the object and generation number for each page dictionary object and for each content stream associated with the page");
         _showPages = string.Empty;
         return this;
     }
@@ -1769,6 +1811,7 @@ public class Job
     /// </returns>
     public Job WithImages()
     {
+        Logger.LogInformation("Also shows the object and generation numbers for the image objects on each page");
         _withImages = string.Empty;
         return this;
     }
@@ -1785,6 +1828,7 @@ public class Job
     /// </returns>
     public Job ListAttachments()
     {
+        Logger.LogInformation("Listing attachments");
         _listAttachments = string.Empty;
         return this;
     }
@@ -1800,6 +1844,7 @@ public class Job
     /// </returns>
     public Job ShowAttachment(string key)
     {
+        Logger.LogInformation($"Showing attachment with key '{key}'");
         _showAttachment = key;
         return this;
     }
@@ -1819,6 +1864,7 @@ public class Job
     /// </returns>
     public Job Json()
     {
+        Logger.LogInformation("Generating a JSON representation of the input PDF file");
         _json = string.Empty;
         return this;
     }
@@ -1836,6 +1882,7 @@ public class Job
     {
         _jsonKey ??= new List<string>();
         _jsonKey.Add(key);
+        Logger.LogInformation($"Only include top-level key '{key}' in JSON output");
         return this;
     }
     #endregion
@@ -1852,6 +1899,7 @@ public class Job
     {
         _jsonObject ??= new List<string>();
         _jsonObject.Add(obj);
+        Logger.LogInformation($"Only include object '{obj}' in JSON output");
         return this;
     }
     #endregion
@@ -1867,6 +1915,7 @@ public class Job
     /// </returns>
     public Job StaticId()
     {
+        Logger.LogInformation("Using a fixed value for the document ID (/ID in the trailer)");
         _staticId = string.Empty;
         return this;
     }
@@ -1884,6 +1933,7 @@ public class Job
     /// </returns>
     public Job StaticAesIv()
     {
+        Logger.LogInformation("Using a static initialization vector for AES-CBC");
         _staticAesIv = string.Empty;
         return this;
     }
@@ -1891,16 +1941,18 @@ public class Job
 
     #region LinearizePass1
     /// <summary>
-    ///     Use a static initialization vector for AES-CBC. This is intended for testing only so that output files can be reproducible.
-    ///     <b>Never</b> use it for production files. This option in particular is not secure since it significantly weakens the encryption.
-    ///     When combined with <see cref="StaticId"/> and using the three-step process described in Idempotency, it is possible to create
-    ///     byte-for-byte idempotent output with PDF files that use 256-bit encryption to assist with creating reproducible test suites.
+    ///     Write the first pass of linearization to the named file. The resulting file is not a valid PDF file. This option is useful
+    ///     only for debugging QPDFWriter’s linearization code. When qpdf linearizes files, it writes the file in two passes, using the
+    ///     first pass to calculate sizes and offsets that are required for hint tables and the linearization dictionary. Ordinarily, the
+    ///     first pass is discarded. This option enables it to be captured, allowing inspection of the file before values calculated in
+    ///     pass 1 are inserted into the file for pass 2.
     /// </summary>
     /// <returns>
     ///     <see cref="Job" />
     /// </returns>
     public Job LinearizePass1(string fileName)
     {
+        Logger.LogInformation("Writing the first pass of linearization to the named file. The resulting file is not a valid PDF file");
         _linearizePass1 = fileName;
         return this;
     }
@@ -1922,6 +1974,9 @@ public class Job
         settings.Converters.Add(new StringEnumConverter());
 
         var json = JsonConvert.SerializeObject(this, settings);
+
+        Logger.LogDebug("JSON input for QPDF: " + Environment.NewLine + json);
+
         var result = QPdfApi.Native.RunFromJSONWithResult(json, out var outPointer, out var errorPointer);
         var outResult = Marshal.PtrToStringAnsi(outPointer);
         var errorResult = Marshal.PtrToStringAnsi(errorPointer);
@@ -1941,6 +1996,8 @@ public class Job
             else
                 output += Environment.NewLine + errorResult;
         }
+
+        Logger.LogInformation("Output from QPDF: " + Environment.NewLine + output);
 
         return result;
     }
