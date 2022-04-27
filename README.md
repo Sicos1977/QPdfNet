@@ -37,6 +37,21 @@ The DLL qpdf29.dll is compiled with Visual Studio 2022 you need these C++ runtim
 - X86: https://aka.ms/vs/17/release/vc_redist.x86.exe
 - X64: https://aka.ms/vs/17/release/vc_redist.x64.exe
 
+Logging
+=======
+
+QPdfNet uses the Microsoft ILogger interface (https://docs.microsoft.com/en-us/dotnet/api/microsoft.extensions.logging.ilogger?view=dotnet-plat-ext-5.0). You can use any logging library that uses this interface.
+
+QPdfNet has some build in loggers that can be found in the ```QPdfNet.Logger``` namespace. 
+
+For example
+
+```csharp
+var logger = !string.IsNullOrWhiteSpace(<some logfile>)
+                ? new QPdfNet.Loggers.Stream(File.OpenWrite(<some logfile>))
+                : new QPdfNet.Loggers.Console();
+```
+
 Installing via NuGet
 ====================
 
