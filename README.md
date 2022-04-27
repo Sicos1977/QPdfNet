@@ -37,6 +37,49 @@ The DLL qpdf29.dll is compiled with Visual Studio 2022 you need these C++ runtim
 - X86: https://aka.ms/vs/17/release/vc_redist.x86.exe
 - X64: https://aka.ms/vs/17/release/vc_redist.x64.exe
 
+How to use
+==========
+
+## Getting the amount of pages
+
+```c#
+var job = new Job();
+var result = job.InputFile(Path.Combine("TestFiles", "20_pages.pdf"))
+    .ShowNPages()
+    .Run(out var output);
+
+Assert.AreEqual(ExitCode.Success, result);
+Assert.AreEqual(output, "20");
+```
+
+## Encrypting a PDF file
+
+```c#
+var outputFile = Path.Combine(_testFolder, "output_encryption_256_bit.pdf");
+
+var job = new Job();
+var result = job.InputFile(Path.Combine("TestFiles", "test.pdf"))
+    .OutputFile(outputFile)
+    .Encrypt("user", "owner", new Encryption256Bit(true, true, true, true, true, true, Modify.None, Print.None))
+    .Linearize()
+    .Run(out _);
+
+Assert.AreEqual(ExitCode.Success, result);
+```
+
+## Checking if a file is encrypted
+
+```c#
+var job = new Job();
+var result = job.InputFile(Path.Combine("TestFiles", "encryption_256_bit.pdf"))
+    .IsEncrypted()
+    .RunIsEncrypted(out _);
+
+Assert.AreEqual(ExitCodeIsEncrypted.Encrypted, result);
+```
+
+See the test project for more examples https://github.com/Sicos1977/QPdfNet/blob/main/QpdfNetTest/QpdfTests.cs
+
 Logging
 =======
 
@@ -46,10 +89,12 @@ QPdfNet has some build in loggers that can be found in the ```QPdfNet.Logger``` 
 
 For example
 
-```csharp
+```c#
 var logger = !string.IsNullOrWhiteSpace(<some logfile>)
                 ? new QPdfNet.Loggers.Stream(File.OpenWrite(<some logfile>))
                 : new QPdfNet.Loggers.Console();
+                
+var job = new Job(logger);                
 ```
 
 Installing via NuGet
