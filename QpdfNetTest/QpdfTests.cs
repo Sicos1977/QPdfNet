@@ -137,7 +137,7 @@ namespace QpdfNetTest
                 .Check()
                 .Run(out var output);
 
-            Assert.AreEqual(output.Length, 1032);
+            Assert.AreEqual(output?.Length, 1032);
             Assert.AreEqual(ExitCode.WarningsWereFoundFileProcessed, result);
         }
 
@@ -162,7 +162,7 @@ namespace QpdfNetTest
                 .ShowEncryption()
                 .Run(out var output);
 
-            Assert.IsTrue(output.Contains("Supplied password is owner password"));
+            Assert.IsTrue(output?.Contains("Supplied password is owner password"));
             Assert.AreEqual(ExitCode.Success, result);
         }
 
@@ -176,7 +176,7 @@ namespace QpdfNetTest
                 .ShowEncryptionKey()
                 .Run(out var output);
 
-            Assert.IsTrue(output.Contains("Encryption key = bc4d3ad2b43dbe372b02a4291cc7ee11413d33e87eb348d3364d5420312f1645"));
+            Assert.IsTrue(output?.Contains("Encryption key = bc4d3ad2b43dbe372b02a4291cc7ee11413d33e87eb348d3364d5420312f1645"));
             Assert.AreEqual(ExitCode.Success, result);
         }
 
@@ -199,7 +199,7 @@ namespace QpdfNetTest
                 .ShowLinearization()
                 .Run(out var output);
 
-            Assert.IsTrue(output.Contains("file_size: 180701"));
+            Assert.IsTrue(output?.Contains("file_size: 180701"));
             Assert.AreEqual(ExitCode.Success, result);
         }
 
@@ -211,7 +211,7 @@ namespace QpdfNetTest
                 .ShowXref()
                 .Run(out var output);
 
-            Assert.IsTrue(output.Contains("1/0: uncompressed; offset = 176168"));
+            Assert.IsTrue(output?.Contains("1/0: uncompressed; offset = 176168"));
             Assert.AreEqual(ExitCode.Success, result);
         }
 
@@ -223,7 +223,7 @@ namespace QpdfNetTest
                 .ShowObject("trailer")
                 .Run(out var output);
 
-            Assert.IsTrue(output.Contains("<< /ID [ <abfecb2b8e80721668392435f5aa76a6> <abfecb2b8e80721668392435f5aa76a6> ] /Info 3 0 R /Prev 180512 /Root 8 0 R /Size 19 >>"));
+            Assert.IsTrue(output?.Contains("<< /ID [ <abfecb2b8e80721668392435f5aa76a6> <abfecb2b8e80721668392435f5aa76a6> ] /Info 3 0 R /Prev 180512 /Root 8 0 R /Size 19 >>"));
             Assert.AreEqual(ExitCode.Success, result);
         }
 
@@ -236,7 +236,7 @@ namespace QpdfNetTest
                 .RawStreamData()
                 .Run(out var output);
 
-            Assert.IsTrue(output.Length > 4);
+            Assert.IsTrue(output?.Length > 4);
             Assert.AreEqual(ExitCode.Success, result);
         }
 
@@ -275,7 +275,7 @@ namespace QpdfNetTest
                 .ShowPages()
                 .Run(out var output);
 
-            Assert.IsTrue(output.Contains("page 12: 29 0 R"));
+            Assert.IsTrue(output?.Contains("page 12: 29 0 R"));
             Assert.AreEqual(ExitCode.Success, result);
         }
 
@@ -288,7 +288,7 @@ namespace QpdfNetTest
                 .WithImages()
                 .Run(out var output);
 
-            Assert.IsTrue(output.Contains("/R10: 14 0 R, 1484 x 989"));
+            Assert.IsTrue(output?.Contains("/R10: 14 0 R, 1484 x 989"));
             Assert.AreEqual(ExitCode.Success, result);
         }
 
@@ -522,7 +522,7 @@ namespace QpdfNetTest
                 .ListAttachments()
                 .Run(out var output);
 
-            Assert.IsTrue(output.Contains("20_pages.pdf -> 10,0"));
+            Assert.IsTrue(output?.Contains("20_pages.pdf -> 10,0"));
             Assert.AreEqual(ExitCode.Success, result);
         }
 
@@ -534,7 +534,7 @@ namespace QpdfNetTest
                 .ShowAttachment("20_pages.pdf")
                 .Run(out var output);
 
-            Assert.IsTrue(output.Contains("20_pages.pdf -> 10,0"));
+            Assert.IsTrue(output?.Contains("20_pages.pdf -> 10,0"));
             Assert.AreEqual(ExitCode.Success, result);
         }
 
@@ -546,7 +546,7 @@ namespace QpdfNetTest
                 .Json()
                 .Run(out var output);
 
-            Assert.IsTrue(output.Length == 6951);
+            Assert.IsTrue(output?.Length == 6951);
             Assert.AreEqual(ExitCode.Success, result);
         }
 
@@ -560,9 +560,9 @@ namespace QpdfNetTest
                 .JsonKey("encrypt")
                 .Run(out var output);
 
-            Assert.IsTrue(output.Contains("attachment"));
-            Assert.IsTrue(output.Contains("encrypt"));
-            Assert.IsTrue(!output.Contains("objects"));
+            Assert.IsTrue(output?.Contains("attachment"));
+            Assert.IsTrue(output?.Contains("encrypt"));
+            Assert.IsTrue(!output?.Contains("objects"));
             Assert.AreEqual(ExitCode.Success, result);
         }
 
@@ -576,9 +576,9 @@ namespace QpdfNetTest
                 .JsonObject("11 0 R")
                 .Run(out var output);
 
-            Assert.IsTrue(output.Contains("1 0 R"));
-            Assert.IsTrue(output.Contains("11 0 R"));
-            Assert.IsTrue(!output.Contains("14 0 R"));
+            Assert.IsTrue(output?.Contains("1 0 R"));
+            Assert.IsTrue(output?.Contains("11 0 R"));
+            Assert.IsTrue(!output?.Contains("14 0 R"));
             Assert.AreEqual(ExitCode.Success, result);
         }
     }
