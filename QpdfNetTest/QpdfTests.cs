@@ -510,7 +510,7 @@ namespace QpdfNetTest
                 .Verbose()
                 .Run(out _);
 
-            Assert.IsTrue(new FileInfo(outputFile).Length == 222126);
+            Assert.IsTrue(new FileInfo(outputFile).Length == 180240);
             Assert.AreEqual(ExitCode.Success, result);
         }
 
