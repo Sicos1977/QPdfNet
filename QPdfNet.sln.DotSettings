@@ -30,4 +30,5 @@
 	<s:Boolean x:Key="/Default/UserDictionary/Words/=Rtld/@EntryIndexedValue">True</s:Boolean>
 	<s:Boolean x:Key="/Default/UserDictionary/Words/=uncompress/@EntryIndexedValue">True</s:Boolean>
 	<s:Boolean x:Key="/Default/UserDictionary/Words/=withattachment/@EntryIndexedValue">True</s:Boolean>
+	<s:Boolean x:Key="/Default/UserDictionary/Words/=withimages/@EntryIndexedValue">True</s:Boolean>
 	<s:Boolean x:Key="/Default/UserDictionary/Words/=_005D_0020priv/@EntryIndexedValue">True</s:Boolean></wpf:ResourceDictionary>

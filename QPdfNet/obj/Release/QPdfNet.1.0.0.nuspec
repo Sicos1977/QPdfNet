@@ -7,7 +7,7 @@
     <icon>qpdf.png</icon>
     <readme>readme.md</readme>
     <projectUrl>https://github.com/Sicos1977/QPdfNet</projectUrl>
-    <description>A C# wrapper around QPDF that gives you all the options thay you normally would have from the QPDF console app</description>
+    <description>A C# wrapper around QPDF that gives you all the options that you normally would have from the QPDF console app</description>
     <releaseNotes>First version</releaseNotes>
     <copyright>Copyright (c) 2021-2022 Kees van Spelde</copyright>
     <tags>qpdf pdf</tags>

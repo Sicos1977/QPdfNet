@@ -113,3 +113,4 @@ D:\Progsoft\_GitHub_\QPdfNet\QpdfNetTest\bin\Release\net6.0\TestFiles\encryption
 D:\Progsoft\_GitHub_\QPdfNet\QpdfNetTest\bin\Release\net6.0\TestFiles\withattachment.pdf
 D:\Progsoft\_GitHub_\QPdfNet\QpdfNetTest\bin\Release\net6.0\x64\qpdf29.dll
 D:\Progsoft\_GitHub_\QPdfNet\QpdfNetTest\bin\Release\net6.0\x86\qpdf29.dll
+D:\Progsoft\_GitHub_\QPdfNet\QpdfNetTest\bin\Release\net6.0\TestFiles\withimages.pdf

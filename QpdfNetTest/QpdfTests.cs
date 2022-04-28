@@ -3,6 +3,7 @@ using System.IO;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using QPdfNet;
 using QPdfNet.Enums;
+using QPdfNet.Output;
 
 namespace QpdfNetTest
 {
@@ -283,12 +284,14 @@ namespace QpdfNetTest
         public void TestWithImages()
         {
             var job = new Job();
-            var result = job.InputFile(Path.Combine("TestFiles", "test.pdf"))
+            var result = job.InputFile(Path.Combine("TestFiles", "withimages.pdf"))
                 .ShowPages()
                 .WithImages()
                 .Run(out var output);
 
-            Assert.IsTrue(output?.Contains("/R10: 14 0 R, 1484 x 989"));
+            var pages = Helper.ShowPagesParser(output);
+
+            Assert.IsTrue(pages.Count == 3);
             Assert.AreEqual(ExitCode.Success, result);
         }
 

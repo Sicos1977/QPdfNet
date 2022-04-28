@@ -112,3 +112,5 @@ D:\Progsoft\_GitHub_\QPdfNet\QpdfNetTest\obj\Debug\net6.0\refint\QpdfNetTest.dll
 D:\Progsoft\_GitHub_\QPdfNet\QpdfNetTest\obj\Debug\net6.0\QpdfNetTest.pdb
 D:\Progsoft\_GitHub_\QPdfNet\QpdfNetTest\obj\Debug\net6.0\QpdfNetTest.genruntimeconfig.cache
 D:\Progsoft\_GitHub_\QPdfNet\QpdfNetTest\obj\Debug\net6.0\ref\QpdfNetTest.dll
+D:\Progsoft\_GitHub_\QPdfNet\QpdfNetTest\bin\Debug\net6.0\x86\qpdf29.dll
+D:\Progsoft\_GitHub_\QPdfNet\QpdfNetTest\bin\Debug\net6.0\TestFiles\withimages.pdf
