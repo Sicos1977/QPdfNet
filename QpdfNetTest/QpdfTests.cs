@@ -542,11 +542,24 @@ namespace QpdfNetTest
         }
 
         [TestMethod]
-        public void TestJson()
+        public void TestJsonWithAttachment()
         {
             var job = new Job();
             var result = job.InputFile(Path.Combine("TestFiles", "withattachment.pdf"))
                 .Json()
+                .Run(out var output);
+
+            Assert.IsTrue(output?.Length == 6951);
+            Assert.AreEqual(ExitCode.Success, result);
+        }
+
+        [TestMethod]
+        public void TestJsonWithImages()
+        {
+            var job = new Job();
+            var result = job.InputFile(Path.Combine("TestFiles", "withimages.pdf"))
+                .Json()
+                .JsonKey("pages")
                 .Run(out var output);
 
             Assert.IsTrue(output?.Length == 6951);

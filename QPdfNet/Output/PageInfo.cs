@@ -1,54 +1,99 @@
-﻿//
-// PageInfo.cs
-//
-// Author: Kees van Spelde <sicos2002@hotmail.com>
-//
-// Copyright (c) 2021-2022 Kees van Spelde.
-//
-// Permission is hereby granted, free of charge, to any person obtaining a copy
-// of this software and associated documentation files (the "Software"), to deal
-// in the Software without restriction, including without limitation the rights
-// to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-// copies of the Software, and to permit persons to whom the Software is
-// furnished to do so, subject to the following conditions:
-//
-// The above copyright notice and this permission notice shall be included in
-// all copies or substantial portions of the Software.
-//
-// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-// FITNESS FOR A PARTICULAR PURPOSE AND NON INFRINGEMENT. IN NO EVENT SHALL THE
-// AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-// LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
-// THE SOFTWARE.
-//
+﻿using System.Collections.Generic;
+using System.Globalization;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
 
-using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace QPdfNet.Output;
-
-/// <summary>
-///     Returns information about a page that 
-/// </summary>
-public class PageInfo
+namespace QPdfNet.Output
 {
-    #region Properties
-    /// <summary>
-    ///     Returns the number of the page
-    /// </summary>
-    public int PageNumber { get; internal set; }
+    public partial class PageInfo
+    {
+        [JsonProperty("pages")]
+        public List<Page> Pages { get; set; }
 
-    /// <summary>
-    ///     Returns <c>true</c> when the page has content
-    /// </summary>
-    public bool HasContent { get; internal set; }
+        [JsonProperty("parameters")]
+        public Parameters Parameters { get; set; }
 
-    /// <summary>
-    ///     Returns the images that are found on the page, <c>null</c> is returned when the page does not contain any
-    /// </summary>
-    public List<Image>? Images { get; internal set; }
-    #endregion
+        [JsonProperty("version")]
+        public long Version { get; set; }
+    }
+
+    public class Page
+    {
+        [JsonProperty("contents")]
+        public List<string> Contents { get; set; }
+
+        [JsonProperty("images")]
+        public List<Image> Images { get; set; }
+
+        [JsonProperty("label")]
+        public object Label { get; set; }
+
+        [JsonProperty("object")]
+        public string Object { get; set; }
+
+        [JsonProperty("outlines")]
+        public List<object> Outlines { get; set; }
+
+        [JsonProperty("pageposfrom1")]
+        public long Pageposfrom1 { get; set; }
+    }
+
+    public class Image
+    {
+        [JsonProperty("bitspercomponent")]
+        public long Bitspercomponent { get; set; }
+
+        [JsonProperty("colorspace")]
+        public string Colorspace { get; set; }
+
+        [JsonProperty("decodeparms")]
+        public List<object> Decodeparms { get; set; }
+
+        [JsonProperty("filter")]
+        public List<string> Filter { get; set; }
+
+        [JsonProperty("filterable")]
+        public bool Filterable { get; set; }
+
+        [JsonProperty("height")]
+        public long Height { get; set; }
+
+        [JsonProperty("name")]
+        public string Name { get; set; }
+
+        [JsonProperty("object")]
+        public string Object { get; set; }
+
+        [JsonProperty("width")]
+        public long Width { get; set; }
+    }
+
+    public partial class Parameters
+    {
+        [JsonProperty("decodelevel")]
+        public string Decodelevel { get; set; }
+    }
+
+    public partial class PageInfo
+    {
+        public static PageInfo FromJson(string json) => JsonConvert.DeserializeObject<PageInfo>(json, Converter.Settings);
+    }
+
+    public static class Serialize
+    {
+        public static string ToJson(this PageInfo self) => JsonConvert.SerializeObject(self, Converter.Settings);
+    }
+
+    internal static class Converter
+    {
+        public static readonly JsonSerializerSettings Settings = new JsonSerializerSettings
+        {
+            MetadataPropertyHandling = MetadataPropertyHandling.Ignore,
+            DateParseHandling = DateParseHandling.None,
+            Converters =
+            {
+                new IsoDateTimeConverter { DateTimeStyles = DateTimeStyles.AssumeUniversal }
+            },
+        };
+    }
 }
