@@ -3,7 +3,7 @@ using System.IO;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using QPdfNet;
 using QPdfNet.Enums;
-using QPdfNet.Output;
+using QPdfNet.Info;
 
 namespace QpdfNetTest
 {
@@ -277,21 +277,6 @@ namespace QpdfNetTest
                 .Run(out var output);
 
             Assert.IsTrue(output?.Contains("page 12: 29 0 R"));
-            Assert.AreEqual(ExitCode.Success, result);
-        }
-
-        [TestMethod]
-        public void TestWithImages()
-        {
-            var job = new Job();
-            var result = job.InputFile(Path.Combine("TestFiles", "withimages.pdf"))
-                .ShowPages()
-                .WithImages()
-                .Run(out var output);
-
-            var pages = Helper.ShowPagesParser(output);
-
-            Assert.IsTrue(pages.Count == 3);
             Assert.AreEqual(ExitCode.Success, result);
         }
 
@@ -596,6 +581,12 @@ namespace QpdfNetTest
             Assert.IsTrue(output?.Contains("11 0 R"));
             Assert.IsTrue(!output?.Contains("14 0 R"));
             Assert.AreEqual(ExitCode.Success, result);
+        }
+
+        [TestMethod]
+        public void TestPdfInfo()
+        {
+            var pdf = Pdf.FromFile(Path.Combine("TestFiles", "random.pdf"));
         }
     }
 }

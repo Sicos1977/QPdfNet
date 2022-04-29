@@ -114,3 +114,4 @@ D:\Progsoft\_GitHub_\QPdfNet\QpdfNetTest\obj\Debug\net6.0\QpdfNetTest.genruntime
 D:\Progsoft\_GitHub_\QPdfNet\QpdfNetTest\obj\Debug\net6.0\ref\QpdfNetTest.dll
 D:\Progsoft\_GitHub_\QPdfNet\QpdfNetTest\bin\Debug\net6.0\x86\qpdf29.dll
 D:\Progsoft\_GitHub_\QPdfNet\QpdfNetTest\bin\Debug\net6.0\TestFiles\withimages.pdf
+D:\Progsoft\_GitHub_\QPdfNet\QpdfNetTest\bin\Debug\net6.0\TestFiles\random.pdf
