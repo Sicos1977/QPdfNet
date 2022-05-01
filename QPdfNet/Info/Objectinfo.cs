@@ -1,5 +1,5 @@
 ﻿//
-// Page.cs
+// ObjectInfo.cs
 //
 // Author: Kees van Spelde <sicos2002@hotmail.com>
 //
@@ -24,51 +24,15 @@
 // THE SOFTWARE.
 //
 
-using System.Collections.Generic;
 using Newtonsoft.Json;
 
 namespace QPdfNet.Info;
 
-/// <summary>
-///     Returns the page
-/// </summary>
-public class Page
+public class Objectinfo
 {
-    #region Properties
     /// <summary>
-    ///     Returns information about the content that is found on the page
+    ///     <see cref="Info.Stream"/>
     /// </summary>
-    [JsonProperty("contents")]
-    public List<string>? Contents { get; set; }
-
-    /// <summary>
-    ///     Returns information about the images found on the page
-    /// </summary>
-    [JsonProperty("images")]
-    public List<Image>? Images { get; set; }
-
-    /// <summary>
-    ///     Returns the page label
-    /// </summary>
-    [JsonProperty("label")]
-    public object? Label { get; set; }
-
-    /// <summary>
-    ///     Returns the object
-    /// </summary>
-    [JsonProperty("object")]
-    public string? Object { get; set; }
-
-    /// <summary>
-    ///     Returns the page outlines
-    /// </summary>
-    [JsonProperty("outlines")]
-    public List<PageOutline>? Outlines { get; set; }
-
-    /// <summary>
-    ///     Returns the page number
-    /// </summary>
-    [JsonProperty("pageposfrom1")]
-    public long PageNumber { get; set; }
-    #endregion
+    [JsonProperty("stream")]
+    public Stream? Stream { get; set; }
 }

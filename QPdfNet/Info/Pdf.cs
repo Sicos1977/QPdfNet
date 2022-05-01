@@ -13,24 +13,39 @@ namespace QPdfNet.Info;
 public class Pdf
 {
     #region Properties
+    /// <summary>
+    ///     <see cref="Acroform"/>
+    /// </summary>
     [JsonProperty("acroform")]
     public Acroform? Acroform { get; private set; }
 
+    /// <summary>
+    ///     Returns a list with the attachments
+    /// </summary>
     [JsonProperty("attachments")]
-    public Attachments Attachments { get; private set; }
+    public Dictionary<string, AttachmentProperties>? Attachments { get; private set; }
 
+    /// <summary>
+    ///     Returns information about PDF encryption
+    /// </summary>
     [JsonProperty("encrypt")]
-    public Encrypt Encrypt { get; private set; }
+    public Encrypt? Encrypt { get; private set; }
 
+    /// <summary>
+    ///     Returns information about the objects in the PDF
+    /// </summary>
     [JsonProperty("objectinfo")]
     public Dictionary<string, Objectinfo>? Objectinfo { get; set; }
 
-    [JsonProperty("objects")]
-    public Objects Objects { get; set; }
+    //[JsonProperty("objects")]
+    //public List<string>? Objects { get; set; }
 
     [JsonProperty("outlines")]
     public List<object>? Outlines { get; set; }
 
+    /// <summary>
+    ///     Returns the used page labels in the PDF
+    /// </summary>
     [JsonProperty("pagelabels")]
     public List<object>? PageLabels { get; private set; }
 

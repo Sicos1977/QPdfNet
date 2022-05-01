@@ -1,5 +1,5 @@
 ﻿//
-// Page.cs
+// Stream.cs
 //
 // Author: Kees van Spelde <sicos2002@hotmail.com>
 //
@@ -29,46 +29,20 @@ using Newtonsoft.Json;
 
 namespace QPdfNet.Info;
 
-/// <summary>
-///     Returns the page
-/// </summary>
-public class Page
+public class Stream
 {
-    #region Properties
     /// <summary>
-    ///     Returns information about the content that is found on the page
+    ///     Returns the filters used
     /// </summary>
-    [JsonProperty("contents")]
-    public List<string>? Contents { get; set; }
+    [JsonProperty("filter")]
+    public string? Filter { get; private set; }
+
+    [JsonProperty("is")]
+    public bool Is { get; set; }
 
     /// <summary>
-    ///     Returns information about the images found on the page
+    ///     Returns the length of the stream
     /// </summary>
-    [JsonProperty("images")]
-    public List<Image>? Images { get; set; }
-
-    /// <summary>
-    ///     Returns the page label
-    /// </summary>
-    [JsonProperty("label")]
-    public object? Label { get; set; }
-
-    /// <summary>
-    ///     Returns the object
-    /// </summary>
-    [JsonProperty("object")]
-    public string? Object { get; set; }
-
-    /// <summary>
-    ///     Returns the page outlines
-    /// </summary>
-    [JsonProperty("outlines")]
-    public List<PageOutline>? Outlines { get; set; }
-
-    /// <summary>
-    ///     Returns the page number
-    /// </summary>
-    [JsonProperty("pageposfrom1")]
-    public long PageNumber { get; set; }
-    #endregion
+    [JsonProperty("length")]
+    public long? Length { get; set; }
 }

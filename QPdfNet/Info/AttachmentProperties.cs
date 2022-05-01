@@ -1,5 +1,5 @@
 ﻿//
-// Page.cs
+// AttachmentProperties.cs
 //
 // Author: Kees van Spelde <sicos2002@hotmail.com>
 //
@@ -24,51 +24,27 @@
 // THE SOFTWARE.
 //
 
-using System.Collections.Generic;
 using Newtonsoft.Json;
 
 namespace QPdfNet.Info;
 
-/// <summary>
-///     Returns the page
-/// </summary>
-public class Page
+public class AttachmentProperties
 {
-    #region Properties
     /// <summary>
-    ///     Returns information about the content that is found on the page
+    ///     Returns the file spec
     /// </summary>
-    [JsonProperty("contents")]
-    public List<string>? Contents { get; set; }
+    [JsonProperty("filespec")]
+    public string? FileSpec { get; private set; }
 
     /// <summary>
-    ///     Returns information about the images found on the page
+    ///     Returns the prefered content
     /// </summary>
-    [JsonProperty("images")]
-    public List<Image>? Images { get; set; }
+    [JsonProperty("preferredcontents")]
+    public string? PreferredContents { get; private set; }
 
     /// <summary>
-    ///     Returns the page label
+    ///     Returns the prefered name of the attachment
     /// </summary>
-    [JsonProperty("label")]
-    public object? Label { get; set; }
-
-    /// <summary>
-    ///     Returns the object
-    /// </summary>
-    [JsonProperty("object")]
-    public string? Object { get; set; }
-
-    /// <summary>
-    ///     Returns the page outlines
-    /// </summary>
-    [JsonProperty("outlines")]
-    public List<PageOutline>? Outlines { get; set; }
-
-    /// <summary>
-    ///     Returns the page number
-    /// </summary>
-    [JsonProperty("pageposfrom1")]
-    public long PageNumber { get; set; }
-    #endregion
+    [JsonProperty("preferredname")]
+    public string? PreferredName { get; private set; }
 }
