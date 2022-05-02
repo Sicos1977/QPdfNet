@@ -4,12 +4,17 @@
     &lt;TestId&gt;MSTest::1C702B8C-5945-4F57-8A80-3BCBA47EC468::net6.0::QpdfNetTest.QpdfTests&lt;/TestId&gt;&#xD;
   &lt;/TestAncestor&gt;&#xD;
 &lt;/SessionState&gt;</s:String>
+	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=56832543_002D5206_002D432e_002D8189_002Df8e69c94bea1/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" IsActive="True" Name="TestPdfInfo" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
+  &lt;TestAncestor&gt;&#xD;
+    &lt;TestId&gt;MSTest::1C702B8C-5945-4F57-8A80-3BCBA47EC468::net6.0::QpdfNetTest.QpdfTests&lt;/TestId&gt;&#xD;
+  &lt;/TestAncestor&gt;&#xD;
+&lt;/SessionState&gt;</s:String>
 	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=c923a674_002D50ab_002D4647_002D8674_002De9419535dc07/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" Name="QpdfTests" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
   &lt;TestAncestor&gt;&#xD;
     &lt;TestId&gt;MSTest::1C702B8C-5945-4F57-8A80-3BCBA47EC468::net6.0::QpdfNetTest.QpdfTests&lt;/TestId&gt;&#xD;
   &lt;/TestAncestor&gt;&#xD;
 &lt;/SessionState&gt;</s:String>
-	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=dcc07dd4_002D9555_002D4ce9_002D906c_002Deb44ba80317e/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" IsActive="True" Name="TestInputOutput2" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
+	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=dcc07dd4_002D9555_002D4ce9_002D906c_002Deb44ba80317e/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" Name="TestInputOutput2" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
   &lt;TestAncestor&gt;&#xD;
     &lt;TestId&gt;MSTest::1C702B8C-5945-4F57-8A80-3BCBA47EC468::net6.0::QpdfNetTest.QpdfTests&lt;/TestId&gt;&#xD;
   &lt;/TestAncestor&gt;&#xD;

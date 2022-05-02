@@ -4,6 +4,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using QPdfNet;
 using QPdfNet.Enums;
 using QPdfNet.Info;
+using QPdfNet.Output;
 
 namespace QpdfNetTest
 {
@@ -143,6 +144,20 @@ namespace QpdfNetTest
         }
 
         [TestMethod]
+        public void TestParseCheck()
+        {
+            var job = new Job();
+            var result = job.InputFile(Path.Combine("TestFiles", "test.pdf"))
+                .Check()
+                .Run(out var output);
+
+            var parseCheck = Helper.ParseCheck(output);
+
+            Assert.IsTrue(parseCheck.Warnings?.Count == 12);
+            Assert.AreEqual(ExitCode.WarningsWereFoundFileProcessed, result);
+        }
+
+        [TestMethod]
         public void TestShowEncryption1()
         {
             var job = new Job();
@@ -182,6 +197,22 @@ namespace QpdfNetTest
         }
 
         [TestMethod]
+        public void TestParseShowEncryptionKey()
+        {
+            var job = new Job();
+            var result = job.InputFile(Path.Combine("TestFiles", "encryption_256_bit.pdf"))
+                .Password("owner")
+                .ShowEncryption()
+                .ShowEncryptionKey()
+                .Run(out var output);
+
+            var encryptionInfo = Helper.ParseShowEncryption(output);
+
+            Assert.IsTrue(encryptionInfo.EncryptionKey == "bc4d3ad2b43dbe372b02a4291cc7ee11413d33e87eb348d3364d5420312f1645");
+            Assert.AreEqual(ExitCode.Success, result);
+        }
+
+        [TestMethod]
         public void TestCheckLinearization()
         {
             var job = new Job();
@@ -208,11 +239,25 @@ namespace QpdfNetTest
         public void TestShowXref()
         {
             var job = new Job();
-            var result = job.InputFile(Path.Combine("TestFiles", "test.pdf"))
+            var result = job.InputFile(Path.Combine("TestFiles", "random.pdf"))
                 .ShowXref()
                 .Run(out var output);
 
-            Assert.IsTrue(output?.Contains("1/0: uncompressed; offset = 176168"));
+            Assert.IsTrue(output?.Contains("1/0: uncompressed; offset = 15"));
+            Assert.AreEqual(ExitCode.Success, result);
+        }
+
+        [TestMethod]
+        public void TestParseShowXref()
+        {
+            var job = new Job();
+            var result = job.InputFile(Path.Combine("TestFiles", "random.pdf"))
+                .ShowXref()
+                .Run(out var output);
+
+            var xRefInfos = Helper.ParseShowXref(output);
+
+            Assert.IsTrue(xRefInfos.Count == 20);
             Assert.AreEqual(ExitCode.Success, result);
         }
 
@@ -515,6 +560,20 @@ namespace QpdfNetTest
         }
 
         [TestMethod]
+        public void TestParseListAttachments()
+        {
+            var job = new Job();
+            var result = job.InputFile(Path.Combine("TestFiles", "withattachment.pdf"))
+                .ListAttachments()
+                .Run(out var output);
+
+            var attachments = Helper.ParseListAttachments(output);
+
+            Assert.IsTrue(attachments.Count == 1);
+            Assert.AreEqual(ExitCode.Success, result);
+        }
+
+        [TestMethod]
         public void TestShowAttachments()
         {
             var job = new Job();
@@ -547,7 +606,7 @@ namespace QpdfNetTest
                 .JsonKey("pages")
                 .Run(out var output);
 
-            Assert.IsTrue(output?.Length == 6951);
+            Assert.IsTrue(output?.Length == 2012);
             Assert.AreEqual(ExitCode.Success, result);
         }
 
@@ -587,6 +646,7 @@ namespace QpdfNetTest
         public void TestPdfInfo()
         {
             var pdf = Pdf.FromFile(Path.Combine("TestFiles", "random.pdf"));
+            Assert.IsTrue(pdf != null);
         }
     }
 }

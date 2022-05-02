@@ -1612,6 +1612,9 @@ public class Job
     ///     the recovered file. Combining <see cref="Check" /> with other options in this way can be useful for manually
     ///     recovering severely damaged files.
     /// </summary>
+    /// <remarks>
+    ///     Use the <see cref="Output.Helper.ParseCheck"/> method to help parse the output
+    /// </remarks>
     /// <returns>
     ///     <see cref="Job" />
     /// </returns>
@@ -1630,6 +1633,9 @@ public class Job
     ///     Encryption for a technical discussion of this feature.) The output of <see cref="ShowEncryption" /> is included in
     ///     the output of <see cref="Check" />.
     /// </summary>
+    /// <remarks>
+    ///     Use the <see cref="Output.Helper.ParseShowEncryption"/> method to help parse the output
+    /// </remarks>
     /// <returns>
     ///     <see cref="Job" />
     /// </returns>
@@ -1650,6 +1656,9 @@ public class Job
     ///     key, and the encryption key is what is actually used for encryption. This enables retrieval of that key. See PDF Encryption
     ///     for a technical discussion.
     /// </summary>
+    /// <remarks>
+    ///     Use the <see cref="Output.Helper.ParseShowEncryption"/> method to help parse the output
+    /// </remarks>
     /// <returns>
     ///     <see cref="Job" />
     /// </returns>
@@ -1826,6 +1835,9 @@ public class Job
     /// <returns>
     ///     <see cref="Job" />
     /// </returns>
+    /// <remarks>
+    ///     Use the <see cref="Output.Helper.ParseListAttachments"/> method to help parse the attachment names out of the output
+    /// </remarks>
     public Job ListAttachments()
     {
         Logger.LogInformation("Listing attachments");
@@ -1859,6 +1871,9 @@ public class Job
     ///     point it will become latest. In all case, you can tell what version of the JSON output you have from the "version"
     ///     key in the output.
     /// </summary>
+    /// <remarks>
+    ///     Use the <see cref="Info.Pdf"/> class if you want to get a nice object orientated output
+    /// </remarks>
     /// <returns>
     ///     <see cref="Job" />
     /// </returns>

@@ -20,11 +20,11 @@
     </dependencies>
   </metadata>
   <files>
-    <file src="D:\Progsoft\_GitHub_\QPdfNet\QPdfNet\bin\Debug\netstandard2.1\QPdfNet.dll" target="lib\netstandard2.1\QPdfNet.dll" />
-    <file src="D:\Progsoft\_GitHub_\QPdfNet\QPdfNet\x64\qpdf29.dll" target="x64\qpdf29.dll" />
-    <file src="D:\Progsoft\_GitHub_\QPdfNet\QPdfNet\x64\qpdf29.dll" target="lib\qpdf29.dll" />
-    <file src="D:\Progsoft\_GitHub_\QPdfNet\QPdfNet\x86\qpdf29.dll" target="x86\qpdf29.dll" />
-    <file src="D:\Progsoft\_GitHub_\QPdfNet\QPdfNet\qpdf.png" target="\qpdf.png" />
-    <file src="D:\Progsoft\_GitHub_\QPdfNet\QPdfNet\readme.md" target="\readme.md" />
+    <file src="c:\Kees\QPdfNet\QPdfNet\bin\Debug\netstandard2.1\QPdfNet.dll" target="lib\netstandard2.1\QPdfNet.dll" />
+    <file src="c:\Kees\QPdfNet\QPdfNet\x64\qpdf29.dll" target="x64\qpdf29.dll" />
+    <file src="c:\Kees\QPdfNet\QPdfNet\x64\qpdf29.dll" target="lib\qpdf29.dll" />
+    <file src="c:\Kees\QPdfNet\QPdfNet\x86\qpdf29.dll" target="x86\qpdf29.dll" />
+    <file src="c:\Kees\QPdfNet\QPdfNet\qpdf.png" target="\qpdf.png" />
+    <file src="c:\Kees\QPdfNet\QPdfNet\readme.md" target="\readme.md" />
   </files>
 </package>

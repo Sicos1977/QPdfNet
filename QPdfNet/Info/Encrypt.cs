@@ -33,6 +33,7 @@ namespace QPdfNet.Info
     /// </summary>
     public class Encrypt
     {
+        #region Properties
         /// <summary>
         ///     <see cref="Capabilities"/>
         /// </summary>
@@ -62,5 +63,6 @@ namespace QPdfNet.Info
         /// </summary>
         [JsonProperty("userpasswordmatched")]
         public bool UserPasswordMatched { get; private set; }
+        #endregion
     }
 }
