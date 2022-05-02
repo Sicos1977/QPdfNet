@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "ZPQZIWn/dbNI4ROUFkKsjsC4wDLwx3hXV7zuz4fJ2UWfLnRkTfzE180vsQWWN1WeotrTNYj8rtxGzOQP+MeBWQ==",
+  "dgSpecHash": "BuHVJaRS5QXHEiIn2PmXUzzwxf34mcGJsysDtR55vC6+Swp8mqhQvTX5S83M+89FqcNcYKdat5Z+fGPOg4ggyw==",
   "success": true,
   "projectFilePath": "c:\\Kees\\QPdfNet\\QpdfNetTest\\QpdfNetTest.csproj",
   "expectedPackageFiles": [
@@ -95,8 +95,7 @@
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder\\system.threading.tasks.extensions\\4.3.0\\system.threading.tasks.extensions.4.3.0.nupkg.sha512",
     "C:\\Users\\AO303388\\.nuget\\packages\\system.threading.timer\\4.3.0\\system.threading.timer.4.3.0.nupkg.sha512",
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder\\system.xml.readerwriter\\4.3.0\\system.xml.readerwriter.4.3.0.nupkg.sha512",
-    "C:\\Users\\AO303388\\.nuget\\packages\\system.xml.xdocument\\4.3.0\\system.xml.xdocument.4.3.0.nupkg.sha512",
-    "C:\\Users\\AO303388\\.nuget\\packages\\qpdfnet\\1.0.0\\qpdfnet.1.0.0.nupkg.sha512"
+    "C:\\Users\\AO303388\\.nuget\\packages\\system.xml.xdocument\\4.3.0\\system.xml.xdocument.4.3.0.nupkg.sha512"
   ],
   "logs": []
 }

@@ -1666,7 +1666,7 @@
           "lib/netstandard1.3/System.Xml.XDocument.dll": {}
         }
       },
-      "QPdfNet/1.0.0": {
+      "QPdfNet/1.0.1": {
         "type": "project",
         "framework": ".NETStandard,Version=v2.1",
         "dependencies": {
@@ -6167,7 +6167,7 @@
         "system.xml.xdocument.nuspec"
       ]
     },
-    "QPdfNet/1.0.0": {
+    "QPdfNet/1.0.1": {
       "type": "project",
       "path": "../QPdfNet/QPdfNet.csproj",
       "msbuildProject": "../QPdfNet/QPdfNet.csproj"
@@ -6179,7 +6179,7 @@
       "MSTest.TestFramework >= 2.2.9",
       "Microsoft.Extensions.Logging >= 6.0.0",
       "Microsoft.NET.Test.Sdk >= 17.1.0",
-      "QPdfNet >= 1.0.0",
+      "QPdfNet >= 1.0.1",
       "coverlet.collector >= 3.1.2"
     ]
   },

@@ -10,11 +10,14 @@
 		<RepositoryUrl>https://github.com/Sicos1977/QPdfNet</RepositoryUrl>
 		<RepositoryType>git</RepositoryType>
 		<PackageTags>qpdf pdf</PackageTags>
-		<PackageReleaseNotes>First version</PackageReleaseNotes>
+		<PackageReleaseNotes>Added Pdf class and helper methods to parse output that is returned by some methods</PackageReleaseNotes>
 		<PackageIcon>qpdf.png</PackageIcon>
 		<PackageReadmeFile>readme.md</PackageReadmeFile>
 		<Copyright>Copyright (c) 2021-2022 Kees van Spelde</Copyright>
 		<GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+		<AssemblyVersion>1.0.1.0</AssemblyVersion>
+		<FileVersion>1.0.1.0</FileVersion>
+		<Version>1.0.1</Version>
 	</PropertyGroup>
 
 	<ItemGroup>
