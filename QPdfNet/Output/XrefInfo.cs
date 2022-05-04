@@ -44,15 +44,15 @@ public class XrefInfos : List<XrefInfo>
         if (output == null)
             return;
 
-        var lines = output.Split('\n', StringSplitOptions.RemoveEmptyEntries);
+        var lines = output.Split(new[] {'\n'}, StringSplitOptions.RemoveEmptyEntries);
 
         foreach (var line in lines)
         {
-            var parts = line.Trim().Split(';', StringSplitOptions.RemoveEmptyEntries);
-            var subParts = parts[0].Split(':', StringSplitOptions.RemoveEmptyEntries);
+            var parts = line.Trim().Split(new[] {';'}, StringSplitOptions.RemoveEmptyEntries);
+            var subParts = parts[0].Split(new[] {':'}, StringSplitOptions.RemoveEmptyEntries);
             var id = subParts[0].Trim();
             var state = subParts[1].Trim();
-            subParts = parts[1].Split('=', StringSplitOptions.RemoveEmptyEntries);
+            subParts = parts[1].Split(new[] {'='}, StringSplitOptions.RemoveEmptyEntries);
             var offset = subParts[1].Trim();
             Add(new XrefInfo(id, state, long.Parse(offset)));
         }

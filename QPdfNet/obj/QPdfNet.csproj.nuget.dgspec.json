@@ -1,18 +1,19 @@
 {
   "format": 1,
   "restore": {
-    "c:\\Kees\\QPdfNet\\QPdfNet\\QPdfNet.csproj": {}
+    "C:\\Kees\\QPdfNet\\QPdfNet\\QPdfNet.csproj": {}
   },
   "projects": {
-    "c:\\Kees\\QPdfNet\\QPdfNet\\QPdfNet.csproj": {
-      "version": "1.0.1",
+    "C:\\Kees\\QPdfNet\\QPdfNet\\QPdfNet.csproj": {
+      "version": "1.0.4",
       "restore": {
-        "projectUniqueName": "c:\\Kees\\QPdfNet\\QPdfNet\\QPdfNet.csproj",
+        "projectUniqueName": "C:\\Kees\\QPdfNet\\QPdfNet\\QPdfNet.csproj",
         "projectName": "QPdfNet",
-        "projectPath": "c:\\Kees\\QPdfNet\\QPdfNet\\QPdfNet.csproj",
+        "projectPath": "C:\\Kees\\QPdfNet\\QPdfNet\\QPdfNet.csproj",
         "packagesPath": "C:\\Users\\AO303388\\.nuget\\packages\\",
-        "outputPath": "c:\\Kees\\QPdfNet\\QPdfNet\\obj\\",
+        "outputPath": "C:\\Kees\\QPdfNet\\QPdfNet\\obj\\",
         "projectStyle": "PackageReference",
+        "crossTargeting": true,
         "fallbackFolders": [
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
         ],
@@ -21,6 +22,7 @@
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
+          "net462",
           "netstandard2.1"
         ],
         "sources": {
@@ -28,6 +30,10 @@
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
+          "net462": {
+            "targetAlias": "net462",
+            "projectReferences": {}
+          },
           "netstandard2.1": {
             "targetAlias": "netstandard2.1",
             "projectReferences": {}
@@ -40,6 +46,20 @@
         }
       },
       "frameworks": {
+        "net462": {
+          "targetAlias": "net462",
+          "dependencies": {
+            "Microsoft.Extensions.Logging": {
+              "target": "Package",
+              "version": "[6.0.0, )"
+            },
+            "Newtonsoft.Json": {
+              "target": "Package",
+              "version": "[13.0.1, )"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.202\\RuntimeIdentifierGraph.json"
+        },
         "netstandard2.1": {
           "targetAlias": "netstandard2.1",
           "dependencies": {

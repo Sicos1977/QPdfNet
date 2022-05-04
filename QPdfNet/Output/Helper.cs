@@ -48,11 +48,11 @@ public static class Helper
         if (output == null)
             return result;
 
-        var lines = output.Split('\n', StringSplitOptions.RemoveEmptyEntries);
+        var lines = output.Split(new[] {'\n'}, StringSplitOptions.RemoveEmptyEntries);
         
         foreach (var line in lines)
         {
-            var parts = line.Split('-', StringSplitOptions.RemoveEmptyEntries);
+            var parts = line.Split(new[] {'-'}, StringSplitOptions.RemoveEmptyEntries);
             result.Add(parts[0].Trim());
         }
 

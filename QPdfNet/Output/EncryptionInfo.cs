@@ -129,14 +129,14 @@ public class EncryptionInfo
         if (output == null)
             return;
 
-        var lines = output.Split('\n', StringSplitOptions.RemoveEmptyEntries);
+        var lines = output.Split(new[] {'\n'}, StringSplitOptions.RemoveEmptyEntries);
 
         foreach (var line in lines)
         {
             if (line.StartsWith("R ="))
-                R = int.Parse(GetValue('=', line) ?? string.Empty);
+                R = int.Parse(GetValue('=', line));
             else if (line.StartsWith("P ="))
-                P = int.Parse(GetValue('=', line) ?? string.Empty);
+                P = int.Parse(GetValue('=', line));
             else if (line.StartsWith("user password"))
                 UserPassword = GetValue('=', line);
             else if (line.StartsWith("Encryption key"))
@@ -176,7 +176,7 @@ public class EncryptionInfo
     #region GetValue
     private string GetValue(char splitChar, string line)
     {
-        var parts = line.Split(splitChar, StringSplitOptions.RemoveEmptyEntries);
+        var parts = line.Split(new[] {splitChar}, StringSplitOptions.RemoveEmptyEntries);
         return parts.Length == 2 ? parts[1].Trim() : string.Empty;
     }
     #endregion

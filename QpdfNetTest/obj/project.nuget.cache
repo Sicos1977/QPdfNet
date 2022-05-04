@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "BuHVJaRS5QXHEiIn2PmXUzzwxf34mcGJsysDtR55vC6+Swp8mqhQvTX5S83M+89FqcNcYKdat5Z+fGPOg4ggyw==",
+  "dgSpecHash": "dG0tSzxx2vwAyOakm+mmeEarzjrjWULXDY4+3g1HY44g2JhZu3SWdjL7w28i55bQfkExKFxUflKADxnUzQ4zAg==",
   "success": true,
-  "projectFilePath": "c:\\Kees\\QPdfNet\\QpdfNetTest\\QpdfNetTest.csproj",
+  "projectFilePath": "C:\\Kees\\QPdfNet\\QpdfNetTest\\QpdfNetTest.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\AO303388\\.nuget\\packages\\coverlet.collector\\3.1.2\\coverlet.collector.3.1.2.nupkg.sha512",
     "C:\\Users\\AO303388\\.nuget\\packages\\microsoft.codecoverage\\17.1.0\\microsoft.codecoverage.17.1.0.nupkg.sha512",

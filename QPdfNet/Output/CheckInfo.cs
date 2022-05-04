@@ -72,7 +72,7 @@ public class CheckInfo
         if (output == null)
             return;
 
-        var lines = output.Split('\n', StringSplitOptions.RemoveEmptyEntries);
+        var lines = output.Split(new[] {'\n'}, StringSplitOptions.RemoveEmptyEntries);
 
         foreach (var line in lines)
         {
@@ -93,7 +93,7 @@ public class CheckInfo
     #region GetValue
     private string GetValue(char splitChar, string line)
     {
-        var parts = line.Split(splitChar, StringSplitOptions.RemoveEmptyEntries);
+        var parts = line.Split(new[] {splitChar}, StringSplitOptions.RemoveEmptyEntries);
         return parts.Length == 2 ? parts[1].Trim() : string.Empty;
     }
     #endregion

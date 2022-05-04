@@ -1666,7 +1666,7 @@
           "lib/netstandard1.3/System.Xml.XDocument.dll": {}
         }
       },
-      "QPdfNet/1.0.1": {
+      "QPdfNet/1.0.4": {
         "type": "project",
         "framework": ".NETStandard,Version=v2.1",
         "dependencies": {
@@ -6167,7 +6167,7 @@
         "system.xml.xdocument.nuspec"
       ]
     },
-    "QPdfNet/1.0.1": {
+    "QPdfNet/1.0.4": {
       "type": "project",
       "path": "../QPdfNet/QPdfNet.csproj",
       "msbuildProject": "../QPdfNet/QPdfNet.csproj"
@@ -6179,7 +6179,7 @@
       "MSTest.TestFramework >= 2.2.9",
       "Microsoft.Extensions.Logging >= 6.0.0",
       "Microsoft.NET.Test.Sdk >= 17.1.0",
-      "QPdfNet >= 1.0.1",
+      "QPdfNet >= 1.0.4",
       "coverlet.collector >= 3.1.2"
     ]
   },
@@ -6190,11 +6190,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "c:\\Kees\\QPdfNet\\QpdfNetTest\\QpdfNetTest.csproj",
+      "projectUniqueName": "C:\\Kees\\QPdfNet\\QpdfNetTest\\QpdfNetTest.csproj",
       "projectName": "QpdfNetTest",
-      "projectPath": "c:\\Kees\\QPdfNet\\QpdfNetTest\\QpdfNetTest.csproj",
+      "projectPath": "C:\\Kees\\QPdfNet\\QpdfNetTest\\QpdfNetTest.csproj",
       "packagesPath": "C:\\Users\\AO303388\\.nuget\\packages\\",
-      "outputPath": "c:\\Kees\\QPdfNet\\QpdfNetTest\\obj\\",
+      "outputPath": "C:\\Kees\\QPdfNet\\QpdfNetTest\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
@@ -6214,8 +6214,8 @@
         "net6.0": {
           "targetAlias": "net6.0",
           "projectReferences": {
-            "c:\\Kees\\QPdfNet\\QPdfNet\\QPdfNet.csproj": {
-              "projectPath": "c:\\Kees\\QPdfNet\\QPdfNet\\QPdfNet.csproj"
+            "C:\\Kees\\QPdfNet\\QPdfNet\\QPdfNet.csproj": {
+              "projectPath": "C:\\Kees\\QPdfNet\\QPdfNet\\QPdfNet.csproj"
             }
           }
         }
