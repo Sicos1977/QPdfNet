@@ -61,6 +61,7 @@ public class CheckInfo
     public bool HasWarnings => Warnings?.Count > 0;
     #endregion
 
+    #region Constructor
     /// <summary>
     ///     Makes this object and sets all it's needed properties
     /// </summary>
@@ -89,6 +90,7 @@ public class CheckInfo
             }
         }
     }
+    #endregion
 
     #region GetValue
     private string GetValue(char splitChar, string line)

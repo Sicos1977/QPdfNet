@@ -179,7 +179,7 @@ public class Job
     #region Empty
     /// <summary>
     ///     This option may be given in place of infile. This causes qpdf to use a dummy input file that contains zero pages.
-    ///     This option is useful in conjunction with <see cref="Pages"/>. See Page Selection for details.
+    ///     This option is useful in conjunction with <see cref="Pages"/>. See <see cref="Pages"/> for details.
     /// </summary>
     /// <returns>
     ///     <see cref="Job" />
@@ -194,10 +194,10 @@ public class Job
 
     #region ReplaceInput
     /// <summary>
-    ///     This option may be given in place of outfile. This causes qpdf to replace the input file with the output.
-    ///     It does this by writing to infilename.~qpdf-temp# and, when done, overwriting the input file with the temporary
-    ///     file. If there were any warnings, the original input is saved as infilename.~qpdf-orig. If there are errors, the
-    ///     input file is left untouched.
+    ///     This option may be given in place of <see cref="OutputFile"/>. This causes qpdf to replace the <see cref="InputFile"/>
+    ///     file with the <see cref="OutputFile"/>. It does this by writing to infilename. ~qpdf-temp# and, when done, overwriting
+    ///     the <see cref="InputFile"/> with the temporary file. If there were any warnings, the original input is saved as infilename.
+    ///     ~qpdf-orig. If there are errors, the <see cref="InputFile"/> is left untouched.
     /// </summary>
     /// <returns>
     ///     <see cref="Job" />
@@ -215,8 +215,9 @@ public class Job
 
     #region WarningExit0
     /// <summary>
-    ///     If there were warnings only and no errors, exit with exit code 0 instead of 3. When combined with
-    ///     <see cref="NoWarn" />, the effect is for qpdf to completely ignore warnings.
+    ///     If there were warnings only and no errors, exit with exit code <see cref="ExitCode.Success" /> instead of
+    ///     <see cref="ExitCode.WarningsWereFoundFileProcessed" />. When combined with <see cref="NoWarn" />, the effect
+    ///     is for qpdf to completely ignore warnings.
     /// </summary>
     /// <returns>
     ///     <see cref="Job" />
@@ -286,8 +287,9 @@ public class Job
     #region NoWarn
     /// <summary>
     ///     Suppress writing of warnings to stderr. If warnings were detected and suppressed, qpdf will still exit with exit
-    ///     code 3. To completely ignore warnings, also specify <see cref="WarningExit0" />. Use with caution as qpdf is not
-    ///     always successful in recovering from situations that cause warnings to be issued.
+    ///     code <see cref="ExitCode.WarningsWereFoundFileProcessed" />. To completely ignore warnings, also specify
+    ///     <see cref="WarningExit0" />. Use with caution as qpdf is not always successful in recovering from situations that
+    ///     cause warnings to be issued.
     /// </summary>
     /// <returns>
     ///     <see cref="Job" />
@@ -393,13 +395,13 @@ public class Job
     ///     Overrides the usual computation/retrieval of the PDF file’s encryption key from user/owner password with an
     ///     explicit specification of the encryption key. When this option is specified, the parameter to the
     ///     <see cref="Password" /> option is interpreted as a hexadecimal-encoded key value. This only applies to the password
-    ///     used to open the main input file. It does not apply to other files opened by --pages or other options or to files
-    ///     being written. Most users will never have a need for this option, and no standard viewers support this mode of
-    ///     operation, but it can be useful for forensic or investigatory purposes. For example, if a PDF file is encrypted with
-    ///     an unknown password, a brute-force attack using the key directly is sometimes more efficient than one using the
-    ///     password.Also, if a file is heavily damaged, it may be possible to derive the encryption key and recover parts of
-    ///     the file using it directly.To expose the encryption key used by an encrypted file that you can open normally, use
-    ///     the <see cref="ShowEncryptionKey" /> option.
+    ///     used to open the main input file. It does not apply to other files opened by <see cref="Pages"/> or other options
+    ///     or to files being written. Most users will never have a need for this option, and no standard viewers support this
+    ///     mode of operation, but it can be useful for forensic or investigatory purposes. For example, if a PDF file is
+    ///     encrypted with an unknown password, a brute-force attack using the key directly is sometimes more efficient than
+    ///     one using the password.Also, if a file is heavily damaged, it may be possible to derive the encryption key and
+    ///     recover parts of the file using it directly.To expose the encryption key used by an encrypted file that you can open
+    ///     normally, use the <see cref="ShowEncryptionKey" /> option.
     /// </summary>
     /// <returns>
     ///     <see cref="Job" />
@@ -486,9 +488,10 @@ public class Job
 
     #region Linearize
     /// <summary>
-    ///     Create linearized (web-optimized) output files. Linearized files are formatted in a way that allows compliant
-    ///     readers to begin displaying a PDF file before it is fully downloaded. Ordinarily, the entire file must be present
-    ///     before it can be rendered because important cross-reference information typically appears at the end of the file.
+    ///     Create linearized (web-optimized) <see cref="OutputFile"/>s. Linearized files are formatted in a way that allows
+    ///     compliant readers to begin displaying a PDF file before it is fully downloaded. Ordinarily, the entire file must
+    ///     be present before it can be rendered because important cross-reference information typically appears at the end
+    ///     of the file.
     /// </summary>
     /// <returns>
     ///     <see cref="Job" />
@@ -520,10 +523,10 @@ public class Job
 
     #region Decrypt
     /// <summary>
-    ///     Create an output file with no encryption even if the input file is encrypted. This option overrides the default
-    ///     behavior of preserving whatever encryption was present on the input file. This functionality is not intended to be
-    ///     used for bypassing copyright restrictions or other restrictions placed on files by their producers. See also
-    ///     <see cref="CopyEncryption"/>.
+    ///     Create an <see cref="OutputFile"/> with no encryption even if the input file is encrypted. This option overrides
+    ///     the default behavior of preserving whatever encryption was present on the <see cref="InputFile"/>. This functionality
+    ///     is not intended to be used for bypassing copyright restrictions or other restrictions placed on files by their producers.
+    ///     See also <see cref="CopyEncryption"/>.
     /// </summary>
     /// <returns>
     ///     <see cref="Job" />
@@ -1598,12 +1601,12 @@ public class Job
     #region Check
     /// <summary>
     ///     Check the file’s structure as well as encryption, linearization, and encoding of stream data, and write information
-    ///     about the file to standard output. An exit status of 0 indicates syntactic correctness of the PDF file. Note that
-    ///     <see cref="Check" /> writes nothing to standard error when everything is valid, so if you are using this to
-    ///     programmatically validate files in bulk, it is safe to run without output redirected to /dev/null and just check
-    ///     for a 0 exit code. A file for which <see cref="Check" /> reports no errors may still have errors in stream data
-    ///     content or may contain constructs that don’t conform to the PDF specification, but it should be syntactically
-    ///     valid. If <see cref="Check" /> reports any errors, qpdf will exit with a status of
+    ///     about the file to standard output. An exit status of <see cref="ExitCode.Success" /> indicates syntactic correctness
+    ///     of the PDF file. Note that <see cref="Check" /> writes nothing to standard error when everything is valid, so if you
+    ///     are using this to programmatically validate files in bulk, it is safe to run without output redirected to /dev/null
+    ///     and just check for a <see cref="ExitCode.Success" />. A file for which <see cref="Check" /> reports no errors may
+    ///     still have errors in stream data content or may contain constructs that don’t conform to the PDF specification, but
+    ///     it should be syntactically valid. If <see cref="Check" /> reports any errors, qpdf will exit with a status of
     ///     <see cref="ExitCode.ErrorsFoundFileNotProcessed" />. There are some recoverable conditions that <see cref="Check" />
     ///     detects. These are issued as warnings instead of errors. If qpdf finds no errors but finds warnings, it will exit
     ///     with a status of <see cref="ExitCode.WarningsWereFoundFileProcessed" />. When <see cref="Check" /> is combined with

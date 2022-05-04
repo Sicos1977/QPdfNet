@@ -90,6 +90,12 @@ public class Pdf
     #endregion
 
     #region FromFile
+    /// <summary>
+    ///     Returns a <c>Pdf</c> object with information about the given <paramref name="fileName"/>
+    /// </summary>
+    /// <param name="fileName"></param>
+    /// <returns></returns>
+    /// <exception cref="Exception"></exception>
     public static Pdf? FromFile(string fileName)
     {
         Logger.LogInformation($"Getting information from PDF '{fileName}'");

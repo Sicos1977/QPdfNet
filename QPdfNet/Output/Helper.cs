@@ -26,6 +26,7 @@
 
 using System;
 using System.Collections.Generic;
+using QPdfNet.Loggers;
 
 namespace QPdfNet.Output;
 
@@ -43,6 +44,8 @@ public static class Helper
     /// <returns>A list with attachment names</returns>
     public static List<string> ParseListAttachments(string? output)
     {
+        Logger.LogInformation("Parsing output from 'Job.ListAttachments' method");
+
         var result = new List<string>();
 
         if (output == null)
@@ -69,6 +72,7 @@ public static class Helper
     /// <returns><see cref="EncryptionInfo"/></returns>
     public static EncryptionInfo ParseShowEncryption(string? output)
     {
+        Logger.LogInformation("Parsing output from 'Job.ShowEncryption' or 'Job.ShowEncryptionKey' method");
         output ??= string.Empty;
         return new EncryptionInfo(output);
     }
@@ -82,6 +86,7 @@ public static class Helper
     /// <returns><see cref="XrefInfos"/></returns>
     public static XrefInfos ParseShowXref(string? output)
     {
+        Logger.LogInformation("Parsing output from 'Job.ParseShowXRef' method");
         output ??= string.Empty;
         return new XrefInfos(output);
     }
@@ -95,6 +100,7 @@ public static class Helper
     /// <returns><see cref="CheckInfo"/></returns>
     public static CheckInfo ParseCheck(string? output)
     {
+        Logger.LogInformation("Parsing output from 'Job.Check' method");
         output ??= string.Empty;
         return new CheckInfo(output);
     }
