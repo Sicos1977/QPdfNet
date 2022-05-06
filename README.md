@@ -106,7 +106,7 @@ var job = new Job(logger);
 Installing via NuGet
 ====================
 
-The easiest way to install MSGReader is via NuGet.
+The easiest way to install QPdfNet is via NuGet.
 
 In Visual Studio's Package Manager Console, simply enter the following command:
 
