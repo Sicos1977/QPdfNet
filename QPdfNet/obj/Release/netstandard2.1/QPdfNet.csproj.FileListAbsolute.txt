@@ -25,3 +25,4 @@ C:\Kees\QPdfNet\QPdfNet\obj\Release\netstandard2.1\QPdfNet.csproj.CoreCompileInp
 C:\Kees\QPdfNet\QPdfNet\obj\Release\netstandard2.1\QPdfNet.dll
 C:\Kees\QPdfNet\QPdfNet\obj\Release\netstandard2.1\QPdfNet.pdb
 C:\Kees\QPdfNet\QPdfNet\bin\Release\netstandard2.1\QPdfNet.xml
+D:\Progsoft\_GitHub_\QPdfNet\QPdfNet\bin\Release\netstandard2.1\QPdfNet.xml

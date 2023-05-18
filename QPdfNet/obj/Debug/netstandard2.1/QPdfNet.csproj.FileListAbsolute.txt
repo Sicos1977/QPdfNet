@@ -24,3 +24,4 @@ C:\Kees\QPdfNet\QPdfNet\obj\Debug\netstandard2.1\QPdfNet.AssemblyInfo.cs
 C:\Kees\QPdfNet\QPdfNet\obj\Debug\netstandard2.1\QPdfNet.csproj.CoreCompileInputs.cache
 C:\Kees\QPdfNet\QPdfNet\obj\Debug\netstandard2.1\QPdfNet.dll
 C:\Kees\QPdfNet\QPdfNet\obj\Debug\netstandard2.1\QPdfNet.pdb
+D:\Progsoft\_GitHub_\QPdfNet\QPdfNet\bin\Debug\netstandard2.1\QPdfNet.xml

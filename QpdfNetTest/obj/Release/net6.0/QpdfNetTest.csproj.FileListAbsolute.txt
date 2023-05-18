@@ -7,7 +7,6 @@ D:\Progsoft\_GitHub_\QPdfNet\QpdfNetTest\bin\Release\net6.0\testhost.dll
 D:\Progsoft\_GitHub_\QPdfNet\QpdfNetTest\bin\Release\net6.0\testhost.exe
 D:\Progsoft\_GitHub_\QPdfNet\QpdfNetTest\bin\Release\net6.0\Microsoft.TestPlatform.PlatformAbstractions.dll
 D:\Progsoft\_GitHub_\QPdfNet\QpdfNetTest\bin\Release\net6.0\Microsoft.VisualStudio.TestPlatform.MSTest.TestAdapter.dll
-D:\Progsoft\_GitHub_\QPdfNet\QpdfNetTest\bin\Release\net6.0\Microsoft.VisualStudio.TestPlatform.MSTestAdapter.PlatformServices.Interface.dll
 D:\Progsoft\_GitHub_\QPdfNet\QpdfNetTest\bin\Release\net6.0\Microsoft.VisualStudio.TestPlatform.MSTestAdapter.PlatformServices.dll
 D:\Progsoft\_GitHub_\QPdfNet\QpdfNetTest\bin\Release\net6.0\Microsoft.TestPlatform.AdapterUtilities.dll
 D:\Progsoft\_GitHub_\QPdfNet\QpdfNetTest\bin\Release\net6.0\TestFiles\acrobat_8_help.pdf
@@ -232,3 +231,19 @@ C:\Kees\QPdfNet\QpdfNetTest\obj\Release\net6.0\QpdfNetTest.pdb
 C:\Kees\QPdfNet\QpdfNetTest\obj\Release\net6.0\QpdfNetTest.genruntimeconfig.cache
 C:\Kees\QPdfNet\QpdfNetTest\obj\Release\net6.0\ref\QpdfNetTest.dll
 C:\Kees\QPdfNet\QpdfNetTest\bin\Release\net6.0\QPdfNet.xml
+D:\Progsoft\_GitHub_\QPdfNet\QpdfNetTest\bin\Release\net6.0\TestFiles\random.pdf
+D:\Progsoft\_GitHub_\QPdfNet\QpdfNetTest\bin\Release\net6.0\cs\Microsoft.VisualStudio.TestPlatform.TestFramework.resources.dll
+D:\Progsoft\_GitHub_\QPdfNet\QpdfNetTest\bin\Release\net6.0\de\Microsoft.VisualStudio.TestPlatform.TestFramework.resources.dll
+D:\Progsoft\_GitHub_\QPdfNet\QpdfNetTest\bin\Release\net6.0\es\Microsoft.VisualStudio.TestPlatform.TestFramework.resources.dll
+D:\Progsoft\_GitHub_\QPdfNet\QpdfNetTest\bin\Release\net6.0\fr\Microsoft.VisualStudio.TestPlatform.TestFramework.resources.dll
+D:\Progsoft\_GitHub_\QPdfNet\QpdfNetTest\bin\Release\net6.0\it\Microsoft.VisualStudio.TestPlatform.TestFramework.resources.dll
+D:\Progsoft\_GitHub_\QPdfNet\QpdfNetTest\bin\Release\net6.0\ja\Microsoft.VisualStudio.TestPlatform.TestFramework.resources.dll
+D:\Progsoft\_GitHub_\QPdfNet\QpdfNetTest\bin\Release\net6.0\ko\Microsoft.VisualStudio.TestPlatform.TestFramework.resources.dll
+D:\Progsoft\_GitHub_\QPdfNet\QpdfNetTest\bin\Release\net6.0\pl\Microsoft.VisualStudio.TestPlatform.TestFramework.resources.dll
+D:\Progsoft\_GitHub_\QPdfNet\QpdfNetTest\bin\Release\net6.0\pt-BR\Microsoft.VisualStudio.TestPlatform.TestFramework.resources.dll
+D:\Progsoft\_GitHub_\QPdfNet\QpdfNetTest\bin\Release\net6.0\ru\Microsoft.VisualStudio.TestPlatform.TestFramework.resources.dll
+D:\Progsoft\_GitHub_\QPdfNet\QpdfNetTest\bin\Release\net6.0\tr\Microsoft.VisualStudio.TestPlatform.TestFramework.resources.dll
+D:\Progsoft\_GitHub_\QPdfNet\QpdfNetTest\bin\Release\net6.0\zh-Hans\Microsoft.VisualStudio.TestPlatform.TestFramework.resources.dll
+D:\Progsoft\_GitHub_\QPdfNet\QpdfNetTest\bin\Release\net6.0\zh-Hant\Microsoft.VisualStudio.TestPlatform.TestFramework.resources.dll
+D:\Progsoft\_GitHub_\QPdfNet\QpdfNetTest\bin\Release\net6.0\QPdfNet.xml
+D:\Progsoft\_GitHub_\QPdfNet\QpdfNetTest\bin\Release\net6.0\Microsoft.VisualStudio.TestPlatform.TestFramework.Extensions.xml

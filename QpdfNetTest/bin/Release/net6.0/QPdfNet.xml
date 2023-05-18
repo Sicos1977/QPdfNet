@@ -788,6 +788,14 @@
                 Returns the parameters used
             </summary>
         </member>
+        <member name="M:QPdfNet.Info.Pdf.FromFile(System.String)">
+            <summary>
+                Returns a <c>Pdf</c> object with information about the given <paramref name="fileName"/>
+            </summary>
+            <param name="fileName"></param>
+            <returns></returns>
+            <exception cref="T:System.Exception"></exception>
+        </member>
         <member name="P:QPdfNet.Info.Stream.Filter">
             <summary>
                 Returns the filters used
@@ -877,7 +885,7 @@
         <member name="M:QPdfNet.Job.Empty">
             <summary>
                 This option may be given in place of infile. This causes qpdf to use a dummy input file that contains zero pages.
-                This option is useful in conjunction with <see cref="M:QPdfNet.Job.Pages(System.String,System.String,System.String)"/>. See Page Selection for details.
+                This option is useful in conjunction with <see cref="M:QPdfNet.Job.Pages(System.String,System.String,System.String)"/>. See <see cref="M:QPdfNet.Job.Pages(System.String,System.String,System.String)"/> for details.
             </summary>
             <returns>
                 <see cref="T:QPdfNet.Job" />
@@ -885,10 +893,10 @@
         </member>
         <member name="M:QPdfNet.Job.ReplaceInput">
             <summary>
-                This option may be given in place of outfile. This causes qpdf to replace the input file with the output.
-                It does this by writing to infilename.~qpdf-temp# and, when done, overwriting the input file with the temporary
-                file. If there were any warnings, the original input is saved as infilename.~qpdf-orig. If there are errors, the
-                input file is left untouched.
+                This option may be given in place of <see cref="M:QPdfNet.Job.OutputFile(System.String)"/>. This causes qpdf to replace the <see cref="M:QPdfNet.Job.InputFile(System.String)"/>
+                file with the <see cref="M:QPdfNet.Job.OutputFile(System.String)"/>. It does this by writing to infilename. ~qpdf-temp# and, when done, overwriting
+                the <see cref="M:QPdfNet.Job.InputFile(System.String)"/> with the temporary file. If there were any warnings, the original input is saved as infilename.
+                ~qpdf-orig. If there are errors, the <see cref="M:QPdfNet.Job.InputFile(System.String)"/> is left untouched.
             </summary>
             <returns>
                 <see cref="T:QPdfNet.Job" />
@@ -896,8 +904,9 @@
         </member>
         <member name="M:QPdfNet.Job.WarningExit0">
             <summary>
-                If there were warnings only and no errors, exit with exit code 0 instead of 3. When combined with
-                <see cref="M:QPdfNet.Job.NoWarn" />, the effect is for qpdf to completely ignore warnings.
+                If there were warnings only and no errors, exit with exit code <see cref="F:QPdfNet.Enums.ExitCode.Success" /> instead of
+                <see cref="F:QPdfNet.Enums.ExitCode.WarningsWereFoundFileProcessed" />. When combined with <see cref="M:QPdfNet.Job.NoWarn" />, the effect
+                is for qpdf to completely ignore warnings.
             </summary>
             <returns>
                 <see cref="T:QPdfNet.Job" />
@@ -935,8 +944,9 @@
         <member name="M:QPdfNet.Job.NoWarn">
             <summary>
                 Suppress writing of warnings to stderr. If warnings were detected and suppressed, qpdf will still exit with exit
-                code 3. To completely ignore warnings, also specify <see cref="M:QPdfNet.Job.WarningExit0" />. Use with caution as qpdf is not
-                always successful in recovering from situations that cause warnings to be issued.
+                code <see cref="F:QPdfNet.Enums.ExitCode.WarningsWereFoundFileProcessed" />. To completely ignore warnings, also specify
+                <see cref="M:QPdfNet.Job.WarningExit0" />. Use with caution as qpdf is not always successful in recovering from situations that
+                cause warnings to be issued.
             </summary>
             <returns>
                 <see cref="T:QPdfNet.Job" />
@@ -998,13 +1008,13 @@
                 Overrides the usual computation/retrieval of the PDF file’s encryption key from user/owner password with an
                 explicit specification of the encryption key. When this option is specified, the parameter to the
                 <see cref="M:QPdfNet.Job.Password(System.String)" /> option is interpreted as a hexadecimal-encoded key value. This only applies to the password
-                used to open the main input file. It does not apply to other files opened by --pages or other options or to files
-                being written. Most users will never have a need for this option, and no standard viewers support this mode of
-                operation, but it can be useful for forensic or investigatory purposes. For example, if a PDF file is encrypted with
-                an unknown password, a brute-force attack using the key directly is sometimes more efficient than one using the
-                password.Also, if a file is heavily damaged, it may be possible to derive the encryption key and recover parts of
-                the file using it directly.To expose the encryption key used by an encrypted file that you can open normally, use
-                the <see cref="M:QPdfNet.Job.ShowEncryptionKey" /> option.
+                used to open the main input file. It does not apply to other files opened by <see cref="M:QPdfNet.Job.Pages(System.String,System.String,System.String)"/> or other options
+                or to files being written. Most users will never have a need for this option, and no standard viewers support this
+                mode of operation, but it can be useful for forensic or investigatory purposes. For example, if a PDF file is
+                encrypted with an unknown password, a brute-force attack using the key directly is sometimes more efficient than
+                one using the password.Also, if a file is heavily damaged, it may be possible to derive the encryption key and
+                recover parts of the file using it directly.To expose the encryption key used by an encrypted file that you can open
+                normally, use the <see cref="M:QPdfNet.Job.ShowEncryptionKey" /> option.
             </summary>
             <returns>
                 <see cref="T:QPdfNet.Job" />
@@ -1056,9 +1066,10 @@
         </member>
         <member name="M:QPdfNet.Job.Linearize">
             <summary>
-                Create linearized (web-optimized) output files. Linearized files are formatted in a way that allows compliant
-                readers to begin displaying a PDF file before it is fully downloaded. Ordinarily, the entire file must be present
-                before it can be rendered because important cross-reference information typically appears at the end of the file.
+                Create linearized (web-optimized) <see cref="M:QPdfNet.Job.OutputFile(System.String)"/>s. Linearized files are formatted in a way that allows
+                compliant readers to begin displaying a PDF file before it is fully downloaded. Ordinarily, the entire file must
+                be present before it can be rendered because important cross-reference information typically appears at the end
+                of the file.
             </summary>
             <returns>
                 <see cref="T:QPdfNet.Job" />
@@ -1077,10 +1088,10 @@
         </member>
         <member name="M:QPdfNet.Job.Decrypt">
             <summary>
-                Create an output file with no encryption even if the input file is encrypted. This option overrides the default
-                behavior of preserving whatever encryption was present on the input file. This functionality is not intended to be
-                used for bypassing copyright restrictions or other restrictions placed on files by their producers. See also
-                <see cref="M:QPdfNet.Job.CopyEncryption(System.String)"/>.
+                Create an <see cref="M:QPdfNet.Job.OutputFile(System.String)"/> with no encryption even if the input file is encrypted. This option overrides
+                the default behavior of preserving whatever encryption was present on the <see cref="M:QPdfNet.Job.InputFile(System.String)"/>. This functionality
+                is not intended to be used for bypassing copyright restrictions or other restrictions placed on files by their producers.
+                See also <see cref="M:QPdfNet.Job.CopyEncryption(System.String)"/>.
             </summary>
             <returns>
                 <see cref="T:QPdfNet.Job" />
@@ -1685,12 +1696,12 @@
         <member name="M:QPdfNet.Job.Check">
             <summary>
                 Check the file’s structure as well as encryption, linearization, and encoding of stream data, and write information
-                about the file to standard output. An exit status of 0 indicates syntactic correctness of the PDF file. Note that
-                <see cref="M:QPdfNet.Job.Check" /> writes nothing to standard error when everything is valid, so if you are using this to
-                programmatically validate files in bulk, it is safe to run without output redirected to /dev/null and just check
-                for a 0 exit code. A file for which <see cref="M:QPdfNet.Job.Check" /> reports no errors may still have errors in stream data
-                content or may contain constructs that don’t conform to the PDF specification, but it should be syntactically
-                valid. If <see cref="M:QPdfNet.Job.Check" /> reports any errors, qpdf will exit with a status of
+                about the file to standard output. An exit status of <see cref="F:QPdfNet.Enums.ExitCode.Success" /> indicates syntactic correctness
+                of the PDF file. Note that <see cref="M:QPdfNet.Job.Check" /> writes nothing to standard error when everything is valid, so if you
+                are using this to programmatically validate files in bulk, it is safe to run without output redirected to /dev/null
+                and just check for a <see cref="F:QPdfNet.Enums.ExitCode.Success" />. A file for which <see cref="M:QPdfNet.Job.Check" /> reports no errors may
+                still have errors in stream data content or may contain constructs that don’t conform to the PDF specification, but
+                it should be syntactically valid. If <see cref="M:QPdfNet.Job.Check" /> reports any errors, qpdf will exit with a status of
                 <see cref="F:QPdfNet.Enums.ExitCode.ErrorsFoundFileNotProcessed" />. There are some recoverable conditions that <see cref="M:QPdfNet.Job.Check" />
                 detects. These are issued as warnings instead of errors. If qpdf finds no errors but finds warnings, it will exit
                 with a status of <see cref="F:QPdfNet.Enums.ExitCode.WarningsWereFoundFileProcessed" />. When <see cref="M:QPdfNet.Job.Check" /> is combined with

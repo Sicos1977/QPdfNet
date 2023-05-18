@@ -1994,7 +1994,7 @@ public class Job
         var json = JsonConvert.SerializeObject(this, settings);
 
         Logger.LogDebug("JSON input for QPDF: " + Environment.NewLine + json);
-
+        var result2 = QPdfApi.Native.RunFromJSON(json);
         var result = QPdfApi.Native.RunFromJSONWithResult(json, out var outPointer, out var errorPointer);
         var outResult = Marshal.PtrToStringAnsi(outPointer);
         var errorResult = Marshal.PtrToStringAnsi(errorPointer);

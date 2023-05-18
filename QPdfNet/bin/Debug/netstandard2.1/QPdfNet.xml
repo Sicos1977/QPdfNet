@@ -1,0 +1,2268 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>QPdfNet</name>
+    </assembly>
+    <members>
+        <member name="T:QPdfNet.AddAttachment">
+            <summary>
+                Adding attachment
+            </summary>
+        </member>
+        <member name="M:QPdfNet.AddAttachment.#ctor(System.String,System.String,System.Boolean)">
+            <summary>
+                Makes this object and sets all it's needed properties
+            </summary>
+            <param name="fileName">
+                Specify the filename to be used for the attachment. This is what is usually displayed to the
+                user and is the name most graphical PDF viewers will use when saving a file. It defaults to the last element of the
+                attached file’s filename.
+            </param>
+            <param name="description">Supply descriptive text for the attachment, displayed by some PDF viewers.</param>
+            <param name="replace">
+                Indicate that any existing attachment with the same key should be replaced by the new attachment.
+                Otherwise, qpdf gives an error if an attachment with that key is already present.
+            </param>
+            <exception cref="T:System.IO.FileNotFoundException"></exception>
+        </member>
+        <member name="M:QPdfNet.AddAttachment.#ctor(System.String,System.String,System.String,System.DateTime,System.DateTime,System.String,System.String,System.Boolean)">
+            <summary>
+                Makes this object and sets all it's needed properties
+            </summary>
+            <param name="file">The file with it's full path</param>
+            <param name="key">
+                Specify the key to use for the attachment in the embedded files table. It defaults to the last
+                element of the attached file’s filename.
+            </param>
+            <param name="fileName">
+                Specify the filename to be used for the attachment. This is what is usually displayed to the
+                user and is the name most graphical PDF viewers will use when saving a file. It defaults to the last element of the
+                attached file’s filename.
+            </param>
+            <param name="creationDate">Specify the attachment’s creation date in PDF format; defaults to the current time</param>
+            <param name="modData">Specify the attachment’s modification date in PDF format; defaults to the current time.</param>
+            <param name="mimeType">
+                Specify the mime type for the attachment, such as text/plain, application/pdf, image/png, etc.
+                The qpdf library does not automatically determine the mime type.
+            </param>
+            <param name="description">Supply descriptive text for the attachment, displayed by some PDF viewers.</param>
+            <param name="replace">
+                Indicate that any existing attachment with the same key should be replaced by the new attachment.
+                Otherwise, qpdf gives an error if an attachment with that key is already present.
+            </param>
+            <exception cref="T:System.IO.FileNotFoundException"></exception>
+        </member>
+        <member name="T:QPdfNet.CopyAttachment">
+            <summary>
+                Copying attachment
+            </summary>
+        </member>
+        <member name="M:QPdfNet.CopyAttachment.#ctor(System.String,System.String)">
+            <summary>
+                Makes this object and sets all it's needed properties
+            </summary>
+            <param name="file">The file to copy from with its full path</param>
+            <param name="prefix">
+                Only required if the file from which attachments are being copied has attachments with keys that
+                conflict with attachments already in the file. In this case, the specified prefix will be prepended to each key.
+                This affects only the key in the embedded files table, not the file name. The PDF specification doesn’t preclude
+                multiple attachments having the same file name.
+            </param>
+            <exception cref="T:System.IO.FileNotFoundException"></exception>
+        </member>
+        <member name="T:QPdfNet.Encryption">
+            <summary>
+                The encryption settings
+            </summary>
+        </member>
+        <member name="P:QPdfNet.Encryption.UserPassword">
+            <summary>
+                The user password
+            </summary>
+        </member>
+        <member name="P:QPdfNet.Encryption.OwnerPassword">
+            <summary>
+                The owner password
+            </summary>
+        </member>
+        <member name="M:QPdfNet.Encryption.#ctor(System.String,System.String,QPdfNet.Interfaces.IEncryption)">
+            <summary>
+                Makes this object and sets its needed properties
+            </summary>
+            <param name="userPassword">The user password</param>
+            <param name="ownerPassword">The owner password</param>
+            <param name="options"><see cref="T:QPdfNet.Interfaces.IEncryption"/></param>
+        </member>
+        <member name="T:QPdfNet.Encryption128Bit">
+            <summary>
+                Use 128 bit encryption
+            </summary>
+        </member>
+        <member name="M:QPdfNet.Encryption128Bit.#ctor(System.Boolean,System.Boolean,System.Boolean,System.Boolean,System.Boolean,System.Boolean,QPdfNet.Enums.Modify,QPdfNet.Enums.Print,System.Boolean)">
+            <summary>
+                 Encrypt the PDF with 128 bit encryption
+            </summary>
+            <param name="accessibility">Restrict accessibility (usually ignored)</param>
+            <param name="annotate">Restrict commenting/filling form fields</param>
+            <param name="assemble">Restrict document assembly</param>
+            <param name="extract">Restrict text/graphic extraction</param>
+            <param name="form">Restrict filling form fields</param>
+            <param name="modifyOther">Restrict other modifications</param>
+            <param name="modify">Control <see cref="T:QPdfNet.Enums.Modify"/> access by level</param>
+            <param name="print">Control printing access</param>
+            <param name="cleartextMetaData">Prevent encryption of metadata</param>
+        </member>
+        <member name="T:QPdfNet.Encryption256Bit">
+            <summary>
+                Use 256 bit encryption
+            </summary>
+        </member>
+        <member name="M:QPdfNet.Encryption256Bit.#ctor(System.Boolean,System.Boolean,System.Boolean,System.Boolean,System.Boolean,System.Boolean,QPdfNet.Enums.Modify,QPdfNet.Enums.Print,System.Boolean)">
+            <summary>
+                 Encrypt the PDF with 256 bit encryption
+            </summary>
+            <param name="accessibility">Restrict accessibility (usually ignored)</param>
+            <param name="annotate">Restrict commenting/filling form fields</param>
+            <param name="assemble">Restrict document assembly</param>
+            <param name="extract">Restrict text/graphic extraction</param>
+            <param name="form">Restrict filling form fields</param>
+            <param name="modifyOther">Restrict other modifications</param>
+            <param name="modify">Control <see cref="F:QPdfNet.Encryption256Bit._modify"/> access by level</param>
+            <param name="print">Control printing access</param>
+            <param name="cleartextMetaData">Prevent encryption of metadata</param>
+        </member>
+        <member name="T:QPdfNet.Encryption40Bit">
+            <summary>
+                Use 40 bit encryption
+            </summary>
+        </member>
+        <member name="M:QPdfNet.Encryption40Bit.#ctor(System.Boolean,System.Boolean,QPdfNet.Enums.Modify,QPdfNet.Enums.Print)">
+            <summary>
+                Encrypt the PDF with 40 bit encryption
+            </summary>
+            <param name="annotate">Restrict comments, filling forms, and signing</param>
+            <param name="extract">Restrict text/graphic extraction</param>
+            <param name="modify">Restrict document <see cref="T:QPdfNet.Enums.Modify"/></param>
+            <param name="print">Restrict <see cref="T:QPdfNet.Enums.Print"/></param>
+        </member>
+        <member name="T:QPdfNet.Enums.AutoYesNo">
+            <summary>
+                Auto, yes or no
+            </summary>
+        </member>
+        <member name="F:QPdfNet.Enums.AutoYesNo.NotSet">
+            <summary>
+                No value is set
+            </summary>
+        </member>
+        <member name="F:QPdfNet.Enums.AutoYesNo.Auto">
+            <summary>
+                Auto
+            </summary>
+        </member>
+        <member name="F:QPdfNet.Enums.AutoYesNo.Yes">
+            <summary>
+                Yes
+            </summary>
+        </member>
+        <member name="F:QPdfNet.Enums.AutoYesNo.No">
+            <summary>
+                no
+            </summary>
+        </member>
+        <member name="T:QPdfNet.Enums.DecodeLevel">
+            <summary>
+                Decode level
+            </summary>
+        </member>
+        <member name="F:QPdfNet.Enums.DecodeLevel.NotSet">
+            <summary>
+                No value is set
+            </summary>
+        </member>
+        <member name="F:QPdfNet.Enums.DecodeLevel.None">
+            <summary>
+                Do not attempt to decode any streams
+            </summary>
+        </member>
+        <member name="F:QPdfNet.Enums.DecodeLevel.Generalized">
+            <summary>
+                Decode streams filtered with supported generalized filters: /LZWDecode, /FlateDecode, /ASCII85Decode, and
+                /ASCIIHexDecode
+            </summary>
+        </member>
+        <member name="F:QPdfNet.Enums.DecodeLevel.Specialized">
+            <summary>
+                In addition to generalized, decode streams with supported non-lossy specialized filters; currently this is just
+                /RunLengthDecode
+            </summary>
+        </member>
+        <member name="F:QPdfNet.Enums.DecodeLevel.All">
+            <summary>
+                In addition to generalized and specialized, decode streams with supported lossy filters; currently this is just
+                /DCTDecode (JPEG)
+            </summary>
+        </member>
+        <member name="F:QPdfNet.Enums.ExitCode.Success">
+            <summary>
+                No errors or warnings were found
+            </summary>
+        </member>
+        <member name="F:QPdfNet.Enums.ExitCode.NotUsed">
+            <summary>
+                Not used
+            </summary>
+        </member>
+        <member name="F:QPdfNet.Enums.ExitCode.ErrorsFoundFileNotProcessed">
+            <summary>
+                Errors were found; the file was not processed
+            </summary>
+        </member>
+        <member name="F:QPdfNet.Enums.ExitCode.WarningsWereFoundFileProcessed">
+            <summary>
+                Warnings were found without errors and the file is processed
+            </summary>
+        </member>
+        <member name="F:QPdfNet.Enums.ExitCodeIsEncrypted.Encrypted">
+            <summary>
+                The file is encrypted
+            </summary>
+        </member>
+        <member name="F:QPdfNet.Enums.ExitCodeIsEncrypted.NotUsed">
+            <summary>
+                Not used
+            </summary>
+        </member>
+        <member name="F:QPdfNet.Enums.ExitCodeIsEncrypted.NotEncrypted">
+            <summary>
+                The file is not encrypted
+            </summary>
+        </member>
+        <member name="F:QPdfNet.Enums.ExitCodeRequiresPassword.OtherPasswordRequired">
+            <summary>
+                A password, other than as supplied, is required
+            </summary>
+        </member>
+        <member name="F:QPdfNet.Enums.ExitCodeRequiresPassword.NotUsed">
+            <summary>
+                Not used
+            </summary>
+        </member>
+        <member name="F:QPdfNet.Enums.ExitCodeRequiresPassword.NotEncrypted">
+            <summary>
+                The file is not encrypted
+            </summary>
+        </member>
+        <member name="F:QPdfNet.Enums.ExitCodeRequiresPassword.IsEncryptedCorrectPassword">
+            <summary>
+                The file is encrypted, and correct password (if any) has been supplied
+            </summary>
+        </member>
+        <member name="T:QPdfNet.Enums.FlattenAnnotations">
+            <summary>
+                Flatten Annotation Parameters
+            </summary>
+        </member>
+        <member name="F:QPdfNet.Enums.FlattenAnnotations.NotSet">
+            <summary>
+                No value is set
+            </summary>
+        </member>
+        <member name="F:QPdfNet.Enums.FlattenAnnotations.All">
+            <summary>
+                Include all annotations that are not marked invisible or hidden
+            </summary>
+        </member>
+        <member name="F:QPdfNet.Enums.FlattenAnnotations.Print">
+            <summary>
+                Only include annotations that should appear when the page is printed
+            </summary>
+        </member>
+        <member name="F:QPdfNet.Enums.FlattenAnnotations.Screen">
+            <summary>
+                Omit annotations that should not appear on the screen
+            </summary>
+        </member>
+        <member name="T:QPdfNet.Enums.Modify">
+            <summary>
+                Values for modify
+            </summary>
+        </member>
+        <member name="F:QPdfNet.Enums.Modify.NotSet">
+            <summary>
+                No value is set
+            </summary>
+        </member>
+        <member name="F:QPdfNet.Enums.Modify.None">
+            <summary>
+                Options for 128-bit or 256-bit Encryption
+            </summary>
+        </member>
+        <member name="F:QPdfNet.Enums.Modify.Assembly">
+            <summary>
+                Allow document assembly only
+            </summary>
+        </member>
+        <member name="F:QPdfNet.Enums.Modify.Form">
+            <summary>
+                <see cref="F:QPdfNet.Enums.Modify.Assembly"/> permissions plus filling in form fields and signing
+            </summary>
+        </member>
+        <member name="F:QPdfNet.Enums.Modify.Annotate">
+            <summary>
+               <see cref="F:QPdfNet.Enums.Modify.Form"/> permissions plus commenting and modifying forms
+            </summary>
+        </member>
+        <member name="F:QPdfNet.Enums.Modify.All">
+            <summary>
+               Allow full document modification
+            </summary>
+        </member>
+        <member name="T:QPdfNet.Enums.ObjectStreams">
+            <summary>
+                Controls handling of object streams
+            </summary>
+        </member>
+        <member name="F:QPdfNet.Enums.ObjectStreams.NotSet">
+            <summary>
+                No value is set
+            </summary>
+        </member>
+        <member name="F:QPdfNet.Enums.ObjectStreams.Preserve">
+            <summary>
+                Preserve original object streams, if any (the default)
+            </summary>
+        </member>
+        <member name="F:QPdfNet.Enums.ObjectStreams.Disable">
+            <summary>
+                Create output files with no object streams
+            </summary>
+        </member>
+        <member name="F:QPdfNet.Enums.ObjectStreams.Generate">
+            <summary>
+                Create object streams, and compress objects when possible
+            </summary>
+        </member>
+        <member name="T:QPdfNet.Enums.PasswordMode">
+            <summary>
+                This option can be used to fine-tune how qpdf interprets Unicode (non-ASCII) password strings passed on the command
+                line. With the exception of the hex-bytes mode, these only apply to passwords provided when encrypting files. The
+                hex-bytes mode also applies to passwords specified for reading files. For additional discussion of the supported
+                password modes and when you might want to use them, see Unicode Passwords
+            </summary>
+        </member>
+        <member name="F:QPdfNet.Enums.PasswordMode.NotSet">
+            <summary>
+                No value is set
+            </summary>
+        </member>
+        <member name="F:QPdfNet.Enums.PasswordMode.Auto">
+            <summary>
+                Automatically determine whether the specified password is a properly encoded Unicode (UTF-8) string, and transcode
+                it as required by the PDF spec based on the type of encryption being applied. On Windows starting with version
+                8.4.0, and on almost all other modern platforms, incoming passwords will be properly encoded in UTF-8, so this is
+                almost always what you want.
+            </summary>
+        </member>
+        <member name="F:QPdfNet.Enums.PasswordMode.Unicode">
+            <summary>
+                ells qpdf that the incoming password is UTF-8, overriding whatever its automatic detection determines. The only
+                difference between this mode and auto is that qpdf will fail with an error message if the password is not valid
+                UTF-8 instead of falling back to bytes mode with a warning.
+            </summary>
+        </member>
+        <member name="F:QPdfNet.Enums.PasswordMode.Bytes">
+            <summary>
+                Interpret the password as a literal byte string. For non-Windows platforms, this is what versions of qpdf prior to
+                8.4.0 did. For Windows platforms, there is no way to specify strings of binary data on the command line directly,
+                but you can use a @filename option or --password-file to do it, in which case this option forces qpdf to respect
+                the string of bytes as provided. Note that this option may cause you to encrypt PDF files with passwords that will
+                not be usable by other readers.
+            </summary>
+        </member>
+        <member name="F:QPdfNet.Enums.PasswordMode.HexBytes">
+            <summary>
+                Interpret the password as a hex-encoded string. This provides a way to pass binary data as a password on all
+                platforms including Windows. As with bytes, this option may allow creation of files that can’t be opened by other
+                readers. This mode affects qpdf’s interpretation of passwords specified for decrypting files as well as for
+                encrypting them. It makes it possible to specify strings that are encoded in some manner other than the system’s
+                default encoding.
+            </summary>
+        </member>
+        <member name="F:QPdfNet.Enums.Print.NotSet">
+            <summary>
+                No value is set
+            </summary>
+        </member>
+        <member name="F:QPdfNet.Enums.Print.None">
+            <summary>
+                Disallow printing
+            </summary>
+        </member>
+        <member name="F:QPdfNet.Enums.Print.Low">
+            <summary>
+                Allow only low-resolution printing
+            </summary>
+        </member>
+        <member name="F:QPdfNet.Enums.Print.Full">
+            <summary>
+                Allow full printing
+            </summary>
+        </member>
+        <member name="T:QPdfNet.Enums.Rotation">
+            <summary>
+                Rotation angle
+            </summary>
+        </member>
+        <member name="F:QPdfNet.Enums.Rotation.NotSet">
+            <summary>
+                No value is set
+            </summary>
+        </member>
+        <member name="F:QPdfNet.Enums.Rotation.Rotate0">
+            <summary>
+                0 degrees clockwise
+            </summary>
+        </member>
+        <member name="F:QPdfNet.Enums.Rotation.Rotate90">
+            <summary>
+                90 degrees clockwise
+            </summary>
+        </member>
+        <member name="F:QPdfNet.Enums.Rotation.RotateMinus90">
+            <summary>
+                90 degrees counter clockwise
+            </summary>
+        </member>
+        <member name="F:QPdfNet.Enums.Rotation.Rotate180">
+            <summary>
+                180 degrees clockwise
+            </summary>
+        </member>
+        <member name="F:QPdfNet.Enums.Rotation.RotateMinus180">
+            <summary>
+                180 degrees counter clockwise
+            </summary>
+        </member>
+        <member name="F:QPdfNet.Enums.Rotation.Rotate270">
+            <summary>
+                270 degrees clockwise
+            </summary>
+        </member>
+        <member name="F:QPdfNet.Enums.Rotation.RotateMinus270">
+            <summary>
+                270 degrees counter clockwise
+            </summary>
+        </member>
+        <member name="T:QPdfNet.Enums.StreamData">
+            <summary>
+                Controls transformation of stream data
+            </summary>
+        </member>
+        <member name="F:QPdfNet.Enums.StreamData.NotSet">
+            <summary>
+                No value is set
+            </summary>
+        </member>
+        <member name="F:QPdfNet.Enums.StreamData.Compress">
+            <summary>
+                Recompress stream data when possible (default)
+            </summary>
+        </member>
+        <member name="F:QPdfNet.Enums.StreamData.Preserve">
+            <summary>
+                Leave all stream data as is
+            </summary>
+        </member>
+        <member name="F:QPdfNet.Enums.StreamData.Uncompress">
+            <summary>
+                Uncompress stream data compressed with generalized filters when possible
+            </summary>
+        </member>
+        <member name="T:QPdfNet.Helpers.MimeTypes">
+            <summary>
+                A mapping of file name extensions to the corresponding MIME-type.
+            </summary>
+        </member>
+        <member name="F:QPdfNet.Helpers.MimeTypes.mimeTypes">
+            <summary>
+            A dictionary of mimetypes
+            </summary>
+        </member>
+        <member name="M:QPdfNet.Helpers.MimeTypes.GetMimeType(System.String)">
+            <summary>
+            Gets the MIME-type of the file.
+            </summary>
+            <remarks>
+            Gets the MIME-type of the file based on the file extension.
+            </remarks>
+            <returns>The MIME-type.</returns>
+            <param name="fileName">The file name.</param>
+            <exception>
+                <cref>System.ArgumentNullException</cref>
+                <paramref name="fileName"/> is <c>null</c>.
+            </exception>
+        </member>
+        <member name="T:QPdfNet.Info.Acroform">
+            <summary>
+                Returns information about form fields used in the PDF
+            </summary>
+        </member>
+        <member name="P:QPdfNet.Info.Acroform.Fields">
+            <summary>
+                Returns the fields
+            </summary>
+        </member>
+        <member name="P:QPdfNet.Info.Acroform.HasAcroform">
+            <summary>
+                Returns <c>true</c> when the PDF has form fields
+            </summary>
+        </member>
+        <member name="P:QPdfNet.Info.Acroform.NeedAppearances">
+            <summary>
+                Returns <c>true</c> when appearances are needed
+            </summary>
+        </member>
+        <member name="P:QPdfNet.Info.AttachmentProperties.FileSpec">
+            <summary>
+                Returns the file spec
+            </summary>
+        </member>
+        <member name="P:QPdfNet.Info.AttachmentProperties.PreferredContents">
+            <summary>
+                Returns the prefered content
+            </summary>
+        </member>
+        <member name="P:QPdfNet.Info.AttachmentProperties.PreferredName">
+            <summary>
+                Returns the prefered name of the attachment
+            </summary>
+        </member>
+        <member name="P:QPdfNet.Info.Capabilities.Accessibility">
+            <summary>
+                Returns <c>true </c> when accessibility is restricted (usually ignored)
+            </summary>
+        </member>
+        <member name="P:QPdfNet.Info.Capabilities.Extract">
+            <summary>
+                Returns <c>true</c> text/graphic extraction is restricted
+            </summary>
+        </member>
+        <member name="P:QPdfNet.Info.Capabilities.ModifyAnnotations">
+            <summary>
+                Returns <c>tru</c> commenting/filling form fields is restricted
+            </summary>
+        </member>
+        <member name="P:QPdfNet.Info.Capabilities.Modify">
+            <summary>
+                Returns <c>true</c> when modification of the PDF is restricted
+            </summary>
+        </member>
+        <member name="P:QPdfNet.Info.Capabilities.ModifyAssembly">
+            <summary>
+                Returns <c>true</c> when document assembly is restricted
+            </summary>
+        </member>
+        <member name="P:QPdfNet.Info.Capabilities.ModifyForms">
+            <summary>
+                Returns <c>true</c> when form field filling is restricted
+            </summary>
+        </member>
+        <member name="P:QPdfNet.Info.Capabilities.ModifyOther">
+            <summary>
+                Returns <c>true</c> when all other modifications are restricted
+            </summary>
+        </member>
+        <member name="P:QPdfNet.Info.Capabilities.PrintHigh">
+            <summary>
+                Returns <c>true</c> when printing is restricted to high quality
+            </summary>
+        </member>
+        <member name="P:QPdfNet.Info.Capabilities.PrintLow">
+            <summary>
+                Returns <c>true</c> when printing is restricted to low quality
+            </summary>
+        </member>
+        <member name="T:QPdfNet.Info.Encrypt">
+            <summary>
+                Returns information about the PDF encryption
+            </summary>
+        </member>
+        <member name="P:QPdfNet.Info.Encrypt.Capabilities">
+            <summary>
+                <see cref="P:QPdfNet.Info.Encrypt.Capabilities"/>
+            </summary>
+        </member>
+        <member name="P:QPdfNet.Info.Encrypt.Encrypted">
+            <summary>
+                Returns <c>true</c> when the PDF is encrypted
+            </summary>
+        </member>
+        <member name="P:QPdfNet.Info.Encrypt.OwnerPasswordMatched">
+            <summary>
+                Returns <c>true</c> when the given owner password is correct
+            </summary>
+        </member>
+        <member name="P:QPdfNet.Info.Encrypt.Parameters">
+            <summary>
+                <see cref="T:QPdfNet.Info.EncryptParameters"/>
+            </summary>
+        </member>
+        <member name="P:QPdfNet.Info.Encrypt.UserPasswordMatched">
+            <summary>
+                Returns <c>true</c> when the given user password is correct
+            </summary>
+        </member>
+        <member name="P:QPdfNet.Info.EncryptParameters.P">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:QPdfNet.Info.EncryptParameters.R">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:QPdfNet.Info.EncryptParameters.V">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:QPdfNet.Info.EncryptParameters.Bits">
+            <summary>
+                Returns the amounts of bits used with the encryption
+            </summary>
+        </member>
+        <member name="P:QPdfNet.Info.EncryptParameters.FileMethod">
+            <summary>
+                Returns the file method used
+            </summary>
+        </member>
+        <member name="P:QPdfNet.Info.EncryptParameters.Key">
+            <summary>
+                Returns the encryption key
+            </summary>
+        </member>
+        <member name="P:QPdfNet.Info.EncryptParameters.Method">
+            <summary>
+                Returns the encryption method used
+            </summary>
+        </member>
+        <member name="P:QPdfNet.Info.EncryptParameters.StreamMethod">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:QPdfNet.Info.EncryptParameters.StringMethod">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:QPdfNet.Info.Image">
+            <summary>
+                Returns information about an <see cref="T:QPdfNet.Info.Image"/> on a <see cref="T:QPdfNet.Info.Page"/>
+            </summary>
+        </member>
+        <member name="P:QPdfNet.Info.Image.Bitspercomponent">
+            <summary>
+                Returns the bits per component
+            </summary>
+        </member>
+        <member name="P:QPdfNet.Info.Image.Colorspace">
+            <summary>
+                Returns information about the color space
+            </summary>
+        </member>
+        <member name="P:QPdfNet.Info.Image.Decodeparms">
+            <summary>
+                Returns the used decode parameters
+            </summary>
+        </member>
+        <member name="P:QPdfNet.Info.Image.Filter">
+            <summary>
+                Returns the filters used
+            </summary>
+        </member>
+        <member name="P:QPdfNet.Info.Image.Height">
+            <summary>
+                Returns the height of the image
+            </summary>
+        </member>
+        <member name="P:QPdfNet.Info.Image.Width">
+            <summary>
+                Returns the width of the image
+            </summary>
+        </member>
+        <member name="P:QPdfNet.Info.Image.Name">
+            <summary>
+                Returns the name of the image
+            </summary>
+        </member>
+        <member name="P:QPdfNet.Info.Image.Object">
+            <summary>
+                Returns the object
+            </summary>
+        </member>
+        <member name="P:QPdfNet.Info.Objectinfo.Stream">
+            <summary>
+                <see cref="T:QPdfNet.Info.Stream"/>
+            </summary>
+        </member>
+        <member name="T:QPdfNet.Info.Page">
+            <summary>
+                Returns the page
+            </summary>
+        </member>
+        <member name="P:QPdfNet.Info.Page.Contents">
+            <summary>
+                Returns information about the content that is found on the page
+            </summary>
+        </member>
+        <member name="P:QPdfNet.Info.Page.Images">
+            <summary>
+                Returns information about the images found on the page
+            </summary>
+        </member>
+        <member name="P:QPdfNet.Info.Page.Label">
+            <summary>
+                Returns the page label
+            </summary>
+        </member>
+        <member name="P:QPdfNet.Info.Page.Object">
+            <summary>
+                Returns the object
+            </summary>
+        </member>
+        <member name="P:QPdfNet.Info.Page.Outlines">
+            <summary>
+                Returns the page outlines
+            </summary>
+        </member>
+        <member name="P:QPdfNet.Info.Page.PageNumber">
+            <summary>
+                Returns the page number
+            </summary>
+        </member>
+        <member name="P:QPdfNet.Info.Parameters.Decodelevel">
+            <summary>
+                Returns the decode level
+            </summary>
+        </member>
+        <member name="T:QPdfNet.Info.Pdf">
+            <summary>
+                Returns information about the PDF
+            </summary>
+        </member>
+        <member name="P:QPdfNet.Info.Pdf.Acroform">
+            <summary>
+                <see cref="P:QPdfNet.Info.Pdf.Acroform"/>
+            </summary>
+        </member>
+        <member name="P:QPdfNet.Info.Pdf.Attachments">
+            <summary>
+                Returns a list with the attachments
+            </summary>
+        </member>
+        <member name="P:QPdfNet.Info.Pdf.Encrypt">
+            <summary>
+                Returns information about PDF encryption
+            </summary>
+        </member>
+        <member name="P:QPdfNet.Info.Pdf.Objectinfo">
+            <summary>
+                Returns information about the objects in the PDF
+            </summary>
+        </member>
+        <member name="P:QPdfNet.Info.Pdf.PageLabels">
+            <summary>
+                Returns the used page labels in the PDF
+            </summary>
+        </member>
+        <member name="P:QPdfNet.Info.Pdf.Pages">
+            <summary>
+                Returns the pages of the PDF
+            </summary>
+        </member>
+        <member name="P:QPdfNet.Info.Pdf.Parameters">
+            <summary>
+                Returns the parameters used
+            </summary>
+        </member>
+        <member name="M:QPdfNet.Info.Pdf.FromFile(System.String)">
+            <summary>
+                Returns a <c>Pdf</c> object with information about the given <paramref name="fileName"/>
+            </summary>
+            <param name="fileName"></param>
+            <returns></returns>
+            <exception cref="T:System.Exception"></exception>
+        </member>
+        <member name="P:QPdfNet.Info.Stream.Filter">
+            <summary>
+                Returns the filters used
+            </summary>
+        </member>
+        <member name="P:QPdfNet.Info.Stream.Length">
+            <summary>
+                Returns the length of the stream
+            </summary>
+        </member>
+        <member name="T:QPdfNet.Interop.Constants">
+            <summary>
+                Description of Constants.
+            </summary>
+        </member>
+        <member name="M:QPdfNet.Interop.MarshalHelper.StrLength(System.IntPtr)">
+            <summary>
+            	Gets the number of bytes in a null terminated byte array.
+            </summary>
+        </member>
+        <member name="T:QPdfNet.Interop.IQPdfApiSignatures">
+            <summary>
+                The exported qpdf api signatures.
+            </summary>
+            <remarks>
+                Please note this is only public for technical reasons (you can't proxy a internal interface).
+                It should be considered an internal interface and is NOT part of the public api and may have
+                breaking changes between releases.
+            </remarks>
+        </member>
+        <member name="M:QPdfNet.Interop.IQPdfApiSignatures.GetQPdfVersion">
+            <summary>
+                Returns the current version
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:QPdfNet.Interop.IQPdfApiSignatures.RunFromJSON(System.String)">
+            <summary>
+                Runs the given json
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:QPdfNet.Interop.IQPdfApiSignatures.RunFromJSONWithResult(System.String,System.IntPtr@,System.IntPtr@)">
+            <summary>
+                Runs the given json and returns the result from cout and cerr
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:QPdfNet.Interop.IQPdfApiSignatures.RunFromJSONWithResultFreeString(System.IntPtr)">
+            <summary>
+                Runs the given json and returns the result from cout and cerr
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:QPdfNet.Job">
+            <summary>
+                Represents a qpdf job
+            </summary>
+            <remarks>
+                https://qpdf.readthedocs.io/en/stable/qpdf-job.html
+            </remarks>
+        </member>
+        <member name="M:QPdfNet.Job.#ctor(Microsoft.Extensions.Logging.ILogger)">
+            <summary>
+                Makes this object
+            </summary>
+            <param name="logger">When set then logging is written to this interface</param>
+        </member>
+        <member name="M:QPdfNet.Job.InputFile(System.String)">
+            <summary>
+                The input PDF file
+            </summary>
+            <param name="fileName">The input file</param>
+            <returns>
+                <see cref="T:QPdfNet.Job" />
+            </returns>
+        </member>
+        <member name="M:QPdfNet.Job.OutputFile(System.String)">
+            <summary>
+                The output PDF file
+            </summary>
+            <param name="fileName">The output file</param>
+            <returns>
+                <see cref="T:QPdfNet.Job" />
+            </returns>
+        </member>
+        <member name="M:QPdfNet.Job.Empty">
+            <summary>
+                This option may be given in place of infile. This causes qpdf to use a dummy input file that contains zero pages.
+                This option is useful in conjunction with <see cref="M:QPdfNet.Job.Pages(System.String,System.String,System.String)"/>. See <see cref="M:QPdfNet.Job.Pages(System.String,System.String,System.String)"/> for details.
+            </summary>
+            <returns>
+                <see cref="T:QPdfNet.Job" />
+            </returns>
+        </member>
+        <member name="M:QPdfNet.Job.ReplaceInput">
+            <summary>
+                This option may be given in place of <see cref="M:QPdfNet.Job.OutputFile(System.String)"/>. This causes qpdf to replace the <see cref="M:QPdfNet.Job.InputFile(System.String)"/>
+                file with the <see cref="M:QPdfNet.Job.OutputFile(System.String)"/>. It does this by writing to infilename. ~qpdf-temp# and, when done, overwriting
+                the <see cref="M:QPdfNet.Job.InputFile(System.String)"/> with the temporary file. If there were any warnings, the original input is saved as infilename.
+                ~qpdf-orig. If there are errors, the <see cref="M:QPdfNet.Job.InputFile(System.String)"/> is left untouched.
+            </summary>
+            <returns>
+                <see cref="T:QPdfNet.Job" />
+            </returns>
+        </member>
+        <member name="M:QPdfNet.Job.WarningExit0">
+            <summary>
+                If there were warnings only and no errors, exit with exit code <see cref="F:QPdfNet.Enums.ExitCode.Success" /> instead of
+                <see cref="F:QPdfNet.Enums.ExitCode.WarningsWereFoundFileProcessed" />. When combined with <see cref="M:QPdfNet.Job.NoWarn" />, the effect
+                is for qpdf to completely ignore warnings.
+            </summary>
+            <returns>
+                <see cref="T:QPdfNet.Job" />
+            </returns>
+        </member>
+        <member name="M:QPdfNet.Job.Password(System.String)">
+            <summary>
+                Specifies a password for accessing encrypted, password-protected files. To read the password from a file or
+                standard input
+            </summary>
+            <param name="password">The password to open the <see cref="M:QPdfNet.Job.InputFile(System.String)"/></param>
+            <returns>
+                <see cref="T:QPdfNet.Job" />
+            </returns>
+        </member>
+        <member name="M:QPdfNet.Job.PasswordFile(System.String)">
+            <summary>
+                Reads the first line from the specified <paramref name="file"/> and uses it as the password for accessing encrypted files
+            </summary>
+            <param name="file">The file with full path</param>
+            <returns>
+                <see cref="T:QPdfNet.Job" />
+            </returns>
+            <exception cref="T:System.IO.FileNotFoundException"></exception>
+        </member>
+        <member name="M:QPdfNet.Job.Verbose">
+            <summary>
+                Increase verbosity of output. This includes information about files created, image optimization, and several other operations.
+                In some cases, it also displays additional information when inspection options (see PDF Inspection) are used.
+            </summary>
+            <returns>
+                <see cref="T:QPdfNet.Job" />
+            </returns>
+        </member>
+        <member name="M:QPdfNet.Job.NoWarn">
+            <summary>
+                Suppress writing of warnings to stderr. If warnings were detected and suppressed, qpdf will still exit with exit
+                code <see cref="F:QPdfNet.Enums.ExitCode.WarningsWereFoundFileProcessed" />. To completely ignore warnings, also specify
+                <see cref="M:QPdfNet.Job.WarningExit0" />. Use with caution as qpdf is not always successful in recovering from situations that
+                cause warnings to be issued.
+            </summary>
+            <returns>
+                <see cref="T:QPdfNet.Job" />
+            </returns>
+        </member>
+        <member name="M:QPdfNet.Job.DeterministicId">
+            <summary>
+                Generate a secure, random document ID using deterministic values. This prevents use of timestamp and output file
+                name information in the ID generation. Instead, at some slight additional runtime cost, the ID field is generated
+                to include a digest of the significant parts of the content of the output PDF file. This meanGenerate a secure,
+                random document ID using deterministic values. This prevents use of timestamp and output file name information in
+                the ID generation. Instead, at some slight additional runtime cost, the ID field is generated to include a digest
+                of the significant parts of the content of the output PDF file. This means that a given qpdf operation should
+                generate the same ID each time it is run, which can be useful when caching results or for generation of some test
+                data. Use of this flag is not compatible with creation of encrypted files. This option can be useful for testing.
+                See also <see cref="M:QPdfNet.Job.StaticId" />.
+            </summary>
+            <returns>
+                <see cref="T:QPdfNet.Job" />
+            </returns>
+        </member>
+        <member name="M:QPdfNet.Job.AllowWeakCrypto">
+            <summary>
+                Starting with version 10.4, qpdf issues warnings when requested to create files using RC4 encryption. This option
+                suppresses those warnings. In future versions of qpdf, qpdf will refuse to create files with weak cryptography when
+                this flag is not given. See Weak Cryptography for additional details.
+            </summary>
+            <returns>
+                <see cref="T:QPdfNet.Job" />
+            </returns>
+        </member>
+        <member name="M:QPdfNet.Job.KeepFilesOpen(System.Boolean)">
+            <summary>
+                This option controls whether qpdf keeps individual files open while merging. By default, qpdf keeps files open when
+                merging unless more than 200 files are specified, in which case files are opened as needed and closed when finished.
+                Repeatedly opening and closing files may impose a large performance penalty with some file systems, especially networked
+                file systems. If you know that you have a large enough open file limit and are suffering from performance problems, or
+                if you have an open file limit smaller than 200, you can use this option to override the default behavior by specifying
+                <see cref="M:QPdfNet.Job.KeepFilesOpen(System.Boolean)"/> = <c>true</c> to force qpdf to keep files open or <see cref="M:QPdfNet.Job.KeepFilesOpen(System.Boolean)"/> = <c>false</c>
+                to force it to only open files as needed. See also <see cref="M:QPdfNet.Job.KeepFilesOpenThreshold(System.Int32)"/>.
+            </summary>
+            <param name="keepOpen"><c>true</c> or <c>false</c></param>
+            <returns>
+                <see cref="T:QPdfNet.Job" />
+            </returns>
+        </member>
+        <member name="M:QPdfNet.Job.KeepFilesOpenThreshold(System.Int32)">
+            <summary>
+                If specified, overrides the default value of <c>200</c> used as the threshold for qpdf deciding whether or not to keep
+                files open. See <see cref="M:QPdfNet.Job.KeepFilesOpen(System.Boolean)"/> for details.
+            </summary>
+            <param name="count">The amount of files to keep open</param>
+            <returns>
+                <see cref="T:QPdfNet.Job" />
+            </returns>
+        </member>
+        <member name="M:QPdfNet.Job.PasswordIsHexKey">
+            <summary>
+                Overrides the usual computation/retrieval of the PDF file’s encryption key from user/owner password with an
+                explicit specification of the encryption key. When this option is specified, the parameter to the
+                <see cref="M:QPdfNet.Job.Password(System.String)" /> option is interpreted as a hexadecimal-encoded key value. This only applies to the password
+                used to open the main input file. It does not apply to other files opened by <see cref="M:QPdfNet.Job.Pages(System.String,System.String,System.String)"/> or other options
+                or to files being written. Most users will never have a need for this option, and no standard viewers support this
+                mode of operation, but it can be useful for forensic or investigatory purposes. For example, if a PDF file is
+                encrypted with an unknown password, a brute-force attack using the key directly is sometimes more efficient than
+                one using the password.Also, if a file is heavily damaged, it may be possible to derive the encryption key and
+                recover parts of the file using it directly.To expose the encryption key used by an encrypted file that you can open
+                normally, use the <see cref="M:QPdfNet.Job.ShowEncryptionKey" /> option.
+            </summary>
+            <returns>
+                <see cref="T:QPdfNet.Job" />
+            </returns>
+        </member>
+        <member name="M:QPdfNet.Job.SuppressPasswordRecovery">
+            <summary>
+                Ordinarily, qpdf attempts to automatically compensate for passwords encoded with the wrong character encoding. This
+                option suppresses that behavior. Under normal conditions, there are no reasons to use this option. See Unicode
+                Passwords for a discussion.
+            </summary>
+            <returns>
+                <see cref="T:QPdfNet.Job" />
+            </returns>
+        </member>
+        <member name="M:QPdfNet.Job.PasswordMode(QPdfNet.Enums.PasswordMode)">
+            <summary>
+                This option can be used to fine-tune how qpdf interprets Unicode (non-ASCII) password strings passed on the command
+                line. With the exception of the hex-bytes mode, these only apply to passwords provided when encrypting files. The
+                hex-bytes mode also applies to passwords specified for reading files. For additional discussion of the supported
+                password modes and when you might want to use them, see Unicode Passwords
+            </summary>
+            <param name="mode">
+                <see cref="M:QPdfNet.Job.PasswordMode(QPdfNet.Enums.PasswordMode)" />
+            </param>
+            <returns>
+                <see cref="T:QPdfNet.Job" />
+            </returns>
+        </member>
+        <member name="M:QPdfNet.Job.SuppressRecovery">
+            <summary>
+                Prevents qpdf from attempting to reconstruct a file’s cross reference table when there are errors reading objects
+                from the file. Recovery is triggered by a variety of situations. While usually successful, it uses heuristics that
+                don’t work on all files. If this option is given, qpdf fails on the first error it encounters.
+            </summary>
+            <see cref="T:QPdfNet.Job" />
+        </member>
+        <member name="M:QPdfNet.Job.IgnoreXrefStreams">
+            <summary>
+                Tells qpdf to ignore any cross-reference streams, falling back to any embedded cross-reference tables or triggering
+                document recovery. Ordinarily, qpdf reads cross-reference streams when they are present in a PDF file. If this
+                option is specified, qpdf will ignore any cross-reference streams for hybrid PDF files. The purpose of hybrid files
+                is to make some content available to viewers that are not aware of cross-reference streams. It is almost never
+                desirable to ignore them. The only time when you might want to use this feature is if you are testing creation of
+                hybrid PDF files and wish to see how a PDF consumer that doesn’t understand object and cross-reference streams
+                would interpret such a file.
+            </summary>
+            <see cref="T:QPdfNet.Job" />
+        </member>
+        <member name="M:QPdfNet.Job.Linearize">
+            <summary>
+                Create linearized (web-optimized) <see cref="M:QPdfNet.Job.OutputFile(System.String)"/>s. Linearized files are formatted in a way that allows
+                compliant readers to begin displaying a PDF file before it is fully downloaded. Ordinarily, the entire file must
+                be present before it can be rendered because important cross-reference information typically appears at the end
+                of the file.
+            </summary>
+            <returns>
+                <see cref="T:QPdfNet.Job" />
+            </returns>
+        </member>
+        <member name="M:QPdfNet.Job.Encrypt(System.String,System.String,QPdfNet.Interfaces.IEncryption)">
+            <summary>
+                The encryption options to use
+            </summary>
+            <remarks>
+                If no <paramref name="options" /> are given then 256 bits encryption is used
+            </remarks>
+            <returns>
+                <see cref="T:QPdfNet.Job" />
+            </returns>
+        </member>
+        <member name="M:QPdfNet.Job.Decrypt">
+            <summary>
+                Create an <see cref="M:QPdfNet.Job.OutputFile(System.String)"/> with no encryption even if the input file is encrypted. This option overrides
+                the default behavior of preserving whatever encryption was present on the <see cref="M:QPdfNet.Job.InputFile(System.String)"/>. This functionality
+                is not intended to be used for bypassing copyright restrictions or other restrictions placed on files by their producers.
+                See also <see cref="M:QPdfNet.Job.CopyEncryption(System.String)"/>.
+            </summary>
+            <returns>
+                <see cref="T:QPdfNet.Job" />
+            </returns>
+        </member>
+        <member name="M:QPdfNet.Job.CopyEncryption(System.String)">
+            <summary>
+                Copy all encryption parameters, including the user password, the owner password, and all security restrictions,
+                from the specified file instead of preserving the encryption details from the input file. This works even if only
+                one of the user password or owner password is known. If the encryption file requires a password, use the
+                <see cref="M:QPdfNet.Job.EncryptionFilePassword(System.String)" /> option to set it. Note that copying the encryption parameters from a file
+                also copies the first half of /ID from the file since this is part of the encryption parameters. This option can
+                be useful if you need to decrypt a file to make manual changes to it or to change it outside of qpdf, and then want
+                to restore the original encryption on the file without having to manual specify all the individual settings. See also
+                <see cref="M:QPdfNet.Job.Decrypt"/>.
+            </summary>
+            <param name="file">The file with full path</param>
+            <returns>
+                <see cref="T:QPdfNet.Job" />
+            </returns>
+            <exception cref="T:System.IO.FileNotFoundException"></exception>
+        </member>
+        <member name="M:QPdfNet.Job.EncryptionFilePassword(System.String)">
+            <summary>
+                If the file specified with <see cref="M:QPdfNet.Job.CopyEncryption(System.String)" /> requires a password, supply the password using this option.
+                This option is necessary because the <see cref="M:QPdfNet.Job.Password(System.String)"/> option applies to the <see cref="M:QPdfNet.Job.InputFile(System.String)"/>, not the
+                file from which encryption is being copied.
+            </summary>
+            <param name="password">The password</param>
+            <returns>
+                <see cref="T:QPdfNet.Job" />
+            </returns>
+        </member>
+        <member name="M:QPdfNet.Job.Qdf">
+            <summary>
+                Create a PDF file suitable for viewing and editing in a text editor. This is to edit the PDF code, not the page
+                contents. To edit a QDF file, your text editor must preserve binary data. In a QDF file, all streams that can be
+                uncompressed are uncompressed, and content streams are normalized, among other changes. The companion tool fix-qdf
+                can be used to repair hand-edited QDF files. QDF is a feature specific to the qpdf tool. For additional
+                information, see QDF Mode. Note that <see cref="M:QPdfNet.Job.Linearize" /> disables QDF mode.
+            </summary>
+            <returns>
+                <see cref="T:QPdfNet.Job" />
+            </returns>
+        </member>
+        <member name="M:QPdfNet.Job.NoOriginalObjectIds">
+            <summary>
+                Suppresses inclusion of original object ID comments in QDF files. This can be useful when generating QDF files for
+                test purposes, particularly when comparing them to determine whether two PDF files have identical content. The
+                original object ID comment is there by default because it makes it easier to trace objects back to the original
+                file.
+            </summary>
+            <returns>
+                <see cref="T:QPdfNet.Job" />
+            </returns>
+        </member>
+        <member name="M:QPdfNet.Job.CompressStreams(System.Boolean)">
+            <summary>
+                By default, or with use <paramref name="compress" /> = true, qpdf will compress streams using the flate compression
+                algorithm (used by zip and gzip) unless those streams are compressed in some other way. This analysis is
+                made after qpdf attempts to uncompress streams and is therefore closely related to <see cref="M:QPdfNet.Job.DecodeLevel(QPdfNet.Enums.DecodeLevel)" />.
+                To suppress this behavior and leave streams streams uncompressed, use <paramref name="compress" /> = <c>false</c>.
+                In QDF mode (see QDF Mode and <see cref="M:QPdfNet.Job.Qdf" />), the default is to leave streams uncompressed.
+            </summary>
+            <param name="compress"><c>true</c> or <c>false</c></param>
+            <returns>
+                <see cref="T:QPdfNet.Job" />
+            </returns>
+        </member>
+        <member name="M:QPdfNet.Job.DecodeLevel(QPdfNet.Enums.DecodeLevel)">
+            <summary>
+                Controls which streams qpdf tries to decode. The default is <see cref="F:QPdfNet.Enums.DecodeLevel.Generalized" />.
+            </summary>
+            <param name="decodeLevel">
+                <see cref="M:QPdfNet.Job.DecodeLevel(QPdfNet.Enums.DecodeLevel)" />
+            </param>
+            <returns>
+                <see cref="T:QPdfNet.Job" />
+            </returns>
+        </member>
+        <member name="M:QPdfNet.Job.StreamData(QPdfNet.Enums.StreamData)">
+            <summary>
+                Controls transformation of stream data. This option predates the <see cref="M:QPdfNet.Job.CompressStreams(System.Boolean)" /> and
+                <see cref="M:QPdfNet.Job.DecodeLevel(QPdfNet.Enums.DecodeLevel)" /> options. Those options can be used to achieve the same effect with more control
+            </summary>
+            <param name="streamData"><see cref="T:QPdfNet.Enums.StreamData"/></param>
+            <returns>
+                <see cref="T:QPdfNet.Job" />
+            </returns>
+        </member>
+        <member name="M:QPdfNet.Job.RecompressFlate">
+            <summary>
+                The default generalized compression scheme used by PDF is flate (/FlateDecode), which is the same as used by zip
+                and gzip. Usually qpdf just leaves these alone. This option tells qpdf to uncompress and recompress streams
+                compressed with flate. This can be useful when combined with <see cref="M:QPdfNet.Job.CompressionLevel(System.Int32)" />. Using this option may
+                make qpdf much slower when writing output files.
+            </summary>
+            <returns>
+                <see cref="T:QPdfNet.Job" />
+            </returns>
+        </member>
+        <member name="M:QPdfNet.Job.CompressionLevel(System.Int32)">
+            <summary>
+                When writing new streams that are compressed with /FlateDecode, use the specified compression
+                <paramref name="level" />. The value of <paramref name="level" /> should be a number from 1 to 9 and is passed
+                directly to zlib, which implements deflate compression. Lower numbers compress less and are faster; higher
+                numbers compress more and are slower. Note that qpdf doesn’t uncompress and recompress streams compressed with flate
+                by default. To have this option apply to already compressed streams, you should also specify <see cref="M:QPdfNet.Job.RecompressFlate" />.
+                If your goal is to shrink the size of PDF files, you should also use <see cref="M:QPdfNet.Job.ObjectStreams(QPdfNet.Enums.ObjectStreams)" />. If you omit this option,
+                qpdf defers to the compression library’s default behavior.
+            </summary>
+            <param name="level">A value in the range 1 to 9</param>
+            <returns>
+                <see cref="T:QPdfNet.Job" />
+            </returns>
+        </member>
+        <member name="M:QPdfNet.Job.NormalizeContent(System.Boolean)">
+            <summary>
+                Enables or disables normalization of newlines in PDF content streams to UNIX-style newlines, which is useful for
+                viewing files in a programmer-friendly text edit across multiple platforms. Content normalization is off by default,
+                but is automatically enabled by <see cref="M:QPdfNet.Job.Qdf" /> (see also QDF Mode). It is not recommended to use this
+                option for production use. If qpdf runs into any lexical errors while normalizing content, it will print a warning
+                indicating that content may be damaged.
+            </summary>
+            <param name="normalize"><c>true</c> or <c>false</c></param>
+            <returns>
+                <see cref="T:QPdfNet.Job" />
+            </returns>
+        </member>
+        <member name="M:QPdfNet.Job.ObjectStreams(QPdfNet.Enums.ObjectStreams)">
+            <summary>
+                Controls handling of object streams. Object streams are PDF streams that contain other objects. Putting objects
+                into object streams allows the PDF objects themselves to be compressed, which can result in much smaller PDF files.
+                Combining this option with <see cref="M:QPdfNet.Job.CompressionLevel(System.Int32)" /> and <see cref="M:QPdfNet.Job.RecompressFlate" /> can often result in
+                the creation of smaller PDF files.
+            </summary>
+            <param name="objectStreams">
+                <see cref="T:QPdfNet.Enums.ObjectStreams" />
+            </param>
+            <returns>
+                <see cref="T:QPdfNet.Job" />
+            </returns>
+        </member>
+        <member name="M:QPdfNet.Job.PreserveUnreferenced">
+            <summary>
+                Tells qpdf to preserve objects that are not referenced when writing the file. Ordinarily any object that is not
+                referenced in a traversal of the document from the trailer dictionary will be discarded. Disabling this default
+                behavior may be useful in working with some damaged files or inspecting files with known unreferenced objects.
+                This flag is ignored for linearized files and has the effect of causing objects in the new file to be written
+                ordered by object ID from the original file. This does not mean that object numbers will be the same since qpdf may
+                create stream lengths as direct or indirect differently from the original file, and the original file may have gaps
+                in its numbering. See also <see cref="M:QPdfNet.Job.PreserveUnreferencedResources" />, which does something completely different.
+            </summary>
+            <returns>
+                <see cref="T:QPdfNet.Job" />
+            </returns>
+        </member>
+        <member name="M:QPdfNet.Job.RemoveUnreferencedResources(QPdfNet.Enums.AutoYesNo)">
+            <summary>
+                Starting with qpdf 8.1, when splitting pages, qpdf is able to attempt to remove images and fonts that are not used
+                by a page even if they are referenced in the page’s resources dictionary. When shared resources are in use, this
+                behavior can greatly reduce the file sizes of split pages, but the analysis is very slow. In versions from 8.1
+                through 9.1.1, qpdf did this analysis by default. Starting in qpdf 10.0.0, if auto is used, qpdf does a quick
+                analysis of the file to determine whether the file is likely to have unreferenced objects on pages, a pattern that
+                frequently occurs when resource dictionaries are shared across multiple pages and rarely occurs otherwise. If it
+                discovers this pattern, then it will attempt to remove unreferenced resources. Usually this means you get the
+                slower splitting speed only when it’s actually going to create smaller files. You can suppress removal of
+                unreferenced resources altogether by specifying no or force qpdf to do the full algorithm by specifying
+                <see cref="F:QPdfNet.Enums.AutoYesNo.Yes" />.
+            </summary>
+            <param name="removeUnreferencedResources">
+                <see cref="T:QPdfNet.Enums.AutoYesNo" />
+            </param>
+            <returns>
+                <see cref="T:QPdfNet.Job" />
+            </returns>
+        </member>
+        <member name="M:QPdfNet.Job.PreserveUnreferencedResources">
+            <summary>
+                This is a synonym for <see cref="M:QPdfNet.Job.RemoveUnreferencedResources(QPdfNet.Enums.AutoYesNo)" /> = <see cref="F:QPdfNet.Enums.AutoYesNo.No" />. See
+                <see cref="M:QPdfNet.Job.RemoveUnreferencedResources(QPdfNet.Enums.AutoYesNo)" />. See also <see cref="M:QPdfNet.Job.PreserveUnreferenced" />, which does
+                something completely different. To reduce confusion, you should use <see cref="M:QPdfNet.Job.RemoveUnreferencedResources(QPdfNet.Enums.AutoYesNo)" />
+                = <see cref="F:QPdfNet.Enums.AutoYesNo.No" /> instead.
+            </summary>
+            <returns>
+                <see cref="T:QPdfNet.Job" />
+            </returns>
+        </member>
+        <member name="M:QPdfNet.Job.NewlineBeforeEndstream">
+            <summary>
+                Tell qpdf to insert a newline before the endstream keyword, not counted in the length, after any stream content
+                even if the last character of the stream was a newline. This may result in two newlines in some cases. This is a
+                requirement of PDF/A. While qpdf doesn’t specifically know how to generate PDF/A-compliant PDFs, this at least
+                prevents it from removing compliance on already compliant files.
+            </summary>
+            <returns>
+                <see cref="T:QPdfNet.Job" />
+            </returns>
+        </member>
+        <member name="M:QPdfNet.Job.CoalesceContents">
+            <summary>
+                When a page’s contents are split across multiple streams, this option causes qpdf to combine them into a single
+                stream. Use of this option is never necessary for ordinary usage, but it can help when working with some files in
+                some cases. For example, this can be combined with QDF mode or content normalization to make it easier to look at
+                all of a page’s contents at once. It is common for PDF writers to create multiple content streams for a variety of
+                reasons such as making it easier to modify page contents and splitting very large content streams so PDF viewers
+                may be able to use less memory.
+            </summary>
+            <returns>
+                <see cref="T:QPdfNet.Job" />
+            </returns>
+        </member>
+        <member name="M:QPdfNet.Job.ExternalizeInlineImages">
+            <summary>
+                Convert inline images to regular images. By default, images whose data is at least 1,024 bytes are converted when
+                this option is selected. Use <see cref="M:QPdfNet.Job.IiMinBytes(System.Int32)" /> to change the size threshold. This option is implicitly
+                selected when <see cref="M:QPdfNet.Job.OptimizeImages" /> is selected unless <see cref="M:QPdfNet.Job.KeepInlineImages" /> is also specified.
+            </summary>
+            <returns>
+                <see cref="T:QPdfNet.Job" />
+            </returns>
+        </member>
+        <member name="M:QPdfNet.Job.IiMinBytes(System.Int32)">
+            <summary>
+                Avoid converting inline images whose size is below the specified minimum size to regular images. The default is
+                <b>1024</b> bytes. Use <b>0</b> for no minimum.
+            </summary>
+            <param name="size">The minimum size</param>
+            <returns>
+                <see cref="T:QPdfNet.Job" />
+            </returns>
+        </member>
+        <member name="M:QPdfNet.Job.MinVersion(System.String)">
+            <summary>
+                Force the PDF version of the output file to be at least version. In other words, if the input file has a lower
+                version than the specified version, the specified version will be used. If the input file has a higher version, the
+                input file’s original version will be used. It is seldom necessary to use this option since qpdf will automatically
+                increase the version as needed when adding features that require newer PDF readers. The version number may be expressed
+                in the form major.minor[.extension-level]. If .extension-level, is given, version is interpreted as major.minor at
+                extension level extension-level. For example, version 1.7.8 represents version 1.7 at extension level 8. Note that
+                minimal syntax checking is done on the command line. qpdf does not check whether the specified version is actually required.
+            </summary>
+            <param name="version">The minimum version</param>
+            <returns>
+                <see cref="T:QPdfNet.Job" />
+            </returns>
+        </member>
+        <member name="M:QPdfNet.Job.ForceVersion(System.String)">
+            <summary>
+                This option forces the PDF version to be the exact version specified even when the file may have content that is
+                not supported in that version. The version number is interpreted in the same way as with <see cref="M:QPdfNet.Job.MinVersion(System.String)"/>
+                so that extension levels can be set. In some cases, forcing the output file’s PDF version to be lower than that of the
+                input file will cause qpdf to disable certain features of the document. Specifically, 256-bit keys are disabled if
+                the version is less than 1.7 with extension level 8 (except the deprecated, unsupported “R5” format is allowed with
+                extension levels 3 through 7), AES encryption is disabled if the version is less than 1.6, clear text metadata and
+                object streams are disabled if less than 1.5, 128-bit encryption keys are disabled if less than 1.4, and all
+                encryption is disabled if less than 1.3. Even with these precautions, qpdf won’t be able to do things like
+                eliminate use of newer image compression schemes, transparency groups, or other features that may have been added
+                in more recent versions of PDF. As a general rule, with the exception of big structural things like the use of object
+                streams or AES encryption, PDF viewers are supposed to ignore features they don’t support. This means that forcing the
+                version to a lower version may make it possible to open your PDF file with an older version, though bear in mind that
+                some of the original document’s functionality may be lost.
+            </summary>
+            <param name="version">The forced version</param>
+            <returns>
+                <see cref="T:QPdfNet.Job" />
+            </returns>
+        </member>
+        <member name="M:QPdfNet.Job.Pages(System.String,System.String,System.String)">
+            <summary>
+                This method starts page selection options, which are used to select pages from one or more input files to perform
+                operations such as splitting, merging, and collating files.
+            </summary>
+            <remarks>
+                See https://qpdf.readthedocs.io/en/stable/cli.html#page-selection about how this method works
+            </remarks>
+            <param name="file">The file</param>
+            <param name="range">The page range</param>
+            <param name="password">The password or <c>null</c> when not needed</param>
+            <returns>
+                <see cref="T:QPdfNet.Job" />
+            </returns>
+        </member>
+        <member name="M:QPdfNet.Job.Collate(System.Int32)">
+            <summary>
+                This option causes qpdf to collate rather than concatenate pages specified with <see cref="M:QPdfNet.Job.Pages(System.String,System.String,System.String)"/>. With a numeric parameter,
+                collate in groups of <paramref name="n" />. The default is <b>1</b>.
+            </summary>
+            <param name="n">
+                A value greater than zero
+            </param>
+            <returns>
+                <see cref="T:QPdfNet.Job" />
+            </returns>
+        </member>
+        <member name="M:QPdfNet.Job.SplitPages(System.Int32)">
+            <summary>
+                Write each group of <paramref name="n" /> pages to a separate  <see cref="M:QPdfNet.Job.OutputFile(System.String)" />. If <paramref name="n" />
+                is not specified, create single pages. Output file names are generated as follows:<br/>
+                If the string %d appears in the <see cref="M:QPdfNet.Job.OutputFile(System.String)" /> name, it is replaced with a range of zero-padded page
+                numbers starting from 1. Otherwise, if the output file name ends in .pdf(case insensitive), a zero-padded page
+                range, preceded by a dash, is inserted before the file extension. Otherwise, the file name is appended with a
+                zero-padded page range preceded by a dash.Zero padding is added to all page numbers in file names so that all
+                the numbers are the same length, which causes the output filenames to sort lexically in numerical order. Page
+                ranges are a single number in the case of single-page groups or two numbers separated by a dash otherwise. for
+                testing
+            </summary>
+            <param name="n">
+                A value greater than zero
+            </param>
+            <returns>
+                <see cref="T:QPdfNet.Job" />
+            </returns>
+        </member>
+        <member name="M:QPdfNet.Job.Overlay(System.String,System.String,System.String,System.String)">
+            <summary>
+                <see cref="M:QPdfNet.Job.Overlay(System.String,System.String,System.String,System.String)"/> options are processed late, so they can be combined with other options like merging and will
+                apply to the final output. The <see cref="M:QPdfNet.Job.Underlay(System.String,System.String,System.String,System.String)"/> options work the same way, except <see cref="M:QPdfNet.Job.Underlay(System.String,System.String,System.String,System.String)"/> pages
+                are drawn underneath the page to which they are applied, possibly obscured by the original page, and
+                <see cref="M:QPdfNet.Job.Overlay(System.String,System.String,System.String,System.String)"/> files are drawn on top of the page to which they are applied, possibly obscuring the page. You
+                can combine both, but you can only specify each option at most one time. The default behavior of <see cref="M:QPdfNet.Job.Overlay(System.String,System.String,System.String,System.String)"/>
+                and <see cref="M:QPdfNet.Job.Underlay(System.String,System.String,System.String,System.String)"/> is that pages are taken from the <see cref="M:QPdfNet.Job.Overlay(System.String,System.String,System.String,System.String)"/>/<see cref="M:QPdfNet.Job.Underlay(System.String,System.String,System.String,System.String)"/> file in
+                sequence and applied to corresponding pages in the output until there are no more output pages.If the
+                <see cref="M:QPdfNet.Job.Overlay(System.String,System.String,System.String,System.String)"/> or <see cref="M:QPdfNet.Job.Underlay(System.String,System.String,System.String,System.String)"/> file runs out of pages, remaining output pages are left alone
+            </summary>
+            <param name="file">The file with it's full path</param>
+            <param name="to">
+                Specify a page range (see Page Ranges) that indicates which pages in the output should have the
+                <see cref="M:QPdfNet.Job.Overlay(System.String,System.String,System.String,System.String)"/>/<see cref="M:QPdfNet.Job.Underlay(System.String,System.String,System.String,System.String)"/> applied. If not specified, <see cref="M:QPdfNet.Job.Overlay(System.String,System.String,System.String,System.String)"/>/<see cref="M:QPdfNet.Job.Underlay(System.String,System.String,System.String,System.String)"/>
+                are applied to all pages.
+            </param>
+            <param name="from">
+                Specify a page range that indicates which pages in the <see cref="M:QPdfNet.Job.Overlay(System.String,System.String,System.String,System.String)"/>/<see cref="M:QPdfNet.Job.Underlay(System.String,System.String,System.String,System.String)"/> file will be used
+                for <see cref="M:QPdfNet.Job.Overlay(System.String,System.String,System.String,System.String)"/> or <see cref="M:QPdfNet.Job.Underlay(System.String,System.String,System.String,System.String)"/>. If not specified, all pages will be used. The
+                <paramref name="from"/> pages are used until they are exhausted, after which any pages specified with
+                <paramref name="repeat" /> are used. If you are using the <paramref name="repeat" /> option, you can use
+                <paramref name="from"/> to provide an empty set of <paramref name="from"/> pages.
+            </param>
+            <param name="repeat">
+                Specify an optional page range that indicates which pages in the <see cref="M:QPdfNet.Job.Overlay(System.String,System.String,System.String,System.String)"/>/<see cref="M:QPdfNet.Job.Underlay(System.String,System.String,System.String,System.String)"/> file
+                will be repeated after the <paramref name="from"/> pages are used up. If you want to apply a repeat a range of
+                pages starting with the first page of output, you can explicitly use <paramref name="from"/>.
+            </param>
+            <returns>
+                <see cref="T:QPdfNet.Job" />
+            </returns>
+        </member>
+        <member name="M:QPdfNet.Job.Underlay(System.String,System.String,System.String,System.String)">
+            <summary>
+                <see cref="M:QPdfNet.Job.Overlay(System.String,System.String,System.String,System.String)"/> options are processed late, so they can be combined with other options like merging and will
+                apply to the final output. The <see cref="M:QPdfNet.Job.Underlay(System.String,System.String,System.String,System.String)"/> options work the same way, except <see cref="M:QPdfNet.Job.Underlay(System.String,System.String,System.String,System.String)"/> pages
+                are drawn underneath the page to which they are applied, possibly obscured by the original page, and
+                <see cref="M:QPdfNet.Job.Overlay(System.String,System.String,System.String,System.String)"/> files are drawn on top of the page to which they are applied, possibly obscuring the page. You
+                can combine both, but you can only specify each option at most one time. The default behavior of <see cref="M:QPdfNet.Job.Overlay(System.String,System.String,System.String,System.String)"/>
+                and <see cref="M:QPdfNet.Job.Underlay(System.String,System.String,System.String,System.String)"/> is that pages are taken from the <see cref="M:QPdfNet.Job.Overlay(System.String,System.String,System.String,System.String)"/>/<see cref="M:QPdfNet.Job.Underlay(System.String,System.String,System.String,System.String)"/> file in
+                sequence and applied to corresponding pages in the output until there are no more output pages.If the
+                <see cref="M:QPdfNet.Job.Overlay(System.String,System.String,System.String,System.String)"/> or <see cref="M:QPdfNet.Job.Underlay(System.String,System.String,System.String,System.String)"/> file runs out of pages, remaining output pages are left alone
+            </summary>
+            <param name="file">The file with it's full path</param>
+            <param name="to">
+                Specify a page range (see Page Ranges) that indicates which pages in the output should have the
+                <see cref="M:QPdfNet.Job.Overlay(System.String,System.String,System.String,System.String)"/>/<see cref="M:QPdfNet.Job.Underlay(System.String,System.String,System.String,System.String)"/> applied. If not specified, <see cref="M:QPdfNet.Job.Overlay(System.String,System.String,System.String,System.String)"/>/<see cref="M:QPdfNet.Job.Underlay(System.String,System.String,System.String,System.String)"/>
+                are applied to all pages.
+            </param>
+            <param name="from">
+                Specify a page range that indicates which pages in the <see cref="M:QPdfNet.Job.Overlay(System.String,System.String,System.String,System.String)"/>/<see cref="M:QPdfNet.Job.Underlay(System.String,System.String,System.String,System.String)"/> file will be used
+                for <see cref="M:QPdfNet.Job.Overlay(System.String,System.String,System.String,System.String)"/> or <see cref="M:QPdfNet.Job.Underlay(System.String,System.String,System.String,System.String)"/>. If not specified, all pages will be used. The
+                <paramref name="from"/> pages are used until they are exhausted, after which any pages specified with
+                <paramref name="repeat" /> are used. If you are using the <paramref name="repeat" /> option, you can use
+                <paramref name="from"/> to provide an empty set of <paramref name="from"/> pages.
+            </param>
+            <param name="repeat">
+                Specify an optional page range that indicates which pages in the <see cref="M:QPdfNet.Job.Overlay(System.String,System.String,System.String,System.String)"/>/<see cref="M:QPdfNet.Job.Underlay(System.String,System.String,System.String,System.String)"/> file
+                will be repeated after the <paramref name="from"/> pages are used up. If you want to apply a repeat a range of
+                pages starting with the first page of output, you can explicitly use <paramref name="from"/>.
+            </param>
+            <returns>
+                <see cref="T:QPdfNet.Job" />
+            </returns>
+        </member>
+        <member name="M:QPdfNet.Job.AddAttachment(System.String,System.String,System.Boolean)">
+            <summary>
+                This flag starts add attachment options, which are used to add attachments to a file.
+                The  flag and its options may be repeated to add multiple attachments
+            </summary>
+            <param name="file">
+                Specify the file with it's full path to be used for the attachment.
+            </param>
+            <param name="description">Supply descriptive text for the attachment, displayed by some PDF viewers.</param>
+            <param name="replace">
+                Indicate that any existing attachment with the same key should be replaced by the new attachment.
+                Otherwise, qpdf gives an error if an attachment with that key is already present.
+            </param>
+            <returns>
+                <see cref="T:QPdfNet.Job" />
+            </returns>
+            <remarks>
+                The key, file name, creation date, modify date and mime type will be read from the given <paramref name="file"/>.
+                If you want to set them your self then use the other AddAttachment method
+            </remarks>
+            <exception cref="T:System.IO.FileNotFoundException"></exception>
+        </member>
+        <member name="M:QPdfNet.Job.AddAttachment(System.String,System.String,System.String,System.DateTime,System.DateTime,System.String,System.String,System.Boolean)">
+            <summary>
+                This flag starts add attachment options, which are used to add attachments to a file.
+                The  flag and its options may be repeated to add multiple attachments
+            </summary>
+            <param name="file">The file with it's full path</param>
+            <param name="key">
+                Specify the key to use for the attachment in the embedded files table. It defaults to the last
+                element of the attached file’s filename.
+            </param>
+            <param name="fileName">
+                Specify the filename to be used for the attachment. This is what is usually displayed to the
+                user and is the name most graphical PDF viewers will use when saving a file. It defaults to the last element of the
+                attached file’s filename.
+            </param>
+            <param name="creationDate">Specify the attachment’s creation date in PDF format; defaults to the current time</param>
+            <param name="modDate">Specify the attachment’s modification date in PDF format; defaults to the current time.</param>
+            <param name="mimeType">
+                Specify the mime type for the attachment, such as text/plain, application/pdf, image/png, etc.
+                The qpdf library does not automatically determine the mime type.
+            </param>
+            <param name="description">Supply descriptive text for the attachment, displayed by some PDF viewers.</param>
+            <param name="replace">
+                Indicate that any existing attachment with the same key should be replaced by the new attachment.
+                Otherwise, qpdf gives an error if an attachment with that key is already present.
+            </param>
+            <returns>
+                <see cref="T:QPdfNet.Job" />
+            </returns>
+            <exception cref="T:System.IO.FileNotFoundException"></exception>
+        </member>
+        <member name="M:QPdfNet.Job.CopyAttachmentsFrom(System.String,System.String)">
+            <summary>
+                This flag starts add attachment options, which are used to add attachments to a file.
+                The  flag and its options may be repeated to add multiple attachments
+            </summary>
+            <param name="file">The file to copy from with its full path</param>
+            <param name="prefix">
+                Only required if the file from which attachments are being copied has attachments with keys that
+                conflict with attachments already in the file. In this case, the specified prefix will be prepended to each key.
+                This affects only the key in the embedded files table, not the file name. The PDF specification doesn’t preclude
+                multiple attachments having the same file name.
+            </param>
+            <returns>
+                <see cref="T:QPdfNet.Job" />
+            </returns>
+        </member>
+        <member name="M:QPdfNet.Job.RemoveAttachment(System.String)">
+            <summary>
+                Remove the specified attachment. This doesn’t only remove the attachment from the embedded files table but
+                also clears out the file specification to ensure that the attachment is actually not present in the output
+                file. That means that any potential internal links to the attachment will be broken. Run with <see cref="M:QPdfNet.Job.Verbose"/>
+                to see status of the removal. Use <see cref="M:QPdfNet.Job.ListAttachments"/> to find the attachment key. This option may
+                be repeated to remove multiple attachments.
+            </summary>
+            <param name="key">The key of the attachment</param>
+            <returns>
+                <see cref="T:QPdfNet.Job" />
+            </returns>
+        </member>
+        <member name="M:QPdfNet.Job.FlattenRotation">
+            <summary>
+                For each page that is rotated using the /Rotate key in the page’s dictionary, remove the /Rotate key and implement
+                the identical rotation semantics by modifying the page’s contents. This option can be useful to prepare files for
+                buggy PDF applications that don’t properly handle rotated pages. There is usually no reason to use this option
+                unless you are working around a specific problem.
+            </summary>
+            <returns>
+                <see cref="T:QPdfNet.Job" />
+            </returns>
+        </member>
+        <member name="M:QPdfNet.Job.FlattenAnnotations(QPdfNet.Enums.FlattenAnnotations)">
+            <summary>
+                This option collapses annotations into the pages’ contents with special handling for form fields. Ordinarily, an
+                annotation is rendered separately and on top of the page. Combining annotations into the page’s contents
+                effectively freezes the placement of the annotations, making them look right after various page transformations.
+                The library functionality backing this option was added for the benefit of programs that want to create n-up page
+                layouts and other similar things that don’t work well with annotations. In a PDF file, interactive form fields have
+                a value and, independently, a set of instructions, called an appearance, to render the filled-in field. If a form
+                is filled in by a program that doesn’t know how to update the appearances, they may become inconsistent with the
+                fields’ values. If qpdf detects this case, its default behavior is not to flatten those annotations because doing
+                so would cause the value of the form field to be lost. This gives you a chance to go back and re-save the form with
+                a program that knows how to generate appearances. qpdf itself can generate appearances with some limitations. See
+                the <see cref="M:QPdfNet.Job.GenerateAppearances" /> option for details.
+            </summary>
+            <param name="parameter">
+                <see cref="M:QPdfNet.Job.FlattenAnnotations(QPdfNet.Enums.FlattenAnnotations)" />
+            </param>
+            <returns>
+                <see cref="T:QPdfNet.Job" />
+            </returns>
+        </member>
+        <member name="M:QPdfNet.Job.Rotate(QPdfNet.Enums.Rotation,System.String)">
+            <summary>
+                Rotate the specified range of pages by the specified angle, which must be a multiple of 90 degrees
+            </summary>
+            <param name="angle">
+                <see cref="T:QPdfNet.Enums.Rotation" />
+            </param>
+            <param name="pageRange">
+                The page range or <c>null</c>, see https://qpdf.readthedocs.io/en/stable/cli.html?highlight=ranges#page-ranges
+            </param>
+            <returns></returns>
+        </member>
+        <member name="M:QPdfNet.Job.GenerateAppearances">
+            <summary>
+                If a file contains interactive form fields and indicates that the appearances are out of date with the values of
+                the form, this flag will regenerate appearances, subject to a few limitations. Note that there is usually no reason
+                to do this, but it can be necessary before using the <see cref="M:QPdfNet.Job.FlattenAnnotations(QPdfNet.Enums.FlattenAnnotations)" /> option.
+            </summary>
+            <returns>
+                <see cref="T:QPdfNet.Job" />
+            </returns>
+        </member>
+        <member name="M:QPdfNet.Job.OptimizeImages">
+            <summary>
+                This flag causes qpdf to recompress all images that are not compressed with DCT (JPEG) using DCT compression as
+                long as doing so decreases the size in bytes of the image data and the image does not fall below minimum specified
+                dimensions. Useful information is provided when used in combination with <see cref="M:QPdfNet.Job.Verbose" />. See also the
+                <see cref="M:QPdfNet.Job.OiMinWidth(System.Int32)" />, <see cref="M:QPdfNet.Job.OiMinHeight(System.Int32)" />, and <see cref="M:QPdfNet.Job.OiMinArea(System.Int32)" /> options. By default, inline
+                images are converted to regular images and optimized as well. Use <see cref="M:QPdfNet.Job.KeepInlineImages"/> to prevent inline
+                images from being included.
+            </summary>
+            <returns>
+                <see cref="T:QPdfNet.Job" />
+            </returns>
+        </member>
+        <member name="M:QPdfNet.Job.OiMinWidth(System.Int32)">
+            <summary>
+                Avoid optimizing images whose width is below the specified amount. If omitted, the default is <b>128</b> pixels. Use
+                <b>0</b> for no minimum.
+            </summary>
+            <param name="width">The width</param>
+            <returns>
+                <see cref="T:QPdfNet.Job" />
+            </returns>
+        </member>
+        <member name="M:QPdfNet.Job.OiMinHeight(System.Int32)">
+            <summary>
+                Avoid optimizing images whose height is below the specified amount. If omitted, the default is <b>128</b> pixels. Use
+                <b>0</b> for no minimum.
+            </summary>
+            <param name="height">The height</param>
+            <returns>
+                <see cref="T:QPdfNet.Job" />
+            </returns>
+        </member>
+        <member name="M:QPdfNet.Job.OiMinArea(System.Int32)">
+            <summary>
+                Avoid optimizing images whose pixel count (width × height) is below the specified amount. If omitted, the default
+                is <b>16384</b> pixels. Use <b>0</b> for no minimum.
+            </summary>
+            <param name="pixels">The amount of pixels</param>
+            <returns>
+                <see cref="T:QPdfNet.Job" />
+            </returns>
+        </member>
+        <member name="M:QPdfNet.Job.KeepInlineImages">
+            <summary>
+                Prevent inline images from being included in image optimization done by <see cref="M:QPdfNet.Job.OptimizeImages" />.
+            </summary>
+            <returns>
+                <see cref="T:QPdfNet.Job" />
+            </returns>
+        </member>
+        <member name="M:QPdfNet.Job.RemovePageLabels">
+            <summary>
+                Exclude page labels (explicit page numbers) from the <see cref="M:QPdfNet.Job.OutputFile(System.String)"/>.
+            </summary>
+            <returns>
+                <see cref="T:QPdfNet.Job" />
+            </returns>
+        </member>
+        <member name="M:QPdfNet.Job.IsEncrypted">
+            <summary>
+                This option can be used for password-protected files even if you don’t know the password.
+                This option is useful for shell scripts. Other options are ignored if this is given. This option is mutually
+                exclusive with <see cref="M:QPdfNet.Job.RequiresPassword"/>. Both this option and <see cref="M:QPdfNet.Job.RequiresPassword"/> exit with
+                status <see cref="F:QPdfNet.Enums.ExitCodeIsEncrypted.NotEncrypted"/> for non-encrypted
+                files.
+            </summary>
+            <returns>
+                <see cref="T:QPdfNet.Job" />
+            </returns>
+        </member>
+        <member name="M:QPdfNet.Job.RequiresPassword">
+            <summary>
+                Silently exit with a code indicating the file’s password status. If a password is supplied with the method
+                <see cref="M:QPdfNet.Job.InputFile(System.String)" /> and the <see cref="M:QPdfNet.Job.Password(System.String)"/> parameter set, that password is used to open the
+                file just as with any normal invocation of qpdf. That means that using this option can be used to check
+                the correctness of the password. This option is mutually exclusive with <see cref="M:QPdfNet.Job.IsEncrypted" />.
+            </summary>
+            <remarks>
+                Use with the method <see cref="M:QPdfNet.Job.Password(System.String)" /> method
+            </remarks>
+            <returns>
+                <see cref="T:QPdfNet.Job" />
+            </returns>
+        </member>
+        <member name="M:QPdfNet.Job.Check">
+            <summary>
+                Check the file’s structure as well as encryption, linearization, and encoding of stream data, and write information
+                about the file to standard output. An exit status of <see cref="F:QPdfNet.Enums.ExitCode.Success" /> indicates syntactic correctness
+                of the PDF file. Note that <see cref="M:QPdfNet.Job.Check" /> writes nothing to standard error when everything is valid, so if you
+                are using this to programmatically validate files in bulk, it is safe to run without output redirected to /dev/null
+                and just check for a <see cref="F:QPdfNet.Enums.ExitCode.Success" />. A file for which <see cref="M:QPdfNet.Job.Check" /> reports no errors may
+                still have errors in stream data content or may contain constructs that don’t conform to the PDF specification, but
+                it should be syntactically valid. If <see cref="M:QPdfNet.Job.Check" /> reports any errors, qpdf will exit with a status of
+                <see cref="F:QPdfNet.Enums.ExitCode.ErrorsFoundFileNotProcessed" />. There are some recoverable conditions that <see cref="M:QPdfNet.Job.Check" />
+                detects. These are issued as warnings instead of errors. If qpdf finds no errors but finds warnings, it will exit
+                with a status of <see cref="F:QPdfNet.Enums.ExitCode.WarningsWereFoundFileProcessed" />. When <see cref="M:QPdfNet.Job.Check" /> is combined with
+                other options, checks are always performed before any other options are processed. For erroneous files,
+                <see cref="M:QPdfNet.Job.Check" /> will cause qpdf to attempt to recover, after which other options are effectively operating on
+                the recovered file. Combining <see cref="M:QPdfNet.Job.Check" /> with other options in this way can be useful for manually
+                recovering severely damaged files.
+            </summary>
+            <remarks>
+                Use the <see cref="M:QPdfNet.Output.Helper.ParseCheck(System.String)"/> method to help parse the output
+            </remarks>
+            <returns>
+                <see cref="T:QPdfNet.Job" />
+            </returns>
+        </member>
+        <member name="M:QPdfNet.Job.ShowEncryption">
+            <summary>
+                This option shows document encryption parameters. It also shows the document’s user password if the owner password
+                is given and the file was encrypted using older encryption formats that allow user password recovery. (See PDF
+                Encryption for a technical discussion of this feature.) The output of <see cref="M:QPdfNet.Job.ShowEncryption" /> is included in
+                the output of <see cref="M:QPdfNet.Job.Check" />.
+            </summary>
+            <remarks>
+                Use the <see cref="M:QPdfNet.Output.Helper.ParseShowEncryption(System.String)"/> method to help parse the output
+            </remarks>
+            <returns>
+                <see cref="T:QPdfNet.Job" />
+            </returns>
+        </member>
+        <member name="M:QPdfNet.Job.ShowEncryptionKey">
+            <summary>
+                When encryption information is being displayed, as when <see cref="M:QPdfNet.Job.Check" /> or <see cref="M:QPdfNet.Job.ShowEncryption" /> is
+                given, display the computed or retrieved encryption key as a hexadecimal string. This value is not ordinarily
+                useful to users, but it can be used as the parameter to <see cref="M:QPdfNet.Job.Password(System.String)" /> if the <see cref="M:QPdfNet.Job.PasswordIsHexKey" />
+                is specified. Note that, when PDF files are encrypted, passwords and other metadata are used only to compute an encryption
+                key, and the encryption key is what is actually used for encryption. This enables retrieval of that key. See PDF Encryption
+                for a technical discussion.
+            </summary>
+            <remarks>
+                Use the <see cref="M:QPdfNet.Output.Helper.ParseShowEncryption(System.String)"/> method to help parse the output
+            </remarks>
+            <returns>
+                <see cref="T:QPdfNet.Job" />
+            </returns>
+        </member>
+        <member name="M:QPdfNet.Job.CheckLinearization">
+            <summary>
+                Check to see whether a file is linearized and, if so, whether the linearization hint tables are correct. qpdf does
+                not check all aspects of linearization. A linearized PDF file with linearization errors that is otherwise correct
+                is almost always readable by a PDF viewer. As such, “errors” in PDF linearization are treated by qpdf as warnings.
+            </summary>
+            <returns>
+                <see cref="T:QPdfNet.Job" />
+            </returns>
+        </member>
+        <member name="M:QPdfNet.Job.ShowLinearization">
+            <summary>
+                Check and display all data in the linearization hint tables.
+            </summary>
+            <returns>
+                <see cref="T:QPdfNet.Job" />
+            </returns>
+        </member>
+        <member name="M:QPdfNet.Job.ShowXref">
+            <summary>
+                Show the contents of the cross-reference table or stream in a human-readable form. The cross-reference data gives
+                the offset of regular objects and the object stream ID and 0-based index within the object stream for compressed
+                objects. This is especially useful for files with cross-reference streams, which are stored in a binary format. If
+                the file is invalid and cross reference table reconstruction is performed, this option will show the information in
+                the reconstructed table.
+            </summary>
+            <returns>
+                <see cref="T:QPdfNet.Job" />
+            </returns>
+        </member>
+        <member name="M:QPdfNet.Job.ShowObject(System.String)">
+            <summary>
+                Show the contents of the given object. This is especially useful for inspecting objects that are inside of object
+                streams (also known as “compressed objects”).
+            </summary>
+            <param name="obj">The object to show</param>
+            <returns>
+                <see cref="T:QPdfNet.Job" />
+            </returns>
+        </member>
+        <member name="M:QPdfNet.Job.RawStreamData">
+            <summary>
+                When used with <see cref="M:QPdfNet.Job.ShowObject(System.String)" />, if the object is a stream, write the raw (compressed) binary stream data
+                to standard output instead of the object’s contents. Avoid combining this with other inspection options to avoid
+                commingling the stream data with other output. See also <see cref="M:QPdfNet.Job.FilteredStreamData" />.
+            </summary>
+            <returns>
+                <see cref="T:QPdfNet.Job" />
+            </returns>
+        </member>
+        <member name="M:QPdfNet.Job.FilteredStreamData">
+            <summary>
+                When used with <see cref="M:QPdfNet.Job.ShowObject(System.String)" />, if the object is a stream, write the filtered (uncompressed, potentially
+                binary) stream data to standard output instead of the object’s contents. If the stream is filtered using filters
+                that qpdf does not support, an error will be issued. This option acts as if <see cref="M:QPdfNet.Job.DecodeLevel(QPdfNet.Enums.DecodeLevel)" />
+                <see cref="F:QPdfNet.Enums.DecodeLevel.All" /> was specified, so it will uncompress images compressed with supported
+                lossy compression schemes. Avoid combining this with other inspection options to avoid commingling the stream data
+                with other output. This option may be combined with <see cref="M:QPdfNet.Job.NormalizeContent(System.Boolean)" />.If you do this, qpdf will attempt
+                to run content normalization even if the stream is not a content stream, which will probably produce unusable results.
+            </summary>
+            <returns>
+                <see cref="T:QPdfNet.Job" />
+            </returns>
+        </member>
+        <member name="M:QPdfNet.Job.ShowNPages">
+            <summary>
+                Print the number of pages in the input file on a line by itself. Since the number of pages appears by itself on a
+                line, this option can be useful for scripting if you need to know the number of pages in a file.
+            </summary>
+            <returns>
+                <see cref="T:QPdfNet.Job" />
+            </returns>
+        </member>
+        <member name="M:QPdfNet.Job.ShowPages">
+            <summary>
+                Show the object and generation number for each page dictionary object and for each content stream associated with
+                the page. Having this information makes it more convenient to inspect objects from a particular page.
+            </summary>
+            <remarks>
+                See also <see cref="M:QPdfNet.Job.WithImages" />.
+            </remarks>
+            <returns>
+                <see cref="T:QPdfNet.Job" />
+            </returns>
+        </member>
+        <member name="M:QPdfNet.Job.WithImages">
+            <summary>
+                When used with <see cref="M:QPdfNet.Job.ShowPages" />, also shows the object and generation numbers for the image objects on each page.
+            </summary>
+            <returns>
+                <see cref="T:QPdfNet.Job" />
+            </returns>
+        </member>
+        <member name="M:QPdfNet.Job.ListAttachments">
+            <summary>
+                Show the key and stream number for each embedded file. With <see cref="M:QPdfNet.Job.Verbose" />, additional information,
+                including preferred file name, description, dates, and more are also displayed. The key is usually but not always
+                equal to the file name and is needed by some of the other options.
+            </summary>
+            <returns>
+                <see cref="T:QPdfNet.Job" />
+            </returns>
+            <remarks>
+                Use the <see cref="M:QPdfNet.Output.Helper.ParseListAttachments(System.String)"/> method to help parse the attachment names out of the output
+            </remarks>
+        </member>
+        <member name="M:QPdfNet.Job.ShowAttachment(System.String)">
+            <summary>
+                Write the contents of the specified attachment to standard output as binary data. The key should match one of the
+                keys shown by <see cref="M:QPdfNet.Job.ListAttachments"/>. If this option is given more than once, only the last attachment will be shown.
+            </summary>
+            <returns>
+                <see cref="T:QPdfNet.Job" />
+            </returns>
+        </member>
+        <member name="M:QPdfNet.Job.Json">
+            <summary>
+                Generate a JSON representation of the file. This is described in depth in QPDF JSON. The version parameter can be
+                used to specify which version of the qpdf JSON format should be output. The only supported value is 1, but it’s
+                possible that a new JSON output version will be added in a future version. You can also specify latest to use the
+                latest JSON version. For backward compatibility, the default value will remain 1 until qpdf version 11, after which
+                point it will become latest. In all case, you can tell what version of the JSON output you have from the "version"
+                key in the output.
+            </summary>
+            <remarks>
+                Use the <see cref="T:QPdfNet.Info.Pdf"/> class if you want to get a nice object orientated output
+            </remarks>
+            <returns>
+                <see cref="T:QPdfNet.Job" />
+            </returns>
+        </member>
+        <member name="M:QPdfNet.Job.JsonKey(System.String)">
+            <summary>
+                This option is repeatable. If given, only the specified top-level keys will be included in the JSON output.
+                Otherwise, all keys will be included. <b>version</b> and <b>parameters</b> will always appear in the output.
+            </summary>
+            <returns>
+                <see cref="T:QPdfNet.Job" />
+            </returns>
+        </member>
+        <member name="M:QPdfNet.Job.JsonObject(System.String)">
+            <summary>
+                This option is repeatable. If given, only specified objects will be shown in the “objects” key of the JSON output.
+                Otherwise, all objects will be shown.
+            </summary>
+            <returns>
+                <see cref="T:QPdfNet.Job" />
+            </returns>
+        </member>
+        <member name="M:QPdfNet.Job.StaticId">
+            <summary>
+                Use a fixed value for the document ID (/ID in the trailer). This is intended for testing only. <b>Never</b> use it for
+                production files. If you are trying to get the same ID each time for a given file and you are not generating encrypted files,
+                consider using the <see cref="M:QPdfNet.Job.DeterministicId"/> option.
+            </summary>
+            <returns>
+                <see cref="T:QPdfNet.Job" />
+            </returns>
+        </member>
+        <member name="M:QPdfNet.Job.StaticAesIv">
+            <summary>
+                Use a static initialization vector for AES-CBC. This is intended for testing only so that output files can be reproducible.
+                <b>Never</b> use it for production files. This option in particular is not secure since it significantly weakens the encryption.
+                When combined with <see cref="M:QPdfNet.Job.StaticId"/> and using the three-step process described in Idempotency, it is possible to create
+                byte-for-byte idempotent output with PDF files that use 256-bit encryption to assist with creating reproducible test suites.
+            </summary>
+            <returns>
+                <see cref="T:QPdfNet.Job" />
+            </returns>
+        </member>
+        <member name="M:QPdfNet.Job.LinearizePass1(System.String)">
+            <summary>
+                Write the first pass of linearization to the named file. The resulting file is not a valid PDF file. This option is useful
+                only for debugging QPDFWriter’s linearization code. When qpdf linearizes files, it writes the file in two passes, using the
+                first pass to calculate sizes and offsets that are required for hint tables and the linearization dictionary. Ordinarily, the
+                first pass is discarded. This option enables it to be captured, allowing inspection of the file before values calculated in
+                pass 1 are inserted into the file for pass 2.
+            </summary>
+            <returns>
+                <see cref="T:QPdfNet.Job" />
+            </returns>
+        </member>
+        <member name="M:QPdfNet.Job.InternalRun(System.String@)">
+            <summary>
+                Runs the job with the given parameters
+            </summary>
+            <param name="output">Returns any output that is generated by qpdf</param>
+        </member>
+        <member name="M:QPdfNet.Job.Run(System.String@)">
+            <summary>
+                Runs the <see cref="T:QPdfNet.Job" /> with the given parameters
+            </summary>
+            <param name="output">Returns any output that is generated by qpdf</param>
+            <returns>
+                <see cref="T:QPdfNet.Enums.ExitCode" />
+            </returns>
+        </member>
+        <member name="M:QPdfNet.Job.RunIsEncrypted(System.String@)">
+            <summary>
+                Runs the <see cref="T:QPdfNet.Job" /> with the given parameters
+            </summary>
+            <param name="output">Returns any output that is generated by qpdf</param>
+            <returns>
+                <see cref="T:QPdfNet.Enums.ExitCode" />
+            </returns>
+        </member>
+        <member name="M:QPdfNet.Job.RunRequiresPassword(System.String@)">
+            <summary>
+                Runs the <see cref="T:QPdfNet.Job" /> with the given parameters
+            </summary>
+            <param name="output">Returns any output that is generated by qpdf</param>
+            <returns>
+                <see cref="T:QPdfNet.Enums.ExitCode" />
+            </returns>
+        </member>
+        <member name="T:QPdfNet.Loggers.Console">
+            <summary>
+                Writes log information to console at the <see cref="F:Microsoft.Extensions.Logging.LogLevel.Debug"/>, <see cref="F:Microsoft.Extensions.Logging.LogLevel.Error"/>
+                and <see cref="F:Microsoft.Extensions.Logging.LogLevel.Information"/> <see cref="T:Microsoft.Extensions.Logging.LogLevel"/>
+            </summary>
+            <remarks>
+                Other levels are ignored
+            </remarks>
+        </member>
+        <member name="T:QPdfNet.Loggers.File">
+            <summary>
+                Writes log information to a file at the <see cref="F:Microsoft.Extensions.Logging.LogLevel.Debug"/>, <see cref="F:Microsoft.Extensions.Logging.LogLevel.Error"/>
+                and <see cref="F:Microsoft.Extensions.Logging.LogLevel.Information"/> <see cref="T:Microsoft.Extensions.Logging.LogLevel"/>
+            </summary>
+            <remarks>
+                Other levels are ignored
+            </remarks>
+        </member>
+        <member name="M:QPdfNet.Loggers.File.#ctor(System.String)">
+            <summary>
+                Logs information to the given <paramref name="fileName"/>
+            </summary>
+            <param name="fileName"></param>
+        </member>
+        <member name="F:QPdfNet.Loggers.Logger._logger">
+            <summary>
+                When set then logging is written to this ILogger instance
+            </summary>
+        </member>
+        <member name="P:QPdfNet.Loggers.Logger.InstanceId">
+            <summary>
+                An unique id that can be used to identify the logging of the converter when
+                calling the code from multiple threads and writing all the logging to the same file
+            </summary>
+        </member>
+        <member name="P:QPdfNet.Loggers.Logger.LoggerInterface">
+            <summary>
+                Sets the logger interface
+            </summary>
+        </member>
+        <member name="M:QPdfNet.Loggers.Logger.LogInformation(System.String)">
+            <summary>
+                Writes an information line to the <see cref="F:QPdfNet.Loggers.Logger._logger" />
+            </summary>
+            <param name="message">The message to write</param>
+        </member>
+        <member name="M:QPdfNet.Loggers.Logger.LogError(System.String)">
+            <summary>
+                Writes an error line to the <see cref="F:QPdfNet.Loggers.Logger._logger" />
+            </summary>
+            <param name="message">The message to write</param>
+        </member>
+        <member name="M:QPdfNet.Loggers.Logger.LogDebug(System.String)">
+            <summary>
+                Writes a debug line to the <see cref="F:QPdfNet.Loggers.Logger._logger" />
+            </summary>
+            <param name="message">The message to write</param>
+        </member>
+        <member name="T:QPdfNet.Loggers.Stream">
+            <summary>
+                Writes log information to a stream at the <see cref="F:Microsoft.Extensions.Logging.LogLevel.Debug"/>, <see cref="F:Microsoft.Extensions.Logging.LogLevel.Error"/>
+                and <see cref="F:Microsoft.Extensions.Logging.LogLevel.Information"/> <see cref="T:Microsoft.Extensions.Logging.LogLevel"/>
+            </summary>
+            <remarks>
+                Other levels are ignored
+            </remarks>
+        </member>
+        <member name="M:QPdfNet.Loggers.Stream.#ctor(System.IO.Stream)">
+            <summary>
+                Logs information to the given <paramref name="stream"/>
+            </summary>
+            <param name="stream"></param>
+        </member>
+        <member name="M:QPdfNet.Loggers.Stream.IsEnabled(Microsoft.Extensions.Logging.LogLevel)">
+            <summary>
+                Will always return <c>true</c>
+            </summary>
+            <param name="logLevel"></param>
+            <returns></returns>
+        </member>
+        <member name="M:QPdfNet.Loggers.Stream.Log``1(Microsoft.Extensions.Logging.LogLevel,Microsoft.Extensions.Logging.EventId,``0,System.Exception,System.Func{``0,System.Exception,System.String})">
+            <summary>
+                Writes logging to the log
+            </summary>
+            <typeparam name="TState"></typeparam>
+            <param name="logLevel"></param>
+            <param name="eventId"></param>
+            <param name="state"></param>
+            <param name="exception"></param>
+            <param name="formatter"></param>
+        </member>
+        <member name="T:QPdfNet.Output.CheckInfo">
+            <summary>
+                A helper class to parse the information that is returned by the <see cref="M:QPdfNet.Job.ShowXref"/> method
+            </summary>
+        </member>
+        <member name="P:QPdfNet.Output.CheckInfo.PdfVersion">
+            <summary>
+                Returns the version of the PDF
+            </summary>
+        </member>
+        <member name="P:QPdfNet.Output.CheckInfo.IsEncrypted">
+            <summary>
+                Returns <c>true</c> when the PDF file is encrypted
+            </summary>
+        </member>
+        <member name="P:QPdfNet.Output.CheckInfo.IsLinearized">
+            <summary>
+                Returns <c>true</c> when the PDF is linearized (optimized for the web)
+            </summary>
+        </member>
+        <member name="P:QPdfNet.Output.CheckInfo.Warnings">
+            <summary>
+                Returns a list with found warnings
+            </summary>
+        </member>
+        <member name="P:QPdfNet.Output.CheckInfo.HasWarnings">
+            <summary>
+                Returns <c>true</c> when there are warnings found
+            </summary>
+        </member>
+        <member name="M:QPdfNet.Output.CheckInfo.#ctor(System.String)">
+            <summary>
+                Makes this object and sets all it's needed properties
+            </summary>
+            <param name="output"></param>
+        </member>
+        <member name="T:QPdfNet.Output.EncryptionInfo">
+            <summary>
+                A helper class to parse the information that is returned by the <see cref="M:QPdfNet.Job.ShowEncryption"/>
+                or <see cref="M:QPdfNet.Job.ShowEncryptionKey"/> method
+            </summary>
+        </member>
+        <member name="P:QPdfNet.Output.EncryptionInfo.UserPassword">
+            <summary>
+                Returns the user password
+            </summary>
+        </member>
+        <member name="P:QPdfNet.Output.EncryptionInfo.EncryptionKey">
+            <summary>
+                Returns the used encryption key
+            </summary>
+        </member>
+        <member name="P:QPdfNet.Output.EncryptionInfo.SuppliedPasswordIsOwnerPassword">
+            <summary>
+                Returns <c>true</c> when the supplied password is the owner password
+            </summary>
+        </member>
+        <member name="P:QPdfNet.Output.EncryptionInfo.SuppliedPasswordIsUserPassword">
+            <summary>
+                Returns <c>true</c> when the supplied password is the user password
+            </summary>
+        </member>
+        <member name="P:QPdfNet.Output.EncryptionInfo.ExtractForAccesibility">
+            <summary>
+                Returns <c>true</c> when extraction for accessibility is enabled
+            </summary>
+        </member>
+        <member name="P:QPdfNet.Output.EncryptionInfo.ExtractForAnyPurpose">
+            <summary>
+                Returns <c>true</c> when extraction for any purpose is enabled
+            </summary>
+        </member>
+        <member name="P:QPdfNet.Output.EncryptionInfo.PrintLowResolution">
+            <summary>
+                Returns <c>true</c> when print in low quality is allowed
+            </summary>
+        </member>
+        <member name="P:QPdfNet.Output.EncryptionInfo.PrintHighResulution">
+            <summary>
+                Returns <c>true</c> when print in high quality is allowed
+            </summary>
+        </member>
+        <member name="P:QPdfNet.Output.EncryptionInfo.ModifyDocumentAssembly">
+            <summary>
+                Returns <c>true</c> when document assembly is allowed
+            </summary>
+        </member>
+        <member name="P:QPdfNet.Output.EncryptionInfo.ModifyForms">
+            <summary>
+                Returns <c>true</c> when form modification is allowed
+            </summary>
+        </member>
+        <member name="P:QPdfNet.Output.EncryptionInfo.ModifyAnnotations">
+            <summary>
+                Returns <c>true</c> when it is allowed to add or change annotations
+            </summary>
+        </member>
+        <member name="P:QPdfNet.Output.EncryptionInfo.ModifyOther">
+            <summary>
+                Returns <c>true</c> for any other modification
+            </summary>
+        </member>
+        <member name="P:QPdfNet.Output.EncryptionInfo.ModifyAnything">
+            <summary>
+                Returns <c>true</c> when anything else can be modified
+            </summary>
+        </member>
+        <member name="P:QPdfNet.Output.EncryptionInfo.StreamEncryptionMethod">
+            <summary>
+                Returns the used stream encryption method
+            </summary>
+        </member>
+        <member name="P:QPdfNet.Output.EncryptionInfo.StringEncryptionMethod">
+            <summary>
+                Returns the used string encryption method
+            </summary>
+        </member>
+        <member name="P:QPdfNet.Output.EncryptionInfo.FileEncryptionMethod">
+            <summary>
+                Returns the used file encryption method
+            </summary>
+        </member>
+        <member name="M:QPdfNet.Output.EncryptionInfo.#ctor(System.String)">
+            <summary>
+                Makes this object and sets all it's properties
+            </summary>
+        </member>
+        <member name="T:QPdfNet.Output.Helper">
+            <summary>
+                A class the help parse the output from some QPDF methods
+            </summary>
+        </member>
+        <member name="M:QPdfNet.Output.Helper.ParseListAttachments(System.String)">
+            <summary>
+                Helper method to parse the output that is returned by the <see cref="M:QPdfNet.Job.ListAttachments"/>
+                method
+            </summary>
+            <param name="output">The output of the <see cref="M:QPdfNet.Job.ListAttachments"/> method</param>
+            <returns>A list with attachment names</returns>
+        </member>
+        <member name="M:QPdfNet.Output.Helper.ParseShowEncryption(System.String)">
+            <summary>
+                Helper method to parse the output that is returns by the <see cref="M:QPdfNet.Job.ShowEncryption"/>
+                or <see cref="M:QPdfNet.Job.ShowEncryptionKey"/> method
+            </summary>
+            <param name="output">The output of the <see cref="M:QPdfNet.Job.ShowEncryption"/> or <see cref="M:QPdfNet.Job.ShowEncryptionKey"/> method</param>
+            <returns><see cref="T:QPdfNet.Output.EncryptionInfo"/></returns>
+        </member>
+        <member name="M:QPdfNet.Output.Helper.ParseShowXref(System.String)">
+            <summary>
+                Helper method to parse the output that is returns by the <see cref="M:QPdfNet.Job.ShowXref"/>
+            </summary>
+            <param name="output">The output of the <see cref="M:QPdfNet.Job.ShowXref"/> method</param>
+            <returns><see cref="T:QPdfNet.Output.XrefInfos"/></returns>
+        </member>
+        <member name="M:QPdfNet.Output.Helper.ParseCheck(System.String)">
+            <summary>
+                Helper method to parse the output that is returns by the <see cref="M:QPdfNet.Job.Check"/>
+            </summary>
+            <param name="output">The output of the <see cref="M:QPdfNet.Job.Check"/> method</param>
+            <returns><see cref="T:QPdfNet.Output.CheckInfo"/></returns>
+        </member>
+        <member name="T:QPdfNet.Output.XrefInfos">
+            <summary>
+                A helper class to parse the information that is returned by the <see cref="M:QPdfNet.Job.ShowXref"/> method
+            </summary>
+        </member>
+        <member name="M:QPdfNet.Output.XrefInfos.#ctor(System.String)">
+            <summary>
+                Makes this object and sets all it's needed properties
+            </summary>
+            <param name="output"></param>
+        </member>
+        <member name="T:QPdfNet.Output.XrefInfo">
+            <summary>
+                A helper class to parse the information that is returned by the <see cref="M:QPdfNet.Job.ShowXref"/> method
+            </summary>
+        </member>
+        <member name="P:QPdfNet.Output.XrefInfo.Id">
+            <summary>
+                Returns the id
+            </summary>
+        </member>
+        <member name="P:QPdfNet.Output.XrefInfo.State">
+            <summary>
+                Returns the state
+            </summary>
+        </member>
+        <member name="P:QPdfNet.Output.XrefInfo.Offset">
+            <summary>
+                Returns the offset
+            </summary>
+        </member>
+        <member name="M:QPdfNet.Output.XrefInfo.#ctor(System.String,System.String,System.Int64)">
+            <summary>
+                Makes this object and sets all it's properties
+            </summary>
+        </member>
+        <member name="T:QPdfNet.Pages">
+            <summary>
+                Pages options
+            </summary>
+        </member>
+        <member name="M:QPdfNet.Pages.#ctor(System.String,System.String,System.String)">
+            <summary>
+                Makes this object and sets its needed properties
+            </summary>
+            <param name="file">The file</param>
+            <param name="range">The page range</param>
+            <param name="password">The password or <c>null</c> when not needed</param>
+        </member>
+    </members>
+</doc>
