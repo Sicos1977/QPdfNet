@@ -10,7 +10,7 @@
 		<RepositoryUrl>https://github.com/Sicos1977/QPdfNet</RepositoryUrl>
 		<RepositoryType>git</RepositoryType>
 		<PackageTags>qpdf pdf</PackageTags>
-		<PackageReleaseNotes>Added Pdf class and helper methods to parse output that is returned by some methods, also target .net 4.6.2</PackageReleaseNotes>
+		<PackageReleaseNotes>- Updated to latest qpdf version</PackageReleaseNotes>
 		<PackageIcon>qpdf.png</PackageIcon>
 		<PackageReadmeFile>readme.md</PackageReadmeFile>
 		<Copyright>Copyright (c) 2021-2023 Kees van Spelde</Copyright>
