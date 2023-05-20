@@ -350,7 +350,7 @@ namespace QpdfNetTest
             var result = job.InputFile(Path.Combine("TestFiles", "20_pages.pdf"))
                 .OutputFile(outputFile)
                 .Pages(".", "1-5,9,15")
-                .Run(out var output);
+                .Run(out _);
 
             Assert.AreEqual(ExitCode.Success, result);
         }
@@ -366,7 +366,7 @@ namespace QpdfNetTest
                 .Pages(".", "1-20")
                 .Pages(Path.Combine(Path.Combine("TestFiles", "acrobat_8_help.pdf")), "1-20")
                 .Collate(2)
-                .Run(out var output);
+                .Run(out _);
 
             Assert.AreEqual(ExitCode.Success, result);
             Assert.IsTrue(File.Exists(outputFile));
