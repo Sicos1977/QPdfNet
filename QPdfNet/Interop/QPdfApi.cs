@@ -33,6 +33,39 @@ using QPdfNet.InteropDotNet;
 
 namespace QPdfNet.Interop
 {
+    #region public enum qpdf_log_dest_e
+    /// <summary>
+    ///     Only used for marshalling
+    /// </summary>
+    public enum qpdf_log_dest_e 
+    {
+        /// <summary>
+        ///     Default
+        /// </summary>
+        qpdf_log_dest_default = 0,
+
+        /// <summary>
+        ///     Logging to standard output
+        /// </summary>
+        qpdf_log_dest_stdout = 1,
+
+        /// <summary>
+        ///     Logging to error output
+        /// </summary>
+        qpdf_log_dest_stderr = 2,
+
+        /// <summary>
+        ///     Discard any logging
+        /// </summary>
+        qpdf_log_dest_discard = 3,
+
+        /// <summary>
+        ///     Custom logging
+        /// </summary>
+        qpdf_log_dest_custom = 4
+    }
+    #endregion
+
     /// <summary>
     ///     The exported qpdf api signatures.
     /// </summary>
@@ -51,45 +84,49 @@ namespace QPdfNet.Interop
         [return: MarshalAs(UnmanagedType.LPTStr)]
         string GetQPdfVersion();
 
+        [RuntimeDllImport(Constants.QPdfDllName, CallingConvention = CallingConvention.Cdecl, EntryPoint = "qpdflogger_default_logger")]
+        IntPtr GetDefaultLogger();
+
+        [RuntimeDllImport(Constants.QPdfDllName, CallingConvention = CallingConvention.Cdecl, EntryPoint = "qpdflogger_cleanup")]
+        IntPtr CleanupLogger(IntPtr loggerHandle);
+
+        [RuntimeDllImport(Constants.QPdfDllName, CallingConvention = CallingConvention.Cdecl, EntryPoint = "qpdflogger_set_info")]
+        IntPtr SetInfo(IntPtr loggerHandle, qpdf_log_dest_e destination, IntPtr callBackHandler);
+        
+        [RuntimeDllImport(Constants.QPdfDllName, CallingConvention = CallingConvention.Cdecl, EntryPoint = "qpdflogger_set_warn")]
+        IntPtr SetWarn(IntPtr loggerHandle, qpdf_log_dest_e destination, IntPtr callBackHandler);
+
+        [RuntimeDllImport(Constants.QPdfDllName, CallingConvention = CallingConvention.Cdecl, EntryPoint = "qpdflogger_set_error")]
+        IntPtr SetError(IntPtr loggerHandle, qpdf_log_dest_e destination, IntPtr callBackHandler);
+
+        [RuntimeDllImport(Constants.QPdfDllName, CallingConvention = CallingConvention.Cdecl, EntryPoint = "qpdflogger_set_save")]
+        IntPtr SetSave(IntPtr loggerHandle, qpdf_log_dest_e destination, IntPtr callBackHandler);
+     
         /// <summary>
-        ///     Runs the given json
+        ///     Runs the given json and returns the result from cout and cerr
         /// </summary>
         /// <returns></returns>
         [RuntimeDllImport(Constants.QPdfDllName, CallingConvention = CallingConvention.Cdecl, EntryPoint = "qpdfjob_run_from_json")]
         int RunFromJSON(string json);
-
-        /// <summary>
-        ///     Runs the given json and returns the result from cout and cerr
-        /// </summary>
-        /// <returns></returns>
-        [RuntimeDllImport(Constants.QPdfDllName, CallingConvention = CallingConvention.Cdecl, EntryPoint = "qpdfjob_run_from_json_with_result")]
-        int RunFromJSONWithResult(string json, out IntPtr out_result, out IntPtr err_result);
-
-        /// <summary>
-        ///     Runs the given json and returns the result from cout and cerr
-        /// </summary>
-        /// <returns></returns>
-        [RuntimeDllImport(Constants.QPdfDllName, CallingConvention = CallingConvention.Cdecl, EntryPoint = "qpdfjob_run_from_json_with_result_free_string")]
-        int RunFromJSONWithResultFreeString(IntPtr str);
     }
 
-    public static class QPdfApi
+    public class QPdfApi
     {
         #region Fields
-        private static IQPdfApiSignatures? native;
+        private IQPdfApiSignatures? _native;
         #endregion
 
         #region Properties
-        public static IQPdfApiSignatures Native
+        public IQPdfApiSignatures Native
         {
             get
             {
-                if (native != null) 
-                    return native;
+                if (_native != null) 
+                    return _native;
                 
                 Helper.SetPath();
-                native = InteropRuntimeImplementer.CreateInstance<IQPdfApiSignatures>();
-                return native;
+                _native = InteropRuntimeImplementer.CreateInstance<IQPdfApiSignatures>();
+                return _native;
             }
         }
         #endregion

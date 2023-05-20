@@ -257,7 +257,7 @@ namespace QPdfNet.InteropDotNet
             {
                 // Preparing
                 var libraryIndex = libraries.IndexOf(method.DllImportAttribute.LibraryFileName);
-                var methodName = method.DllImportAttribute.EntryPoint ?? method.Info.Name;
+                var methodName = method.DllImportAttribute.EntryPoint;
                 // Load Library Loader
                 ilGen.Emit(OpCodes.Ldarg_1);
                 // Load libraryHandle (locals[libraryIndex])

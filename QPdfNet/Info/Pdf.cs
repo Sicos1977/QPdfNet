@@ -27,6 +27,7 @@
 using System;
 using System.Collections.Generic;
 using System.Globalization;
+using System.Text;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 using QPdfNet.Enums;
@@ -100,13 +101,13 @@ public class Pdf
     {
         Logger.LogInformation($"Getting information from PDF '{fileName}'");
 
-        var result = new Job().InputFile(fileName).Json().Run(out var output);
+        var result = new Job().InputFile(fileName).Json().Run(out var output, out var data);
 
         if (result != ExitCode.Success)
             throw new Exception(output);
 
         if (output != null)
-            return JsonConvert.DeserializeObject<Pdf>(output, new JsonSerializerSettings()
+            return JsonConvert.DeserializeObject<Pdf>(Encoding.ASCII.GetString(data!), new JsonSerializerSettings()
             {
                 MetadataPropertyHandling = MetadataPropertyHandling.Ignore,
                 DateParseHandling = DateParseHandling.None,

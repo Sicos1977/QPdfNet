@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.1.32228.430
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QPdfNet", "QPdfNet\QPdfNet.csproj", "{1184D7CF-D69F-4707-AA76-55B846D32ACC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "QPdfNet", "QPdfNet\QPdfNet.csproj", "{1184D7CF-D69F-4707-AA76-55B846D32ACC}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "QpdfNetTest", "QpdfNetTest\QpdfNetTest.csproj", "{1C702B8C-5945-4F57-8A80-3BCBA47EC468}"
 EndProject

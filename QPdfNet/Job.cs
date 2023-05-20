@@ -27,7 +27,9 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Runtime.InteropServices;
+using System.Text;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
@@ -46,8 +48,12 @@ namespace QPdfNet;
 /// <remarks>
 ///     https://qpdf.readthedocs.io/en/stable/qpdf-job.html
 /// </remarks>
-public class Job
+public class Job : IDisposable
 {
+    #region Delegates
+    private delegate void Callback(IntPtr data, int length);
+    #endregion
+
     #region Fields
     [JsonProperty("inputFile")] private string? _inputFile;
     [JsonProperty("outputFile")] private string? _outputFile;
@@ -70,6 +76,7 @@ public class Job
     [JsonProperty("linearize")] private string? _linearize;
     [JsonProperty("encrypt")] private Encryption? _encryption;
     [JsonProperty("decrypt")] private string? _decrypt;
+    [JsonProperty("removeRestrictions")] private string? _removeRestrictions;
     [JsonProperty("copyEncryption")] private string? _copyEncryption;
     [JsonProperty("encryptionFilePassword")] private string? _encryptionFilePassword;
     [JsonProperty("qdf")] private string? _qdf;
@@ -125,11 +132,39 @@ public class Job
     [JsonProperty("listAttachments")] private string? _listAttachments;
     [JsonProperty("showAttachment")] private string? _showAttachment;
     [JsonProperty("json")] private string? _json;
+    [JsonProperty("jsonHelp")] private string? _jsonHelp;
+    [JsonProperty("jsonStreamData")] private string? _jsonStreamData;
+    [JsonProperty("jsonStreamPrefix")] private string? _jsonStreamPrefix;
     [JsonProperty("jsonKey")] private List<string>? _jsonKey;
     [JsonProperty("jsonObject")] private List<string>? _jsonObject;
+    [JsonProperty("jsonOutput")] private string? _jsonOutput;
+    [JsonProperty("jsonInput")] private string? _jsonInput;
+    [JsonProperty("updateFromJson")] private string? _updateFromJson;
     [JsonProperty("staticId")] private string? _staticId;
     [JsonProperty("staticAesIv")] private string? _staticAesIv;
     [JsonProperty("linearizePass1")] private string? _linearizePass1;
+
+    private readonly IQPdfApiSignatures _native;
+
+    private readonly IntPtr _loggerHandle;
+
+    private StringBuilder? _info;
+    // ReSharper disable PrivateFieldCanBeConvertedToLocalVariable
+    private readonly Callback _infoCallback;
+    private GCHandle _infoHandle;
+
+    private StringBuilder? _warn;
+    private readonly Callback _warnCallback;
+    private GCHandle _warnHandle;
+    
+    private StringBuilder? _error;
+    private readonly Callback _errorCallback;
+    private GCHandle _errorHandle;
+
+    private List<byte>? _save;
+    private readonly Callback _saveCallback;
+    private GCHandle _saveHandle;
+    // ReSharper restore PrivateFieldCanBeConvertedToLocalVariable
     #endregion
 
     #region Constructor
@@ -141,6 +176,62 @@ public class Job
     {
         if (logger != null)
             Logger.LoggerInterface = logger;
+
+        _native = new QPdfApi().Native;
+
+        _loggerHandle = _native.GetDefaultLogger();
+
+        _infoCallback = InfoCallback;
+        _warnCallback = WarnCallback;
+        _errorCallback = ErrorCallback;
+        _saveCallback = SaveCallback;
+
+        var infoPointer = Marshal.GetFunctionPointerForDelegate(_infoCallback);
+        _infoHandle = GCHandle.Alloc(infoPointer);
+
+        var warnPointer = Marshal.GetFunctionPointerForDelegate(_warnCallback);
+        _warnHandle = GCHandle.Alloc(warnPointer);
+
+        var errorPointer = Marshal.GetFunctionPointerForDelegate(_errorCallback);
+        _errorHandle = GCHandle.Alloc(errorPointer);
+        
+        var savePointer = Marshal.GetFunctionPointerForDelegate(_saveCallback);
+        _saveHandle = GCHandle.Alloc(savePointer);
+        
+        _native.SetInfo(_loggerHandle, qpdf_log_dest_e.qpdf_log_dest_custom, infoPointer);
+        _native.SetWarn(_loggerHandle, qpdf_log_dest_e.qpdf_log_dest_custom, warnPointer);
+        _native.SetError(_loggerHandle, qpdf_log_dest_e.qpdf_log_dest_custom, errorPointer);
+        _native.SetSave(_loggerHandle, qpdf_log_dest_e.qpdf_log_dest_custom, savePointer);
+    }
+    #endregion
+
+    #region Callbacks
+    private void InfoCallback(IntPtr data, int length)
+    {
+        var bytes = new byte[length];
+        Marshal.Copy(data, bytes, 0, length);
+        _info!.Append(Encoding.ASCII.GetString(bytes));
+    }
+
+    private void WarnCallback(IntPtr data, int length)
+    {
+        var bytes = new byte[length];
+        Marshal.Copy(data, bytes, 0, length);
+        _warn!.Append(Encoding.ASCII.GetString(bytes));
+    }
+
+    private void ErrorCallback(IntPtr data, int length)
+    {
+        var bytes = new byte[length];
+        Marshal.Copy(data, bytes, 0, length);
+        _error!.Append(Encoding.ASCII.GetString(bytes));
+    }
+
+    private void SaveCallback(IntPtr data, int length)
+    {
+        var bytes = new byte[length];
+        Marshal.Copy(data, bytes, 0, length);
+        _save!.AddRange(bytes.Select(b => b));
     }
     #endregion
 
@@ -535,6 +626,22 @@ public class Job
     {
         Logger.LogInformation("Creating PDF output file with no encryption");
         _decrypt = string.Empty;
+        return this;
+    }
+    #endregion
+
+    #region RemoveRestrictions
+    /// <summary>
+    ///     Remove security restrictions associated with digitally signed PDF files. This may be combined with <see cref="Decrypt"/> to
+    ///     allow free editing of previously signed/encrypted files. This option invalidates the signature but leaves its visual appearance intact.
+    /// </summary>
+    /// <returns>
+    ///     <see cref="Job" />
+    /// </returns>
+    public Job RemoveRestrictions()
+    {
+        Logger.LogInformation("Creating PDF output file with security restrictions associated with digitally signed PDF files removed");
+        _removeRestrictions = string.Empty;
         return this;
     }
     #endregion
@@ -1111,6 +1218,7 @@ public class Job
 
         _overlay = new Dictionary<string, string> { { "file", file } };
 
+#pragma warning disable CS8604
         if (!string.IsNullOrWhiteSpace(to))
             _overlay.Add("to", to);
 
@@ -1119,6 +1227,7 @@ public class Job
 
         if (!string.IsNullOrWhiteSpace(repeat))
             _overlay.Add("repeat", repeat);
+#pragma warning restore CS8604
 
         Logger.LogInformation($"Overlaying PDF file '{file}' from '{from}' to '{to}' and repeat '{repeat}'");
 
@@ -1169,6 +1278,7 @@ public class Job
 
         _underlay = new Dictionary<string, string> { { "file", file } };
 
+#pragma warning disable CS8604
         if (!string.IsNullOrWhiteSpace(to))
             _underlay.Add("to", to);
 
@@ -1177,6 +1287,7 @@ public class Job
 
         if (!string.IsNullOrWhiteSpace(repeat))
             _underlay.Add("repeat", repeat);
+#pragma warning restore CS8604
 
         Logger.LogInformation($"Under-laying PDF file '{file}' from '{from}' to '{to}' and repeat '{repeat}'");
 
@@ -1566,6 +1677,9 @@ public class Job
     ///     status <see cref="ExitCodeIsEncrypted.NotEncrypted"/> for non-encrypted
     ///     files.
     /// </summary>
+    /// <remarks>
+    ///     Use <see cref="RunIsEncrypted"/> instead of <see cref="Run(out string?)"/> when using this method
+    /// </remarks>
     /// <returns>
     ///     <see cref="Job" />
     /// </returns>
@@ -1851,9 +1965,14 @@ public class Job
 
     #region ShowAttachment
     /// <summary>
-    ///     Write the contents of the specified attachment to standard output as binary data. The key should match one of the
-    ///     keys shown by <see cref="ListAttachments"/>. If this option is given more than once, only the last attachment will be shown.
+    ///     Write the contents of the specified attachment as binary data. The key should match one of the
+    ///     keys shown by <see cref="ListAttachments"/>. If this option is given more than once, only the
+    ///     last attachment will be shown.
     /// </summary>
+    /// <param name="key">The key of the attachment to show</param>
+    /// <remarks>
+    ///     Use <see cref="Run(out string?, out byte[])"/> instead of <see cref="Run(out string?)"/> when using this method 
+    /// </remarks>
     /// <returns>
     ///     <see cref="Job" />
     /// </returns>
@@ -1867,32 +1986,57 @@ public class Job
 
     #region Json
     /// <summary>
-    ///     Generate a JSON representation of the file. This is described in depth in QPDF JSON. The version parameter can be
-    ///     used to specify which version of the qpdf JSON format should be output. The only supported value is 1, but it’s
-    ///     possible that a new JSON output version will be added in a future version. You can also specify latest to use the
-    ///     latest JSON version. For backward compatibility, the default value will remain 1 until qpdf version 11, after which
-    ///     point it will become latest. In all case, you can tell what version of the JSON output you have from the "version"
-    ///     key in the output.
+    ///     Generate a JSON representation of the file. This is described in depth in qpdf JSON. The version parameter can be used to
+    ///     specify which version of the qpdf JSON format should be output. The version number be a number or latest. The default is
+    ///     latest. As of qpdf 11, the latest version is 2. If you have code that reads qpdf JSON output, you can tell what version
+    ///     of the JSON output you have from the "version" key in the output. Use the --json-help option to get a description of the
+    ///     JSON object. Starting with qpdf 11, when this option is specified, an output file is optional (for backward compatibility)
+    ///     and defaults to standard output. You may specify an output file to write the JSON to a file rather than standard output
     /// </summary>
+    /// <param name="version"><see cref="JsonVersion"/></param>
     /// <remarks>
     ///     Use the <see cref="Info.Pdf"/> class if you want to get a nice object orientated output
+    /// </remarks>
+    /// <remarks>
+    ///     Use <see cref="Run(out string?, out byte[])"/> instead of <see cref="Run(out string?)"/> when using this method 
     /// </remarks>
     /// <returns>
     ///     <see cref="Job" />
     /// </returns>
-    public Job Json()
+    public Job Json(JsonVersion version = JsonVersion.Version2)
     {
-        Logger.LogInformation("Generating a JSON representation of the input PDF file");
-        _json = string.Empty;
+        Logger.LogInformation($"Generating a JSON {version} representation of the input PDF file");
+        _json = ((int)version).ToString();
         return this;
     }
     #endregion
+
+    //#region JsonHelp
+    ///// <summary>
+    /////     Describe the format of the corresponding version of JSON output by writing to standard output a JSON
+    /////     object with the same structure as the JSON generated by qpdf. In the output written by <see cref="JsonHelp"/>,
+    /////     each key’s value is a description of the key. The specific contract guaranteed by qpdf in its JSON
+    /////     representation is explained in more detail in the qpdf JSON. The default version of help is version 2,
+    /////     as with the <see cref="Json"/> flag.
+    ///// </summary>
+    ///// <param name="version"><see cref="JsonVersion"/></param>
+    ///// <returns>
+    /////     <see cref="Job" />
+    ///// </returns>
+    //public Job JsonHelp(JsonVersion version = JsonVersion.Version2)
+    //{
+    //    Logger.LogInformation($"Generating JSON {version} help output");
+    //    _jsonHelp = version.ToString();
+    //    return this;
+    //}
+    //#endregion
 
     #region JsonKey
     /// <summary>
     ///     This option is repeatable. If given, only the specified top-level keys will be included in the JSON output.
     ///     Otherwise, all keys will be included. <b>version</b> and <b>parameters</b> will always appear in the output.
     /// </summary>
+    /// <param name="key">The key to show</param>
     /// <returns>
     ///     <see cref="Job" />
     /// </returns>
@@ -1910,6 +2054,7 @@ public class Job
     ///     This option is repeatable. If given, only specified objects will be shown in the “objects” key of the JSON output.
     ///     Otherwise, all objects will be shown.
     /// </summary>
+    /// <param name="obj">The object to only include</param>
     /// <returns>
     ///     <see cref="Job" />
     /// </returns>
@@ -1918,6 +2063,120 @@ public class Job
         _jsonObject ??= new List<string>();
         _jsonObject.Add(obj);
         Logger.LogInformation($"Only include object '{obj}' in JSON output");
+        return this;
+    }
+    #endregion
+
+    #region JsonStreamData
+    /// <summary>
+    ///     When used with <see cref="JsonStreamData.File"/>, <see cref="JsonStreamPrefix"/> sets the prefix
+    ///     for stream data files, overriding the default, which is to use the output file name. Whatever is
+    ///     given here will be appended with -nnn to create the name of the file that will contain the data
+    ///     for the stream stream in object nnn.
+    /// </summary>
+    /// <param name="streamData"><see cref="StreamData"/></param>
+    /// <remarks>
+    ///     Use <see cref="Run(out string?, out byte[])"/> instead of <see cref="Run(out string?)"/> when using this method 
+    /// </remarks>
+    /// <returns>
+    ///     <see cref="Job" />
+    /// </returns>
+    public Job JsonStreamData(JsonStreamData streamData)
+    {
+        Logger.LogInformation($"Setting JSON stream data to '{streamData}'");
+
+        switch (streamData)
+        {
+            case Enums.JsonStreamData.None:
+                _jsonStreamData = string.Empty;
+                break;
+            case Enums.JsonStreamData.Inline:
+                _jsonStreamData = "inline";
+                break;
+            case Enums.JsonStreamData.File:
+                _jsonStreamData = "file";
+                break;
+            default:
+                throw new ArgumentOutOfRangeException(nameof(streamData), streamData, null);
+        }
+        return this;
+    }
+    #endregion
+
+    #region JsonStreamPrefix
+    /// <summary>
+    ///     When used with <see cref="JsonStreamData.File"/>, <see cref="JsonStreamPrefix"/> sets the prefix for
+    ///     stream data files, overriding the default, which is to use the output file name. Whatever is given
+    ///     here will be appended with -nnn to create the name of the file that will contain the data for the
+    ///     stream stream in object nnn.
+    /// </summary>
+    /// <param name="prefix">The file prefix</param>
+    /// <returns>
+    ///     <see cref="Job" />
+    /// </returns>
+    public Job JsonStreamPrefix(string prefix)
+    {
+        Logger.LogInformation($"Setting JSON stream prefix to '{prefix}'");
+        _jsonStreamPrefix = prefix;
+        return this;
+    }
+    #endregion
+
+    #region JsonOutput
+    /// <summary>
+    ///     Implies <see cref="Json"/> at the specified version. This option changes several default values, all of
+    ///     which can be overridden by specifying the stated option:<br/>
+    ///     - The default value for <see cref="JsonStreamData"/> changes from none to inline.<br/>
+    ///     - The default value for <see cref="DecodeLevel"/> changes from generalized to none.<br/>
+    ///     - By default, only the "qpdf" key is included in the JSON output, but you can add additional keys with <see cref="JsonKey"/>.
+    ///     - The "version" and "parameters" keys will be excluded from the JSON output.
+    ///
+    ///     If you want to look at the contents of streams easily as you would in QDF mode (see QDF Mode), you can use
+    ///     <see cref="DecodeLevel"/> generalized and <see cref="JsonStreamData"/> file for a convenient way to do that.
+    /// </summary>
+    /// <param name="version"><see cref="JsonVersion"/></param>
+    /// <returns>
+    ///     <see cref="Job" />
+    /// </returns>
+    public Job JsonOutput(JsonVersion version = JsonVersion.Version2)
+    {
+        Logger.LogInformation($"Setting JSON output format to version {version}");
+        _jsonOutput = ((int)version).ToString();
+        return this;
+    }
+    #endregion
+
+    #region JsonInput
+    /// <summary>
+    ///     Treat the input file as a JSON file in qpdf JSON format. The input file must be complete and include all stream data.
+    ///     The JSON version must be at least 2. All top-level keys are ignored except for "qpdf". For information about converting
+    ///     between PDF and JSON, please see qpdf JSON.
+    /// </summary>
+    /// <returns>
+    ///     <see cref="Job" />
+    /// </returns>
+    public Job JsonInput()
+    {
+        Logger.LogInformation("Treat the input file as a JSON file in qpdf JSON format.");
+        _jsonInput = string.Empty;
+        return this;
+    }
+    #endregion
+
+    #region UpdateFromJson
+    /// <summary>
+    ///     Treat the input file as a JSON file in qpdf JSON format. The input file must be complete and include all stream data.
+    ///     The JSON version must be at least 2. All top-level keys are ignored except for "qpdf". For information about converting
+    ///     between PDF and JSON, please see qpdf JSON.
+    /// </summary>
+    /// <param name="jsonFile">an input JSON file in qpdf format</param>
+    /// <returns>
+    ///     <see cref="Job" />
+    /// </returns>
+    public Job UpdateFromJson(string jsonFile)
+    {
+        Logger.LogInformation($"Updating PDF with qpdf JSON input file '{jsonFile}'");
+        _updateFromJson = jsonFile;
         return this;
     }
     #endregion
@@ -1981,8 +2240,11 @@ public class Job
     ///     Runs the job with the given parameters
     /// </summary>
     /// <param name="output">Returns any output that is generated by qpdf</param>
-    private int InternalRun(out string? output)
+    /// <param name="data">Only some methods return data</param>
+    private int InternalRun(out string? output, out byte[]? data)
     {
+        data = null;
+
         var settings = new JsonSerializerSettings
         {
             DefaultValueHandling = DefaultValueHandling.Ignore,
@@ -1993,27 +2255,23 @@ public class Job
 
         var json = JsonConvert.SerializeObject(this, settings);
 
-        Logger.LogDebug("JSON input for QPDF: " + Environment.NewLine + json);
-        var result2 = QPdfApi.Native.RunFromJSON(json);
-        var result = QPdfApi.Native.RunFromJSONWithResult(json, out var outPointer, out var errorPointer);
-        var outResult = Marshal.PtrToStringAnsi(outPointer);
-        var errorResult = Marshal.PtrToStringAnsi(errorPointer);
+        Logger.LogDebug($"JSON input for QPDF: {Environment.NewLine}{json}");
 
-        outResult = outResult?.Trim();
-        errorResult = errorResult?.Trim();
+        _info = new StringBuilder();
+        _warn = new StringBuilder();
+        _error = new StringBuilder();
+        _save = new List<byte>();
+        
+        var result = _native.RunFromJSON(json);
 
-        Marshal.FreeCoTaskMem(outPointer);
-        Marshal.FreeCoTaskMem(errorPointer);
+        output = _info.ToString();
+        output += _warn.ToString();
+        output += _error.ToString();
 
-        output = outResult;
+        output = output.TrimEnd();
 
-        if (!string.IsNullOrWhiteSpace(errorResult))
-        {
-            if (string.IsNullOrWhiteSpace(output))
-                output = errorResult;
-            else
-                output += Environment.NewLine + errorResult;
-        }
+        if (_save.Count > 0)
+            data = _save.ToArray();
 
         Logger.LogInformation("Output from QPDF: " + Environment.NewLine + output);
 
@@ -2035,10 +2293,28 @@ public class Job
             throw new ArgumentException("Use the method 'RunIsEncrypted' when the IsEncrypted method is used");
 
         if (_requiresPassword == string.Empty)
-            throw new ArgumentException(
-                "Use the method 'RunRequiresPassword' when the RequiresPassword method is used");
+            throw new ArgumentException("Use the method 'RunRequiresPassword' when the RequiresPassword method is used");
 
-        return (ExitCode)InternalRun(out output);
+        return (ExitCode)InternalRun(out output, out _);
+    }
+
+    /// <summary>
+    ///     Runs the <see cref="Job" /> with the given parameters
+    /// </summary>
+    /// <param name="output">Returns any output that is generated by qpdf</param>
+    /// <param name="data">Returns the data or <c>null</c> when something goes wrong</param>
+    /// <returns>
+    ///     <see cref="ExitCode" />
+    /// </returns>
+    public ExitCode Run(out string? output, out byte[]? data)
+    {
+        if (_isEncrypted == string.Empty)
+            throw new ArgumentException("Use the method 'RunIsEncrypted' when the IsEncrypted method is used");
+
+        if (_requiresPassword == string.Empty)
+            throw new ArgumentException("Use the method 'RunRequiresPassword' when the RequiresPassword method is used");
+
+        return (ExitCode)InternalRun(out output, out data);
     }
     #endregion
 
@@ -2056,7 +2332,7 @@ public class Job
             throw new ArgumentException(
                 "Use the method 'RunRequiresPassword' when the RequiresPassword method is used");
 
-        return (ExitCodeIsEncrypted)InternalRun(out output);
+        return (ExitCodeIsEncrypted)InternalRun(out output, out _);
     }
     #endregion
 
@@ -2073,7 +2349,22 @@ public class Job
         if (_isEncrypted == string.Empty)
             throw new ArgumentException("Use the method 'RunIsEncrypted' when the IsEncrypted method is used");
 
-        return (ExitCodeRequiresPassword)InternalRun(out output);
+        return (ExitCodeRequiresPassword)InternalRun(out output, out _);
+    }
+    #endregion
+
+    #region Dispose
+    /// <summary>
+    ///     Disposes this object
+    /// </summary>
+    public void Dispose()
+    {
+        _infoHandle.Free();
+        _warnHandle.Free();
+        _errorHandle.Free();
+        _saveHandle.Free();
+
+        _native.CleanupLogger(_loggerHandle);
     }
     #endregion
 }

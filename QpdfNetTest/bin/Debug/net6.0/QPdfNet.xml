@@ -283,6 +283,41 @@
                 Omit annotations that should not appear on the screen
             </summary>
         </member>
+        <member name="T:QPdfNet.Enums.JsonStreamData">
+            <summary>
+                JSON stream data formatting
+            </summary>
+        </member>
+        <member name="F:QPdfNet.Enums.JsonStreamData.None">
+            <summary>
+                None
+            </summary>
+        </member>
+        <member name="F:QPdfNet.Enums.JsonStreamData.Inline">
+            <summary>
+                Inline in JSON
+            </summary>
+        </member>
+        <member name="F:QPdfNet.Enums.JsonStreamData.File">
+            <summary>
+                To a file
+            </summary>
+        </member>
+        <member name="T:QPdfNet.Enums.JsonVersion">
+            <summary>
+                Sets the JSON output version when showing a PDF as JSON
+            </summary>
+        </member>
+        <member name="F:QPdfNet.Enums.JsonVersion.Version1">
+            <summary>
+                Version 1
+            </summary>
+        </member>
+        <member name="F:QPdfNet.Enums.JsonVersion.Version2">
+            <summary>
+                Version 2
+            </summary>
+        </member>
         <member name="T:QPdfNet.Enums.Modify">
             <summary>
                 Values for modify
@@ -816,6 +851,36 @@
             	Gets the number of bytes in a null terminated byte array.
             </summary>
         </member>
+        <member name="T:QPdfNet.Interop.qpdf_log_dest_e">
+            <summary>
+                Only used for marshalling
+            </summary>
+        </member>
+        <member name="F:QPdfNet.Interop.qpdf_log_dest_e.qpdf_log_dest_default">
+            <summary>
+                Default
+            </summary>
+        </member>
+        <member name="F:QPdfNet.Interop.qpdf_log_dest_e.qpdf_log_dest_stdout">
+            <summary>
+                Logging to standard output
+            </summary>
+        </member>
+        <member name="F:QPdfNet.Interop.qpdf_log_dest_e.qpdf_log_dest_stderr">
+            <summary>
+                Logging to error output
+            </summary>
+        </member>
+        <member name="F:QPdfNet.Interop.qpdf_log_dest_e.qpdf_log_dest_discard">
+            <summary>
+                Discard any logging
+            </summary>
+        </member>
+        <member name="F:QPdfNet.Interop.qpdf_log_dest_e.qpdf_log_dest_custom">
+            <summary>
+                Custom logging
+            </summary>
+        </member>
         <member name="T:QPdfNet.Interop.IQPdfApiSignatures">
             <summary>
                 The exported qpdf api signatures.
@@ -833,18 +898,6 @@
             <returns></returns>
         </member>
         <member name="M:QPdfNet.Interop.IQPdfApiSignatures.RunFromJSON(System.String)">
-            <summary>
-                Runs the given json
-            </summary>
-            <returns></returns>
-        </member>
-        <member name="M:QPdfNet.Interop.IQPdfApiSignatures.RunFromJSONWithResult(System.String,System.IntPtr@,System.IntPtr@)">
-            <summary>
-                Runs the given json and returns the result from cout and cerr
-            </summary>
-            <returns></returns>
-        </member>
-        <member name="M:QPdfNet.Interop.IQPdfApiSignatures.RunFromJSONWithResultFreeString(System.IntPtr)">
             <summary>
                 Runs the given json and returns the result from cout and cerr
             </summary>
@@ -1092,6 +1145,15 @@
                 the default behavior of preserving whatever encryption was present on the <see cref="M:QPdfNet.Job.InputFile(System.String)"/>. This functionality
                 is not intended to be used for bypassing copyright restrictions or other restrictions placed on files by their producers.
                 See also <see cref="M:QPdfNet.Job.CopyEncryption(System.String)"/>.
+            </summary>
+            <returns>
+                <see cref="T:QPdfNet.Job" />
+            </returns>
+        </member>
+        <member name="M:QPdfNet.Job.RemoveRestrictions">
+            <summary>
+                Remove security restrictions associated with digitally signed PDF files. This may be combined with <see cref="M:QPdfNet.Job.Decrypt"/> to
+                allow free editing of previously signed/encrypted files. This option invalidates the signature but leaves its visual appearance intact.
             </summary>
             <returns>
                 <see cref="T:QPdfNet.Job" />
@@ -1675,6 +1737,9 @@
                 status <see cref="F:QPdfNet.Enums.ExitCodeIsEncrypted.NotEncrypted"/> for non-encrypted
                 files.
             </summary>
+            <remarks>
+                Use <see cref="M:QPdfNet.Job.RunIsEncrypted(System.String@)"/> instead of <see cref="M:QPdfNet.Job.Run(System.String@)"/> when using this method
+            </remarks>
             <returns>
                 <see cref="T:QPdfNet.Job" />
             </returns>
@@ -1855,24 +1920,33 @@
         </member>
         <member name="M:QPdfNet.Job.ShowAttachment(System.String)">
             <summary>
-                Write the contents of the specified attachment to standard output as binary data. The key should match one of the
-                keys shown by <see cref="M:QPdfNet.Job.ListAttachments"/>. If this option is given more than once, only the last attachment will be shown.
+                Write the contents of the specified attachment as binary data. The key should match one of the
+                keys shown by <see cref="M:QPdfNet.Job.ListAttachments"/>. If this option is given more than once, only the
+                last attachment will be shown.
             </summary>
+            <param name="key">The key of the attachment to show</param>
+            <remarks>
+                Use <see cref="M:QPdfNet.Job.Run(System.String@,System.Byte[]@)"/> instead of <see cref="M:QPdfNet.Job.Run(System.String@)"/> when using this method 
+            </remarks>
             <returns>
                 <see cref="T:QPdfNet.Job" />
             </returns>
         </member>
-        <member name="M:QPdfNet.Job.Json">
+        <member name="M:QPdfNet.Job.Json(QPdfNet.Enums.JsonVersion)">
             <summary>
-                Generate a JSON representation of the file. This is described in depth in QPDF JSON. The version parameter can be
-                used to specify which version of the qpdf JSON format should be output. The only supported value is 1, but it’s
-                possible that a new JSON output version will be added in a future version. You can also specify latest to use the
-                latest JSON version. For backward compatibility, the default value will remain 1 until qpdf version 11, after which
-                point it will become latest. In all case, you can tell what version of the JSON output you have from the "version"
-                key in the output.
+                Generate a JSON representation of the file. This is described in depth in qpdf JSON. The version parameter can be used to
+                specify which version of the qpdf JSON format should be output. The version number be a number or latest. The default is
+                latest. As of qpdf 11, the latest version is 2. If you have code that reads qpdf JSON output, you can tell what version
+                of the JSON output you have from the "version" key in the output. Use the --json-help option to get a description of the
+                JSON object. Starting with qpdf 11, when this option is specified, an output file is optional (for backward compatibility)
+                and defaults to standard output. You may specify an output file to write the JSON to a file rather than standard output
             </summary>
+            <param name="version"><see cref="T:QPdfNet.Enums.JsonVersion"/></param>
             <remarks>
                 Use the <see cref="T:QPdfNet.Info.Pdf"/> class if you want to get a nice object orientated output
+            </remarks>
+            <remarks>
+                Use <see cref="M:QPdfNet.Job.Run(System.String@,System.Byte[]@)"/> instead of <see cref="M:QPdfNet.Job.Run(System.String@)"/> when using this method 
             </remarks>
             <returns>
                 <see cref="T:QPdfNet.Job" />
@@ -1883,6 +1957,7 @@
                 This option is repeatable. If given, only the specified top-level keys will be included in the JSON output.
                 Otherwise, all keys will be included. <b>version</b> and <b>parameters</b> will always appear in the output.
             </summary>
+            <param name="key">The key to show</param>
             <returns>
                 <see cref="T:QPdfNet.Job" />
             </returns>
@@ -1892,6 +1967,72 @@
                 This option is repeatable. If given, only specified objects will be shown in the “objects” key of the JSON output.
                 Otherwise, all objects will be shown.
             </summary>
+            <param name="obj">The object to only include</param>
+            <returns>
+                <see cref="T:QPdfNet.Job" />
+            </returns>
+        </member>
+        <member name="M:QPdfNet.Job.JsonStreamData(QPdfNet.Enums.JsonStreamData)">
+            <summary>
+                When used with <see cref="F:QPdfNet.Enums.JsonStreamData.File"/>, <see cref="M:QPdfNet.Job.JsonStreamPrefix(System.String)"/> sets the prefix
+                for stream data files, overriding the default, which is to use the output file name. Whatever is
+                given here will be appended with -nnn to create the name of the file that will contain the data
+                for the stream stream in object nnn.
+            </summary>
+            <param name="streamData"><see cref="M:QPdfNet.Job.StreamData(QPdfNet.Enums.StreamData)"/></param>
+            <remarks>
+                Use <see cref="M:QPdfNet.Job.Run(System.String@,System.Byte[]@)"/> instead of <see cref="M:QPdfNet.Job.Run(System.String@)"/> when using this method 
+            </remarks>
+            <returns>
+                <see cref="T:QPdfNet.Job" />
+            </returns>
+        </member>
+        <member name="M:QPdfNet.Job.JsonStreamPrefix(System.String)">
+            <summary>
+                When used with <see cref="F:QPdfNet.Enums.JsonStreamData.File"/>, <see cref="M:QPdfNet.Job.JsonStreamPrefix(System.String)"/> sets the prefix for
+                stream data files, overriding the default, which is to use the output file name. Whatever is given
+                here will be appended with -nnn to create the name of the file that will contain the data for the
+                stream stream in object nnn.
+            </summary>
+            <param name="prefix">The file prefix</param>
+            <returns>
+                <see cref="T:QPdfNet.Job" />
+            </returns>
+        </member>
+        <member name="M:QPdfNet.Job.JsonOutput(QPdfNet.Enums.JsonVersion)">
+             <summary>
+                 Implies <see cref="M:QPdfNet.Job.Json(QPdfNet.Enums.JsonVersion)"/> at the specified version. This option changes several default values, all of
+                 which can be overridden by specifying the stated option:<br/>
+                 - The default value for <see cref="M:QPdfNet.Job.JsonStreamData(QPdfNet.Enums.JsonStreamData)"/> changes from none to inline.<br/>
+                 - The default value for <see cref="M:QPdfNet.Job.DecodeLevel(QPdfNet.Enums.DecodeLevel)"/> changes from generalized to none.<br/>
+                 - By default, only the "qpdf" key is included in the JSON output, but you can add additional keys with <see cref="M:QPdfNet.Job.JsonKey(System.String)"/>.
+                 - The "version" and "parameters" keys will be excluded from the JSON output.
+            
+                 If you want to look at the contents of streams easily as you would in QDF mode (see QDF Mode), you can use
+                 <see cref="M:QPdfNet.Job.DecodeLevel(QPdfNet.Enums.DecodeLevel)"/> generalized and <see cref="M:QPdfNet.Job.JsonStreamData(QPdfNet.Enums.JsonStreamData)"/> file for a convenient way to do that.
+             </summary>
+             <param name="version"><see cref="T:QPdfNet.Enums.JsonVersion"/></param>
+             <returns>
+                 <see cref="T:QPdfNet.Job" />
+             </returns>
+        </member>
+        <member name="M:QPdfNet.Job.JsonInput">
+            <summary>
+                Treat the input file as a JSON file in qpdf JSON format. The input file must be complete and include all stream data.
+                The JSON version must be at least 2. All top-level keys are ignored except for "qpdf". For information about converting
+                between PDF and JSON, please see qpdf JSON.
+            </summary>
+            <returns>
+                <see cref="T:QPdfNet.Job" />
+            </returns>
+        </member>
+        <member name="M:QPdfNet.Job.UpdateFromJson(System.String)">
+            <summary>
+                Treat the input file as a JSON file in qpdf JSON format. The input file must be complete and include all stream data.
+                The JSON version must be at least 2. All top-level keys are ignored except for "qpdf". For information about converting
+                between PDF and JSON, please see qpdf JSON.
+            </summary>
+            <param name="jsonFile">an input JSON file in qpdf format</param>
             <returns>
                 <see cref="T:QPdfNet.Job" />
             </returns>
@@ -1929,17 +2070,28 @@
                 <see cref="T:QPdfNet.Job" />
             </returns>
         </member>
-        <member name="M:QPdfNet.Job.InternalRun(System.String@)">
+        <member name="M:QPdfNet.Job.InternalRun(System.String@,System.Byte[]@)">
             <summary>
                 Runs the job with the given parameters
             </summary>
             <param name="output">Returns any output that is generated by qpdf</param>
+            <param name="data">Only some methods return data</param>
         </member>
         <member name="M:QPdfNet.Job.Run(System.String@)">
             <summary>
                 Runs the <see cref="T:QPdfNet.Job" /> with the given parameters
             </summary>
             <param name="output">Returns any output that is generated by qpdf</param>
+            <returns>
+                <see cref="T:QPdfNet.Enums.ExitCode" />
+            </returns>
+        </member>
+        <member name="M:QPdfNet.Job.Run(System.String@,System.Byte[]@)">
+            <summary>
+                Runs the <see cref="T:QPdfNet.Job" /> with the given parameters
+            </summary>
+            <param name="output">Returns any output that is generated by qpdf</param>
+            <param name="data">Returns the data or <c>null</c> when something goes wrong</param>
             <returns>
                 <see cref="T:QPdfNet.Enums.ExitCode" />
             </returns>
@@ -1961,6 +2113,11 @@
             <returns>
                 <see cref="T:QPdfNet.Enums.ExitCode" />
             </returns>
+        </member>
+        <member name="M:QPdfNet.Job.Dispose">
+            <summary>
+                Disposes this object
+            </summary>
         </member>
         <member name="T:QPdfNet.Loggers.Console">
             <summary>
