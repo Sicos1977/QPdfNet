@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "+jQaSgAoE7ZiQlNGNw/EkBjh4mzEvUir6PdolbwIYNn+jMWeU+fkIySQgQqOLw0Br01jaMCZjnwq+nc4MAs3aw==",
+  "dgSpecHash": "uPUpsSH/BWhHnMVT4MsebQ2k13PE093JTn5ueLfA3aPIBw3yvAMYeaPUOdLj3d+zZPve/9p6wPyhzu/dAAghYw==",
   "success": true,
   "projectFilePath": "C:\\Kees\\QPdfNet\\QpdfNetTest\\QpdfNetTest.csproj",
   "expectedPackageFiles": [
@@ -20,8 +20,7 @@
     "C:\\Users\\AO303388\\.nuget\\packages\\newtonsoft.json\\13.0.3\\newtonsoft.json.13.0.3.nupkg.sha512",
     "C:\\Users\\AO303388\\.nuget\\packages\\nuget.frameworks\\6.5.0\\nuget.frameworks.6.5.0.nupkg.sha512",
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder\\system.reflection.metadata\\1.6.0\\system.reflection.metadata.1.6.0.nupkg.sha512",
-    "C:\\Users\\AO303388\\.nuget\\packages\\system.runtime.compilerservices.unsafe\\6.0.0\\system.runtime.compilerservices.unsafe.6.0.0.nupkg.sha512",
-    "C:\\Users\\AO303388\\.nuget\\packages\\qpdfnet\\1.1.0\\qpdfnet.1.1.0.nupkg.sha512"
+    "C:\\Users\\AO303388\\.nuget\\packages\\system.runtime.compilerservices.unsafe\\6.0.0\\system.runtime.compilerservices.unsafe.6.0.0.nupkg.sha512"
   ],
   "logs": []
 }
