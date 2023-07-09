@@ -52,11 +52,11 @@
           "dependencies": {
             "MSTest.TestAdapter": {
               "target": "Package",
-              "version": "[3.0.2, )"
+              "version": "[3.0.4, )"
             },
             "MSTest.TestFramework": {
               "target": "Package",
-              "version": "[3.0.2, )"
+              "version": "[3.0.4, )"
             },
             "Microsoft.Extensions.Logging": {
               "target": "Package",
@@ -64,13 +64,13 @@
             },
             "Microsoft.NET.Test.Sdk": {
               "target": "Package",
-              "version": "[17.6.0, )"
+              "version": "[17.6.3, )"
             },
             "coverlet.collector": {
               "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
               "suppressParent": "All",
               "target": "Package",
-              "version": "[3.2.0, )"
+              "version": "[6.0.0, )"
             }
           },
           "imports": [
