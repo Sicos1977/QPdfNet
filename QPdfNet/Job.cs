@@ -51,7 +51,7 @@ namespace QPdfNet;
 public class Job : IDisposable
 {
     #region Delegates
-    private delegate void Callback(IntPtr data, int length);
+    private delegate int Callback(IntPtr data, int length);
     #endregion
 
     #region Fields
@@ -206,32 +206,36 @@ public class Job : IDisposable
     #endregion
 
     #region Callbacks
-    private void InfoCallback(IntPtr data, int length)
+    private int InfoCallback(IntPtr data, int length)
     {
         var bytes = new byte[length];
         Marshal.Copy(data, bytes, 0, length);
         _info!.Append(Encoding.ASCII.GetString(bytes));
+        return 0;
     }
 
-    private void WarnCallback(IntPtr data, int length)
+    private int WarnCallback(IntPtr data, int length)
     {
         var bytes = new byte[length];
         Marshal.Copy(data, bytes, 0, length);
         _warn!.Append(Encoding.ASCII.GetString(bytes));
+        return 0;
     }
 
-    private void ErrorCallback(IntPtr data, int length)
+    private int ErrorCallback(IntPtr data, int length)
     {
         var bytes = new byte[length];
         Marshal.Copy(data, bytes, 0, length);
         _error!.Append(Encoding.ASCII.GetString(bytes));
+        return 0;
     }
 
-    private void SaveCallback(IntPtr data, int length)
+    private int SaveCallback(IntPtr data, int length)
     {
         var bytes = new byte[length];
         Marshal.Copy(data, bytes, 0, length);
         _save!.AddRange(bytes.Select(b => b));
+        return 0;
     }
     #endregion
 
