@@ -742,7 +742,7 @@ public class Job : IDisposable
     ///     By default, or with use <paramref name="compress" /> = true, qpdf will compress streams using the flate compression
     ///     algorithm (used by zip and gzip) unless those streams are compressed in some other way. This analysis is
     ///     made after qpdf attempts to uncompress streams and is therefore closely related to <see cref="DecodeLevel" />.
-    ///     To suppress this behavior and leave streams streams uncompressed, use <paramref name="compress" /> = <c>false</c>.
+    ///     To suppress this behavior and leave streams uncompressed, use <paramref name="compress" /> = <c>false</c>.
     ///     In QDF mode (see QDF Mode and <see cref="Qdf" />), the default is to leave streams uncompressed.
     /// </summary>
     /// <param name="compress"><c>true</c> or <c>false</c></param>
