@@ -618,7 +618,7 @@ public class Job : IDisposable
 
     #region Decrypt
     /// <summary>
-    ///     Create an <see cref="OutputFile"/> with no encryption even if the input file is encrypted. This option overrides
+    ///     Create a <see cref="OutputFile"/> with no encryption even if the input file is encrypted. This option overrides
     ///     the default behavior of preserving whatever encryption was present on the <see cref="InputFile"/>. This functionality
     ///     is not intended to be used for bypassing copyright restrictions or other restrictions placed on files by their producers.
     ///     See also <see cref="CopyEncryption"/>.
@@ -1123,7 +1123,8 @@ public class Job : IDisposable
     #region Collate
     /// <summary>
     ///     This option causes qpdf to collate rather than concatenate pages specified with <see cref="Pages"/>. With a numeric parameter,
-    ///     collate in groups of <paramref name="n" />. The default is <b>1</b>.
+    ///     collate in groups of <paramref name="n" />. The default is <b>1</b>. With comma-separated numeric parameters, take n from the
+    ///     first file, m from the second, etc.
     /// </summary>
     /// <param name="n">
     ///     A value greater than zero
@@ -1142,6 +1143,35 @@ public class Job : IDisposable
 
         Logger.LogError($"$Collating pages with value '{n}'");
         _collate = n.ToString();
+        return this;
+    }
+
+    /// <summary>
+    ///     This option causes qpdf to collate rather than concatenate pages specified with <see cref="Pages"/>. With a numeric parameter,
+    ///     collate in groups of <paramref name="pages" />. The default is <b>1</b>. With comma-separated numeric parameters, take n from the
+    ///     first file, m from the second, etc.
+    /// </summary>
+    /// <param name="pages">
+    ///     A list of pages to take n from the first file, m from the second, etc.
+    /// </param>
+    /// <returns>
+    ///     <see cref="Job" />
+    /// </returns>
+    public Job Collate(List<int> pages)
+    {
+        foreach (var page in pages)
+        {
+            if (page <= 0)
+            {
+                var message = "$Collate value '{n}' should be greater than zero";
+                Logger.LogError(message);
+                throw new ArgumentOutOfRangeException(nameof(page), message);
+            }
+        }
+
+        var n = string.Join(",", pages);
+        Logger.LogError($"$Collating pages with values '{n}'");
+        _collate = n;
         return this;
     }
     #endregion
@@ -2076,7 +2106,7 @@ public class Job : IDisposable
     ///     When used with <see cref="JsonStreamData.File"/>, <see cref="JsonStreamPrefix"/> sets the prefix
     ///     for stream data files, overriding the default, which is to use the output file name. Whatever is
     ///     given here will be appended with -nnn to create the name of the file that will contain the data
-    ///     for the stream stream in object nnn.
+    ///     for the stream in object nnn.
     /// </summary>
     /// <param name="streamData"><see cref="StreamData"/></param>
     /// <remarks>
@@ -2112,7 +2142,7 @@ public class Job : IDisposable
     ///     When used with <see cref="JsonStreamData.File"/>, <see cref="JsonStreamPrefix"/> sets the prefix for
     ///     stream data files, overriding the default, which is to use the output file name. Whatever is given
     ///     here will be appended with -nnn to create the name of the file that will contain the data for the
-    ///     stream stream in object nnn.
+    ///     stream in object nnn.
     /// </summary>
     /// <param name="prefix">The file prefix</param>
     /// <returns>
@@ -2188,7 +2218,7 @@ public class Job : IDisposable
     #region StaticId
     /// <summary>
     ///     Use a fixed value for the document ID (/ID in the trailer). This is intended for testing only. <b>Never</b> use it for
-    ///     production files. If you are trying to get the same ID each time for a given file and you are not generating encrypted files,
+    ///     production files. If you are trying to get the same ID each time for a given file, and you are not generating encrypted files,
     ///     consider using the <see cref="DeterministicId"/> option.
     /// </summary>
     /// <returns>
