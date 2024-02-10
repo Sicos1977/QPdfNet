@@ -1141,7 +1141,7 @@
         </member>
         <member name="M:QPdfNet.Job.Decrypt">
             <summary>
-                Create an <see cref="M:QPdfNet.Job.OutputFile(System.String)"/> with no encryption even if the input file is encrypted. This option overrides
+                Create a <see cref="M:QPdfNet.Job.OutputFile(System.String)"/> with no encryption even if the input file is encrypted. This option overrides
                 the default behavior of preserving whatever encryption was present on the <see cref="M:QPdfNet.Job.InputFile(System.String)"/>. This functionality
                 is not intended to be used for bypassing copyright restrictions or other restrictions placed on files by their producers.
                 See also <see cref="M:QPdfNet.Job.CopyEncryption(System.String)"/>.
@@ -1215,7 +1215,7 @@
                 By default, or with use <paramref name="compress" /> = true, qpdf will compress streams using the flate compression
                 algorithm (used by zip and gzip) unless those streams are compressed in some other way. This analysis is
                 made after qpdf attempts to uncompress streams and is therefore closely related to <see cref="M:QPdfNet.Job.DecodeLevel(QPdfNet.Enums.DecodeLevel)" />.
-                To suppress this behavior and leave streams streams uncompressed, use <paramref name="compress" /> = <c>false</c>.
+                To suppress this behavior and leave streams uncompressed, use <paramref name="compress" /> = <c>false</c>.
                 In QDF mode (see QDF Mode and <see cref="M:QPdfNet.Job.Qdf" />), the default is to leave streams uncompressed.
             </summary>
             <param name="compress"><c>true</c> or <c>false</c></param>
@@ -1440,10 +1440,24 @@
         <member name="M:QPdfNet.Job.Collate(System.Int32)">
             <summary>
                 This option causes qpdf to collate rather than concatenate pages specified with <see cref="M:QPdfNet.Job.Pages(System.String,System.String,System.String)"/>. With a numeric parameter,
-                collate in groups of <paramref name="n" />. The default is <b>1</b>.
+                collate in groups of <paramref name="n" />. The default is <b>1</b>. With comma-separated numeric parameters, take n from the
+                first file, m from the second, etc.
             </summary>
             <param name="n">
                 A value greater than zero
+            </param>
+            <returns>
+                <see cref="T:QPdfNet.Job" />
+            </returns>
+        </member>
+        <member name="M:QPdfNet.Job.Collate(System.Collections.Generic.List{System.Int32})">
+            <summary>
+                This option causes qpdf to collate rather than concatenate pages specified with <see cref="M:QPdfNet.Job.Pages(System.String,System.String,System.String)"/>. With a numeric parameter,
+                collate in groups of <paramref name="pages" />. The default is <b>1</b>. With comma-separated numeric parameters, take n from the
+                first file, m from the second, etc.
+            </summary>
+            <param name="pages">
+                A list of pages to take n from the first file, m from the second, etc.
             </param>
             <returns>
                 <see cref="T:QPdfNet.Job" />
@@ -1729,6 +1743,14 @@
                 <see cref="T:QPdfNet.Job" />
             </returns>
         </member>
+        <member name="M:QPdfNet.Job.SetPageLabels">
+            <summary>
+                Exclude page labels (explicit page numbers) from the <see cref="M:QPdfNet.Job.OutputFile(System.String)"/>.
+            </summary>
+            <returns>
+                <see cref="T:QPdfNet.Job" />
+            </returns>
+        </member>
         <member name="M:QPdfNet.Job.IsEncrypted">
             <summary>
                 This option can be used for password-protected files even if you don’t know the password.
@@ -1977,7 +1999,7 @@
                 When used with <see cref="F:QPdfNet.Enums.JsonStreamData.File"/>, <see cref="M:QPdfNet.Job.JsonStreamPrefix(System.String)"/> sets the prefix
                 for stream data files, overriding the default, which is to use the output file name. Whatever is
                 given here will be appended with -nnn to create the name of the file that will contain the data
-                for the stream stream in object nnn.
+                for the stream in object nnn.
             </summary>
             <param name="streamData"><see cref="M:QPdfNet.Job.StreamData(QPdfNet.Enums.StreamData)"/></param>
             <remarks>
@@ -1992,7 +2014,7 @@
                 When used with <see cref="F:QPdfNet.Enums.JsonStreamData.File"/>, <see cref="M:QPdfNet.Job.JsonStreamPrefix(System.String)"/> sets the prefix for
                 stream data files, overriding the default, which is to use the output file name. Whatever is given
                 here will be appended with -nnn to create the name of the file that will contain the data for the
-                stream stream in object nnn.
+                stream in object nnn.
             </summary>
             <param name="prefix">The file prefix</param>
             <returns>
@@ -2040,7 +2062,7 @@
         <member name="M:QPdfNet.Job.StaticId">
             <summary>
                 Use a fixed value for the document ID (/ID in the trailer). This is intended for testing only. <b>Never</b> use it for
-                production files. If you are trying to get the same ID each time for a given file and you are not generating encrypted files,
+                production files. If you are trying to get the same ID each time for a given file, and you are not generating encrypted files,
                 consider using the <see cref="M:QPdfNet.Job.DeterministicId"/> option.
             </summary>
             <returns>
