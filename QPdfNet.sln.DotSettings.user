@@ -1,5 +1,5 @@
 ﻿<wpf:ResourceDictionary xml:space="preserve" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:s="clr-namespace:System;assembly=mscorlib" xmlns:ss="urn:shemas-jetbrains-com:settings-storage-xaml" xmlns:wpf="http://schemas.microsoft.com/winfx/2006/xaml/presentation">
-	<s:String x:Key="/Default/Environment/Highlighting/HighlightingSourceSnapshotLocation/@EntryValue">C:\Users\keesv\AppData\Local\Temp\JetBrains\ReSharperPlatformVs17\vAny_9a7312f8\CoverageData\_QPdfNet.1908726857\Snapshot\snapshot.utdcvr</s:String>
+	
 	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=4557a971_002Db678_002D4399_002Dbe5a_002D993d73bd8f67/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" IsActive="True" Name="QpdfTests" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
   &lt;TestAncestor&gt;&#xD;
     &lt;TestId&gt;MSTest::1C702B8C-5945-4F57-8A80-3BCBA47EC468::net6.0::QpdfNetTest.QpdfTests&lt;/TestId&gt;&#xD;
