@@ -12,14 +12,15 @@
 		<PackageTags>qpdf pdf</PackageTags>
 		<PackageReleaseNotes>- Updates to latest QPDF version
 - Added method SetPageLabels
-- Extended method collate met new functionality</PackageReleaseNotes>
+- Extended method collate with new functionality
+- Fixes threading issues (thanks to deralbert on Github)</PackageReleaseNotes>
 		<PackageIcon>qpdf.png</PackageIcon>
 		<PackageReadmeFile>readme.md</PackageReadmeFile>
-		<Copyright>Copyright (c) 2021-2023 Kees van Spelde</Copyright>
+		<Copyright>Copyright (c) 2021-2024 Kees van Spelde</Copyright>
 		<GeneratePackageOnBuild>True</GeneratePackageOnBuild>
-		<AssemblyVersion>1.3.0.0</AssemblyVersion>
-		<FileVersion>1.3.0.0</FileVersion>
-		<Version>1.3.0</Version>
+		<AssemblyVersion>1.4.0.0</AssemblyVersion>
+		<FileVersion>1.4.0.0</FileVersion>
+		<Version>1.4.0</Version>
     <DocumentationFile>bin\$(Configuration)\$(TargetFramework)\$(AssemblyName).xml</DocumentationFile>
     <NoWarn>$(NoWarn);1591</NoWarn>
 	</PropertyGroup>
