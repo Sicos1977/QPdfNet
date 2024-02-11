@@ -891,15 +891,9 @@
                 breaking changes between releases.
             </remarks>
         </member>
-        <member name="M:QPdfNet.Interop.IQPdfApiSignatures.GetQPdfVersion">
+        <member name="M:QPdfNet.Interop.IQPdfApiSignatures.qpdf_get_qpdf_version">
             <summary>
                 Returns the current version
-            </summary>
-            <returns></returns>
-        </member>
-        <member name="M:QPdfNet.Interop.IQPdfApiSignatures.RunFromJSON(System.String)">
-            <summary>
-                Runs the given json and returns the result from cout and cerr
             </summary>
             <returns></returns>
         </member>

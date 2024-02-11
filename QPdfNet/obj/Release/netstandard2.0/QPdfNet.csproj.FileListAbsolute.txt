@@ -1,5 +1,0 @@
-C:\Kees\QPdfNet\QPdfNet\obj\Release\netstandard2.0\QPdfNet.csproj.AssemblyReference.cache
-C:\Kees\QPdfNet\QPdfNet\obj\Release\netstandard2.0\QPdfNet.GeneratedMSBuildEditorConfig.editorconfig
-C:\Kees\QPdfNet\QPdfNet\obj\Release\netstandard2.0\QPdfNet.AssemblyInfoInputs.cache
-C:\Kees\QPdfNet\QPdfNet\obj\Release\netstandard2.0\QPdfNet.AssemblyInfo.cs
-C:\Kees\QPdfNet\QPdfNet\obj\Release\netstandard2.0\QPdfNet.csproj.CoreCompileInputs.cache

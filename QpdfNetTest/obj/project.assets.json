@@ -2171,26 +2171,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\AO303388\\.nuget\\packages\\": {},
-    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {},
-    "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
+    "C:\\Users\\arsenii.denisov\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Kees\\QPdfNet\\QpdfNetTest\\QpdfNetTest.csproj",
+      "projectUniqueName": "C:\\Temp\\QPdfNetFork\\QpdfNetTest\\QpdfNetTest.csproj",
       "projectName": "QpdfNetTest",
-      "projectPath": "C:\\Kees\\QPdfNet\\QpdfNetTest\\QpdfNetTest.csproj",
-      "packagesPath": "C:\\Users\\AO303388\\.nuget\\packages\\",
-      "outputPath": "C:\\Kees\\QPdfNet\\QpdfNetTest\\obj\\",
+      "projectPath": "C:\\Temp\\QPdfNetFork\\QpdfNetTest\\QpdfNetTest.csproj",
+      "packagesPath": "C:\\Users\\arsenii.denisov\\.nuget\\packages\\",
+      "outputPath": "C:\\Temp\\QPdfNetFork\\QpdfNetTest\\obj\\",
       "projectStyle": "PackageReference",
-      "fallbackFolders": [
-        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",
-        "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
-      ],
       "configFilePaths": [
-        "C:\\Users\\AO303388\\AppData\\Roaming\\NuGet\\NuGet.Config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+        "C:\\Users\\arsenii.denisov\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -2198,14 +2191,16 @@
       ],
       "sources": {
         "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-        "https://api.nuget.org/v3/index.json": {}
+        "https://api.nuget.org/v3/index.json": {},
+        "https://stp-pde.pkgs.visualstudio.com/_packaging/standard_pde/nuget/v3/index.json": {},
+        "https://www.myget.org/F/caliburn-micro-builds/api/v3/index.json": {}
       },
       "frameworks": {
         "net6.0": {
           "targetAlias": "net6.0",
           "projectReferences": {
-            "C:\\Kees\\QPdfNet\\QPdfNet\\QPdfNet.csproj": {
-              "projectPath": "C:\\Kees\\QPdfNet\\QPdfNet\\QPdfNet.csproj"
+            "C:\\Temp\\QPdfNetFork\\QPdfNet\\QPdfNet.csproj": {
+              "projectPath": "C:\\Temp\\QPdfNetFork\\QPdfNet\\QPdfNet.csproj"
             }
           }
         }
@@ -2214,6 +2209,11 @@
         "warnAsError": [
           "NU1605"
         ]
+      },
+      "restoreAuditProperties": {
+        "enableAudit": "true",
+        "auditLevel": "low",
+        "auditMode": "direct"
       }
     },
     "frameworks": {
@@ -2259,7 +2259,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.101\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.200-preview.23624.5\\RuntimeIdentifierGraph.json"
       }
     }
   }
