@@ -80,43 +80,48 @@ namespace QPdfNet.Interop
         ///     Returns the current version
         /// </summary>
         /// <returns></returns>
-        [RuntimeDllImport(Constants.QPdfDllName, CallingConvention = CallingConvention.Cdecl, EntryPoint = "qpdf_get_qpdf_version")]
+        [RuntimeDllImport(Constants.QPdfDllName, CallingConvention = CallingConvention.Cdecl, EntryPoint = nameof(qpdf_get_qpdf_version))]
         [return: MarshalAs(UnmanagedType.LPTStr)]
-        string GetQPdfVersion();
+        string qpdf_get_qpdf_version();
 
-        [RuntimeDllImport(Constants.QPdfDllName, CallingConvention = CallingConvention.Cdecl, EntryPoint = "qpdflogger_default_logger")]
-        IntPtr GetDefaultLogger();
+        [RuntimeDllImport(Constants.QPdfDllName, CallingConvention = CallingConvention.Cdecl, EntryPoint = nameof(qpdflogger_create))]
+        IntPtr qpdflogger_create();
 
-        [RuntimeDllImport(Constants.QPdfDllName, CallingConvention = CallingConvention.Cdecl, EntryPoint = "qpdflogger_cleanup")]
-        IntPtr CleanupLogger(IntPtr loggerHandle);
+        [RuntimeDllImport(Constants.QPdfDllName, CallingConvention = CallingConvention.Cdecl, EntryPoint = nameof(qpdflogger_cleanup))]
+        void qpdflogger_cleanup(IntPtr loggerHandle);
 
-        [RuntimeDllImport(Constants.QPdfDllName, CallingConvention = CallingConvention.Cdecl, EntryPoint = "qpdflogger_set_info")]
-        IntPtr SetInfo(IntPtr loggerHandle, qpdf_log_dest_e destination, IntPtr callBackHandler);
-        
-        [RuntimeDllImport(Constants.QPdfDllName, CallingConvention = CallingConvention.Cdecl, EntryPoint = "qpdflogger_set_warn")]
-        IntPtr SetWarn(IntPtr loggerHandle, qpdf_log_dest_e destination, IntPtr callBackHandler);
+        [RuntimeDllImport(Constants.QPdfDllName, CallingConvention = CallingConvention.Cdecl, EntryPoint = nameof(qpdfjob_init))]
+        IntPtr qpdfjob_init();
 
-        [RuntimeDllImport(Constants.QPdfDllName, CallingConvention = CallingConvention.Cdecl, EntryPoint = "qpdflogger_set_error")]
-        IntPtr SetError(IntPtr loggerHandle, qpdf_log_dest_e destination, IntPtr callBackHandler);
+        [RuntimeDllImport(Constants.QPdfDllName, CallingConvention = CallingConvention.Cdecl, EntryPoint = nameof(qpdfjob_cleanup))]
+        void qpdfjob_cleanup(IntPtr jobHandle);
 
-        [RuntimeDllImport(Constants.QPdfDllName, CallingConvention = CallingConvention.Cdecl, EntryPoint = "qpdflogger_set_save")]
-        IntPtr SetSave(IntPtr loggerHandle, qpdf_log_dest_e destination, IntPtr callBackHandler);
-     
-        /// <summary>
-        ///     Runs the given json and returns the result from cout and cerr
-        /// </summary>
-        /// <returns></returns>
-        [RuntimeDllImport(Constants.QPdfDllName, CallingConvention = CallingConvention.Cdecl, EntryPoint = "qpdfjob_run_from_json")]
-        int RunFromJSON(string json);
+        [RuntimeDllImport(Constants.QPdfDllName, CallingConvention = CallingConvention.Cdecl, EntryPoint = nameof(qpdfjob_set_logger))]
+        void qpdfjob_set_logger(IntPtr jobHandle, IntPtr loggerHandle);
+
+        [RuntimeDllImport(Constants.QPdfDllName, CallingConvention = CallingConvention.Cdecl, EntryPoint = nameof(qpdflogger_set_info))]
+        void qpdflogger_set_info(IntPtr loggerHandle, qpdf_log_dest_e destination, IntPtr callBackHandler, IntPtr udata);
+
+        [RuntimeDllImport(Constants.QPdfDllName, CallingConvention = CallingConvention.Cdecl, EntryPoint = nameof(qpdflogger_set_warn))]
+        void qpdflogger_set_warn(IntPtr loggerHandle, qpdf_log_dest_e destination, IntPtr callBackHandler, IntPtr udata);
+
+        [RuntimeDllImport(Constants.QPdfDllName, CallingConvention = CallingConvention.Cdecl, EntryPoint = nameof(qpdflogger_set_error))]
+        void qpdflogger_set_error(IntPtr loggerHandle, qpdf_log_dest_e destination, IntPtr callBackHandler, IntPtr udata);
+
+        [RuntimeDllImport(Constants.QPdfDllName, CallingConvention = CallingConvention.Cdecl, EntryPoint = nameof(qpdflogger_set_save))]
+        void qpdflogger_set_save(IntPtr loggerHandle, qpdf_log_dest_e destination, IntPtr callBackHandler, IntPtr udata);
+
+        [RuntimeDllImport(Constants.QPdfDllName, CallingConvention = CallingConvention.Cdecl, EntryPoint = nameof(qpdfjob_initialize_from_json))]
+        int qpdfjob_initialize_from_json(IntPtr jobHandle, string json);
+
+        [RuntimeDllImport(Constants.QPdfDllName, CallingConvention = CallingConvention.Cdecl, EntryPoint = nameof(qpdfjob_run))]
+        int qpdfjob_run(IntPtr jobHandle);
     }
 
     public class QPdfApi
     {
         #region Fields
         private IQPdfApiSignatures? _native;
-
-        [ThreadStatic]
-        private static IntPtr _loggerHandle;
         #endregion
 
         #region Properties
@@ -131,25 +136,6 @@ namespace QPdfNet.Interop
                 _native = InteropRuntimeImplementer.CreateInstance<IQPdfApiSignatures>();
                 return _native;
             }
-        }
-
-        internal IntPtr LoggerHandle
-        {
-            get
-            {
-                if (_loggerHandle == IntPtr.Zero)
-                    _loggerHandle = Native.GetDefaultLogger();
-
-                return _loggerHandle;
-            }
-        }
-        #endregion
-
-        #region Destructor
-        ~QPdfApi()
-        {
-            if (_loggerHandle != IntPtr.Zero)
-                Native.CleanupLogger(_loggerHandle);
         }
         #endregion
     }
