@@ -240,6 +240,104 @@ public class Job : IDisposable
     }
     #endregion
 
+    #region Reset
+    /// <summary>
+    ///     Resets the job to its default state
+    /// </summary>
+    private void Reset()
+    {
+        _inputFile = null;
+        _outputFile = null;
+        _empty = null;
+        _replaceInput = null;
+        _warningExit0 = null;
+        _password = null;
+        _passwordFile = null;
+        _verbose = null;
+        _noWarn = null;
+        _deterministicId = null;
+        _allowWeakCrypto = null;
+        _keepFilesOpen = null;
+        _keepFilesOpenThreshold = null;
+        _passwordIsHexKey = null;
+        _suppressPasswordRecovery = null;
+        _passwordMode = default;
+        _suppressRecovery = null;
+        _ignoreXrefStreams = null;
+        _linearize = null;
+        _encryption = null;
+        _decrypt = null;
+        _removeRestrictions = null;
+        _copyEncryption = null;
+        _encryptionFilePassword = null;
+        _qdf = null;
+        _noOriginalObjectIds = null;
+        _compressStreams = null;
+        _decodeLevel = default;
+        _streamData = default;
+        _recompressFlate = null;
+        _compressionLevel = null;
+        _normalizeContent = null;
+        _objectStreams = default;
+        _preserveUnreferenced = null;
+        _removeUnreferencedResources = default;
+        _preserveUnreferencedResources = null;
+        _newlineBeforeEndstream = null;
+        _coalesceContents = null;
+        _externalizeInlineImages = null;
+        _iiMinBytes = null;
+        _minVersion = null;
+        _forceVersion = null;
+        _collate = null;
+        _pages = null;
+        _splitPages = null;
+        _overlay = null;
+        _underlay = null;
+        _addAttachment = null;
+        _copyAttachments = null;
+        _removeAttachment = null;
+        _flattenRotation = null;
+        _flattenAnnotation = default;
+        _rotate = null;
+        _generateAppearances = null;
+        _optimizeImages = null;
+        _oiMinWidth = null;
+        _oiMinHeight = null;
+        _oiMinArea = null;
+        _keepInlineImages = null;
+        _removePageLabels = null;
+        _setPageLabels = null;
+        _isEncrypted = null;
+        _requiresPassword = null;
+        _check = null;
+        _showEncryption = null;
+        _showEncryptionKey = null;
+        _checkLinearization = null;
+        _showLinearization = null;
+        _showXref = null;
+        _showObject = null;
+        _rawStreamData = null;
+        _filteredStreamData = null;
+        _showNpages = null;
+        _showPages = null;
+        _withImages = null;
+        _listAttachments = null;
+        _showAttachment = null;
+        _json = null;
+        _jsonHelp = null;
+        _jsonStreamData = null;
+        _jsonStreamPrefix = null;
+        _jsonKey = null;
+        _jsonObject = null;
+        _jsonOutput = null;
+        _jsonInput = null;
+        _updateFromJson = null;
+        _staticId = null;
+        _staticAesIv = null;
+        _linearizePass1 = null;
+    }
+    #endregion
+
     #region InputFile
     /// <summary>
     ///     The input PDF file
@@ -2201,7 +2299,7 @@ public class Job : IDisposable
         return this;
     }
     #endregion
-
+     
     #region JsonStreamPrefix
     /// <summary>
     ///     When used with <see cref="JsonStreamData.File"/>, <see cref="JsonStreamPrefix"/> sets the prefix for
@@ -2369,10 +2467,18 @@ public class Job : IDisposable
 
         output = output.TrimEnd();
 
+        _info.Clear();
+        _warn.Clear();
+        _error.Clear();
+
         if (_save.Count > 0)
             data = _save.ToArray();
 
+        _save.Clear();
+
         Logger.LogInformation("Output from QPDF: " + Environment.NewLine + output);
+
+        Reset();
 
         return result;
     }
