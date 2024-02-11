@@ -8,11 +8,11 @@
     ".NETCoreApp,Version=v6.0": {
       "QpdfNetTest/1.0.0": {
         "dependencies": {
-          "MSTest.TestAdapter": "3.0.4",
-          "MSTest.TestFramework": "3.0.4",
-          "Microsoft.Extensions.Logging": "7.0.0",
-          "Microsoft.NET.Test.Sdk": "17.6.3",
-          "QPdfNet": "1.2.0",
+          "MSTest.TestAdapter": "3.2.0",
+          "MSTest.TestFramework": "3.2.0",
+          "Microsoft.Extensions.Logging": "8.0.0",
+          "Microsoft.NET.Test.Sdk": "17.9.0",
+          "QPdfNet": "1.4.0",
           "coverlet.collector": "6.0.0",
           "Microsoft.VisualStudio.TestPlatform.TestFramework.Extensions": "14.0.0.0"
         },
@@ -21,101 +21,332 @@
         }
       },
       "coverlet.collector/6.0.0": {},
-      "Microsoft.CodeCoverage/17.6.3": {
+      "Microsoft.ApplicationInsights/2.21.0": {
+        "dependencies": {
+          "System.Diagnostics.DiagnosticSource": "5.0.0"
+        },
+        "runtime": {
+          "lib/netstandard2.0/Microsoft.ApplicationInsights.dll": {
+            "assemblyVersion": "2.21.0.429",
+            "fileVersion": "2.21.0.429"
+          }
+        }
+      },
+      "Microsoft.CodeCoverage/17.9.0": {
         "runtime": {
           "lib/netcoreapp3.1/Microsoft.VisualStudio.CodeCoverage.Shim.dll": {
             "assemblyVersion": "15.0.0.0",
-            "fileVersion": "17.600.1423.27404"
+            "fileVersion": "17.900.724.7204"
           }
         }
       },
-      "Microsoft.Extensions.DependencyInjection/7.0.0": {
+      "Microsoft.Extensions.DependencyInjection/8.0.0": {
         "dependencies": {
-          "Microsoft.Extensions.DependencyInjection.Abstractions": "7.0.0"
+          "Microsoft.Extensions.DependencyInjection.Abstractions": "8.0.0"
         },
         "runtime": {
           "lib/net6.0/Microsoft.Extensions.DependencyInjection.dll": {
-            "assemblyVersion": "7.0.0.0",
-            "fileVersion": "7.0.22.51805"
+            "assemblyVersion": "8.0.0.0",
+            "fileVersion": "8.0.23.53103"
           }
         }
       },
-      "Microsoft.Extensions.DependencyInjection.Abstractions/7.0.0": {
+      "Microsoft.Extensions.DependencyInjection.Abstractions/8.0.0": {
         "runtime": {
           "lib/net6.0/Microsoft.Extensions.DependencyInjection.Abstractions.dll": {
-            "assemblyVersion": "7.0.0.0",
-            "fileVersion": "7.0.22.51805"
+            "assemblyVersion": "8.0.0.0",
+            "fileVersion": "8.0.23.53103"
           }
         }
       },
-      "Microsoft.Extensions.Logging/7.0.0": {
+      "Microsoft.Extensions.Logging/8.0.0": {
         "dependencies": {
-          "Microsoft.Extensions.DependencyInjection": "7.0.0",
-          "Microsoft.Extensions.DependencyInjection.Abstractions": "7.0.0",
-          "Microsoft.Extensions.Logging.Abstractions": "7.0.0",
-          "Microsoft.Extensions.Options": "7.0.0"
+          "Microsoft.Extensions.DependencyInjection": "8.0.0",
+          "Microsoft.Extensions.Logging.Abstractions": "8.0.0",
+          "Microsoft.Extensions.Options": "8.0.0"
         },
         "runtime": {
           "lib/net6.0/Microsoft.Extensions.Logging.dll": {
-            "assemblyVersion": "7.0.0.0",
-            "fileVersion": "7.0.22.51805"
+            "assemblyVersion": "8.0.0.0",
+            "fileVersion": "8.0.23.53103"
           }
         }
       },
-      "Microsoft.Extensions.Logging.Abstractions/7.0.0": {
+      "Microsoft.Extensions.Logging.Abstractions/8.0.0": {
+        "dependencies": {
+          "Microsoft.Extensions.DependencyInjection.Abstractions": "8.0.0"
+        },
         "runtime": {
           "lib/net6.0/Microsoft.Extensions.Logging.Abstractions.dll": {
-            "assemblyVersion": "7.0.0.0",
-            "fileVersion": "7.0.22.51805"
+            "assemblyVersion": "8.0.0.0",
+            "fileVersion": "8.0.23.53103"
           }
         }
       },
-      "Microsoft.Extensions.Options/7.0.0": {
+      "Microsoft.Extensions.Options/8.0.0": {
         "dependencies": {
-          "Microsoft.Extensions.DependencyInjection.Abstractions": "7.0.0",
-          "Microsoft.Extensions.Primitives": "7.0.0"
+          "Microsoft.Extensions.DependencyInjection.Abstractions": "8.0.0",
+          "Microsoft.Extensions.Primitives": "8.0.0"
         },
         "runtime": {
           "lib/net6.0/Microsoft.Extensions.Options.dll": {
-            "assemblyVersion": "7.0.0.0",
-            "fileVersion": "7.0.22.51805"
+            "assemblyVersion": "8.0.0.0",
+            "fileVersion": "8.0.23.53103"
           }
         }
       },
-      "Microsoft.Extensions.Primitives/7.0.0": {
+      "Microsoft.Extensions.Primitives/8.0.0": {
         "dependencies": {
           "System.Runtime.CompilerServices.Unsafe": "6.0.0"
         },
         "runtime": {
           "lib/net6.0/Microsoft.Extensions.Primitives.dll": {
-            "assemblyVersion": "7.0.0.0",
-            "fileVersion": "7.0.22.51805"
+            "assemblyVersion": "8.0.0.0",
+            "fileVersion": "8.0.23.53103"
           }
         }
       },
-      "Microsoft.NET.Test.Sdk/17.6.3": {
+      "Microsoft.NET.Test.Sdk/17.9.0": {
         "dependencies": {
-          "Microsoft.CodeCoverage": "17.6.3",
-          "Microsoft.TestPlatform.TestHost": "17.6.3"
+          "Microsoft.CodeCoverage": "17.9.0",
+          "Microsoft.TestPlatform.TestHost": "17.9.0"
         }
       },
-      "Microsoft.TestPlatform.ObjectModel/17.6.3": {
+      "Microsoft.Testing.Extensions.Telemetry/1.0.0": {
         "dependencies": {
-          "NuGet.Frameworks": "6.5.0",
+          "Microsoft.ApplicationInsights": "2.21.0",
+          "Microsoft.Testing.Platform": "1.0.0"
+        },
+        "runtime": {
+          "lib/net6.0/Microsoft.Testing.Extensions.Telemetry.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.0.24.7403"
+          }
+        },
+        "resources": {
+          "lib/net6.0/cs/Microsoft.Testing.Extensions.Telemetry.resources.dll": {
+            "locale": "cs"
+          },
+          "lib/net6.0/de/Microsoft.Testing.Extensions.Telemetry.resources.dll": {
+            "locale": "de"
+          },
+          "lib/net6.0/es/Microsoft.Testing.Extensions.Telemetry.resources.dll": {
+            "locale": "es"
+          },
+          "lib/net6.0/fr/Microsoft.Testing.Extensions.Telemetry.resources.dll": {
+            "locale": "fr"
+          },
+          "lib/net6.0/it/Microsoft.Testing.Extensions.Telemetry.resources.dll": {
+            "locale": "it"
+          },
+          "lib/net6.0/ja/Microsoft.Testing.Extensions.Telemetry.resources.dll": {
+            "locale": "ja"
+          },
+          "lib/net6.0/ko/Microsoft.Testing.Extensions.Telemetry.resources.dll": {
+            "locale": "ko"
+          },
+          "lib/net6.0/pl/Microsoft.Testing.Extensions.Telemetry.resources.dll": {
+            "locale": "pl"
+          },
+          "lib/net6.0/pt-BR/Microsoft.Testing.Extensions.Telemetry.resources.dll": {
+            "locale": "pt-BR"
+          },
+          "lib/net6.0/ru/Microsoft.Testing.Extensions.Telemetry.resources.dll": {
+            "locale": "ru"
+          },
+          "lib/net6.0/tr/Microsoft.Testing.Extensions.Telemetry.resources.dll": {
+            "locale": "tr"
+          },
+          "lib/net6.0/zh-Hans/Microsoft.Testing.Extensions.Telemetry.resources.dll": {
+            "locale": "zh-Hans"
+          },
+          "lib/net6.0/zh-Hant/Microsoft.Testing.Extensions.Telemetry.resources.dll": {
+            "locale": "zh-Hant"
+          }
+        }
+      },
+      "Microsoft.Testing.Extensions.TrxReport.Abstractions/1.0.0": {
+        "dependencies": {
+          "Microsoft.Testing.Platform": "1.0.0"
+        },
+        "runtime": {
+          "lib/net6.0/Microsoft.Testing.Extensions.TrxReport.Abstractions.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.0.24.7403"
+          }
+        }
+      },
+      "Microsoft.Testing.Extensions.VSTestBridge/1.0.0": {
+        "dependencies": {
+          "Microsoft.TestPlatform.ObjectModel": "17.9.0",
+          "Microsoft.Testing.Extensions.TrxReport.Abstractions": "1.0.0",
+          "Microsoft.Testing.Platform": "1.0.0"
+        },
+        "runtime": {
+          "lib/net6.0/Microsoft.Testing.Extensions.VSTestBridge.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.0.24.7403"
+          }
+        },
+        "resources": {
+          "lib/net6.0/cs/Microsoft.Testing.Extensions.VSTestBridge.resources.dll": {
+            "locale": "cs"
+          },
+          "lib/net6.0/de/Microsoft.Testing.Extensions.VSTestBridge.resources.dll": {
+            "locale": "de"
+          },
+          "lib/net6.0/es/Microsoft.Testing.Extensions.VSTestBridge.resources.dll": {
+            "locale": "es"
+          },
+          "lib/net6.0/fr/Microsoft.Testing.Extensions.VSTestBridge.resources.dll": {
+            "locale": "fr"
+          },
+          "lib/net6.0/it/Microsoft.Testing.Extensions.VSTestBridge.resources.dll": {
+            "locale": "it"
+          },
+          "lib/net6.0/ja/Microsoft.Testing.Extensions.VSTestBridge.resources.dll": {
+            "locale": "ja"
+          },
+          "lib/net6.0/ko/Microsoft.Testing.Extensions.VSTestBridge.resources.dll": {
+            "locale": "ko"
+          },
+          "lib/net6.0/pl/Microsoft.Testing.Extensions.VSTestBridge.resources.dll": {
+            "locale": "pl"
+          },
+          "lib/net6.0/pt-BR/Microsoft.Testing.Extensions.VSTestBridge.resources.dll": {
+            "locale": "pt-BR"
+          },
+          "lib/net6.0/ru/Microsoft.Testing.Extensions.VSTestBridge.resources.dll": {
+            "locale": "ru"
+          },
+          "lib/net6.0/tr/Microsoft.Testing.Extensions.VSTestBridge.resources.dll": {
+            "locale": "tr"
+          },
+          "lib/net6.0/zh-Hans/Microsoft.Testing.Extensions.VSTestBridge.resources.dll": {
+            "locale": "zh-Hans"
+          },
+          "lib/net6.0/zh-Hant/Microsoft.Testing.Extensions.VSTestBridge.resources.dll": {
+            "locale": "zh-Hant"
+          }
+        }
+      },
+      "Microsoft.Testing.Platform/1.0.0": {
+        "runtime": {
+          "lib/net6.0/Microsoft.Testing.Platform.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.0.24.7403"
+          }
+        },
+        "resources": {
+          "lib/net6.0/cs/Microsoft.Testing.Platform.resources.dll": {
+            "locale": "cs"
+          },
+          "lib/net6.0/de/Microsoft.Testing.Platform.resources.dll": {
+            "locale": "de"
+          },
+          "lib/net6.0/es/Microsoft.Testing.Platform.resources.dll": {
+            "locale": "es"
+          },
+          "lib/net6.0/fr/Microsoft.Testing.Platform.resources.dll": {
+            "locale": "fr"
+          },
+          "lib/net6.0/it/Microsoft.Testing.Platform.resources.dll": {
+            "locale": "it"
+          },
+          "lib/net6.0/ja/Microsoft.Testing.Platform.resources.dll": {
+            "locale": "ja"
+          },
+          "lib/net6.0/ko/Microsoft.Testing.Platform.resources.dll": {
+            "locale": "ko"
+          },
+          "lib/net6.0/pl/Microsoft.Testing.Platform.resources.dll": {
+            "locale": "pl"
+          },
+          "lib/net6.0/pt-BR/Microsoft.Testing.Platform.resources.dll": {
+            "locale": "pt-BR"
+          },
+          "lib/net6.0/ru/Microsoft.Testing.Platform.resources.dll": {
+            "locale": "ru"
+          },
+          "lib/net6.0/tr/Microsoft.Testing.Platform.resources.dll": {
+            "locale": "tr"
+          },
+          "lib/net6.0/zh-Hans/Microsoft.Testing.Platform.resources.dll": {
+            "locale": "zh-Hans"
+          },
+          "lib/net6.0/zh-Hant/Microsoft.Testing.Platform.resources.dll": {
+            "locale": "zh-Hant"
+          }
+        }
+      },
+      "Microsoft.Testing.Platform.MSBuild/1.0.0": {
+        "dependencies": {
+          "Microsoft.Testing.Platform": "1.0.0"
+        },
+        "runtime": {
+          "lib/net6.0/Microsoft.Testing.Platform.MSBuild.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.0.24.7403"
+          }
+        },
+        "resources": {
+          "lib/net6.0/cs/Microsoft.Testing.Platform.MSBuild.resources.dll": {
+            "locale": "cs"
+          },
+          "lib/net6.0/de/Microsoft.Testing.Platform.MSBuild.resources.dll": {
+            "locale": "de"
+          },
+          "lib/net6.0/es/Microsoft.Testing.Platform.MSBuild.resources.dll": {
+            "locale": "es"
+          },
+          "lib/net6.0/fr/Microsoft.Testing.Platform.MSBuild.resources.dll": {
+            "locale": "fr"
+          },
+          "lib/net6.0/it/Microsoft.Testing.Platform.MSBuild.resources.dll": {
+            "locale": "it"
+          },
+          "lib/net6.0/ja/Microsoft.Testing.Platform.MSBuild.resources.dll": {
+            "locale": "ja"
+          },
+          "lib/net6.0/ko/Microsoft.Testing.Platform.MSBuild.resources.dll": {
+            "locale": "ko"
+          },
+          "lib/net6.0/pl/Microsoft.Testing.Platform.MSBuild.resources.dll": {
+            "locale": "pl"
+          },
+          "lib/net6.0/pt-BR/Microsoft.Testing.Platform.MSBuild.resources.dll": {
+            "locale": "pt-BR"
+          },
+          "lib/net6.0/ru/Microsoft.Testing.Platform.MSBuild.resources.dll": {
+            "locale": "ru"
+          },
+          "lib/net6.0/tr/Microsoft.Testing.Platform.MSBuild.resources.dll": {
+            "locale": "tr"
+          },
+          "lib/net6.0/zh-Hans/Microsoft.Testing.Platform.MSBuild.resources.dll": {
+            "locale": "zh-Hans"
+          },
+          "lib/net6.0/zh-Hant/Microsoft.Testing.Platform.MSBuild.resources.dll": {
+            "locale": "zh-Hant"
+          }
+        }
+      },
+      "Microsoft.TestPlatform.ObjectModel/17.9.0": {
+        "dependencies": {
           "System.Reflection.Metadata": "1.6.0"
         },
         "runtime": {
           "lib/netcoreapp3.1/Microsoft.TestPlatform.CoreUtilities.dll": {
             "assemblyVersion": "15.0.0.0",
-            "fileVersion": "15.0.0.0"
+            "fileVersion": "17.900.24.10602"
           },
           "lib/netcoreapp3.1/Microsoft.TestPlatform.PlatformAbstractions.dll": {
             "assemblyVersion": "15.0.0.0",
-            "fileVersion": "15.0.0.0"
+            "fileVersion": "17.900.24.10602"
           },
           "lib/netcoreapp3.1/Microsoft.VisualStudio.TestPlatform.ObjectModel.dll": {
             "assemblyVersion": "15.0.0.0",
-            "fileVersion": "15.0.0.0"
+            "fileVersion": "17.900.24.10602"
           }
         },
         "resources": {
@@ -199,31 +430,31 @@
           }
         }
       },
-      "Microsoft.TestPlatform.TestHost/17.6.3": {
+      "Microsoft.TestPlatform.TestHost/17.9.0": {
         "dependencies": {
-          "Microsoft.TestPlatform.ObjectModel": "17.6.3",
+          "Microsoft.TestPlatform.ObjectModel": "17.9.0",
           "Newtonsoft.Json": "13.0.3"
         },
         "runtime": {
           "lib/netcoreapp3.1/Microsoft.TestPlatform.CommunicationUtilities.dll": {
             "assemblyVersion": "15.0.0.0",
-            "fileVersion": "15.0.0.0"
+            "fileVersion": "17.900.24.10602"
           },
           "lib/netcoreapp3.1/Microsoft.TestPlatform.CrossPlatEngine.dll": {
             "assemblyVersion": "15.0.0.0",
-            "fileVersion": "15.0.0.0"
+            "fileVersion": "17.900.24.10602"
           },
           "lib/netcoreapp3.1/Microsoft.TestPlatform.Utilities.dll": {
             "assemblyVersion": "15.0.0.0",
-            "fileVersion": "15.0.0.0"
+            "fileVersion": "17.900.24.10602"
           },
           "lib/netcoreapp3.1/Microsoft.VisualStudio.TestPlatform.Common.dll": {
             "assemblyVersion": "15.0.0.0",
-            "fileVersion": "15.0.0.0"
+            "fileVersion": "17.900.24.10602"
           },
           "lib/netcoreapp3.1/testhost.dll": {
             "assemblyVersion": "15.0.0.0",
-            "fileVersion": "15.0.0.0"
+            "fileVersion": "17.900.24.10602"
           }
         },
         "resources": {
@@ -346,12 +577,18 @@
           }
         }
       },
-      "MSTest.TestAdapter/3.0.4": {},
-      "MSTest.TestFramework/3.0.4": {
+      "MSTest.TestAdapter/3.2.0": {
+        "dependencies": {
+          "Microsoft.Testing.Extensions.Telemetry": "1.0.0",
+          "Microsoft.Testing.Extensions.VSTestBridge": "1.0.0",
+          "Microsoft.Testing.Platform.MSBuild": "1.0.0"
+        }
+      },
+      "MSTest.TestFramework/3.2.0": {
         "runtime": {
           "lib/net6.0/Microsoft.VisualStudio.TestPlatform.TestFramework.dll": {
             "assemblyVersion": "14.0.0.0",
-            "fileVersion": "14.0.8501.1"
+            "fileVersion": "3.200.24.7406"
           }
         },
         "resources": {
@@ -404,19 +641,12 @@
           }
         }
       },
-      "NuGet.Frameworks/6.5.0": {
-        "runtime": {
-          "lib/netstandard2.0/NuGet.Frameworks.dll": {
-            "assemblyVersion": "6.5.0.154",
-            "fileVersion": "6.5.0.154"
-          }
-        }
-      },
+      "System.Diagnostics.DiagnosticSource/5.0.0": {},
       "System.Reflection.Metadata/1.6.0": {},
       "System.Runtime.CompilerServices.Unsafe/6.0.0": {},
-      "QPdfNet/1.2.0": {
+      "QPdfNet/1.4.0": {
         "dependencies": {
-          "Microsoft.Extensions.Logging": "7.0.0",
+          "Microsoft.Extensions.Logging": "8.0.0",
           "Newtonsoft.Json": "13.0.3"
         },
         "runtime": {
@@ -427,7 +657,7 @@
         "runtime": {
           "Microsoft.VisualStudio.TestPlatform.TestFramework.Extensions.dll": {
             "assemblyVersion": "14.0.0.0",
-            "fileVersion": "14.0.8501.1"
+            "fileVersion": "3.200.24.7406"
           }
         }
       }
@@ -446,89 +676,131 @@
       "path": "coverlet.collector/6.0.0",
       "hashPath": "coverlet.collector.6.0.0.nupkg.sha512"
     },
-    "Microsoft.CodeCoverage/17.6.3": {
+    "Microsoft.ApplicationInsights/2.21.0": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-Gorg6F1dOxlI28yHYKhbQ3pOOfHeW6sUfsmwFQFaIV+xttUAZ+l8KarHIfsR+rBAnjY9VH71BXvPXBuObCkXsw==",
-      "path": "microsoft.codecoverage/17.6.3",
-      "hashPath": "microsoft.codecoverage.17.6.3.nupkg.sha512"
+      "sha512": "sha512-btZEDWAFNo9CoYliMCriSMTX3ruRGZTtYw4mo2XyyfLlowFicYVM2Xszi5evDG95QRYV7MbbH3D2RqVwfZlJHw==",
+      "path": "microsoft.applicationinsights/2.21.0",
+      "hashPath": "microsoft.applicationinsights.2.21.0.nupkg.sha512"
     },
-    "Microsoft.Extensions.DependencyInjection/7.0.0": {
+    "Microsoft.CodeCoverage/17.9.0": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-elNeOmkeX3eDVG6pYVeV82p29hr+UKDaBhrZyWvWLw/EVZSYEkZlQdkp0V39k/Xehs2Qa0mvoCvkVj3eQxNQ1Q==",
-      "path": "microsoft.extensions.dependencyinjection/7.0.0",
-      "hashPath": "microsoft.extensions.dependencyinjection.7.0.0.nupkg.sha512"
+      "sha512": "sha512-RGD37ZSrratfScYXm7M0HjvxMxZyWZL4jm+XgMZbkIY1UPgjUpbNA/t+WTGj/rC/0Hm9A3IrH3ywbKZkOCnoZA==",
+      "path": "microsoft.codecoverage/17.9.0",
+      "hashPath": "microsoft.codecoverage.17.9.0.nupkg.sha512"
     },
-    "Microsoft.Extensions.DependencyInjection.Abstractions/7.0.0": {
+    "Microsoft.Extensions.DependencyInjection/8.0.0": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-h3j/QfmFN4S0w4C2A6X7arXij/M/OVw3uQHSOFxnND4DyAzO1F9eMX7Eti7lU/OkSthEE0WzRsfT/Dmx86jzCw==",
-      "path": "microsoft.extensions.dependencyinjection.abstractions/7.0.0",
-      "hashPath": "microsoft.extensions.dependencyinjection.abstractions.7.0.0.nupkg.sha512"
+      "sha512": "sha512-V8S3bsm50ig6JSyrbcJJ8bW2b9QLGouz+G1miK3UTaOWmMtFwNNNzUf4AleyDWUmTrWMLNnFSLEQtxmxgNQnNQ==",
+      "path": "microsoft.extensions.dependencyinjection/8.0.0",
+      "hashPath": "microsoft.extensions.dependencyinjection.8.0.0.nupkg.sha512"
     },
-    "Microsoft.Extensions.Logging/7.0.0": {
+    "Microsoft.Extensions.DependencyInjection.Abstractions/8.0.0": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-Nw2muoNrOG5U5qa2ZekXwudUn2BJcD41e65zwmDHb1fQegTX66UokLWZkJRpqSSHXDOWZ5V0iqhbxOEky91atA==",
-      "path": "microsoft.extensions.logging/7.0.0",
-      "hashPath": "microsoft.extensions.logging.7.0.0.nupkg.sha512"
+      "sha512": "sha512-cjWrLkJXK0rs4zofsK4bSdg+jhDLTaxrkXu4gS6Y7MAlCvRyNNgwY/lJi5RDlQOnSZweHqoyvgvbdvQsRIW+hg==",
+      "path": "microsoft.extensions.dependencyinjection.abstractions/8.0.0",
+      "hashPath": "microsoft.extensions.dependencyinjection.abstractions.8.0.0.nupkg.sha512"
     },
-    "Microsoft.Extensions.Logging.Abstractions/7.0.0": {
+    "Microsoft.Extensions.Logging/8.0.0": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-kmn78+LPVMOWeITUjIlfxUPDsI0R6G0RkeAMBmQxAJ7vBJn4q2dTva7pWi65ceN5vPGjJ9q/Uae2WKgvfktJAw==",
-      "path": "microsoft.extensions.logging.abstractions/7.0.0",
-      "hashPath": "microsoft.extensions.logging.abstractions.7.0.0.nupkg.sha512"
+      "sha512": "sha512-tvRkov9tAJ3xP51LCv3FJ2zINmv1P8Hi8lhhtcKGqM+ImiTCC84uOPEI4z8Cdq2C3o9e+Aa0Gw0rmrsJD77W+w==",
+      "path": "microsoft.extensions.logging/8.0.0",
+      "hashPath": "microsoft.extensions.logging.8.0.0.nupkg.sha512"
     },
-    "Microsoft.Extensions.Options/7.0.0": {
+    "Microsoft.Extensions.Logging.Abstractions/8.0.0": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-lP1yBnTTU42cKpMozuafbvNtQ7QcBjr/CcK3bYOGEMH55Fjt+iecXjT6chR7vbgCMqy3PG3aNQSZgo/EuY/9qQ==",
-      "path": "microsoft.extensions.options/7.0.0",
-      "hashPath": "microsoft.extensions.options.7.0.0.nupkg.sha512"
+      "sha512": "sha512-arDBqTgFCyS0EvRV7O3MZturChstm50OJ0y9bDJvAcmEPJm0FFpFyjU/JLYyStNGGey081DvnQYlncNX5SJJGA==",
+      "path": "microsoft.extensions.logging.abstractions/8.0.0",
+      "hashPath": "microsoft.extensions.logging.abstractions.8.0.0.nupkg.sha512"
     },
-    "Microsoft.Extensions.Primitives/7.0.0": {
+    "Microsoft.Extensions.Options/8.0.0": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-um1KU5kxcRp3CNuI8o/GrZtD4AIOXDk+RLsytjZ9QPok3ttLUelLKpilVPuaFT3TFjOhSibUAso0odbOaCDj3Q==",
-      "path": "microsoft.extensions.primitives/7.0.0",
-      "hashPath": "microsoft.extensions.primitives.7.0.0.nupkg.sha512"
+      "sha512": "sha512-JOVOfqpnqlVLUzINQ2fox8evY2SKLYJ3BV8QDe/Jyp21u1T7r45x/R/5QdteURMR5r01GxeJSBBUOCOyaNXA3g==",
+      "path": "microsoft.extensions.options/8.0.0",
+      "hashPath": "microsoft.extensions.options.8.0.0.nupkg.sha512"
     },
-    "Microsoft.NET.Test.Sdk/17.6.3": {
+    "Microsoft.Extensions.Primitives/8.0.0": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-MglaNTl646dC2xpHKotSk1xscmHO5uV3x3NK057IUA9BM3Wgl16WMEb9ptGczk518JfLd1+Th5OAYwnoWgHQQQ==",
-      "path": "microsoft.net.test.sdk/17.6.3",
-      "hashPath": "microsoft.net.test.sdk.17.6.3.nupkg.sha512"
+      "sha512": "sha512-bXJEZrW9ny8vjMF1JV253WeLhpEVzFo1lyaZu1vQ4ZxWUlVvknZ/+ftFgVheLubb4eZPSwwxBeqS1JkCOjxd8g==",
+      "path": "microsoft.extensions.primitives/8.0.0",
+      "hashPath": "microsoft.extensions.primitives.8.0.0.nupkg.sha512"
     },
-    "Microsoft.TestPlatform.ObjectModel/17.6.3": {
+    "Microsoft.NET.Test.Sdk/17.9.0": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-gSqtX3RvcFisaLPs6sKXdZkSwUix83NQ9nOU/w6pYrHTl+d8GsVHSL9rvDNxMgoV5BNOdyU7zK7JOfbSaVMDWQ==",
-      "path": "microsoft.testplatform.objectmodel/17.6.3",
-      "hashPath": "microsoft.testplatform.objectmodel.17.6.3.nupkg.sha512"
+      "sha512": "sha512-7GUNAUbJYn644jzwLm5BD3a2p9C1dmP8Hr6fDPDxgItQk9hBs1Svdxzz07KQ/UphMSmgza9AbijBJGmw5D658A==",
+      "path": "microsoft.net.test.sdk/17.9.0",
+      "hashPath": "microsoft.net.test.sdk.17.9.0.nupkg.sha512"
     },
-    "Microsoft.TestPlatform.TestHost/17.6.3": {
+    "Microsoft.Testing.Extensions.Telemetry/1.0.0": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-lrgRXKFfIZSPlhuoQGLtciO/osL+4oADYEYb0d5or7n7YyJATIWespq3lRgz2IQpRh6N7cm0DnCOWeZiCRGzxA==",
-      "path": "microsoft.testplatform.testhost/17.6.3",
-      "hashPath": "microsoft.testplatform.testhost.17.6.3.nupkg.sha512"
+      "sha512": "sha512-F3R3yjB93H3H0ak9DJm1W4lIhr9wxy/9n05eO8eKZpuHGsCyMj5qqLQOTxeGqUB0oG6Ok3FIvYxYZJa0GevshQ==",
+      "path": "microsoft.testing.extensions.telemetry/1.0.0",
+      "hashPath": "microsoft.testing.extensions.telemetry.1.0.0.nupkg.sha512"
     },
-    "MSTest.TestAdapter/3.0.4": {
+    "Microsoft.Testing.Extensions.TrxReport.Abstractions/1.0.0": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-18THEGVcU4fbAOZWvRtEyvQCnZ/o+3LFAiFbAkWYh63GC5TmHoJ10IUiF9L02SMmbLbWpH1/PxvO7mcInIY4/Q==",
-      "path": "mstest.testadapter/3.0.4",
-      "hashPath": "mstest.testadapter.3.0.4.nupkg.sha512"
+      "sha512": "sha512-wQObn9m3xV/JiSatHYqlJNuEnoe7C3yIzHtr5jACHS67Y0/gITTAHdzWw8MInd/HWj0uVT+LwbeP8JQhSh8quA==",
+      "path": "microsoft.testing.extensions.trxreport.abstractions/1.0.0",
+      "hashPath": "microsoft.testing.extensions.trxreport.abstractions.1.0.0.nupkg.sha512"
     },
-    "MSTest.TestFramework/3.0.4": {
+    "Microsoft.Testing.Extensions.VSTestBridge/1.0.0": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-hYq5xOOr2k09rtXpmcHkJ4Tdt/yS4cy8jiFPNMdDJP+lB6OY8yekOmQC4Fsvug4rhLpXGDd6zbPWYeoewqfePA==",
-      "path": "mstest.testframework/3.0.4",
-      "hashPath": "mstest.testframework.3.0.4.nupkg.sha512"
+      "sha512": "sha512-aIZ5l/3+DwRn4lxcXXKfgVVg2aWRTmf9BhSZO+y9JkGa3TjtZkGLw4pDx/OHcj32cS/MqssXUAtMjLEZV31bqw==",
+      "path": "microsoft.testing.extensions.vstestbridge/1.0.0",
+      "hashPath": "microsoft.testing.extensions.vstestbridge.1.0.0.nupkg.sha512"
+    },
+    "Microsoft.Testing.Platform/1.0.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-HTiRQgiIOTOd9yihyIIsJzOI5ZXx0CwjNVzv0bdxd7s5Y8utVXUBUY+P8jD4KusY8CI9+9T87VE5MCx+N5SYsw==",
+      "path": "microsoft.testing.platform/1.0.0",
+      "hashPath": "microsoft.testing.platform.1.0.0.nupkg.sha512"
+    },
+    "Microsoft.Testing.Platform.MSBuild/1.0.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-dw6Q3cVQELdj12ywijQwCIJmiwPRGMUyXlsao/M/uS3TuNg02JTazrTrY+O2GUi+2uvhCtLIc+sBQfvJ6GTAJw==",
+      "path": "microsoft.testing.platform.msbuild/1.0.0",
+      "hashPath": "microsoft.testing.platform.msbuild.1.0.0.nupkg.sha512"
+    },
+    "Microsoft.TestPlatform.ObjectModel/17.9.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-1ilw/8vgmjLyKU+2SKXKXaOqpYFJCQfGqGz+x0cosl981VzjrY74Sv6qAJv+neZMZ9ZMxF3ArN6kotaQ4uvEBw==",
+      "path": "microsoft.testplatform.objectmodel/17.9.0",
+      "hashPath": "microsoft.testplatform.objectmodel.17.9.0.nupkg.sha512"
+    },
+    "Microsoft.TestPlatform.TestHost/17.9.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-Spmg7Wx49Ya3SxBjyeAR+nQpjMTKZwTwpZ7KyeOTIqI/WHNPnBU4HUvl5kuHPQAwGWqMy4FGZja1HvEwvoaDiA==",
+      "path": "microsoft.testplatform.testhost/17.9.0",
+      "hashPath": "microsoft.testplatform.testhost.17.9.0.nupkg.sha512"
+    },
+    "MSTest.TestAdapter/3.2.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-ddQhfk2d/w4pZ7wDAyxP1JFOUG09kB8U3Sso2Fj9lGr4kZYYpzmTrpG1Ghwvx3i/vPqwWhKvaVQIrQtsr7cPhg==",
+      "path": "mstest.testadapter/3.2.0",
+      "hashPath": "mstest.testadapter.3.2.0.nupkg.sha512"
+    },
+    "MSTest.TestFramework/3.2.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-jrlSvf3DmE6nqMR194++GdpJfN4evGwDKlCzxC6mowvCj0QVWSPfTltkq9pyXO/ne4gpE8DpPl9dqTg4CNPiUQ==",
+      "path": "mstest.testframework/3.2.0",
+      "hashPath": "mstest.testframework.3.2.0.nupkg.sha512"
     },
     "Newtonsoft.Json/13.0.3": {
       "type": "package",
@@ -537,12 +809,12 @@
       "path": "newtonsoft.json/13.0.3",
       "hashPath": "newtonsoft.json.13.0.3.nupkg.sha512"
     },
-    "NuGet.Frameworks/6.5.0": {
+    "System.Diagnostics.DiagnosticSource/5.0.0": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-QWINE2x3MbTODsWT1Gh71GaGb5icBz4chS8VYvTgsBnsi8esgN6wtHhydd7fvToWECYGq7T4cgBBDiKD/363fg==",
-      "path": "nuget.frameworks/6.5.0",
-      "hashPath": "nuget.frameworks.6.5.0.nupkg.sha512"
+      "sha512": "sha512-tCQTzPsGZh/A9LhhA6zrqCRV4hOHsK90/G7q3Khxmn6tnB1PuNU0cRaKANP2AWcF9bn0zsuOoZOSrHuJk6oNBA==",
+      "path": "system.diagnostics.diagnosticsource/5.0.0",
+      "hashPath": "system.diagnostics.diagnosticsource.5.0.0.nupkg.sha512"
     },
     "System.Reflection.Metadata/1.6.0": {
       "type": "package",
@@ -558,7 +830,7 @@
       "path": "system.runtime.compilerservices.unsafe/6.0.0",
       "hashPath": "system.runtime.compilerservices.unsafe.6.0.0.nupkg.sha512"
     },
-    "QPdfNet/1.2.0": {
+    "QPdfNet/1.4.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""
