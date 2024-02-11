@@ -49,6 +49,36 @@ namespace QpdfNetTest
         }
 
         [TestMethod]
+        public void TestInputOutputTwice()
+        {
+            var outputFile = Path.Combine(_testFolder, "output.pdf");
+
+            using (var job = new Job())
+            {
+                var result = job
+                    .InputFile(Path.Combine("TestFiles", "test.pdf"))
+                    .OutputFile(outputFile)
+                    .Run(out var output);
+
+                Assert.AreEqual(ExitCode.Success, result);
+                Assert.IsTrue(string.IsNullOrEmpty(output));
+                Assert.IsTrue(File.Exists(outputFile));
+            }
+
+            using var job2 = new Job();
+            {
+                var result2 = job2
+                    .InputFile(Path.Combine("TestFiles", "test.pdf"))
+                    .OutputFile(outputFile)
+                    .Run(out var output);
+
+                Assert.AreEqual(ExitCode.Success, result2);
+                Assert.IsTrue(string.IsNullOrEmpty(output));
+                Assert.IsTrue(File.Exists(outputFile));
+            }
+        }
+
+        [TestMethod]
         public void TestEmpty()
         {
             var outputFile = Path.Combine(_testFolder, "output.pdf");

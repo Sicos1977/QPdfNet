@@ -145,9 +145,7 @@ public class Job : IDisposable
     [JsonProperty("staticAesIv")] private string? _staticAesIv;
     [JsonProperty("linearizePass1")] private string? _linearizePass1;
 
-    private readonly IQPdfApiSignatures _native;
-
-    private readonly IntPtr _loggerHandle;
+    private readonly QPdfApi _qPdfApi;
 
     private StringBuilder? _info;
     // ReSharper disable PrivateFieldCanBeConvertedToLocalVariable
@@ -178,9 +176,7 @@ public class Job : IDisposable
         if (logger != null)
             Logger.LoggerInterface = logger;
 
-        _native = new QPdfApi().Native;
-
-        _loggerHandle = _native.GetDefaultLogger();
+        _qPdfApi = new QPdfApi();
 
         _infoCallback = InfoCallback;
         _warnCallback = WarnCallback;
@@ -199,10 +195,10 @@ public class Job : IDisposable
         var savePointer = Marshal.GetFunctionPointerForDelegate(_saveCallback);
         _saveHandle = GCHandle.Alloc(savePointer);
         
-        _native.SetInfo(_loggerHandle, qpdf_log_dest_e.qpdf_log_dest_custom, infoPointer);
-        _native.SetWarn(_loggerHandle, qpdf_log_dest_e.qpdf_log_dest_custom, warnPointer);
-        _native.SetError(_loggerHandle, qpdf_log_dest_e.qpdf_log_dest_custom, errorPointer);
-        _native.SetSave(_loggerHandle, qpdf_log_dest_e.qpdf_log_dest_custom, savePointer);
+        _qPdfApi.Native.SetInfo(_qPdfApi.LoggerHandle, qpdf_log_dest_e.qpdf_log_dest_custom, infoPointer);
+        _qPdfApi.Native.SetWarn(_qPdfApi.LoggerHandle, qpdf_log_dest_e.qpdf_log_dest_custom, warnPointer);
+        _qPdfApi.Native.SetError(_qPdfApi.LoggerHandle, qpdf_log_dest_e.qpdf_log_dest_custom, errorPointer);
+        _qPdfApi.Native.SetSave(_qPdfApi.LoggerHandle, qpdf_log_dest_e.qpdf_log_dest_custom, savePointer);
     }
     #endregion
 
@@ -2459,7 +2455,7 @@ public class Job : IDisposable
         _error = new StringBuilder();
         _save = new List<byte>();
         
-        var result = _native.RunFromJSON(json);
+        var result = _qPdfApi.Native.RunFromJSON(json);
 
         output = _info.ToString();
         output += _warn.ToString();
@@ -2568,8 +2564,6 @@ public class Job : IDisposable
         _warnHandle.Free();
         _errorHandle.Free();
         _saveHandle.Free();
-
-        _native.CleanupLogger(_loggerHandle);
     }
     #endregion
 }

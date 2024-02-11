@@ -917,6 +917,11 @@
             </summary>
             <param name="logger">When set then logging is written to this interface</param>
         </member>
+        <member name="M:QPdfNet.Job.Reset">
+            <summary>
+                Resets the job to its default state
+            </summary>
+        </member>
         <member name="M:QPdfNet.Job.InputFile(System.String)">
             <summary>
                 The input PDF file
@@ -1743,10 +1748,52 @@
                 <see cref="T:QPdfNet.Job" />
             </returns>
         </member>
-        <member name="M:QPdfNet.Job.SetPageLabels">
+        <member name="M:QPdfNet.Job.SetPageLabels(System.String)">
             <summary>
-                Exclude page labels (explicit page numbers) from the <see cref="M:QPdfNet.Job.OutputFile(System.String)"/>.
+                Set page labels (explicit page numbers) for the entire file.<br/>
+                A PDF file’s pages can be explicitly numbered using page labels.<br/>
+                Page labels in a PDF file have an optional type (Arabic numerals, upper/lower-case alphabetic characters, upper/lower-case Roman numerals),<br/>
+                an optional prefix, and an optional starting value, which defaults to 1.<br/>
+                A qpdf page label spec has the form<br/>
+                <br/>
+                <c>first-page:[type][/start[/prefix]]</c><br/>
+                <br/>
+                where<br/>
+                <br/>
+                first-page represents a sequential page number using the same format as page ranges (see Page Ranges): a number,<br/>
+                a number preceded by r to indicate counting from the end, or z indicating the last page<br/>
+                <br/>
+                type may be one of<br/>
+                <br/>
+                    - <b>D</b>: Arabic numerals (digits)<br/>
+                    - <b>A</b>: Upper-case alphabetic characters<br/>
+                    - <b>a</b>: Lower-case alphabetic characters<br/>
+                    - <b>R</b>: Upper-case Roman numerals<br/>
+                    - <b>r</b>: Lower-case Roman numerals<br/>
+                omitted: the page number does not appear, though the prefix, if specified will still appear<br/>
+                <br/>
+                <c>prefix</c> may be any string and is prepended to each page label<br/>
+                <br/>
+                A given page label spec causes pages to be numbered according to that scheme starting with <c>first-page</c><br/>
+                and continuing until the next label spec or the end of the document.<br/>
+                If you want to omit numbering starting at a certain page, you can use first-page: as the spec.<br/>
+                <br/>
+                Here are some example page labeling schemes. First these examples, assume a 50-page document.<br/>
+                <br/>
+                <c>1:a 5:D</c><br/>
+                - The first four pages will be numbered <c>a</c> through <c>d</c>, then the remaining pages will numbered <c>1</c> through <c>46</c>.<br/><br/>
+                <c>1:r 5:D 12: 14:D/10 r5:D//A- z://"end note"</c>:<br/>
+                - The first four pages are numbered <c>i</c> through <c>iv</c><br/>
+                - The 5th page is numbered <c>1</c>, and pages are numbered sequentially through the 11th page, which will be numbered <c>7</c><br/>
+                - The 12th and 13th pages will not have labels<br/>
+                - The 14th page is numbered <c>10</c>. Pages will be numbered sequentially up through the 45th page, which will be numbered <c>41</c><br/>
+                - Starting with the 46th page (the fifth to last page) and going to the 49th page, pages will be labeled A-1 through A-4<br/>
+                - The 50th page (the last page) will be labeled <c>end note</c>.<br/>
+                <br/>
+                The limitations on the range of formats for page labels are as specified in Section 12.4.2 of the PDF spec, ISO 32000.<br/>
+                <seealso cref="M:QPdfNet.Job.RemovePageLabels"/>
             </summary>
+            <param name="pageLabels">The page labels</param>
             <returns>
                 <see cref="T:QPdfNet.Job" />
             </returns>

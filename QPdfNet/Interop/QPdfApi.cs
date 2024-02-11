@@ -114,6 +114,9 @@ namespace QPdfNet.Interop
     {
         #region Fields
         private IQPdfApiSignatures? _native;
+
+        [ThreadStatic]
+        private static IntPtr _loggerHandle;
         #endregion
 
         #region Properties
@@ -128,6 +131,25 @@ namespace QPdfNet.Interop
                 _native = InteropRuntimeImplementer.CreateInstance<IQPdfApiSignatures>();
                 return _native;
             }
+        }
+
+        internal IntPtr LoggerHandle
+        {
+            get
+            {
+                if (_loggerHandle == IntPtr.Zero)
+                    _loggerHandle = Native.GetDefaultLogger();
+
+                return _loggerHandle;
+            }
+        }
+        #endregion
+
+        #region Destructor
+        ~QPdfApi()
+        {
+            if (_loggerHandle != IntPtr.Zero)
+                Native.CleanupLogger(_loggerHandle);
         }
         #endregion
     }
