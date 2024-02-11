@@ -148,10 +148,10 @@ public class Job : IDisposable
 
     private readonly IntPtr _loggerHandle;
 
-    private static readonly CallbackDelegate _loggingCallbackDelegate = LoggingCallback;
-    private static readonly IntPtr _loggingCallbackPointer = Marshal.GetFunctionPointerForDelegate(_loggingCallbackDelegate);
-    private static readonly CallbackDelegate _saveCallbackDelegate = SaveCallback;
-    private static readonly IntPtr _saveCallbackPointer = Marshal.GetFunctionPointerForDelegate(_saveCallbackDelegate);
+    private static readonly CallbackDelegate LoggingCallbackDelegate = LoggingCallback;
+    private static readonly IntPtr LoggingCallbackPointer = Marshal.GetFunctionPointerForDelegate(LoggingCallbackDelegate);
+    private static readonly CallbackDelegate SaveCallbackDelegate = SaveCallback;
+    private static readonly IntPtr SaveCallbackPointer = Marshal.GetFunctionPointerForDelegate(SaveCallbackDelegate);
 
     // ReSharper disable PrivateFieldCanBeConvertedToLocalVariable
     // Free() does not work, if readonly.
@@ -178,31 +178,31 @@ public class Job : IDisposable
         if (logger != null)
             Logger.LoggerInterface = logger;
 
-        this._info = new StringBuilder();
-        this._warn = new StringBuilder();
-        this._error = new StringBuilder();
-        this._output = new StringBuilder();
-        this._save = new List<byte>();
+        _info = new StringBuilder();
+        _warn = new StringBuilder();
+        _error = new StringBuilder();
+        _output = new StringBuilder();
+        _save = new List<byte>();
 
-        this._native = new QPdfApi().Native;
+        _native = new QPdfApi().Native;
 
-        this._loggerHandle = this._native.qpdflogger_create();
+        _loggerHandle = _native.qpdflogger_create();
 
-        this._infoHandle = GCHandle.Alloc(this._info);
-        var _infoPtr = GCHandle.ToIntPtr(_infoHandle);
-        this._native.qpdflogger_set_info(loggerHandle: this._loggerHandle, destination: qpdf_log_dest_e.qpdf_log_dest_custom, callBackHandler: Job._loggingCallbackPointer, udata: _infoPtr);
+        _infoHandle = GCHandle.Alloc(_info);
+        var infoPtr = GCHandle.ToIntPtr(_infoHandle);
+        _native.qpdflogger_set_info(_loggerHandle, qpdf_log_dest_e.qpdf_log_dest_custom, LoggingCallbackPointer, infoPtr);
 
-        this._warnHandle = GCHandle.Alloc(this._warn);
-        var _warnPtr = GCHandle.ToIntPtr(_warnHandle);
-        this._native.qpdflogger_set_warn(loggerHandle: this._loggerHandle, destination: qpdf_log_dest_e.qpdf_log_dest_custom, callBackHandler: Job._loggingCallbackPointer, udata: _warnPtr);
+        _warnHandle = GCHandle.Alloc(_warn);
+        var warnPtr = GCHandle.ToIntPtr(_warnHandle);
+        _native.qpdflogger_set_warn(_loggerHandle, qpdf_log_dest_e.qpdf_log_dest_custom, LoggingCallbackPointer, warnPtr);
 
-        this._errorHandle = GCHandle.Alloc(this._error);
-        var _errorPtr = GCHandle.ToIntPtr(_errorHandle);
-        this._native.qpdflogger_set_error(loggerHandle: this._loggerHandle, destination: qpdf_log_dest_e.qpdf_log_dest_custom, callBackHandler: Job._loggingCallbackPointer, udata: _errorPtr);
+        _errorHandle = GCHandle.Alloc(_error);
+        var errorPtr = GCHandle.ToIntPtr(_errorHandle);
+        _native.qpdflogger_set_error(_loggerHandle, qpdf_log_dest_e.qpdf_log_dest_custom, LoggingCallbackPointer, errorPtr);
 
-        this._saveHandle = GCHandle.Alloc(this._save);
-        var _savePtr = GCHandle.ToIntPtr(_saveHandle);
-        this._native.qpdflogger_set_save(loggerHandle: this._loggerHandle, destination: qpdf_log_dest_e.qpdf_log_dest_custom, callBackHandler: Job._saveCallbackPointer, udata: _savePtr);
+        _saveHandle = GCHandle.Alloc(_save);
+        var savePtr = GCHandle.ToIntPtr(_saveHandle);
+        _native.qpdflogger_set_save(_loggerHandle, qpdf_log_dest_e.qpdf_log_dest_custom, SaveCallbackPointer, savePtr);
     }
     #endregion
 
@@ -225,8 +225,8 @@ public class Job : IDisposable
         Marshal.Copy(data, bytes, 0, length);
 
         var handle = GCHandle.FromIntPtr(udata);
-        var _save = (List<byte>)handle.Target;
-        _save.AddRange(bytes);
+        var save = (List<byte>)handle.Target;
+        save.AddRange(bytes);
 
         return 0;
     }
@@ -2446,30 +2446,30 @@ public class Job : IDisposable
 
         Logger.LogDebug($"JSON input for QPDF: {Environment.NewLine}{json}");
 
-        this._info.Clear();
-        this._warn.Clear();
-        this._error.Clear();
-        this._output.Clear();
-        this._save.Clear();
+        _info.Clear();
+        _warn.Clear();
+        _error.Clear();
+        _output.Clear();
+        _save.Clear();
 
-        var _jobHandle = this._native.qpdfjob_init();
-        this._native.qpdfjob_set_logger(jobHandle: _jobHandle, loggerHandle: this._loggerHandle);
-        this._native.qpdfjob_initialize_from_json(jobHandle: _jobHandle, json: json);
+        var jobHandle = _native.qpdfjob_init();
+        _native.qpdfjob_set_logger(jobHandle: jobHandle, loggerHandle: _loggerHandle);
+        _native.qpdfjob_initialize_from_json(jobHandle: jobHandle, json: json);
 
-        var result = this._native.qpdfjob_run(jobHandle: _jobHandle);
+        var result = _native.qpdfjob_run(jobHandle: jobHandle);
 
-        this._output.Append(this._info);
-        this._output.Append(this._warn);
-        this._output.Append(this._error);
+        _output.Append(_info);
+        _output.Append(_warn);
+        _output.Append(_error);
 
-        output = this._output.ToString().TrimEnd();
+        output = _output.ToString().TrimEnd();
 
-        if (this._save.Count > 0)
-            data = this._save.ToArray();
+        if (_save.Count > 0)
+            data = _save.ToArray();
 
         Logger.LogInformation("Output from QPDF: " + Environment.NewLine + output);
 
-        this._native.qpdfjob_cleanup(_jobHandle);
+        _native.qpdfjob_cleanup(jobHandle);
 
         Reset();
 
@@ -2557,12 +2557,12 @@ public class Job : IDisposable
     /// </summary>
     public void Dispose()
     {
-        this._infoHandle.Free();
-        this._warnHandle.Free();
-        this._errorHandle.Free();
-        this._saveHandle.Free();
+        _infoHandle.Free();
+        _warnHandle.Free();
+        _errorHandle.Free();
+        _saveHandle.Free();
 
-        this._native.qpdflogger_cleanup(this._loggerHandle);
+        _native.qpdflogger_cleanup(_loggerHandle);
     }
     #endregion
 }
