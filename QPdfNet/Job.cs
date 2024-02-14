@@ -2451,7 +2451,7 @@ public class Job : IDisposable
         _save.Clear();
 
         var jobHandle = Native.qpdfjob_init();
-        Native.qpdfjob_set_logger(jobHandle: jobHandle, loggerHandle: _loggerHandle);
+        Native.qpdfjob_set_logger(jobHandle, _loggerHandle);
         Native.qpdfjob_initialize_from_json(jobHandle, json);
 
         var result = Native.qpdfjob_run(jobHandle);

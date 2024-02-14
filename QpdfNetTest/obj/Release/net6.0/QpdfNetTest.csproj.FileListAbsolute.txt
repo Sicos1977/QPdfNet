@@ -343,9 +343,9 @@ C:\Kees\QPdfNet\QpdfNetTest\obj\Release\net6.0\QpdfNetTest.AssemblyInfoInputs.ca
 C:\Kees\QPdfNet\QpdfNetTest\obj\Release\net6.0\QpdfNetTest.AssemblyInfo.cs
 C:\Kees\QPdfNet\QpdfNetTest\obj\Release\net6.0\QpdfNetTest.csproj.CoreCompileInputs.cache
 C:\Kees\QPdfNet\QpdfNetTest\obj\Release\net6.0\QpdfNetTest.sourcelink.json
-C:\Kees\QPdfNet\QpdfNetTest\obj\Release\net6.0\QpdfNetTest.csproj.CopyComplete
 C:\Kees\QPdfNet\QpdfNetTest\obj\Release\net6.0\QpdfNetTest.dll
 C:\Kees\QPdfNet\QpdfNetTest\obj\Release\net6.0\refint\QpdfNetTest.dll
 C:\Kees\QPdfNet\QpdfNetTest\obj\Release\net6.0\QpdfNetTest.pdb
 C:\Kees\QPdfNet\QpdfNetTest\obj\Release\net6.0\QpdfNetTest.genruntimeconfig.cache
 C:\Kees\QPdfNet\QpdfNetTest\obj\Release\net6.0\ref\QpdfNetTest.dll
+C:\Kees\QPdfNet\QpdfNetTest\obj\Release\net6.0\QpdfNetT.19544E49.Up2Date
