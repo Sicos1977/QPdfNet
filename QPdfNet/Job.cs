@@ -144,14 +144,14 @@ public class Job : IDisposable
     [JsonProperty("staticAesIv")] private string? _staticAesIv;
     [JsonProperty("linearizePass1")] private string? _linearizePass1;
 
-    private static readonly IQPdfApiSignatures _native = new QPdfApi().Native;
+    private static readonly IQPdfApiSignatures Native = new QPdfApi().Native;
 
     private readonly IntPtr _loggerHandle;
 
-    private static readonly CallbackDelegate _loggingCallbackDelegate = LoggingCallback;
-    private static readonly IntPtr _loggingCallbackPointer = Marshal.GetFunctionPointerForDelegate(_loggingCallbackDelegate);
-    private static readonly CallbackDelegate _saveCallbackDelegate = SaveCallback;
-    private static readonly IntPtr _saveCallbackPointer = Marshal.GetFunctionPointerForDelegate(_saveCallbackDelegate);
+    private static readonly CallbackDelegate LoggingCallbackDelegate = LoggingCallback;
+    private static readonly IntPtr LoggingCallbackPointer = Marshal.GetFunctionPointerForDelegate(LoggingCallbackDelegate);
+    private static readonly CallbackDelegate SaveCallbackDelegate = SaveCallback;
+    private static readonly IntPtr SaveCallbackPointer = Marshal.GetFunctionPointerForDelegate(SaveCallbackDelegate);
 
     // ReSharper disable PrivateFieldCanBeConvertedToLocalVariable
     // Free() does not work, if readonly.
@@ -184,23 +184,23 @@ public class Job : IDisposable
         _output = new StringBuilder();
         _save = new List<byte>();
 
-        _loggerHandle = _native.qpdflogger_create();
+        _loggerHandle = Native.qpdflogger_create();
 
         _infoHandle = GCHandle.Alloc(_info);
         var infoPtr = GCHandle.ToIntPtr(_infoHandle);
-        _native.qpdflogger_set_info(loggerHandle: _loggerHandle, destination: qpdf_log_dest_e.qpdf_log_dest_custom, callBackHandler: Job._loggingCallbackPointer, udata: infoPtr);
+        Native.qpdflogger_set_info(loggerHandle: _loggerHandle, destination: qpdf_log_dest_e.qpdf_log_dest_custom, callBackHandler: Job.LoggingCallbackPointer, udata: infoPtr);
 
         _warnHandle = GCHandle.Alloc(_warn);
         var warnPtr = GCHandle.ToIntPtr(_warnHandle);
-        _native.qpdflogger_set_warn(loggerHandle: _loggerHandle, destination: qpdf_log_dest_e.qpdf_log_dest_custom, callBackHandler: Job._loggingCallbackPointer, udata: warnPtr);
+        Native.qpdflogger_set_warn(loggerHandle: _loggerHandle, destination: qpdf_log_dest_e.qpdf_log_dest_custom, callBackHandler: Job.LoggingCallbackPointer, udata: warnPtr);
 
         _errorHandle = GCHandle.Alloc(_error);
         var errorPtr = GCHandle.ToIntPtr(_errorHandle);
-        _native.qpdflogger_set_error(loggerHandle: _loggerHandle, destination: qpdf_log_dest_e.qpdf_log_dest_custom, callBackHandler: Job._loggingCallbackPointer, udata: errorPtr);
+        Native.qpdflogger_set_error(loggerHandle: _loggerHandle, destination: qpdf_log_dest_e.qpdf_log_dest_custom, callBackHandler: Job.LoggingCallbackPointer, udata: errorPtr);
 
         _saveHandle = GCHandle.Alloc(_save);
         var savePtr = GCHandle.ToIntPtr(_saveHandle);
-        _native.qpdflogger_set_save(loggerHandle: _loggerHandle, destination: qpdf_log_dest_e.qpdf_log_dest_custom, callBackHandler: Job._saveCallbackPointer, udata: savePtr);
+        Native.qpdflogger_set_save(loggerHandle: _loggerHandle, destination: qpdf_log_dest_e.qpdf_log_dest_custom, callBackHandler: Job.SaveCallbackPointer, udata: savePtr);
     }
     #endregion
 
@@ -2450,11 +2450,11 @@ public class Job : IDisposable
         _output.Clear();
         _save.Clear();
 
-        var jobHandle = _native.qpdfjob_init();
-        _native.qpdfjob_set_logger(jobHandle: jobHandle, loggerHandle: _loggerHandle);
-        _native.qpdfjob_initialize_from_json(jobHandle, json);
+        var jobHandle = Native.qpdfjob_init();
+        Native.qpdfjob_set_logger(jobHandle: jobHandle, loggerHandle: _loggerHandle);
+        Native.qpdfjob_initialize_from_json(jobHandle, json);
 
-        var result = _native.qpdfjob_run(jobHandle);
+        var result = Native.qpdfjob_run(jobHandle);
 
         _output.Append(_info);
         _output.Append(_warn);
@@ -2467,7 +2467,7 @@ public class Job : IDisposable
 
         Logger.LogInformation("Output from QPDF: " + Environment.NewLine + output);
 
-        _native.qpdfjob_cleanup(jobHandle);
+        Native.qpdfjob_cleanup(jobHandle);
 
         Reset();
 
@@ -2560,7 +2560,7 @@ public class Job : IDisposable
         _errorHandle.Free();
         _saveHandle.Free();
 
-        _native.qpdflogger_cleanup(_loggerHandle);
+        Native.qpdflogger_cleanup(_loggerHandle);
     }
     #endregion
 }
