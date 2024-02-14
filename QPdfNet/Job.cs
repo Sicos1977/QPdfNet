@@ -2450,11 +2450,11 @@ public class Job : IDisposable
         _output.Clear();
         _save.Clear();
 
-        var _jobHandle = _native.qpdfjob_init();
-        _native.qpdfjob_set_logger(jobHandle: _jobHandle, loggerHandle: _loggerHandle);
-        _native.qpdfjob_initialize_from_json(jobHandle: _jobHandle, json: json);
+        var jobHandle = _native.qpdfjob_init();
+        _native.qpdfjob_set_logger(jobHandle: jobHandle, loggerHandle: _loggerHandle);
+        _native.qpdfjob_initialize_from_json(jobHandle, json);
 
-        var result = _native.qpdfjob_run(jobHandle: _jobHandle);
+        var result = _native.qpdfjob_run(jobHandle);
 
         _output.Append(_info);
         _output.Append(_warn);
@@ -2467,7 +2467,7 @@ public class Job : IDisposable
 
         Logger.LogInformation("Output from QPDF: " + Environment.NewLine + output);
 
-        _native.qpdfjob_cleanup(_jobHandle);
+        _native.qpdfjob_cleanup(jobHandle);
 
         Reset();
 
