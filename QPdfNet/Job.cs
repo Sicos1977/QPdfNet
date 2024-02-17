@@ -50,6 +50,7 @@ namespace QPdfNet;
 public class Job : IDisposable
 {
     #region Delegates
+    [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
     private delegate int CallbackDelegate(IntPtr data, int length, IntPtr udata);
     #endregion
 
