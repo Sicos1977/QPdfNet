@@ -1,24 +1,24 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Kees\\QPdfNet\\QpdfNetTest\\QpdfNetTest.csproj": {}
+    "D:\\Progsoft\\_GitHub_\\QPdfNet\\QpdfNetTest\\QpdfNetTest.csproj": {}
   },
   "projects": {
-    "C:\\Kees\\QPdfNet\\QpdfNetTest\\QpdfNetTest.csproj": {
+    "D:\\Progsoft\\_GitHub_\\QPdfNet\\QpdfNetTest\\QpdfNetTest.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Kees\\QPdfNet\\QpdfNetTest\\QpdfNetTest.csproj",
+        "projectUniqueName": "D:\\Progsoft\\_GitHub_\\QPdfNet\\QpdfNetTest\\QpdfNetTest.csproj",
         "projectName": "QpdfNetTest",
-        "projectPath": "C:\\Kees\\QPdfNet\\QpdfNetTest\\QpdfNetTest.csproj",
-        "packagesPath": "C:\\Users\\AO303388\\.nuget\\packages\\",
-        "outputPath": "C:\\Kees\\QPdfNet\\QpdfNetTest\\obj\\",
+        "projectPath": "D:\\Progsoft\\_GitHub_\\QPdfNet\\QpdfNetTest\\QpdfNetTest.csproj",
+        "packagesPath": "C:\\Users\\keesv\\.nuget\\packages\\",
+        "outputPath": "D:\\Progsoft\\_GitHub_\\QPdfNet\\QpdfNetTest\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
         ],
         "configFilePaths": [
-          "C:\\Users\\AO303388\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\keesv\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -27,14 +27,16 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "C:\\Program Files\\dotnet\\library-packs": {},
+          "d:\\Progsoft\\_GitHub_\\_nuget package_\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
           "net6.0": {
             "targetAlias": "net6.0",
             "projectReferences": {
-              "C:\\Kees\\QPdfNet\\QPdfNet\\QPdfNet.csproj": {
-                "projectPath": "C:\\Kees\\QPdfNet\\QPdfNet\\QPdfNet.csproj"
+              "D:\\Progsoft\\_GitHub_\\QPdfNet\\QPdfNet\\QPdfNet.csproj": {
+                "projectPath": "D:\\Progsoft\\_GitHub_\\QPdfNet\\QPdfNet\\QPdfNet.csproj"
               }
             }
           }
@@ -43,11 +45,6 @@
           "warnAsError": [
             "NU1605"
           ]
-        },
-        "restoreAuditProperties": {
-          "enableAudit": "true",
-          "auditLevel": "low",
-          "auditMode": "direct"
         }
       },
       "frameworks": {
@@ -93,18 +90,18 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.200\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.102\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "C:\\Kees\\QPdfNet\\QPdfNet\\QPdfNet.csproj": {
-      "version": "1.4.1",
+    "D:\\Progsoft\\_GitHub_\\QPdfNet\\QPdfNet\\QPdfNet.csproj": {
+      "version": "1.4.2",
       "restore": {
-        "projectUniqueName": "C:\\Kees\\QPdfNet\\QPdfNet\\QPdfNet.csproj",
+        "projectUniqueName": "D:\\Progsoft\\_GitHub_\\QPdfNet\\QPdfNet\\QPdfNet.csproj",
         "projectName": "QPdfNet",
-        "projectPath": "C:\\Kees\\QPdfNet\\QPdfNet\\QPdfNet.csproj",
-        "packagesPath": "C:\\Users\\AO303388\\.nuget\\packages\\",
-        "outputPath": "C:\\Kees\\QPdfNet\\QPdfNet\\obj\\",
+        "projectPath": "D:\\Progsoft\\_GitHub_\\QPdfNet\\QPdfNet\\QPdfNet.csproj",
+        "packagesPath": "C:\\Users\\keesv\\.nuget\\packages\\",
+        "outputPath": "D:\\Progsoft\\_GitHub_\\QPdfNet\\QPdfNet\\obj\\",
         "projectStyle": "PackageReference",
         "crossTargeting": true,
         "fallbackFolders": [
@@ -112,7 +109,7 @@
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
         ],
         "configFilePaths": [
-          "C:\\Users\\AO303388\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\keesv\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -122,6 +119,8 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "C:\\Program Files\\dotnet\\library-packs": {},
+          "d:\\Progsoft\\_GitHub_\\_nuget package_\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -138,11 +137,6 @@
           "warnAsError": [
             "NU1605"
           ]
-        },
-        "restoreAuditProperties": {
-          "enableAudit": "true",
-          "auditLevel": "low",
-          "auditMode": "direct"
         }
       },
       "frameworks": {
@@ -158,7 +152,7 @@
               "version": "[13.0.3, )"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.200\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.102\\RuntimeIdentifierGraph.json"
         },
         "netstandard2.1": {
           "targetAlias": "netstandard2.1",
@@ -188,7 +182,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.200\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.102\\RuntimeIdentifierGraph.json"
         }
       }
     }
