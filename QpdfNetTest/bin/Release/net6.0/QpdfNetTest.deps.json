@@ -12,7 +12,7 @@
           "MSTest.TestFramework": "3.2.0",
           "Microsoft.Extensions.Logging": "8.0.0",
           "Microsoft.NET.Test.Sdk": "17.9.0",
-          "QPdfNet": "1.4.1",
+          "QPdfNet": "1.4.2",
           "coverlet.collector": "6.0.0",
           "Microsoft.VisualStudio.TestPlatform.TestFramework.Extensions": "14.0.0.0"
         },
@@ -644,7 +644,7 @@
       "System.Diagnostics.DiagnosticSource/5.0.0": {},
       "System.Reflection.Metadata/1.6.0": {},
       "System.Runtime.CompilerServices.Unsafe/6.0.0": {},
-      "QPdfNet/1.4.1": {
+      "QPdfNet/1.4.2": {
         "dependencies": {
           "Microsoft.Extensions.Logging": "8.0.0",
           "Newtonsoft.Json": "13.0.3"
@@ -830,7 +830,7 @@
       "path": "system.runtime.compilerservices.unsafe/6.0.0",
       "hashPath": "system.runtime.compilerservices.unsafe.6.0.0.nupkg.sha512"
     },
-    "QPdfNet/1.4.1": {
+    "QPdfNet/1.4.2": {
       "type": "project",
       "serviceable": false,
       "sha512": ""
