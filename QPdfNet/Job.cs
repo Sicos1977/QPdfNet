@@ -553,7 +553,7 @@ public class Job : IDisposable
 
     #region KeepFilesOpenThreshold
     /// <summary>
-    ///     If specified, overrides the default value of <c>200</c> used as the threshold for qpdf deciding whether or not to keep
+    ///     If specified, overrides the default value of <c>200</c> used as the threshold for qpdf deciding whether to keep
     ///     files open. See <see cref="KeepFilesOpen"/> for details.
     /// </summary>
     /// <param name="count">The amount of files to keep open</param>
@@ -619,7 +619,7 @@ public class Job : IDisposable
     #region PasswordMode
     /// <summary>
     ///     This option can be used to fine-tune how qpdf interprets Unicode (non-ASCII) password strings passed on the command
-    ///     line. With the exception of the hex-bytes mode, these only apply to passwords provided when encrypting files. The
+    ///     line. Except for the hex-bytes mode, these only apply to passwords provided when encrypting files. The
     ///     hex-bytes mode also applies to passwords specified for reading files. For additional discussion of the supported
     ///     password modes and when you might want to use them, see Unicode Passwords
     /// </summary>
@@ -639,7 +639,7 @@ public class Job : IDisposable
 
     #region SuppressRecovery
     /// <summary>
-    ///     Prevents qpdf from attempting to reconstruct a file’s cross reference table when there are errors reading objects
+    ///     Prevents qpdf from attempting to reconstruct a file’s cross-reference table when there are errors reading objects
     ///     from the file. Recovery is triggered by a variety of situations. While usually successful, it uses heuristics that
     ///     don’t work on all files. If this option is given, qpdf fails on the first error it encounters.
     /// </summary>
@@ -747,8 +747,8 @@ public class Job : IDisposable
     ///     one of the user password or owner password is known. If the encryption file requires a password, use the
     ///     <see cref="EncryptionFilePassword" /> option to set it. Note that copying the encryption parameters from a file
     ///     also copies the first half of /ID from the file since this is part of the encryption parameters. This option can
-    ///     be useful if you need to decrypt a file to make manual changes to it or to change it outside of qpdf, and then want
-    ///     to restore the original encryption on the file without having to manual specify all the individual settings. See also
+    ///     be useful if you need to decrypt a file to make manual changes to it or to change it outside qpdf, and then want
+    ///     to restore the original encryption on the file without having to manually specify all the individual settings. See also
     ///     <see cref="Decrypt"/>.
     /// </summary>
     /// <param name="file">The file with full path</param>
@@ -1160,7 +1160,7 @@ public class Job : IDisposable
     ///     object streams are disabled if less than 1.5, 128-bit encryption keys are disabled if less than 1.4, and all
     ///     encryption is disabled if less than 1.3. Even with these precautions, qpdf won’t be able to do things like
     ///     eliminate use of newer image compression schemes, transparency groups, or other features that may have been added
-    ///     in more recent versions of PDF. As a general rule, with the exception of big structural things like the use of object
+    ///     in more recent versions of PDF. As a general rule, except for big structural things like the use of object
     ///     streams or AES encryption, PDF viewers are supposed to ignore features they don’t support. This means that forcing the
     ///     version to a lower version may make it possible to open your PDF file with an older version, though bear in mind that
     ///     some of the original document’s functionality may be lost.
@@ -1271,7 +1271,7 @@ public class Job : IDisposable
     ///     Write each group of <paramref name="n" /> pages to a separate  <see cref="OutputFile" />. If <paramref name="n" />
     ///     is not specified, create single pages. Output file names are generated as follows:<br/>
     ///     If the string %d appears in the <see cref="OutputFile" /> name, it is replaced with a range of zero-padded page
-    ///     numbers starting from 1. Otherwise, if the output file name ends in .pdf(case insensitive), a zero-padded page
+    ///     numbers starting from 1. Otherwise, if the output file name ends in .pdf(case-insensitive), a zero-padded page
     ///     range, preceded by a dash, is inserted before the file extension. Otherwise, the file name is appended with a
     ///     zero-padded page range preceded by a dash.Zero padding is added to all page numbers in file names so that all
     ///     the numbers are the same length, which causes the output filenames to sort lexically in numerical order. Page
@@ -1310,7 +1310,7 @@ public class Job : IDisposable
     ///     sequence and applied to corresponding pages in the output until there are no more output pages.If the
     ///     <see cref="Overlay"/> or <see cref="Underlay"/> file runs out of pages, remaining output pages are left alone
     /// </summary>
-    /// <param name="file">The file with it's full path</param>
+    /// <param name="file">The file with its full path</param>
     /// <param name="to">
     ///     Specify a page range (see Page Ranges) that indicates which pages in the output should have the
     ///     <see cref="Overlay"/>/<see cref="Underlay"/> applied. If not specified, <see cref="Overlay"/>/<see cref="Underlay"/>
@@ -1370,7 +1370,7 @@ public class Job : IDisposable
     ///     sequence and applied to corresponding pages in the output until there are no more output pages.If the
     ///     <see cref="Overlay"/> or <see cref="Underlay"/> file runs out of pages, remaining output pages are left alone
     /// </summary>
-    /// <param name="file">The file with it's full path</param>
+    /// <param name="file">The file with its full path</param>
     /// <param name="to">
     ///     Specify a page range (see Page Ranges) that indicates which pages in the output should have the
     ///     <see cref="Overlay"/>/<see cref="Underlay"/> applied. If not specified, <see cref="Overlay"/>/<see cref="Underlay"/>
@@ -1425,7 +1425,7 @@ public class Job : IDisposable
     ///     The  flag and its options may be repeated to add multiple attachments
     /// </summary>
     /// <param name="file">
-    ///     Specify the file with it's full path to be used for the attachment.
+    ///     Specify the file with its full path to be used for the attachment.
     /// </param>
     /// <param name="description">Supply descriptive text for the attachment, displayed by some PDF viewers.</param>
     /// <param name="replace">
@@ -1462,7 +1462,7 @@ public class Job : IDisposable
     ///     This flag starts add attachment options, which are used to add attachments to a file.
     ///     The  flag and its options may be repeated to add multiple attachments
     /// </summary>
-    /// <param name="file">The file with it's full path</param>
+    /// <param name="file">The file with its full path</param>
     /// <param name="key">
     ///     Specify the key to use for the attachment in the embedded files table. It defaults to the last
     ///     element of the attached file’s filename.
@@ -2012,7 +2012,7 @@ public class Job : IDisposable
     ///     Show the contents of the cross-reference table or stream in a human-readable form. The cross-reference data gives
     ///     the offset of regular objects and the object stream ID and 0-based index within the object stream for compressed
     ///     objects. This is especially useful for files with cross-reference streams, which are stored in a binary format. If
-    ///     the file is invalid and cross reference table reconstruction is performed, this option will show the information in
+    ///     the file is invalid and cross-reference table reconstruction is performed, this option will show the information in
     ///     the reconstructed table.
     /// </summary>
     /// <returns>
