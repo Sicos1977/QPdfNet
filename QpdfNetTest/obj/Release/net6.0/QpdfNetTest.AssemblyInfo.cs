@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("QpdfNetTest")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Release")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+9074cb411f381e1de4ec15ec520dfef464a585db")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+bd3844d06b888ee658261cd8f4a798c19b197c3a")]
 [assembly: System.Reflection.AssemblyProductAttribute("QpdfNetTest")]
 [assembly: System.Reflection.AssemblyTitleAttribute("QpdfNetTest")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

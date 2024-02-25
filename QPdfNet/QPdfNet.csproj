@@ -10,14 +10,14 @@
 		<RepositoryUrl>https://github.com/Sicos1977/QPdfNet</RepositoryUrl>
 		<RepositoryType>git</RepositoryType>
 		<PackageTags>qpdf pdf</PackageTags>
-		<PackageReleaseNotes>- Fixes System.AccessViolationException occurs when calling Run() in an application targeting the x86 architecture</PackageReleaseNotes>
+		<PackageReleaseNotes>- Updated to QPDF version 11.9.0</PackageReleaseNotes>
 		<PackageIcon>qpdf.png</PackageIcon>
 		<PackageReadmeFile>readme.md</PackageReadmeFile>
 		<Copyright>Copyright (c) 2021-2024 Kees van Spelde</Copyright>
 		<GeneratePackageOnBuild>True</GeneratePackageOnBuild>
-		<AssemblyVersion>1.4.2.0</AssemblyVersion>
-		<FileVersion>1.4.2.0</FileVersion>
-		<Version>1.4.2</Version>
+		<AssemblyVersion>1.4.3.0</AssemblyVersion>
+		<FileVersion>1.4.3.0</FileVersion>
+		<Version>1.4.3</Version>
     <DocumentationFile>bin\$(Configuration)\$(TargetFramework)\$(AssemblyName).xml</DocumentationFile>
     <NoWarn>$(NoWarn);1591</NoWarn>
 	</PropertyGroup>

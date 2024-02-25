@@ -808,7 +808,7 @@
           "buildTransitive/netcoreapp3.1/_._": {}
         }
       },
-      "QPdfNet/1.4.2": {
+      "QPdfNet/1.4.3": {
         "type": "project",
         "framework": ".NETStandard,Version=v2.1",
         "dependencies": {
@@ -2154,7 +2154,7 @@
         "useSharedDesignerContext.txt"
       ]
     },
-    "QPdfNet/1.4.2": {
+    "QPdfNet/1.4.3": {
       "type": "project",
       "path": "../QPdfNet/QPdfNet.csproj",
       "msbuildProject": "../QPdfNet/QPdfNet.csproj"
@@ -2166,7 +2166,7 @@
       "MSTest.TestFramework >= 3.2.0",
       "Microsoft.Extensions.Logging >= 8.0.0",
       "Microsoft.NET.Test.Sdk >= 17.9.0",
-      "QPdfNet >= 1.4.2",
+      "QPdfNet >= 1.4.3",
       "coverlet.collector >= 6.0.0"
     ]
   },
