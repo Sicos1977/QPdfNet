@@ -390,8 +390,8 @@ public class Job : IDisposable
     public Job ReplaceInput()
     {
         Logger.LogInformation(string.IsNullOrEmpty(_inputFile)
-            ? $"Replacing input PDF file '{_inputFile}'"
-            : "Replacing input PDF file");
+            ? "Replacing input PDF file"
+            : $"Replacing input PDF file '{_inputFile}'");
 
         _replaceInput = string.Empty;
         return this;
