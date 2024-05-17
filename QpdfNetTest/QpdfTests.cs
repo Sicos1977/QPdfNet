@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.IO;
 using System.Text;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -40,6 +40,22 @@ namespace QpdfNetTest
             var job = new Job();
             var result = job
                 .InputFile(Path.Combine("TestFiles", "test.pdf"))
+                .OutputFile(outputFile)
+                .Run(out var output);
+
+            Assert.AreEqual(ExitCode.Success, result);
+            Assert.IsTrue(string.IsNullOrEmpty(output));
+            Assert.IsTrue(File.Exists(outputFile));
+        }
+
+        [TestMethod]
+        public void TestInputOutputWithSpecialCharsInName()
+        {
+            var outputFile = Path.Combine(_testFolder, "output.pdf");
+
+            var job = new Job();
+            var result = job
+                .InputFile(Path.Combine("TestFiles", "test - ąbć.pdf"))
                 .OutputFile(outputFile)
                 .Run(out var output);
 

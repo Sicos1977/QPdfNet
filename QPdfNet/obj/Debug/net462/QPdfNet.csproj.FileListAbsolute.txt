@@ -52,7 +52,6 @@ D:\Progsoft\_GitHub_\QPdfNet\QPdfNet\obj\Debug\net462\QPdfNet.GeneratedMSBuildEd
 D:\Progsoft\_GitHub_\QPdfNet\QPdfNet\obj\Debug\net462\QPdfNet.AssemblyInfoInputs.cache
 D:\Progsoft\_GitHub_\QPdfNet\QPdfNet\obj\Debug\net462\QPdfNet.AssemblyInfo.cs
 D:\Progsoft\_GitHub_\QPdfNet\QPdfNet\obj\Debug\net462\QPdfNet.csproj.CoreCompileInputs.cache
-D:\Progsoft\_GitHub_\QPdfNet\QPdfNet\obj\Debug\net462\QPdfNet.csproj.CopyComplete
 D:\Progsoft\_GitHub_\QPdfNet\QPdfNet\obj\Debug\net462\QPdfNet.dll
 D:\Progsoft\_GitHub_\QPdfNet\QPdfNet\obj\Debug\net462\QPdfNet.pdb
 D:\Progsoft\_GitHub_\QPdfNet\QPdfNet\bin\Debug\net462\x64\concrt140.dll
@@ -88,3 +87,4 @@ C:\Kees\QPdfNet\QPdfNet\bin\Debug\net462\x86\msvcp140_codecvt_ids.dll
 C:\Kees\QPdfNet\QPdfNet\bin\Debug\net462\x86\vcruntime140.dll
 C:\Kees\QPdfNet\QPdfNet\bin\Debug\net462\QPdfNet.xml
 C:\Kees\QPdfNet\QPdfNet\obj\Debug\net462\QPdfNet.sourcelink.json
+D:\Progsoft\_GitHub_\QPdfNet\QPdfNet\obj\Debug\net462\QPdfNet.csproj.Up2Date

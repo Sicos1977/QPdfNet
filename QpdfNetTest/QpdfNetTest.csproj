@@ -37,6 +37,9 @@
     <None Update="TestFiles\random.pdf">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Update="TestFiles\test - ąbć.pdf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="TestFiles\test.pdf">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
