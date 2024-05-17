@@ -49,7 +49,7 @@ namespace QpdfNetTest
         }
 
         [TestMethod]
-        public void TestInputOutputWithSpecialCharsInName()
+        public void TestInputOutputWithUnicodeCharsInName()
         {
             var outputFile = Path.Combine(_testFolder, "output.pdf");
 
@@ -664,7 +664,7 @@ namespace QpdfNetTest
             var result = job.InputFile(Path.Combine("TestFiles", "withimages.pdf"))
                 .Json()
                 .JsonKey("pages")
-                .Run(out var output, out var data);
+                .Run(out _, out var data);
 
             var json = Encoding.ASCII.GetString(data!);
 
