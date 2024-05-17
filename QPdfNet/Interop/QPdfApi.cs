@@ -70,7 +70,7 @@ namespace QPdfNet.Interop
     ///     The exported qpdf api signatures.
     /// </summary>
     /// <remarks>
-    ///     Please note this is only public for technical reasons (you can't proxy a internal interface).
+    ///     Please note this is only public for technical reasons (you can't proxy an internal interface).
     ///     It should be considered an internal interface and is NOT part of the public api and may have
     ///     breaking changes between releases.
     /// </remarks>
