@@ -58,11 +58,11 @@
           "dependencies": {
             "MSTest.TestAdapter": {
               "target": "Package",
-              "version": "[3.2.0, )"
+              "version": "[3.3.1, )"
             },
             "MSTest.TestFramework": {
               "target": "Package",
-              "version": "[3.2.0, )"
+              "version": "[3.3.1, )"
             },
             "Microsoft.Extensions.Logging": {
               "target": "Package",
@@ -76,7 +76,7 @@
               "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
               "suppressParent": "All",
               "target": "Package",
-              "version": "[6.0.0, )"
+              "version": "[6.0.2, )"
             }
           },
           "imports": [
