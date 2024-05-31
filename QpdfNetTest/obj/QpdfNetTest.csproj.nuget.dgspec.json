@@ -1,24 +1,24 @@
 {
   "format": 1,
   "restore": {
-    "D:\\Progsoft\\_GitHub_\\QPdfNet\\QpdfNetTest\\QpdfNetTest.csproj": {}
+    "C:\\Kees\\QPdfNet\\QpdfNetTest\\QpdfNetTest.csproj": {}
   },
   "projects": {
-    "D:\\Progsoft\\_GitHub_\\QPdfNet\\QpdfNetTest\\QpdfNetTest.csproj": {
+    "C:\\Kees\\QPdfNet\\QpdfNetTest\\QpdfNetTest.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Progsoft\\_GitHub_\\QPdfNet\\QpdfNetTest\\QpdfNetTest.csproj",
+        "projectUniqueName": "C:\\Kees\\QPdfNet\\QpdfNetTest\\QpdfNetTest.csproj",
         "projectName": "QpdfNetTest",
-        "projectPath": "D:\\Progsoft\\_GitHub_\\QPdfNet\\QpdfNetTest\\QpdfNetTest.csproj",
-        "packagesPath": "C:\\Users\\keesv\\.nuget\\packages\\",
-        "outputPath": "D:\\Progsoft\\_GitHub_\\QPdfNet\\QpdfNetTest\\obj\\",
+        "projectPath": "C:\\Kees\\QPdfNet\\QpdfNetTest\\QpdfNetTest.csproj",
+        "packagesPath": "C:\\Users\\AO303388\\.nuget\\packages\\",
+        "outputPath": "C:\\Kees\\QPdfNet\\QpdfNetTest\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
         ],
         "configFilePaths": [
-          "C:\\Users\\keesv\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\AO303388\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -28,15 +28,14 @@
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "C:\\Program Files\\dotnet\\library-packs": {},
-          "d:\\Progsoft\\_GitHub_\\_nuget package_\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
           "net6.0": {
             "targetAlias": "net6.0",
             "projectReferences": {
-              "D:\\Progsoft\\_GitHub_\\QPdfNet\\QPdfNet\\QPdfNet.csproj": {
-                "projectPath": "D:\\Progsoft\\_GitHub_\\QPdfNet\\QPdfNet\\QPdfNet.csproj"
+              "C:\\Kees\\QPdfNet\\QPdfNet\\QPdfNet.csproj": {
+                "projectPath": "C:\\Kees\\QPdfNet\\QPdfNet\\QPdfNet.csproj"
               }
             }
           }
@@ -58,11 +57,11 @@
           "dependencies": {
             "MSTest.TestAdapter": {
               "target": "Package",
-              "version": "[3.3.1, )"
+              "version": "[3.4.3, )"
             },
             "MSTest.TestFramework": {
               "target": "Package",
-              "version": "[3.3.1, )"
+              "version": "[3.4.3, )"
             },
             "Microsoft.Extensions.Logging": {
               "target": "Package",
@@ -70,7 +69,7 @@
             },
             "Microsoft.NET.Test.Sdk": {
               "target": "Package",
-              "version": "[17.9.0, )"
+              "version": "[17.10.0, )"
             },
             "coverlet.collector": {
               "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
@@ -99,14 +98,14 @@
         }
       }
     },
-    "D:\\Progsoft\\_GitHub_\\QPdfNet\\QPdfNet\\QPdfNet.csproj": {
+    "C:\\Kees\\QPdfNet\\QPdfNet\\QPdfNet.csproj": {
       "version": "1.4.3",
       "restore": {
-        "projectUniqueName": "D:\\Progsoft\\_GitHub_\\QPdfNet\\QPdfNet\\QPdfNet.csproj",
+        "projectUniqueName": "C:\\Kees\\QPdfNet\\QPdfNet\\QPdfNet.csproj",
         "projectName": "QPdfNet",
-        "projectPath": "D:\\Progsoft\\_GitHub_\\QPdfNet\\QPdfNet\\QPdfNet.csproj",
-        "packagesPath": "C:\\Users\\keesv\\.nuget\\packages\\",
-        "outputPath": "D:\\Progsoft\\_GitHub_\\QPdfNet\\QPdfNet\\obj\\",
+        "projectPath": "C:\\Kees\\QPdfNet\\QPdfNet\\QPdfNet.csproj",
+        "packagesPath": "C:\\Users\\AO303388\\.nuget\\packages\\",
+        "outputPath": "C:\\Kees\\QPdfNet\\QPdfNet\\obj\\",
         "projectStyle": "PackageReference",
         "crossTargeting": true,
         "fallbackFolders": [
@@ -114,7 +113,7 @@
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
         ],
         "configFilePaths": [
-          "C:\\Users\\keesv\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\AO303388\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -125,7 +124,6 @@
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "C:\\Program Files\\dotnet\\library-packs": {},
-          "d:\\Progsoft\\_GitHub_\\_nuget package_\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
