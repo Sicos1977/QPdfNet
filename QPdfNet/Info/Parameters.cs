@@ -28,11 +28,16 @@ using Newtonsoft.Json;
 
 namespace QPdfNet.Info;
 
+/// <summary>
+///     Parameters
+/// </summary>
 public class Parameters
 {
+    #region Properties
     /// <summary>
-    ///     Returns the decode level
+    ///     Decode level used to determine stream filterability
     /// </summary>
-    [JsonProperty("decodelevel")]
-    public string? Decodelevel { get; private set; }
+    [JsonProperty("decodelevel", DefaultValueHandling = DefaultValueHandling.Ignore)]
+    public string? DecodeLevel { get; set; }
+    #endregion
 }

@@ -30,45 +30,45 @@ using Newtonsoft.Json;
 namespace QPdfNet.Info;
 
 /// <summary>
-///     Returns the page
+///     The page data
 /// </summary>
 public class Page
 {
     #region Properties
     /// <summary>
-    ///     Returns information about the content that is found on the page
+    ///     Reference to each content stream
     /// </summary>
-    [JsonProperty("contents")]
+    [JsonProperty("contents", DefaultValueHandling = DefaultValueHandling.Ignore)]
     public List<string>? Contents { get; set; }
 
     /// <summary>
-    ///     Returns information about the images found on the page
+    ///     List of images on the page
     /// </summary>
-    [JsonProperty("images")]
+    [JsonProperty("images", DefaultValueHandling = DefaultValueHandling.Ignore)] 
     public List<Image>? Images { get; set; }
 
     /// <summary>
-    ///     Returns the page label
+    ///     Page label dictionary, or null if none
     /// </summary>
-    [JsonProperty("label")]
-    public object? Label { get; set; }
+    [JsonProperty("label", DefaultValueHandling = DefaultValueHandling.Ignore)]
+    public string? Label { get; set; }
 
     /// <summary>
-    ///     Returns the object
+    ///     Reference to original page object
     /// </summary>
-    [JsonProperty("object")]
+    [JsonProperty("object", DefaultValueHandling = DefaultValueHandling.Ignore)]
     public string? Object { get; set; }
-
+    
     /// <summary>
-    ///     Returns the page outlines
+    ///     Outlines that target this page
     /// </summary>
-    [JsonProperty("outlines")]
+    [JsonProperty("outlines", DefaultValueHandling = DefaultValueHandling.Ignore)] 
     public List<PageOutline>? Outlines { get; set; }
 
     /// <summary>
-    ///     Returns the page number
+    ///     Position of page in document numbering from 1
     /// </summary>
-    [JsonProperty("pageposfrom1")]
-    public long PageNumber { get; set; }
+    [JsonProperty("pageposfrom1", DefaultValueHandling = DefaultValueHandling.Ignore)]
+    public int? PagePosFrom1 { get; set; }
     #endregion
 }

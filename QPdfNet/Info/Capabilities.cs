@@ -28,59 +28,64 @@ using Newtonsoft.Json;
 
 namespace QPdfNet.Info;
 
+/// <summary>
+///     Encryption capabilities
+/// </summary>
 public class Capabilities
 {
+    #region Properties
     /// <summary>
-    ///     Returns <c>true </c> when accessibility is restricted (usually ignored)
+    ///     Allow extraction for accessibility?
     /// </summary>
-    [JsonProperty("accessibility")]
-    public bool Accessibility { get; private set; }
+    [JsonProperty("accessibility", DefaultValueHandling = DefaultValueHandling.Ignore)]
+    public bool Accessibility { get; set; }
 
     /// <summary>
-    ///     Returns <c>true</c> text/graphic extraction is restricted
+    ///     Allow extraction?
     /// </summary>
-    [JsonProperty("extract")]
-    public bool Extract { get; private set; }
+    [JsonProperty("extract", DefaultValueHandling = DefaultValueHandling.Ignore)]
+    public bool Extract { get; set; }
 
     /// <summary>
-    ///     Returns <c>tru</c> commenting/filling form fields is restricted
+    ///     Allow modifying annotations?
     /// </summary>
-    [JsonProperty("moddifyannotations")]
-    public bool ModifyAnnotations { get; private set; }
+    [JsonProperty("moddifyannotations", DefaultValueHandling = DefaultValueHandling.Ignore)]
+    public bool ModdifyAnnotations { get; set; }
 
     /// <summary>
-    ///     Returns <c>true</c> when modification of the PDF is restricted
+    ///     Allow all modifications?
     /// </summary>
-    [JsonProperty("modify")]
-    public bool Modify { get; private set; }
+    [JsonProperty("modify", DefaultValueHandling = DefaultValueHandling.Ignore)]
+    public bool Modify { get; set; }
 
     /// <summary>
-    ///     Returns <c>true</c> when document assembly is restricted
+    ///     Allow modifying document assembly?
     /// </summary>
-    [JsonProperty("modifyassembly")]
-    public bool ModifyAssembly { get; private set; }
+    [JsonProperty("modifyassembly", DefaultValueHandling = DefaultValueHandling.Ignore)]
+    public bool ModifyAssembly { get; set; }
 
     /// <summary>
-    ///     Returns <c>true</c> when form field filling is restricted
+    ///     Allow modifying forms?
     /// </summary>
-    [JsonProperty("modifyforms")]
-    public bool ModifyForms { get; private set; }
+    [JsonProperty("modifyforms", DefaultValueHandling = DefaultValueHandling.Ignore)]
+    public bool ModifyForms { get; set; }
 
     /// <summary>
-    ///     Returns <c>true</c> when all other modifications are restricted
+    ///     Allow other modifications?
     /// </summary>
-    [JsonProperty("modifyother")]
-    public bool ModifyOther { get; private set; }
+    [JsonProperty("modifyother", DefaultValueHandling = DefaultValueHandling.Ignore)]
+    public bool ModifyOther { get; set; }
 
     /// <summary>
-    ///     Returns <c>true</c> when printing is restricted to high quality
+    ///     Allow high resolution printing?
     /// </summary>
-    [JsonProperty("printhigh")]
-    public bool PrintHigh { get; private set; }
+    [JsonProperty("printhigh", DefaultValueHandling = DefaultValueHandling.Ignore)]
+    public bool PrintHigh { get; set; }
 
     /// <summary>
-    ///     Returns <c>true</c> when printing is restricted to low quality
+    ///     Allow low resolution printing?
     /// </summary>
-    [JsonProperty("printlow")]
-    public bool PrintLow { get; private set; }
+    [JsonProperty("printlow", DefaultValueHandling = DefaultValueHandling.Ignore)]
+    public bool PrintLow { get; set; }
+    #endregion
 }

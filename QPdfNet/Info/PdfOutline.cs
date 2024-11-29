@@ -29,11 +29,17 @@ using Newtonsoft.Json;
 
 namespace QPdfNet.Info;
 
+/// <summary>
+///     The outline
+/// </summary>
 public class PdfOutline
 {
     #region Properties
+    /// <summary>
+    ///     Outline destination dictionary
+    /// </summary>
     [JsonProperty("dest")]
-    public List<string>? Dest { get; private set; }
+    public List<string>? Dest { get; set; }
 
     [JsonProperty("destpageposfrom1")]
     public long PageNumber { get; private set; }

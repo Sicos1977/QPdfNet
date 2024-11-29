@@ -30,27 +30,27 @@ using Newtonsoft.Json;
 namespace QPdfNet.Info;
 
 /// <summary>
-///     Returns information about form fields used in the PDF
+///     The acro from fields
 /// </summary>
-public class Acroform
+public class AcroForm
 {
     #region Properties
     /// <summary>
-    ///     Returns the fields
+    ///     List of fields in the acroform
     /// </summary>
-    [JsonProperty("fields")]
-    public List<object>? Fields { get; private set; }
+    [JsonProperty("fields", DefaultValueHandling = DefaultValueHandling.Ignore)]
+    public List<Field>? Fields { get; set; }
 
     /// <summary>
-    ///     Returns <c>true</c> when the PDF has form fields
+    ///     Whether the document has interactive forms
     /// </summary>
-    [JsonProperty("hasacroform")]
-    public bool HasAcroform { get; private set; }
+    [JsonProperty("hasacroform", DefaultValueHandling = DefaultValueHandling.Ignore)]
+    public bool? Hasacroform { get; set; }
 
     /// <summary>
-    ///     Returns <c>true</c> when appearances are needed
+    ///     Whether the form fields' appearance streams need to be regenerated
     /// </summary>
-    [JsonProperty("needappearances")]
-    public bool NeedAppearances { get; private set; }
+    [JsonProperty("needappearances", DefaultValueHandling = DefaultValueHandling.Ignore)]
+    public bool? NeedAppearances { get; set; }
     #endregion
 }

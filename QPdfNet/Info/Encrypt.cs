@@ -26,43 +26,42 @@
 
 using Newtonsoft.Json;
 
-namespace QPdfNet.Info
+namespace QPdfNet.Info;
+
+/// <summary>
+///     The encryption information
+/// </summary>
+public class Encrypt
 {
+    #region Properties
     /// <summary>
-    ///     Returns information about the PDF encryption
+    ///     The capabilities of the encryption
     /// </summary>
-    public class Encrypt
-    {
-        #region Properties
-        /// <summary>
-        ///     <see cref="Capabilities"/>
-        /// </summary>
-        [JsonProperty("capabilities")]
-        public Capabilities? Capabilities { get; private set; }
+    [JsonProperty("capabilities", DefaultValueHandling = DefaultValueHandling.Ignore)] 
+    public Capabilities? Capabilities { get; set; }
 
-        /// <summary>
-        ///     Returns <c>true</c> when the PDF is encrypted
-        /// </summary>
-        [JsonProperty("encrypted")]
-        public bool Encrypted { get; private set; }
+    /// <summary>
+    ///     Whether the document is encrypted
+    /// </summary>
+    [JsonProperty("encrypted", DefaultValueHandling = DefaultValueHandling.Ignore)]
+    public bool Encrypted { get; set; }
 
-        /// <summary>
-        ///     Returns <c>true</c> when the given owner password is correct
-        /// </summary>
-        [JsonProperty("ownerpasswordmatched")]
-        public bool OwnerPasswordMatched { get; private set; }
+    /// <summary>
+    ///     Whether supplied password matched owner password; always false for non-encrypted files
+    /// </summary>
+    [JsonProperty("ownerpasswordmatched", DefaultValueHandling = DefaultValueHandling.Ignore)]
+    public bool OwnerPasswordMatched { get; set; }
 
-        /// <summary>
-        ///     <see cref="EncryptParameters"/>
-        /// </summary>
-        [JsonProperty("parameters")]
-        public EncryptParameters? Parameters { get; private set; }
+    /// <summary>
+    ///     Encryption parameters
+    /// </summary>
+    [JsonProperty("parameters", DefaultValueHandling = DefaultValueHandling.Ignore)] 
+    public EncryptParameters? Parameters { get; set; }
 
-        /// <summary>
-        ///     Returns <c>true</c> when the given user password is correct
-        /// </summary>
-        [JsonProperty("userpasswordmatched")]
-        public bool UserPasswordMatched { get; private set; }
-        #endregion
-    }
+    /// <summary>
+    ///     Whether supplied password matched user password; always false for non-encrypted files
+    /// </summary>
+    [JsonProperty("userpasswordmatched", DefaultValueHandling = DefaultValueHandling.Ignore)]
+    public bool UserPasswordMatched { get; set; }
+    #endregion
 }

@@ -29,14 +29,28 @@ using Newtonsoft.Json;
 
 namespace QPdfNet.Info;
 
+/// <summary>
+///     The page outline object
+/// </summary>
 public class PageOutline
 {
-    [JsonProperty("dest")]
-    public List<string>? Dest { get; private set; }
+    #region Properties
+    /// <summary>
+    ///     Outline destination dictionary
+    /// </summary>
+    [JsonProperty("dest", DefaultValueHandling = DefaultValueHandling.Ignore)]
+    public List<string>? Dest { get; set; }
 
-    [JsonProperty("object")]
-    public string? Object { get; private set; }
+    /// <summary>
+    ///     Reference to outline that targets this page
+    /// </summary>
+    [JsonProperty("object", DefaultValueHandling = DefaultValueHandling.Ignore)]
+    public string? Object { get; set; }
 
-    [JsonProperty("title")]
-    public string? Title { get; private set; }
+    /// <summary>
+    ///     Outline title
+    /// </summary>
+    [JsonProperty("title", DefaultValueHandling = DefaultValueHandling.Ignore)]
+    public string? Title { get; set; }
+    #endregion
 }

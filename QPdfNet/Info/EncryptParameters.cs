@@ -28,61 +28,55 @@ using Newtonsoft.Json;
 
 namespace QPdfNet.Info;
 
+/// <summary>
+///     The encryption parameters
+/// </summary>
 public class EncryptParameters
 {
     #region Properties
-    /// <summary>
-    /// 
-    /// </summary>
-    [JsonProperty("P")]
-    public long P { get; private set; }
+    [JsonProperty("P", DefaultValueHandling = DefaultValueHandling.Ignore)] 
+    public string? P { get; set; }
+
+    [JsonProperty("R", DefaultValueHandling = DefaultValueHandling.Ignore)] 
+    public string? R { get; set; }
+
+    [JsonProperty("V", DefaultValueHandling = DefaultValueHandling.Ignore)] 
+    public string? V { get; set; }
 
     /// <summary>
-    /// 
+    ///     Encryption key bit length
     /// </summary>
-    [JsonProperty("R")]
-    public long R { get; private set; }
+    [JsonProperty("bits", DefaultValueHandling = DefaultValueHandling.Ignore)]
+    public string? Bits { get; set; }
 
     /// <summary>
-    /// 
+    ///     Encryption method for attachments
     /// </summary>
-    [JsonProperty("V")]
-    public long V { get; private set; }
+    [JsonProperty("filemethod", DefaultValueHandling = DefaultValueHandling.Ignore)]
+    public string? FileMethod { get; set; }
 
     /// <summary>
-    ///     Returns the amounts of bits used with the encryption
+    ///     Encryption key; will be null unless --show-encryption-key was specified
     /// </summary>
-    [JsonProperty("bits")]
-    public long Bits { get; set; }
+    [JsonProperty("key", DefaultValueHandling = DefaultValueHandling.Ignore)]
+    public string? Key { get; set; }
 
     /// <summary>
-    ///     Returns the file method used
+    ///     Overall encryption method: none, mixed, RC4, AESv2, AESv3
     /// </summary>
-    [JsonProperty("filemethod")]
-    public string? FileMethod { get; private set; }
+    [JsonProperty("method", DefaultValueHandling = DefaultValueHandling.Ignore)]
+    public string? Method { get; set; }
 
     /// <summary>
-    ///     Returns the encryption key
+    ///     Encryption method for streams
     /// </summary>
-    [JsonProperty("key")]
-    public object? Key { get; private set; }
+    [JsonProperty("streammethod", DefaultValueHandling = DefaultValueHandling.Ignore)]
+    public string? StreamMethod { get; set; }
 
     /// <summary>
-    ///     Returns the encryption method used
+    ///     Encryption method for string
     /// </summary>
-    [JsonProperty("method")]
-    public string? Method { get; private set; }
-
-    /// <summary>
-    /// 
-    /// </summary>
-    [JsonProperty("streammethod")]
-    public string? StreamMethod { get; private set; }
-
-    /// <summary>
-    /// 
-    /// </summary>
-    [JsonProperty("stringmethod")]
-    public string? StringMethod { get; private set; }
+    [JsonProperty("stringmethod", DefaultValueHandling = DefaultValueHandling.Ignore)]
+    public string? StringMethod { get; set; }
     #endregion
 }

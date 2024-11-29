@@ -30,60 +30,63 @@ using Newtonsoft.Json;
 namespace QPdfNet.Info;
 
 /// <summary>
-///     Returns information about an <see cref="Image"/> on a <see cref="Page"/>
+///    The image data
 /// </summary>
 public class Image
 {
     #region Properties
     /// <summary>
-    ///     Returns the bits per component
+    ///     Bits per component
     /// </summary>
-    [JsonProperty("bitspercomponent")]
-    public long Bitspercomponent { get; private set; }
+    [JsonProperty("bitspercomponent", DefaultValueHandling = DefaultValueHandling.Ignore)]
+    public string? Bitspercomponent { get; set; }
+    
+    /// <summary>
+    ///     Color space
+    /// </summary>
+    [JsonProperty("colorspace", DefaultValueHandling = DefaultValueHandling.Ignore)]
+    public string? Colorspace { get; set; }
 
     /// <summary>
-    ///     Returns information about the color space
+    ///     Decode parameters for image data
     /// </summary>
-    [JsonProperty("colorspace")]
-    public string? Colorspace { get; private set; }
+    [JsonProperty("decodeparms", DefaultValueHandling = DefaultValueHandling.Ignore)]
+    public List<string>? Decodeparms { get; set; }
 
     /// <summary>
-    ///     Returns the used decode parameters
+    ///     Filters applied to image data
     /// </summary>
-    [JsonProperty("decodeparms")]
-    public List<object>? Decodeparms { get; private set; }
+    [JsonProperty("filter", DefaultValueHandling = DefaultValueHandling.Ignore)]
+    public List<string>? Filter { get; set; }
 
     /// <summary>
-    ///     Returns the filters used
+    ///     Whether image data can be decoded using the decode level qpdf was invoked with
     /// </summary>
-    [JsonProperty("filter")]
-    public List<string>? Filter { get; private set; }
-
-    [JsonProperty("filterable")]
-    public bool Filterable { get; private set; }
+    [JsonProperty("filterable", DefaultValueHandling = DefaultValueHandling.Ignore)]
+    public string? Filterable { get; set; }
 
     /// <summary>
-    ///     Returns the height of the image
+    ///     Image height
     /// </summary>
-    [JsonProperty("height")]
-    public long Height { get; private set; }
+    [JsonProperty("height", DefaultValueHandling = DefaultValueHandling.Ignore)]
+    public double? Height { get; set; }
 
     /// <summary>
-    ///     Returns the width of the image
+    ///     Image width
     /// </summary>
-    [JsonProperty("width")]
-    public long Width { get; private set; }
+    [JsonProperty("width", DefaultValueHandling = DefaultValueHandling.Ignore)]
+    public double? Width { get; set; }
 
     /// <summary>
-    ///     Returns the name of the image
+    ///     Name of image in XObject table
     /// </summary>
-    [JsonProperty("name")]
-    public string? Name { get; private set; }
+    [JsonProperty("name", DefaultValueHandling = DefaultValueHandling.Ignore)]
+    public string? Name { get; set; }
 
     /// <summary>
-    ///     Returns the object
+    ///     Reference to image stream
     /// </summary>
-    [JsonProperty("object")]
-    public string? Object { get; private set; }
+    [JsonProperty("object", DefaultValueHandling = DefaultValueHandling.Ignore)]
+    public string? Object { get; set; }
     #endregion
 }

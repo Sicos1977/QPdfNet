@@ -42,52 +42,64 @@ public class Pdf
 {
     #region Properties
     /// <summary>
-    ///     <see cref="Acroform"/>
+    ///     The JSON version
     /// </summary>
-    [JsonProperty("acroform")]
-    public Acroform? Acroform { get; private set; }
+    [JsonProperty("version", DefaultValueHandling = DefaultValueHandling.Ignore)] 
+    public string? Version { get; set; }
 
     /// <summary>
-    ///     Returns a list with the attachments
+    ///     The acro form fields
     /// </summary>
-    [JsonProperty("attachments")]
-    public Dictionary<string, AttachmentProperties>? Attachments { get; private set; }
+    [JsonProperty("acroform", DefaultValueHandling = DefaultValueHandling.Ignore)] 
+    public AcroForm? AcroForm { get; set; }
 
     /// <summary>
-    ///     Returns information about PDF encryption
+    ///     The attachments
     /// </summary>
-    [JsonProperty("encrypt")]
-    public Encrypt? Encrypt { get; private set; }
+    [JsonProperty("attachments", DefaultValueHandling = DefaultValueHandling.Ignore)] 
+    public Dictionary<string, Attachment>? Attachments { get; set; }
 
     /// <summary>
-    ///     Returns information about the objects in the PDF
+    ///     Encryption information
     /// </summary>
-    [JsonProperty("objectinfo")]
-    public Dictionary<string, Objectinfo>? Objectinfo { get; set; }
-
-    //[JsonProperty("objects")]
-    //public List<string>? Objects { get; set; }
-
-    [JsonProperty("outlines")]
-    public List<object>? Outlines { get; set; }
+    [JsonProperty("encrypt", DefaultValueHandling = DefaultValueHandling.Ignore)] 
+    public Encrypt? Encrypt { get; set; }
 
     /// <summary>
-    ///     Returns the used page labels in the PDF
+    ///     The object information
     /// </summary>
-    [JsonProperty("pagelabels")]
-    public List<object>? PageLabels { get; private set; }
+    [JsonProperty("objectinfo", DefaultValueHandling = DefaultValueHandling.Ignore)] 
+    public Dictionary<string, Stream>? Objectinfo { get; set; }
 
     /// <summary>
-    ///     Returns the pages of the PDF
+    ///     The objects
     /// </summary>
-    [JsonProperty("pages")]
-    public List<Page>? Pages { get; private set; }
+    [JsonProperty("objects", DefaultValueHandling = DefaultValueHandling.Ignore)] 
+    public string? Objects { get; set; }
 
     /// <summary>
-    ///     Returns the parameters used
+    ///     The outline information
     /// </summary>
-    [JsonProperty("parameters")]
-    public Parameters? Parameters { get; private set; }
+    [JsonProperty("outlines", DefaultValueHandling = DefaultValueHandling.Ignore)] 
+    public List<PdfOutline>? Outlines { get; set; }
+
+    /// <summary>
+    ///     The page labels
+    /// </summary>
+    [JsonProperty("pagelabels", DefaultValueHandling = DefaultValueHandling.Ignore)] 
+    public List<PageLabel>? PageLabels { get; set; }
+
+    /// <summary>
+    ///     The pages of the document
+    /// </summary>
+    [JsonProperty("pages", DefaultValueHandling = DefaultValueHandling.Ignore)] 
+    public List<Page>? Pages { get; set; }
+
+    /// <summary>
+    ///     The parameters
+    /// </summary>
+    [JsonProperty("parameters", DefaultValueHandling = DefaultValueHandling.Ignore)] 
+    public Parameters? Parameters { get; set; }
     #endregion
 
     #region FromFile
@@ -107,14 +119,11 @@ public class Pdf
             throw new Exception(output);
 
         if (output != null)
-            return JsonConvert.DeserializeObject<Pdf>(Encoding.ASCII.GetString(data!), new JsonSerializerSettings()
+            return JsonConvert.DeserializeObject<Pdf>(Encoding.ASCII.GetString(data!), new JsonSerializerSettings
             {
                 MetadataPropertyHandling = MetadataPropertyHandling.Ignore,
                 DateParseHandling = DateParseHandling.None,
-                Converters =
-                {
-                    new IsoDateTimeConverter { DateTimeStyles = DateTimeStyles.AssumeUniversal }
-                }
+                Converters = { new IsoDateTimeConverter { DateTimeStyles = DateTimeStyles.AssumeUniversal } }
             });
 
         return null;

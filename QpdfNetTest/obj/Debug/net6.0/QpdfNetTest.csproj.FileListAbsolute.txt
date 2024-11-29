@@ -324,7 +324,6 @@ C:\Kees\QPdfNet\QpdfNetTest\obj\Debug\net6.0\QpdfNetTest.AssemblyInfoInputs.cach
 C:\Kees\QPdfNet\QpdfNetTest\obj\Debug\net6.0\QpdfNetTest.AssemblyInfo.cs
 C:\Kees\QPdfNet\QpdfNetTest\obj\Debug\net6.0\QpdfNetTest.csproj.CoreCompileInputs.cache
 C:\Kees\QPdfNet\QpdfNetTest\obj\Debug\net6.0\QpdfNetTest.sourcelink.json
-C:\Kees\QPdfNet\QpdfNetTest\obj\Debug\net6.0\QpdfNetTest.csproj.CopyComplete
 C:\Kees\QPdfNet\QpdfNetTest\obj\Debug\net6.0\QpdfNetTest.dll
 C:\Kees\QPdfNet\QpdfNetTest\obj\Debug\net6.0\refint\QpdfNetTest.dll
 C:\Kees\QPdfNet\QpdfNetTest\obj\Debug\net6.0\QpdfNetTest.pdb
@@ -407,3 +406,6 @@ D:\Progsoft\_GitHub_\QPdfNet\QpdfNetTest\bin\Debug\net6.0\zh-Hans\Microsoft.Test
 D:\Progsoft\_GitHub_\QPdfNet\QpdfNetTest\bin\Debug\net6.0\zh-Hant\Microsoft.Testing.Platform.MSBuild.resources.dll
 D:\Progsoft\_GitHub_\QPdfNet\QpdfNetTest\obj\Debug\net6.0\QpdfNetTest.sourcelink.json
 D:\Progsoft\_GitHub_\QPdfNet\QpdfNetTest\obj\Debug\net6.0\QpdfNetT.19544E49.Up2Date
+C:\Kees\QPdfNet\QpdfNetTest\bin\Debug\net6.0\.msCoverageSourceRootsMapping_QpdfNetTest
+C:\Kees\QPdfNet\QpdfNetTest\bin\Debug\net6.0\TestFiles\test - ąbć.pdf
+C:\Kees\QPdfNet\QpdfNetTest\obj\Debug\net6.0\QpdfNetT.19544E49.Up2Date

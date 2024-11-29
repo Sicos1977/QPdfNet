@@ -74,24 +74,22 @@ namespace QpdfNetTest
                 var result = job
                     .InputFile(Path.Combine("TestFiles", "test.pdf"))
                     .OutputFile(outputFile)
-                    .Run(out var output);
+                    .Run(out var output1);
 
                 Assert.AreEqual(ExitCode.Success, result);
-                Assert.IsTrue(string.IsNullOrEmpty(output));
+                Assert.IsTrue(string.IsNullOrEmpty(output1));
                 Assert.IsTrue(File.Exists(outputFile));
             }
 
             using var job2 = new Job();
-            {
-                var result2 = job2
-                    .InputFile(Path.Combine("TestFiles", "test.pdf"))
-                    .OutputFile(outputFile)
-                    .Run(out var output);
+            var result2 = job2
+                .InputFile(Path.Combine("TestFiles", "test.pdf"))
+                .OutputFile(outputFile)
+                .Run(out var output2);
 
-                Assert.AreEqual(ExitCode.Success, result2);
-                Assert.IsTrue(string.IsNullOrEmpty(output));
-                Assert.IsTrue(File.Exists(outputFile));
-            }
+            Assert.AreEqual(ExitCode.Success, result2);
+            Assert.IsTrue(string.IsNullOrEmpty(output2));
+            Assert.IsTrue(File.Exists(outputFile));
         }
 
         [TestMethod]
@@ -710,7 +708,7 @@ namespace QpdfNetTest
         [TestMethod]
         public void TestPdfInfo()
         {
-            var pdf = Pdf.FromFile(Path.Combine("TestFiles", "random.pdf"));
+            var pdf = Pdf.FromFile(Path.Combine("TestFiles", "withimages.pdf"));
             Assert.IsTrue(pdf != null);
         }
     }

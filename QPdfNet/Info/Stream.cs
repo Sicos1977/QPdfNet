@@ -24,25 +24,32 @@
 // THE SOFTWARE.
 //
 
-using System.Collections.Generic;
 using Newtonsoft.Json;
 
-namespace QPdfNet.Info;
+namespace QPdfNet.Json;
 
+/// <summary>
+///     The stream object
+/// </summary>
 public class Stream
 {
+    #region Properties
     /// <summary>
-    ///     Returns the filters used
+    ///     If stream, its filters, otherwise null
     /// </summary>
-    [JsonProperty("filter")]
-    public string? Filter { get; private set; }
-
-    [JsonProperty("is")]
-    public bool Is { get; set; }
+    [JsonProperty("filter", DefaultValueHandling = DefaultValueHandling.Ignore)]
+    public string? Filter { get; set; }
 
     /// <summary>
-    ///     Returns the length of the stream
+    ///     Whether the object is a stream
     /// </summary>
-    [JsonProperty("length")]
-    public long? Length { get; set; }
+    [JsonProperty("is", DefaultValueHandling = DefaultValueHandling.Ignore)]
+    public bool? Is { get; set; }
+
+    /// <summary>
+    ///     If stream, its length, otherwise null
+    /// </summary>
+    [JsonProperty("length", DefaultValueHandling = DefaultValueHandling.Ignore)]
+    public int? Length { get; set; }
+    #endregion
 }

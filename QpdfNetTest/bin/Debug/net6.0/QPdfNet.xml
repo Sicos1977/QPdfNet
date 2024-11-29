@@ -886,7 +886,7 @@
                 The exported qpdf api signatures.
             </summary>
             <remarks>
-                Please note this is only public for technical reasons (you can't proxy a internal interface).
+                Please note this is only public for technical reasons (you can't proxy an internal interface).
                 It should be considered an internal interface and is NOT part of the public api and may have
                 breaking changes between releases.
             </remarks>
@@ -2025,6 +2025,13 @@
                 <see cref="T:QPdfNet.Job" />
             </returns>
         </member>
+        <member name="M:QPdfNet.Job.ToDocument">
+            <summary>
+                Returns the internal structure of the given PDF <see cref="M:QPdfNet.Job.InputFile(System.String)"/> as a <see cref="T:QPdfNet.Json.Document"/>
+                or <c>null</c> when the file is not a valid PDF file
+            </summary>
+            <returns></returns>
+        </member>
         <member name="M:QPdfNet.Job.JsonObject(System.String)">
             <summary>
                 This option is repeatable. If given, only specified objects will be shown in the “objects” key of the JSON output.
@@ -2180,6 +2187,499 @@
         <member name="M:QPdfNet.Job.Dispose">
             <summary>
                 Disposes this object
+            </summary>
+        </member>
+        <member name="T:QPdfNet.Json.AcroForm">
+            <summary>
+                The acro from fields
+            </summary>
+        </member>
+        <member name="P:QPdfNet.Json.AcroForm.Fields">
+            <summary>
+                List of fields in the acroform
+            </summary>
+        </member>
+        <member name="P:QPdfNet.Json.AcroForm.Hasacroform">
+            <summary>
+                Whether the document has interactive forms
+            </summary>
+        </member>
+        <member name="P:QPdfNet.Json.AcroForm.NeedAppearances">
+            <summary>
+                Whether the form fields' appearance streams need to be regenerated
+            </summary>
+        </member>
+        <member name="P:QPdfNet.Json.Annotation.AnnotationFlags">
+            <summary>
+                Annotation flags from /F -- see pdf_annotation_flag_e in qpdf/Constants.h
+            </summary>
+        </member>
+        <member name="P:QPdfNet.Json.Annotation.AppearanceState">
+            <summary>
+                Appearance state -- can be used to determine value for checkboxes and radio buttons
+            </summary>
+        </member>
+        <member name="P:QPdfNet.Json.Annotation.Object">
+            <summary>
+                Reference to the annotation object
+            </summary>
+        </member>
+        <member name="T:QPdfNet.Json.Attachment">
+            <summary>
+               The attachment
+            </summary>
+        </member>
+        <member name="P:QPdfNet.Json.Attachment.FileSpec">
+            <summary>
+                Object containing the file spec
+            </summary>
+        </member>
+        <member name="P:QPdfNet.Json.Attachment.PreferredContents">
+            <summary>
+                Most preferred embedded file stream
+            </summary>
+        </member>
+        <member name="P:QPdfNet.Json.Attachment.PreferredName">
+            <summary>
+                Most preferred file name
+            </summary>
+        </member>
+        <member name="T:QPdfNet.Json.Capabilities">
+            <summary>
+                Encryption capabilities
+            </summary>
+        </member>
+        <member name="P:QPdfNet.Json.Capabilities.Accessibility">
+            <summary>
+                Allow extraction for accessibility?
+            </summary>
+        </member>
+        <member name="P:QPdfNet.Json.Capabilities.Extract">
+            <summary>
+                Allow extraction?
+            </summary>
+        </member>
+        <member name="P:QPdfNet.Json.Capabilities.ModdifyAnnotations">
+            <summary>
+                Allow modifying annotations?
+            </summary>
+        </member>
+        <member name="P:QPdfNet.Json.Capabilities.Modify">
+            <summary>
+                Allow all modifications?
+            </summary>
+        </member>
+        <member name="P:QPdfNet.Json.Capabilities.ModifyAssembly">
+            <summary>
+                Allow modifying document assembly?
+            </summary>
+        </member>
+        <member name="P:QPdfNet.Json.Capabilities.ModifyForms">
+            <summary>
+                Allow modifying forms?
+            </summary>
+        </member>
+        <member name="P:QPdfNet.Json.Capabilities.ModifyOther">
+            <summary>
+                Allow other modifications?
+            </summary>
+        </member>
+        <member name="P:QPdfNet.Json.Capabilities.PrintHigh">
+            <summary>
+                Allow high resolution printing?
+            </summary>
+        </member>
+        <member name="P:QPdfNet.Json.Capabilities.PrintLow">
+            <summary>
+                Allow low resolution printing?
+            </summary>
+        </member>
+        <member name="T:QPdfNet.Json.Document">
+            <summary>
+                The PDF document and its internal structure
+            </summary>
+        </member>
+        <member name="P:QPdfNet.Json.Document.AcroForm">
+            <summary>
+                The acro form fields
+            </summary>
+        </member>
+        <member name="P:QPdfNet.Json.Document.Attachments">
+            <summary>
+                The attachments
+            </summary>
+        </member>
+        <member name="P:QPdfNet.Json.Document.Encrypt">
+            <summary>
+                Encryption information
+            </summary>
+        </member>
+        <member name="P:QPdfNet.Json.Document.Objectinfo">
+            <summary>
+                The object information
+            </summary>
+        </member>
+        <member name="P:QPdfNet.Json.Document.Objects">
+            <summary>
+                The objects
+            </summary>
+        </member>
+        <member name="P:QPdfNet.Json.Document.Outlines">
+            <summary>
+                The outline information
+            </summary>
+        </member>
+        <member name="P:QPdfNet.Json.Document.PageLabels">
+            <summary>
+                The page labels
+            </summary>
+        </member>
+        <member name="P:QPdfNet.Json.Document.Pages">
+            <summary>
+                The pages of the document
+            </summary>
+        </member>
+        <member name="P:QPdfNet.Json.Document.Parameters">
+            <summary>
+                The parameters
+            </summary>
+        </member>
+        <member name="P:QPdfNet.Json.Document.Version">
+            <summary>
+                The version of the PDF document
+            </summary>
+        </member>
+        <member name="M:QPdfNet.Json.Document.FromJson(System.String)">
+            <summary>
+                Reads a JSON string and converts it to a Document object
+            </summary>
+            <param name="json">The JSON string</param>
+            <returns>The Document object</returns>
+        </member>
+        <member name="M:QPdfNet.Json.Document.ToJson">
+            <summary>
+                Converts the Document object to a JSON string
+            </summary>
+            <returns>The JSON string</returns>
+        </member>
+        <member name="T:QPdfNet.Json.Encrypt">
+            <summary>
+                The encryption information
+            </summary>
+        </member>
+        <member name="P:QPdfNet.Json.Encrypt.Capabilities">
+            <summary>
+                The capabilities of the encryption
+            </summary>
+        </member>
+        <member name="P:QPdfNet.Json.Encrypt.Encrypted">
+            <summary>
+                Whether the document is encrypted
+            </summary>
+        </member>
+        <member name="P:QPdfNet.Json.Encrypt.OwnerPasswordMatched">
+            <summary>
+                Whether supplied password matched owner password; always false for non-encrypted files
+            </summary>
+        </member>
+        <member name="P:QPdfNet.Json.Encrypt.Parameters">
+            <summary>
+                Encryption parameters
+            </summary>
+        </member>
+        <member name="P:QPdfNet.Json.Encrypt.UserPasswordMatched">
+            <summary>
+                Whether supplied password matched user password; always false for non-encrypted files
+            </summary>
+        </member>
+        <member name="T:QPdfNet.Json.EncryptParameters">
+            <summary>
+                The encryption parameters
+            </summary>
+        </member>
+        <member name="P:QPdfNet.Json.EncryptParameters.Bits">
+            <summary>
+                Encryption key bit length
+            </summary>
+        </member>
+        <member name="P:QPdfNet.Json.EncryptParameters.FileMethod">
+            <summary>
+                Encryption method for attachments
+            </summary>
+        </member>
+        <member name="P:QPdfNet.Json.EncryptParameters.Key">
+            <summary>
+                Encryption key; will be null unless --show-encryption-key was specified
+            </summary>
+        </member>
+        <member name="P:QPdfNet.Json.EncryptParameters.Method">
+            <summary>
+                Overall encryption method: none, mixed, RC4, AESv2, AESv3
+            </summary>
+        </member>
+        <member name="P:QPdfNet.Json.EncryptParameters.StreamMethod">
+            <summary>
+                Encryption method for streams
+            </summary>
+        </member>
+        <member name="P:QPdfNet.Json.EncryptParameters.StringMethod">
+            <summary>
+                Encryption method for string
+            </summary>
+        </member>
+        <member name="T:QPdfNet.Json.Field">
+            <summary>
+                The form fields
+            </summary>
+        </member>
+        <member name="P:QPdfNet.Json.Field.AlternativeName">
+            <summary>
+                Alternative name of field -- this is the one usually shown to users
+            </summary>
+        </member>
+        <member name="P:QPdfNet.Json.Field.Annotation">
+            <summary>
+                Reference to the annotation object
+            </summary>
+        </member>
+        <member name="P:QPdfNet.Json.Field.Choices">
+            <summary>
+                For choices fields, the list of choices presented to the user
+            </summary>
+        </member>
+        <member name="P:QPdfNet.Json.Field.DefaultValue">
+            <summary>
+                Default value of field
+            </summary>
+        </member>
+        <member name="P:QPdfNet.Json.Field.FieldFlags">
+            <summary>
+                Form field flags from /Ff -- see pdf_form_field_flag_e in qpdf/Constants.h
+            </summary>
+        </member>
+        <member name="P:QPdfNet.Json.Field.FieldType">
+            <summary>
+                Field type
+            </summary>
+        </member>
+        <member name="P:QPdfNet.Json.Field.FullName">
+            <summary>
+                Full name of field
+            </summary>
+        </member>
+        <member name="P:QPdfNet.Json.Field.IsCheckbox">
+            <summary>
+                Whether field is a checkbox
+            </summary>
+        </member>
+        <member name="P:QPdfNet.Json.Field.IsChoice">
+            <summary>
+                Whether field is a list, combo, or dropdown
+            </summary>
+        </member>
+        <member name="P:QPdfNet.Json.Field.IsRadiobutton">
+            <summary>
+                Whether field is a radio button -- buttons in a single group share a parent
+            </summary>
+        </member>
+        <member name="P:QPdfNet.Json.Field.IsText">
+            <summary>
+                Whether field is a text field
+            </summary>
+        </member>
+        <member name="P:QPdfNet.Json.Field.MappingName">
+            <summary>
+                Mapping name of field
+            </summary>
+        </member>
+        <member name="P:QPdfNet.Json.Field.Object">
+            <summary>
+                Reference to this form field
+            </summary>
+        </member>
+        <member name="P:QPdfNet.Json.Field.PagePosFrom1">
+            <summary>
+                Position of containing page numbered from 1
+            </summary>
+        </member>
+        <member name="P:QPdfNet.Json.Field.Parent">
+            <summary>
+                Reference to this field's parent
+            </summary>
+        </member>
+        <member name="P:QPdfNet.Json.Field.PartialName">
+            <summary>
+                Partial name of field
+            </summary>
+        </member>
+        <member name="P:QPdfNet.Json.Field.Quadding">
+            <summary>
+                Field quadding -- number indicating left, center, or right
+            </summary>
+        </member>
+        <member name="P:QPdfNet.Json.Field.Value">
+            <summary>
+                Value of field
+            </summary>
+        </member>
+        <member name="T:QPdfNet.Json.Image">
+            <summary>
+               The image data
+            </summary>
+        </member>
+        <member name="P:QPdfNet.Json.Image.Bitspercomponent">
+            <summary>
+                Bits per component
+            </summary>
+        </member>
+        <member name="P:QPdfNet.Json.Image.Colorspace">
+            <summary>
+                Color space
+            </summary>
+        </member>
+        <member name="P:QPdfNet.Json.Image.Decodeparms">
+            <summary>
+                Decode parameters for image data
+            </summary>
+        </member>
+        <member name="P:QPdfNet.Json.Image.Filter">
+            <summary>
+                Filters applied to image data
+            </summary>
+        </member>
+        <member name="P:QPdfNet.Json.Image.Filterable">
+            <summary>
+                Whether image data can be decoded using the decode level qpdf was invoked with
+            </summary>
+        </member>
+        <member name="P:QPdfNet.Json.Image.Height">
+            <summary>
+                Image height
+            </summary>
+        </member>
+        <member name="P:QPdfNet.Json.Image.Width">
+            <summary>
+                Image width
+            </summary>
+        </member>
+        <member name="P:QPdfNet.Json.Image.Name">
+            <summary>
+                Name of image in XObject table
+            </summary>
+        </member>
+        <member name="P:QPdfNet.Json.Image.Object">
+            <summary>
+                Reference to image stream
+            </summary>
+        </member>
+        <member name="T:QPdfNet.Json.Outline">
+            <summary>
+                The outline
+            </summary>
+        </member>
+        <member name="P:QPdfNet.Json.Outline.Dest">
+            <summary>
+                Outline destination dictionary
+            </summary>
+        </member>
+        <member name="T:QPdfNet.Json.Page">
+            <summary>
+                The page data
+            </summary>
+        </member>
+        <member name="P:QPdfNet.Json.Page.Contents">
+            <summary>
+                Reference to each content stream
+            </summary>
+        </member>
+        <member name="P:QPdfNet.Json.Page.Images">
+            <summary>
+                List of images on the page
+            </summary>
+        </member>
+        <member name="P:QPdfNet.Json.Page.Label">
+            <summary>
+                Page label dictionary, or null if none
+            </summary>
+        </member>
+        <member name="P:QPdfNet.Json.Page.Object">
+            <summary>
+                Reference to original page object
+            </summary>
+        </member>
+        <member name="P:QPdfNet.Json.Page.Outlines">
+            <summary>
+                Outlines that target this page
+            </summary>
+        </member>
+        <member name="P:QPdfNet.Json.Page.PagePosFrom1">
+            <summary>
+                Position of page in document numbering from 1
+            </summary>
+        </member>
+        <member name="T:QPdfNet.Json.PageLabel">
+            <summary>
+                The page label
+            </summary>
+        </member>
+        <member name="P:QPdfNet.Json.PageLabel.Index">
+            <summary>
+                Starting page position starting from zero 
+            </summary>
+        </member>
+        <member name="P:QPdfNet.Json.PageLabel.Label">
+            <summary>
+                Page label dictionary
+            </summary>
+        </member>
+        <member name="T:QPdfNet.Json.PageOutline">
+            <summary>
+                The page outline object
+            </summary>
+        </member>
+        <member name="P:QPdfNet.Json.PageOutline.Dest">
+            <summary>
+                Outline destination dictionary
+            </summary>
+        </member>
+        <member name="P:QPdfNet.Json.PageOutline.Object">
+            <summary>
+                Reference to outline that targets this page
+            </summary>
+        </member>
+        <member name="P:QPdfNet.Json.PageOutline.Title">
+            <summary>
+                Outline title
+            </summary>
+        </member>
+        <member name="T:QPdfNet.Json.Parameters">
+            <summary>
+                Parameters
+            </summary>
+        </member>
+        <member name="P:QPdfNet.Json.Parameters.DecodeLevel">
+            <summary>
+                Decode level used to determine stream filterability
+            </summary>
+        </member>
+        <member name="T:QPdfNet.Json.Stream">
+            <summary>
+                The stream object
+            </summary>
+        </member>
+        <member name="P:QPdfNet.Json.Stream.Filter">
+            <summary>
+                If stream, its filters, otherwise null
+            </summary>
+        </member>
+        <member name="P:QPdfNet.Json.Stream.Is">
+            <summary>
+                Whether the object is a stream
+            </summary>
+        </member>
+        <member name="P:QPdfNet.Json.Stream.Length">
+            <summary>
+                If stream, its length, otherwise null
             </summary>
         </member>
         <member name="T:QPdfNet.Loggers.Console">
