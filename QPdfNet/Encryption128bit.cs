@@ -24,7 +24,9 @@
 // THE SOFTWARE.
 //
 
+using Newtonsoft.Json;
 using QPdfNet.Enums;
+using QPdfNet.Loggers;
 
 namespace QPdfNet
 {
@@ -33,6 +35,11 @@ namespace QPdfNet
     /// </summary>
     public class Encryption128Bit : Encryption256Bit
     {
+        #region Fields
+        [JsonProperty("useAes")] private string _useAes;
+        #endregion
+
+        #region Constructor
         /// <summary>
         ///      Encrypt the PDF with 128 bit encryption
         /// </summary>
@@ -45,6 +52,7 @@ namespace QPdfNet
         /// <param name="modify">Control <see cref="Enums.Modify"/> access by level</param>
         /// <param name="print">Control printing access</param>
         /// <param name="cleartextMetaData">Prevent encryption of metadata</param>
+        /// <param name="useAes">Use AES instead of RC4 encryption</param>
         public Encryption128Bit(
             bool accessibility = true,
             bool annotate = true,
@@ -54,7 +62,8 @@ namespace QPdfNet
             bool modifyOther = true,
             Modify modify = Modify.All,
             Print print = Print.Full,
-            bool cleartextMetaData = false) :
+            bool cleartextMetaData = false,
+            bool useAes = false) :
             base(
                 accessibility,
                 annotate,
@@ -66,7 +75,10 @@ namespace QPdfNet
                 print, 
                 cleartextMetaData)
         {
+            Logger.LogInformation($"128-bit encryption is using {(useAes ? "AES" : "RC4")} encryption");
 
+            _useAes = useAes ? "y" : "n";
         }
+        #endregion
     }
 }
