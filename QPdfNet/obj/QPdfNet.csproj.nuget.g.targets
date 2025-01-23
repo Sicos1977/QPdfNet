@@ -1,11 +1,11 @@
 ﻿<?xml version="1.0" encoding="utf-8" standalone="no"?>
 <Project ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ImportGroup Condition=" '$(TargetFramework)' == 'net462' AND '$(ExcludeRestorePackageImports)' != 'true' ">
-    <Import Project="$(NuGetPackageRoot)microsoft.extensions.options\9.0.0\buildTransitive\net462\Microsoft.Extensions.Options.targets" Condition="Exists('$(NuGetPackageRoot)microsoft.extensions.options\9.0.0\buildTransitive\net462\Microsoft.Extensions.Options.targets')" />
-    <Import Project="$(NuGetPackageRoot)microsoft.extensions.logging.abstractions\9.0.0\buildTransitive\net462\Microsoft.Extensions.Logging.Abstractions.targets" Condition="Exists('$(NuGetPackageRoot)microsoft.extensions.logging.abstractions\9.0.0\buildTransitive\net462\Microsoft.Extensions.Logging.Abstractions.targets')" />
+    <Import Project="$(NuGetPackageRoot)microsoft.extensions.options\9.0.1\buildTransitive\net462\Microsoft.Extensions.Options.targets" Condition="Exists('$(NuGetPackageRoot)microsoft.extensions.options\9.0.1\buildTransitive\net462\Microsoft.Extensions.Options.targets')" />
+    <Import Project="$(NuGetPackageRoot)microsoft.extensions.logging.abstractions\9.0.1\buildTransitive\net462\Microsoft.Extensions.Logging.Abstractions.targets" Condition="Exists('$(NuGetPackageRoot)microsoft.extensions.logging.abstractions\9.0.1\buildTransitive\net462\Microsoft.Extensions.Logging.Abstractions.targets')" />
   </ImportGroup>
   <ImportGroup Condition=" '$(TargetFramework)' == 'netstandard2.1' AND '$(ExcludeRestorePackageImports)' != 'true' ">
-    <Import Project="$(NuGetPackageRoot)microsoft.extensions.options\9.0.0\buildTransitive\netstandard2.0\Microsoft.Extensions.Options.targets" Condition="Exists('$(NuGetPackageRoot)microsoft.extensions.options\9.0.0\buildTransitive\netstandard2.0\Microsoft.Extensions.Options.targets')" />
-    <Import Project="$(NuGetPackageRoot)microsoft.extensions.logging.abstractions\9.0.0\buildTransitive\netstandard2.0\Microsoft.Extensions.Logging.Abstractions.targets" Condition="Exists('$(NuGetPackageRoot)microsoft.extensions.logging.abstractions\9.0.0\buildTransitive\netstandard2.0\Microsoft.Extensions.Logging.Abstractions.targets')" />
+    <Import Project="$(NuGetPackageRoot)microsoft.extensions.options\9.0.1\buildTransitive\netstandard2.0\Microsoft.Extensions.Options.targets" Condition="Exists('$(NuGetPackageRoot)microsoft.extensions.options\9.0.1\buildTransitive\netstandard2.0\Microsoft.Extensions.Options.targets')" />
+    <Import Project="$(NuGetPackageRoot)microsoft.extensions.logging.abstractions\9.0.1\buildTransitive\netstandard2.0\Microsoft.Extensions.Logging.Abstractions.targets" Condition="Exists('$(NuGetPackageRoot)microsoft.extensions.logging.abstractions\9.0.1\buildTransitive\netstandard2.0\Microsoft.Extensions.Logging.Abstractions.targets')" />
   </ImportGroup>
 </Project>

@@ -2,7 +2,7 @@
   "version": 3,
   "targets": {
     "net8.0": {
-      "coverlet.collector/6.0.2": {
+      "coverlet.collector/6.0.4": {
         "type": "package",
         "build": {
           "build/netstandard2.0/coverlet.collector.targets": {}
@@ -37,10 +37,10 @@
           "build/netstandard2.0/Microsoft.CodeCoverage.targets": {}
         }
       },
-      "Microsoft.Extensions.DependencyInjection/9.0.0": {
+      "Microsoft.Extensions.DependencyInjection/9.0.1": {
         "type": "package",
         "dependencies": {
-          "Microsoft.Extensions.DependencyInjection.Abstractions": "9.0.0"
+          "Microsoft.Extensions.DependencyInjection.Abstractions": "9.0.1"
         },
         "compile": {
           "lib/net8.0/Microsoft.Extensions.DependencyInjection.dll": {
@@ -56,7 +56,7 @@
           "buildTransitive/net8.0/_._": {}
         }
       },
-      "Microsoft.Extensions.DependencyInjection.Abstractions/9.0.0": {
+      "Microsoft.Extensions.DependencyInjection.Abstractions/9.0.1": {
         "type": "package",
         "compile": {
           "lib/net8.0/Microsoft.Extensions.DependencyInjection.Abstractions.dll": {
@@ -72,12 +72,12 @@
           "buildTransitive/net8.0/_._": {}
         }
       },
-      "Microsoft.Extensions.Logging/9.0.0": {
+      "Microsoft.Extensions.Logging/9.0.1": {
         "type": "package",
         "dependencies": {
-          "Microsoft.Extensions.DependencyInjection": "9.0.0",
-          "Microsoft.Extensions.Logging.Abstractions": "9.0.0",
-          "Microsoft.Extensions.Options": "9.0.0"
+          "Microsoft.Extensions.DependencyInjection": "9.0.1",
+          "Microsoft.Extensions.Logging.Abstractions": "9.0.1",
+          "Microsoft.Extensions.Options": "9.0.1"
         },
         "compile": {
           "lib/net8.0/Microsoft.Extensions.Logging.dll": {
@@ -93,11 +93,11 @@
           "buildTransitive/net8.0/_._": {}
         }
       },
-      "Microsoft.Extensions.Logging.Abstractions/9.0.0": {
+      "Microsoft.Extensions.Logging.Abstractions/9.0.1": {
         "type": "package",
         "dependencies": {
-          "Microsoft.Extensions.DependencyInjection.Abstractions": "9.0.0",
-          "System.Diagnostics.DiagnosticSource": "9.0.0"
+          "Microsoft.Extensions.DependencyInjection.Abstractions": "9.0.1",
+          "System.Diagnostics.DiagnosticSource": "9.0.1"
         },
         "compile": {
           "lib/net8.0/Microsoft.Extensions.Logging.Abstractions.dll": {
@@ -113,11 +113,11 @@
           "buildTransitive/net8.0/Microsoft.Extensions.Logging.Abstractions.targets": {}
         }
       },
-      "Microsoft.Extensions.Options/9.0.0": {
+      "Microsoft.Extensions.Options/9.0.1": {
         "type": "package",
         "dependencies": {
-          "Microsoft.Extensions.DependencyInjection.Abstractions": "9.0.0",
-          "Microsoft.Extensions.Primitives": "9.0.0"
+          "Microsoft.Extensions.DependencyInjection.Abstractions": "9.0.1",
+          "Microsoft.Extensions.Primitives": "9.0.1"
         },
         "compile": {
           "lib/net8.0/Microsoft.Extensions.Options.dll": {
@@ -133,7 +133,7 @@
           "buildTransitive/net8.0/Microsoft.Extensions.Options.targets": {}
         }
       },
-      "Microsoft.Extensions.Primitives/9.0.0": {
+      "Microsoft.Extensions.Primitives/9.0.1": {
         "type": "package",
         "compile": {
           "lib/net8.0/Microsoft.Extensions.Primitives.dll": {
@@ -169,11 +169,11 @@
           "buildMultiTargeting/Microsoft.NET.Test.Sdk.props": {}
         }
       },
-      "Microsoft.Testing.Extensions.Telemetry/1.4.3": {
+      "Microsoft.Testing.Extensions.Telemetry/1.5.2": {
         "type": "package",
         "dependencies": {
           "Microsoft.ApplicationInsights": "2.22.0",
-          "Microsoft.Testing.Platform": "1.4.3"
+          "Microsoft.Testing.Platform": "1.5.2"
         },
         "compile": {
           "lib/net8.0/Microsoft.Testing.Extensions.Telemetry.dll": {
@@ -233,10 +233,10 @@
           "buildMultiTargeting/Microsoft.Testing.Extensions.Telemetry.props": {}
         }
       },
-      "Microsoft.Testing.Extensions.TrxReport.Abstractions/1.4.3": {
+      "Microsoft.Testing.Extensions.TrxReport.Abstractions/1.5.2": {
         "type": "package",
         "dependencies": {
-          "Microsoft.Testing.Platform": "1.4.3"
+          "Microsoft.Testing.Platform": "1.5.2"
         },
         "compile": {
           "lib/net8.0/Microsoft.Testing.Extensions.TrxReport.Abstractions.dll": {
@@ -249,14 +249,14 @@
           }
         }
       },
-      "Microsoft.Testing.Extensions.VSTestBridge/1.4.3": {
+      "Microsoft.Testing.Extensions.VSTestBridge/1.5.2": {
         "type": "package",
         "dependencies": {
           "Microsoft.ApplicationInsights": "2.22.0",
-          "Microsoft.TestPlatform.ObjectModel": "17.11.1",
-          "Microsoft.Testing.Extensions.Telemetry": "1.4.3",
-          "Microsoft.Testing.Extensions.TrxReport.Abstractions": "1.4.3",
-          "Microsoft.Testing.Platform": "1.4.3"
+          "Microsoft.TestPlatform.ObjectModel": "17.12.0",
+          "Microsoft.Testing.Extensions.Telemetry": "1.5.2",
+          "Microsoft.Testing.Extensions.TrxReport.Abstractions": "1.5.2",
+          "Microsoft.Testing.Platform": "1.5.2"
         },
         "compile": {
           "lib/net8.0/Microsoft.Testing.Extensions.VSTestBridge.dll": {
@@ -310,7 +310,7 @@
           }
         }
       },
-      "Microsoft.Testing.Platform/1.4.3": {
+      "Microsoft.Testing.Platform/1.5.2": {
         "type": "package",
         "compile": {
           "lib/net8.0/Microsoft.Testing.Platform.dll": {
@@ -370,65 +370,65 @@
           "buildMultiTargeting/Microsoft.Testing.Platform.props": {}
         }
       },
-      "Microsoft.Testing.Platform.MSBuild/1.4.3": {
+      "Microsoft.Testing.Platform.MSBuild/1.5.2": {
         "type": "package",
         "dependencies": {
-          "Microsoft.Testing.Platform": "1.4.3"
+          "Microsoft.Testing.Platform": "1.5.2"
         },
         "compile": {
-          "lib/net8.0/Microsoft.Testing.Platform.MSBuild.dll": {
+          "lib/net8.0/Microsoft.Testing.Extensions.MSBuild.dll": {
             "related": ".xml"
           }
         },
         "runtime": {
-          "lib/net8.0/Microsoft.Testing.Platform.MSBuild.dll": {
+          "lib/net8.0/Microsoft.Testing.Extensions.MSBuild.dll": {
             "related": ".xml"
           }
         },
         "resource": {
-          "lib/net8.0/cs/Microsoft.Testing.Platform.MSBuild.resources.dll": {
+          "lib/net8.0/cs/Microsoft.Testing.Extensions.MSBuild.resources.dll": {
             "locale": "cs"
           },
-          "lib/net8.0/de/Microsoft.Testing.Platform.MSBuild.resources.dll": {
+          "lib/net8.0/de/Microsoft.Testing.Extensions.MSBuild.resources.dll": {
             "locale": "de"
           },
-          "lib/net8.0/es/Microsoft.Testing.Platform.MSBuild.resources.dll": {
+          "lib/net8.0/es/Microsoft.Testing.Extensions.MSBuild.resources.dll": {
             "locale": "es"
           },
-          "lib/net8.0/fr/Microsoft.Testing.Platform.MSBuild.resources.dll": {
+          "lib/net8.0/fr/Microsoft.Testing.Extensions.MSBuild.resources.dll": {
             "locale": "fr"
           },
-          "lib/net8.0/it/Microsoft.Testing.Platform.MSBuild.resources.dll": {
+          "lib/net8.0/it/Microsoft.Testing.Extensions.MSBuild.resources.dll": {
             "locale": "it"
           },
-          "lib/net8.0/ja/Microsoft.Testing.Platform.MSBuild.resources.dll": {
+          "lib/net8.0/ja/Microsoft.Testing.Extensions.MSBuild.resources.dll": {
             "locale": "ja"
           },
-          "lib/net8.0/ko/Microsoft.Testing.Platform.MSBuild.resources.dll": {
+          "lib/net8.0/ko/Microsoft.Testing.Extensions.MSBuild.resources.dll": {
             "locale": "ko"
           },
-          "lib/net8.0/pl/Microsoft.Testing.Platform.MSBuild.resources.dll": {
+          "lib/net8.0/pl/Microsoft.Testing.Extensions.MSBuild.resources.dll": {
             "locale": "pl"
           },
-          "lib/net8.0/pt-BR/Microsoft.Testing.Platform.MSBuild.resources.dll": {
+          "lib/net8.0/pt-BR/Microsoft.Testing.Extensions.MSBuild.resources.dll": {
             "locale": "pt-BR"
           },
-          "lib/net8.0/ru/Microsoft.Testing.Platform.MSBuild.resources.dll": {
+          "lib/net8.0/ru/Microsoft.Testing.Extensions.MSBuild.resources.dll": {
             "locale": "ru"
           },
-          "lib/net8.0/tr/Microsoft.Testing.Platform.MSBuild.resources.dll": {
+          "lib/net8.0/tr/Microsoft.Testing.Extensions.MSBuild.resources.dll": {
             "locale": "tr"
           },
-          "lib/net8.0/zh-Hans/Microsoft.Testing.Platform.MSBuild.resources.dll": {
+          "lib/net8.0/zh-Hans/Microsoft.Testing.Extensions.MSBuild.resources.dll": {
             "locale": "zh-Hans"
           },
-          "lib/net8.0/zh-Hant/Microsoft.Testing.Platform.MSBuild.resources.dll": {
+          "lib/net8.0/zh-Hant/Microsoft.Testing.Extensions.MSBuild.resources.dll": {
             "locale": "zh-Hant"
           }
         },
         "build": {
-          "buildTransitive/net8.0/Microsoft.Testing.Platform.MSBuild.props": {},
-          "buildTransitive/net8.0/Microsoft.Testing.Platform.MSBuild.targets": {}
+          "buildTransitive/Microsoft.Testing.Platform.MSBuild.props": {},
+          "buildTransitive/Microsoft.Testing.Platform.MSBuild.targets": {}
         },
         "buildMultiTargeting": {
           "buildMultiTargeting/Microsoft.Testing.Platform.MSBuild.props": {},
@@ -684,19 +684,25 @@
           "build/netcoreapp3.1/Microsoft.TestPlatform.TestHost.props": {}
         }
       },
-      "MSTest.TestAdapter/3.6.3": {
+      "MSTest.Analyzers/3.7.2": {
+        "type": "package"
+      },
+      "MSTest.TestAdapter/3.7.2": {
         "type": "package",
         "dependencies": {
-          "Microsoft.Testing.Extensions.VSTestBridge": "1.4.3",
-          "Microsoft.Testing.Platform.MSBuild": "1.4.3"
+          "Microsoft.Testing.Extensions.VSTestBridge": "1.5.2",
+          "Microsoft.Testing.Platform.MSBuild": "1.5.2"
         },
         "build": {
           "build/net8.0/MSTest.TestAdapter.props": {},
           "build/net8.0/MSTest.TestAdapter.targets": {}
         }
       },
-      "MSTest.TestFramework/3.6.3": {
+      "MSTest.TestFramework/3.7.2": {
         "type": "package",
+        "dependencies": {
+          "MSTest.Analyzers": "3.7.2"
+        },
         "compile": {
           "lib/net8.0/Microsoft.VisualStudio.TestPlatform.TestFramework.dll": {
             "related": ".xml"
@@ -765,7 +771,7 @@
           }
         }
       },
-      "System.Diagnostics.DiagnosticSource/9.0.0": {
+      "System.Diagnostics.DiagnosticSource/9.0.1": {
         "type": "package",
         "compile": {
           "lib/net8.0/System.Diagnostics.DiagnosticSource.dll": {
@@ -805,7 +811,7 @@
         "type": "project",
         "framework": ".NETStandard,Version=v2.1",
         "dependencies": {
-          "Microsoft.Extensions.Logging": "9.0.0",
+          "Microsoft.Extensions.Logging": "9.0.1",
           "Newtonsoft.Json": "13.0.3"
         },
         "compile": {
@@ -818,10 +824,10 @@
     }
   },
   "libraries": {
-    "coverlet.collector/6.0.2": {
-      "sha512": "bJShQ6uWRTQ100ZeyiMqcFlhP7WJ+bCuabUs885dJiBEzMsJMSFr7BOyeCw4rgvQokteGi5rKQTlkhfQPUXg2A==",
+    "coverlet.collector/6.0.4": {
+      "sha512": "lkhqpF8Pu2Y7IiN7OntbsTtdbpR1syMsm2F3IgX6ootA4ffRqWL5jF7XipHuZQTdVuWG/gVAAcf8mjk8Tz0xPg==",
       "type": "package",
-      "path": "coverlet.collector/6.0.2",
+      "path": "coverlet.collector/6.0.4",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
@@ -884,7 +890,7 @@
         "build/netstandard2.0/zh-Hant/Microsoft.TestPlatform.CoreUtilities.resources.dll",
         "build/netstandard2.0/zh-Hant/Microsoft.VisualStudio.TestPlatform.ObjectModel.resources.dll",
         "coverlet-icon.png",
-        "coverlet.collector.6.0.2.nupkg.sha512",
+        "coverlet.collector.6.0.4.nupkg.sha512",
         "coverlet.collector.nuspec"
       ]
     },
@@ -975,10 +981,10 @@
         "microsoft.codecoverage.nuspec"
       ]
     },
-    "Microsoft.Extensions.DependencyInjection/9.0.0": {
-      "sha512": "MCPrg7v3QgNMr0vX4vzRXvkNGgLg8vKWX0nKCWUxu2uPyMsaRgiRc1tHBnbTcfJMhMKj2slE/j2M9oGkd25DNw==",
+    "Microsoft.Extensions.DependencyInjection/9.0.1": {
+      "sha512": "qZI42ASAe3hr2zMSA6UjM92pO1LeDq5DcwkgSowXXPY8I56M76pEKrnmsKKbxagAf39AJxkH2DY4sb72ixyOrg==",
       "type": "package",
-      "path": "microsoft.extensions.dependencyinjection/9.0.0",
+      "path": "microsoft.extensions.dependencyinjection/9.0.1",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
@@ -1000,15 +1006,15 @@
         "lib/netstandard2.0/Microsoft.Extensions.DependencyInjection.xml",
         "lib/netstandard2.1/Microsoft.Extensions.DependencyInjection.dll",
         "lib/netstandard2.1/Microsoft.Extensions.DependencyInjection.xml",
-        "microsoft.extensions.dependencyinjection.9.0.0.nupkg.sha512",
+        "microsoft.extensions.dependencyinjection.9.0.1.nupkg.sha512",
         "microsoft.extensions.dependencyinjection.nuspec",
         "useSharedDesignerContext.txt"
       ]
     },
-    "Microsoft.Extensions.DependencyInjection.Abstractions/9.0.0": {
-      "sha512": "+6f2qv2a3dLwd5w6JanPIPs47CxRbnk+ZocMJUhv9NxP88VlOcJYZs9jY+MYSjxvady08bUZn6qgiNh7DadGgg==",
+    "Microsoft.Extensions.DependencyInjection.Abstractions/9.0.1": {
+      "sha512": "Tr74eP0oQ3AyC24ch17N8PuEkrPbD0JqIfENCYqmgKYNOmL8wQKzLJu3ObxTUDrjnn4rHoR1qKa37/eQyHmCDA==",
       "type": "package",
-      "path": "microsoft.extensions.dependencyinjection.abstractions/9.0.0",
+      "path": "microsoft.extensions.dependencyinjection.abstractions/9.0.1",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
@@ -1030,15 +1036,15 @@
         "lib/netstandard2.0/Microsoft.Extensions.DependencyInjection.Abstractions.xml",
         "lib/netstandard2.1/Microsoft.Extensions.DependencyInjection.Abstractions.dll",
         "lib/netstandard2.1/Microsoft.Extensions.DependencyInjection.Abstractions.xml",
-        "microsoft.extensions.dependencyinjection.abstractions.9.0.0.nupkg.sha512",
+        "microsoft.extensions.dependencyinjection.abstractions.9.0.1.nupkg.sha512",
         "microsoft.extensions.dependencyinjection.abstractions.nuspec",
         "useSharedDesignerContext.txt"
       ]
     },
-    "Microsoft.Extensions.Logging/9.0.0": {
-      "sha512": "crjWyORoug0kK7RSNJBTeSE6VX8IQgLf3nUpTB9m62bPXp/tzbnOsnbe8TXEG0AASNaKZddnpHKw7fET8E++Pg==",
+    "Microsoft.Extensions.Logging/9.0.1": {
+      "sha512": "E/k5r7S44DOW+08xQPnNbO8DKAQHhkspDboTThNJ6Z3/QBb4LC6gStNWzVmy3IvW7sUD+iJKf4fj0xEkqE7vnQ==",
       "type": "package",
-      "path": "microsoft.extensions.logging/9.0.0",
+      "path": "microsoft.extensions.logging/9.0.1",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
@@ -1060,15 +1066,15 @@
         "lib/netstandard2.0/Microsoft.Extensions.Logging.xml",
         "lib/netstandard2.1/Microsoft.Extensions.Logging.dll",
         "lib/netstandard2.1/Microsoft.Extensions.Logging.xml",
-        "microsoft.extensions.logging.9.0.0.nupkg.sha512",
+        "microsoft.extensions.logging.9.0.1.nupkg.sha512",
         "microsoft.extensions.logging.nuspec",
         "useSharedDesignerContext.txt"
       ]
     },
-    "Microsoft.Extensions.Logging.Abstractions/9.0.0": {
-      "sha512": "g0UfujELzlLbHoVG8kPKVBaW470Ewi+jnptGS9KUi6jcb+k2StujtK3m26DFSGGwQ/+bVgZfsWqNzlP6YOejvw==",
+    "Microsoft.Extensions.Logging.Abstractions/9.0.1": {
+      "sha512": "w2gUqXN/jNIuvqYwX3lbXagsizVNXYyt6LlF57+tMve4JYCEgCMMAjRce6uKcDASJgpMbErRT1PfHy2OhbkqEA==",
       "type": "package",
-      "path": "microsoft.extensions.logging.abstractions/9.0.0",
+      "path": "microsoft.extensions.logging.abstractions/9.0.1",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
@@ -1131,15 +1137,15 @@
         "lib/net9.0/Microsoft.Extensions.Logging.Abstractions.xml",
         "lib/netstandard2.0/Microsoft.Extensions.Logging.Abstractions.dll",
         "lib/netstandard2.0/Microsoft.Extensions.Logging.Abstractions.xml",
-        "microsoft.extensions.logging.abstractions.9.0.0.nupkg.sha512",
+        "microsoft.extensions.logging.abstractions.9.0.1.nupkg.sha512",
         "microsoft.extensions.logging.abstractions.nuspec",
         "useSharedDesignerContext.txt"
       ]
     },
-    "Microsoft.Extensions.Options/9.0.0": {
-      "sha512": "y2146b3jrPI3Q0lokKXdKLpmXqakYbDIPDV6r3M8SqvSf45WwOTzkyfDpxnZXJsJQEpAsAqjUq5Pu8RCJMjubg==",
+    "Microsoft.Extensions.Options/9.0.1": {
+      "sha512": "nggoNKnWcsBIAaOWHA+53XZWrslC7aGeok+aR+epDPRy7HI7GwMnGZE8yEsL2Onw7kMOHVHwKcsDls1INkNUJQ==",
       "type": "package",
-      "path": "microsoft.extensions.options/9.0.0",
+      "path": "microsoft.extensions.options/9.0.1",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
@@ -1176,15 +1182,15 @@
         "lib/netstandard2.0/Microsoft.Extensions.Options.xml",
         "lib/netstandard2.1/Microsoft.Extensions.Options.dll",
         "lib/netstandard2.1/Microsoft.Extensions.Options.xml",
-        "microsoft.extensions.options.9.0.0.nupkg.sha512",
+        "microsoft.extensions.options.9.0.1.nupkg.sha512",
         "microsoft.extensions.options.nuspec",
         "useSharedDesignerContext.txt"
       ]
     },
-    "Microsoft.Extensions.Primitives/9.0.0": {
-      "sha512": "N3qEBzmLMYiASUlKxxFIISP4AiwuPTHF5uCh+2CWSwwzAJiIYx0kBJsS30cp1nvhSySFAVi30jecD307jV+8Kg==",
+    "Microsoft.Extensions.Primitives/9.0.1": {
+      "sha512": "bHtTesA4lrSGD1ZUaMIx6frU3wyy0vYtTa/hM6gGQu5QNrydObv8T5COiGUWsisflAfmsaFOe9Xvw5NSO99z0g==",
       "type": "package",
-      "path": "microsoft.extensions.primitives/9.0.0",
+      "path": "microsoft.extensions.primitives/9.0.1",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
@@ -1204,7 +1210,7 @@
         "lib/net9.0/Microsoft.Extensions.Primitives.xml",
         "lib/netstandard2.0/Microsoft.Extensions.Primitives.dll",
         "lib/netstandard2.0/Microsoft.Extensions.Primitives.xml",
-        "microsoft.extensions.primitives.9.0.0.nupkg.sha512",
+        "microsoft.extensions.primitives.9.0.1.nupkg.sha512",
         "microsoft.extensions.primitives.nuspec",
         "useSharedDesignerContext.txt"
       ]
@@ -1231,10 +1237,10 @@
         "microsoft.net.test.sdk.nuspec"
       ]
     },
-    "Microsoft.Testing.Extensions.Telemetry/1.4.3": {
-      "sha512": "dh8jnqWikxQXJ4kWy8B82PtSAlQCnvDKh1128arDmSW5OU5xWA84HwruV3TanXi3ZjIHn1wWFCgtMOhcDNwBow==",
+    "Microsoft.Testing.Extensions.Telemetry/1.5.2": {
+      "sha512": "13K4Xs7CCRs9ZKzTZSdReuSwOkVUVPBskQmGw6s+027DEM4N4DbDl9Jq9p+zC+IxGKT5C66ZcKRd9X91pVPt5g==",
       "type": "package",
-      "path": "microsoft.testing.extensions.telemetry/1.4.3",
+      "path": "microsoft.testing.extensions.telemetry/1.5.2",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
@@ -1243,11 +1249,13 @@
         "build/net6.0/Microsoft.Testing.Extensions.Telemetry.props",
         "build/net7.0/Microsoft.Testing.Extensions.Telemetry.props",
         "build/net8.0/Microsoft.Testing.Extensions.Telemetry.props",
+        "build/net9.0/Microsoft.Testing.Extensions.Telemetry.props",
         "build/netstandard2.0/Microsoft.Testing.Extensions.Telemetry.props",
         "buildMultiTargeting/Microsoft.Testing.Extensions.Telemetry.props",
         "buildTransitive/net6.0/Microsoft.Testing.Extensions.Telemetry.props",
         "buildTransitive/net7.0/Microsoft.Testing.Extensions.Telemetry.props",
         "buildTransitive/net8.0/Microsoft.Testing.Extensions.Telemetry.props",
+        "buildTransitive/net9.0/Microsoft.Testing.Extensions.Telemetry.props",
         "buildTransitive/netstandard2.0/Microsoft.Testing.Extensions.Telemetry.props",
         "lib/net6.0/Microsoft.Testing.Extensions.Telemetry.dll",
         "lib/net6.0/Microsoft.Testing.Extensions.Telemetry.xml",
@@ -1294,6 +1302,21 @@
         "lib/net8.0/tr/Microsoft.Testing.Extensions.Telemetry.resources.dll",
         "lib/net8.0/zh-Hans/Microsoft.Testing.Extensions.Telemetry.resources.dll",
         "lib/net8.0/zh-Hant/Microsoft.Testing.Extensions.Telemetry.resources.dll",
+        "lib/net9.0/Microsoft.Testing.Extensions.Telemetry.dll",
+        "lib/net9.0/Microsoft.Testing.Extensions.Telemetry.xml",
+        "lib/net9.0/cs/Microsoft.Testing.Extensions.Telemetry.resources.dll",
+        "lib/net9.0/de/Microsoft.Testing.Extensions.Telemetry.resources.dll",
+        "lib/net9.0/es/Microsoft.Testing.Extensions.Telemetry.resources.dll",
+        "lib/net9.0/fr/Microsoft.Testing.Extensions.Telemetry.resources.dll",
+        "lib/net9.0/it/Microsoft.Testing.Extensions.Telemetry.resources.dll",
+        "lib/net9.0/ja/Microsoft.Testing.Extensions.Telemetry.resources.dll",
+        "lib/net9.0/ko/Microsoft.Testing.Extensions.Telemetry.resources.dll",
+        "lib/net9.0/pl/Microsoft.Testing.Extensions.Telemetry.resources.dll",
+        "lib/net9.0/pt-BR/Microsoft.Testing.Extensions.Telemetry.resources.dll",
+        "lib/net9.0/ru/Microsoft.Testing.Extensions.Telemetry.resources.dll",
+        "lib/net9.0/tr/Microsoft.Testing.Extensions.Telemetry.resources.dll",
+        "lib/net9.0/zh-Hans/Microsoft.Testing.Extensions.Telemetry.resources.dll",
+        "lib/net9.0/zh-Hant/Microsoft.Testing.Extensions.Telemetry.resources.dll",
         "lib/netstandard2.0/Microsoft.Testing.Extensions.Telemetry.dll",
         "lib/netstandard2.0/Microsoft.Testing.Extensions.Telemetry.xml",
         "lib/netstandard2.0/cs/Microsoft.Testing.Extensions.Telemetry.resources.dll",
@@ -1309,14 +1332,14 @@
         "lib/netstandard2.0/tr/Microsoft.Testing.Extensions.Telemetry.resources.dll",
         "lib/netstandard2.0/zh-Hans/Microsoft.Testing.Extensions.Telemetry.resources.dll",
         "lib/netstandard2.0/zh-Hant/Microsoft.Testing.Extensions.Telemetry.resources.dll",
-        "microsoft.testing.extensions.telemetry.1.4.3.nupkg.sha512",
+        "microsoft.testing.extensions.telemetry.1.5.2.nupkg.sha512",
         "microsoft.testing.extensions.telemetry.nuspec"
       ]
     },
-    "Microsoft.Testing.Extensions.TrxReport.Abstractions/1.4.3": {
-      "sha512": "16sWznD6ZMok/zgW+vrO6zerCFMD9N+ey9bi1iV/e9xxsQb4V4y/aW6cY/Y7E9jA7pc+aZ6ffZby43yxQOoYZA==",
+    "Microsoft.Testing.Extensions.TrxReport.Abstractions/1.5.2": {
+      "sha512": "kaW+BhcsX9NxzF8ty3nyvdux+MNWclaunoE4+mjOrYfIIinl9SGTlM1hOeMofyWPddLzlj3CnZJMuRptCiDZ9w==",
       "type": "package",
-      "path": "microsoft.testing.extensions.trxreport.abstractions/1.4.3",
+      "path": "microsoft.testing.extensions.trxreport.abstractions/1.5.2",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
@@ -1328,16 +1351,18 @@
         "lib/net7.0/Microsoft.Testing.Extensions.TrxReport.Abstractions.xml",
         "lib/net8.0/Microsoft.Testing.Extensions.TrxReport.Abstractions.dll",
         "lib/net8.0/Microsoft.Testing.Extensions.TrxReport.Abstractions.xml",
+        "lib/net9.0/Microsoft.Testing.Extensions.TrxReport.Abstractions.dll",
+        "lib/net9.0/Microsoft.Testing.Extensions.TrxReport.Abstractions.xml",
         "lib/netstandard2.0/Microsoft.Testing.Extensions.TrxReport.Abstractions.dll",
         "lib/netstandard2.0/Microsoft.Testing.Extensions.TrxReport.Abstractions.xml",
-        "microsoft.testing.extensions.trxreport.abstractions.1.4.3.nupkg.sha512",
+        "microsoft.testing.extensions.trxreport.abstractions.1.5.2.nupkg.sha512",
         "microsoft.testing.extensions.trxreport.abstractions.nuspec"
       ]
     },
-    "Microsoft.Testing.Extensions.VSTestBridge/1.4.3": {
-      "sha512": "xZ6oyNYh2aM5Wb+HJAy1fj2C4CNRVhINXHCjlWs/2C8hEIpdqVSpP3y6HWUN40KpFqyGD4myHGR1Rflm28UpcQ==",
+    "Microsoft.Testing.Extensions.VSTestBridge/1.5.2": {
+      "sha512": "VUyHa+Md93xwrdedTHYy0TQt/TPJAHUhiJxvs7j4TJY5bE0DgSfubNd/in48j008oGyUiNUDrJx9EiFaLqBAsg==",
       "type": "package",
-      "path": "microsoft.testing.extensions.vstestbridge/1.4.3",
+      "path": "microsoft.testing.extensions.vstestbridge/1.5.2",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
@@ -1388,6 +1413,21 @@
         "lib/net8.0/tr/Microsoft.Testing.Extensions.VSTestBridge.resources.dll",
         "lib/net8.0/zh-Hans/Microsoft.Testing.Extensions.VSTestBridge.resources.dll",
         "lib/net8.0/zh-Hant/Microsoft.Testing.Extensions.VSTestBridge.resources.dll",
+        "lib/net9.0/Microsoft.Testing.Extensions.VSTestBridge.dll",
+        "lib/net9.0/Microsoft.Testing.Extensions.VSTestBridge.xml",
+        "lib/net9.0/cs/Microsoft.Testing.Extensions.VSTestBridge.resources.dll",
+        "lib/net9.0/de/Microsoft.Testing.Extensions.VSTestBridge.resources.dll",
+        "lib/net9.0/es/Microsoft.Testing.Extensions.VSTestBridge.resources.dll",
+        "lib/net9.0/fr/Microsoft.Testing.Extensions.VSTestBridge.resources.dll",
+        "lib/net9.0/it/Microsoft.Testing.Extensions.VSTestBridge.resources.dll",
+        "lib/net9.0/ja/Microsoft.Testing.Extensions.VSTestBridge.resources.dll",
+        "lib/net9.0/ko/Microsoft.Testing.Extensions.VSTestBridge.resources.dll",
+        "lib/net9.0/pl/Microsoft.Testing.Extensions.VSTestBridge.resources.dll",
+        "lib/net9.0/pt-BR/Microsoft.Testing.Extensions.VSTestBridge.resources.dll",
+        "lib/net9.0/ru/Microsoft.Testing.Extensions.VSTestBridge.resources.dll",
+        "lib/net9.0/tr/Microsoft.Testing.Extensions.VSTestBridge.resources.dll",
+        "lib/net9.0/zh-Hans/Microsoft.Testing.Extensions.VSTestBridge.resources.dll",
+        "lib/net9.0/zh-Hant/Microsoft.Testing.Extensions.VSTestBridge.resources.dll",
         "lib/netstandard2.0/Microsoft.Testing.Extensions.VSTestBridge.dll",
         "lib/netstandard2.0/Microsoft.Testing.Extensions.VSTestBridge.xml",
         "lib/netstandard2.0/cs/Microsoft.Testing.Extensions.VSTestBridge.resources.dll",
@@ -1403,14 +1443,14 @@
         "lib/netstandard2.0/tr/Microsoft.Testing.Extensions.VSTestBridge.resources.dll",
         "lib/netstandard2.0/zh-Hans/Microsoft.Testing.Extensions.VSTestBridge.resources.dll",
         "lib/netstandard2.0/zh-Hant/Microsoft.Testing.Extensions.VSTestBridge.resources.dll",
-        "microsoft.testing.extensions.vstestbridge.1.4.3.nupkg.sha512",
+        "microsoft.testing.extensions.vstestbridge.1.5.2.nupkg.sha512",
         "microsoft.testing.extensions.vstestbridge.nuspec"
       ]
     },
-    "Microsoft.Testing.Platform/1.4.3": {
-      "sha512": "NedIbwl1T7+ZMeg7gwk0Db8/RFLf0siyVpeTcRMMOle6Xl/ujaYOM4Aduo8rEfVqNj3kcQ7blegpyT3dHi+0PA==",
+    "Microsoft.Testing.Platform/1.5.2": {
+      "sha512": "IcBrO3WAs+TK622oGSuaHJAn2Ru8b7o4kWjAbaiy2v4302x5qhYphwQ3BvKMK7e7P0fcSyQwq1IfYmrlplgq0w==",
       "type": "package",
-      "path": "microsoft.testing.platform/1.4.3",
+      "path": "microsoft.testing.platform/1.5.2",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
@@ -1419,11 +1459,13 @@
         "build/net6.0/Microsoft.Testing.Platform.props",
         "build/net7.0/Microsoft.Testing.Platform.props",
         "build/net8.0/Microsoft.Testing.Platform.props",
+        "build/net9.0/Microsoft.Testing.Platform.props",
         "build/netstandard2.0/Microsoft.Testing.Platform.props",
         "buildMultiTargeting/Microsoft.Testing.Platform.props",
         "buildTransitive/net6.0/Microsoft.Testing.Platform.props",
         "buildTransitive/net7.0/Microsoft.Testing.Platform.props",
         "buildTransitive/net8.0/Microsoft.Testing.Platform.props",
+        "buildTransitive/net9.0/Microsoft.Testing.Platform.props",
         "buildTransitive/netstandard2.0/Microsoft.Testing.Platform.props",
         "lib/net6.0/Microsoft.Testing.Platform.dll",
         "lib/net6.0/Microsoft.Testing.Platform.xml",
@@ -1470,6 +1512,21 @@
         "lib/net8.0/tr/Microsoft.Testing.Platform.resources.dll",
         "lib/net8.0/zh-Hans/Microsoft.Testing.Platform.resources.dll",
         "lib/net8.0/zh-Hant/Microsoft.Testing.Platform.resources.dll",
+        "lib/net9.0/Microsoft.Testing.Platform.dll",
+        "lib/net9.0/Microsoft.Testing.Platform.xml",
+        "lib/net9.0/cs/Microsoft.Testing.Platform.resources.dll",
+        "lib/net9.0/de/Microsoft.Testing.Platform.resources.dll",
+        "lib/net9.0/es/Microsoft.Testing.Platform.resources.dll",
+        "lib/net9.0/fr/Microsoft.Testing.Platform.resources.dll",
+        "lib/net9.0/it/Microsoft.Testing.Platform.resources.dll",
+        "lib/net9.0/ja/Microsoft.Testing.Platform.resources.dll",
+        "lib/net9.0/ko/Microsoft.Testing.Platform.resources.dll",
+        "lib/net9.0/pl/Microsoft.Testing.Platform.resources.dll",
+        "lib/net9.0/pt-BR/Microsoft.Testing.Platform.resources.dll",
+        "lib/net9.0/ru/Microsoft.Testing.Platform.resources.dll",
+        "lib/net9.0/tr/Microsoft.Testing.Platform.resources.dll",
+        "lib/net9.0/zh-Hans/Microsoft.Testing.Platform.resources.dll",
+        "lib/net9.0/zh-Hant/Microsoft.Testing.Platform.resources.dll",
         "lib/netstandard2.0/Microsoft.Testing.Platform.dll",
         "lib/netstandard2.0/Microsoft.Testing.Platform.xml",
         "lib/netstandard2.0/cs/Microsoft.Testing.Platform.resources.dll",
@@ -1485,101 +1542,132 @@
         "lib/netstandard2.0/tr/Microsoft.Testing.Platform.resources.dll",
         "lib/netstandard2.0/zh-Hans/Microsoft.Testing.Platform.resources.dll",
         "lib/netstandard2.0/zh-Hant/Microsoft.Testing.Platform.resources.dll",
-        "microsoft.testing.platform.1.4.3.nupkg.sha512",
+        "microsoft.testing.platform.1.5.2.nupkg.sha512",
         "microsoft.testing.platform.nuspec"
       ]
     },
-    "Microsoft.Testing.Platform.MSBuild/1.4.3": {
-      "sha512": "1gGqgHtiZ6tZn/6Tby+qlKpNe5Ye/5LnxlSsyl4XMZ4m4V+Cu1K1m+gD1zxoxHIvLjgX8mCnQRK95MGBBFuumw==",
+    "Microsoft.Testing.Platform.MSBuild/1.5.2": {
+      "sha512": "vIZYqOjoeJ4Nf8h3zIQy03jkXeJZxw39I2+sZ2CoNZ4Jrdx8SAcGxJKETY/zbcmSuwSFVfPo/RwOnqVoa74TFg==",
       "type": "package",
-      "path": "microsoft.testing.platform.msbuild/1.4.3",
+      "path": "microsoft.testing.platform.msbuild/1.5.2",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
         "Icon.png",
         "PACKAGE.md",
         "_MSBuildTasks/netstandard2.0/Microsoft.Testing.Platform.MSBuild.dll",
+        "_MSBuildTasks/netstandard2.0/Microsoft.Testing.Platform.MSBuild.xml",
         "_MSBuildTasks/netstandard2.0/Microsoft.Testing.Platform.dll",
-        "build/net6.0/Microsoft.Testing.Platform.MSBuild.props",
-        "build/net6.0/Microsoft.Testing.Platform.MSBuild.targets",
-        "build/net7.0/Microsoft.Testing.Platform.MSBuild.props",
-        "build/net7.0/Microsoft.Testing.Platform.MSBuild.targets",
-        "build/net8.0/Microsoft.Testing.Platform.MSBuild.props",
-        "build/net8.0/Microsoft.Testing.Platform.MSBuild.targets",
-        "build/netstandard2.0/Microsoft.Testing.Platform.MSBuild.props",
-        "build/netstandard2.0/Microsoft.Testing.Platform.MSBuild.targets",
+        "_MSBuildTasks/netstandard2.0/Microsoft.Testing.Platform.xml",
+        "_MSBuildTasks/netstandard2.0/cs/Microsoft.Testing.Platform.MSBuild.resources.dll",
+        "_MSBuildTasks/netstandard2.0/cs/Microsoft.Testing.Platform.resources.dll",
+        "_MSBuildTasks/netstandard2.0/de/Microsoft.Testing.Platform.MSBuild.resources.dll",
+        "_MSBuildTasks/netstandard2.0/de/Microsoft.Testing.Platform.resources.dll",
+        "_MSBuildTasks/netstandard2.0/es/Microsoft.Testing.Platform.MSBuild.resources.dll",
+        "_MSBuildTasks/netstandard2.0/es/Microsoft.Testing.Platform.resources.dll",
+        "_MSBuildTasks/netstandard2.0/fr/Microsoft.Testing.Platform.MSBuild.resources.dll",
+        "_MSBuildTasks/netstandard2.0/fr/Microsoft.Testing.Platform.resources.dll",
+        "_MSBuildTasks/netstandard2.0/it/Microsoft.Testing.Platform.MSBuild.resources.dll",
+        "_MSBuildTasks/netstandard2.0/it/Microsoft.Testing.Platform.resources.dll",
+        "_MSBuildTasks/netstandard2.0/ja/Microsoft.Testing.Platform.MSBuild.resources.dll",
+        "_MSBuildTasks/netstandard2.0/ja/Microsoft.Testing.Platform.resources.dll",
+        "_MSBuildTasks/netstandard2.0/ko/Microsoft.Testing.Platform.MSBuild.resources.dll",
+        "_MSBuildTasks/netstandard2.0/ko/Microsoft.Testing.Platform.resources.dll",
+        "_MSBuildTasks/netstandard2.0/pl/Microsoft.Testing.Platform.MSBuild.resources.dll",
+        "_MSBuildTasks/netstandard2.0/pl/Microsoft.Testing.Platform.resources.dll",
+        "_MSBuildTasks/netstandard2.0/pt-BR/Microsoft.Testing.Platform.MSBuild.resources.dll",
+        "_MSBuildTasks/netstandard2.0/pt-BR/Microsoft.Testing.Platform.resources.dll",
+        "_MSBuildTasks/netstandard2.0/ru/Microsoft.Testing.Platform.MSBuild.resources.dll",
+        "_MSBuildTasks/netstandard2.0/ru/Microsoft.Testing.Platform.resources.dll",
+        "_MSBuildTasks/netstandard2.0/tr/Microsoft.Testing.Platform.MSBuild.resources.dll",
+        "_MSBuildTasks/netstandard2.0/tr/Microsoft.Testing.Platform.resources.dll",
+        "_MSBuildTasks/netstandard2.0/zh-Hans/Microsoft.Testing.Platform.MSBuild.resources.dll",
+        "_MSBuildTasks/netstandard2.0/zh-Hans/Microsoft.Testing.Platform.resources.dll",
+        "_MSBuildTasks/netstandard2.0/zh-Hant/Microsoft.Testing.Platform.MSBuild.resources.dll",
+        "_MSBuildTasks/netstandard2.0/zh-Hant/Microsoft.Testing.Platform.resources.dll",
+        "build/Microsoft.Testing.Platform.MSBuild.props",
+        "build/Microsoft.Testing.Platform.MSBuild.targets",
         "buildMultiTargeting/Microsoft.Testing.Platform.MSBuild.VSTest.targets",
         "buildMultiTargeting/Microsoft.Testing.Platform.MSBuild.props",
         "buildMultiTargeting/Microsoft.Testing.Platform.MSBuild.targets",
-        "buildTransitive/net6.0/Microsoft.Testing.Platform.MSBuild.props",
-        "buildTransitive/net6.0/Microsoft.Testing.Platform.MSBuild.targets",
-        "buildTransitive/net7.0/Microsoft.Testing.Platform.MSBuild.props",
-        "buildTransitive/net7.0/Microsoft.Testing.Platform.MSBuild.targets",
-        "buildTransitive/net8.0/Microsoft.Testing.Platform.MSBuild.props",
-        "buildTransitive/net8.0/Microsoft.Testing.Platform.MSBuild.targets",
-        "buildTransitive/netstandard2.0/Microsoft.Testing.Platform.MSBuild.props",
-        "buildTransitive/netstandard2.0/Microsoft.Testing.Platform.MSBuild.targets",
-        "lib/net6.0/Microsoft.Testing.Platform.MSBuild.dll",
-        "lib/net6.0/Microsoft.Testing.Platform.MSBuild.xml",
-        "lib/net6.0/cs/Microsoft.Testing.Platform.MSBuild.resources.dll",
-        "lib/net6.0/de/Microsoft.Testing.Platform.MSBuild.resources.dll",
-        "lib/net6.0/es/Microsoft.Testing.Platform.MSBuild.resources.dll",
-        "lib/net6.0/fr/Microsoft.Testing.Platform.MSBuild.resources.dll",
-        "lib/net6.0/it/Microsoft.Testing.Platform.MSBuild.resources.dll",
-        "lib/net6.0/ja/Microsoft.Testing.Platform.MSBuild.resources.dll",
-        "lib/net6.0/ko/Microsoft.Testing.Platform.MSBuild.resources.dll",
-        "lib/net6.0/pl/Microsoft.Testing.Platform.MSBuild.resources.dll",
-        "lib/net6.0/pt-BR/Microsoft.Testing.Platform.MSBuild.resources.dll",
-        "lib/net6.0/ru/Microsoft.Testing.Platform.MSBuild.resources.dll",
-        "lib/net6.0/tr/Microsoft.Testing.Platform.MSBuild.resources.dll",
-        "lib/net6.0/zh-Hans/Microsoft.Testing.Platform.MSBuild.resources.dll",
-        "lib/net6.0/zh-Hant/Microsoft.Testing.Platform.MSBuild.resources.dll",
-        "lib/net7.0/Microsoft.Testing.Platform.MSBuild.dll",
-        "lib/net7.0/Microsoft.Testing.Platform.MSBuild.xml",
-        "lib/net7.0/cs/Microsoft.Testing.Platform.MSBuild.resources.dll",
-        "lib/net7.0/de/Microsoft.Testing.Platform.MSBuild.resources.dll",
-        "lib/net7.0/es/Microsoft.Testing.Platform.MSBuild.resources.dll",
-        "lib/net7.0/fr/Microsoft.Testing.Platform.MSBuild.resources.dll",
-        "lib/net7.0/it/Microsoft.Testing.Platform.MSBuild.resources.dll",
-        "lib/net7.0/ja/Microsoft.Testing.Platform.MSBuild.resources.dll",
-        "lib/net7.0/ko/Microsoft.Testing.Platform.MSBuild.resources.dll",
-        "lib/net7.0/pl/Microsoft.Testing.Platform.MSBuild.resources.dll",
-        "lib/net7.0/pt-BR/Microsoft.Testing.Platform.MSBuild.resources.dll",
-        "lib/net7.0/ru/Microsoft.Testing.Platform.MSBuild.resources.dll",
-        "lib/net7.0/tr/Microsoft.Testing.Platform.MSBuild.resources.dll",
-        "lib/net7.0/zh-Hans/Microsoft.Testing.Platform.MSBuild.resources.dll",
-        "lib/net7.0/zh-Hant/Microsoft.Testing.Platform.MSBuild.resources.dll",
-        "lib/net8.0/Microsoft.Testing.Platform.MSBuild.dll",
-        "lib/net8.0/Microsoft.Testing.Platform.MSBuild.xml",
-        "lib/net8.0/cs/Microsoft.Testing.Platform.MSBuild.resources.dll",
-        "lib/net8.0/de/Microsoft.Testing.Platform.MSBuild.resources.dll",
-        "lib/net8.0/es/Microsoft.Testing.Platform.MSBuild.resources.dll",
-        "lib/net8.0/fr/Microsoft.Testing.Platform.MSBuild.resources.dll",
-        "lib/net8.0/it/Microsoft.Testing.Platform.MSBuild.resources.dll",
-        "lib/net8.0/ja/Microsoft.Testing.Platform.MSBuild.resources.dll",
-        "lib/net8.0/ko/Microsoft.Testing.Platform.MSBuild.resources.dll",
-        "lib/net8.0/pl/Microsoft.Testing.Platform.MSBuild.resources.dll",
-        "lib/net8.0/pt-BR/Microsoft.Testing.Platform.MSBuild.resources.dll",
-        "lib/net8.0/ru/Microsoft.Testing.Platform.MSBuild.resources.dll",
-        "lib/net8.0/tr/Microsoft.Testing.Platform.MSBuild.resources.dll",
-        "lib/net8.0/zh-Hans/Microsoft.Testing.Platform.MSBuild.resources.dll",
-        "lib/net8.0/zh-Hant/Microsoft.Testing.Platform.MSBuild.resources.dll",
-        "lib/netstandard2.0/Microsoft.Testing.Platform.MSBuild.dll",
-        "lib/netstandard2.0/Microsoft.Testing.Platform.MSBuild.xml",
-        "lib/netstandard2.0/cs/Microsoft.Testing.Platform.MSBuild.resources.dll",
-        "lib/netstandard2.0/de/Microsoft.Testing.Platform.MSBuild.resources.dll",
-        "lib/netstandard2.0/es/Microsoft.Testing.Platform.MSBuild.resources.dll",
-        "lib/netstandard2.0/fr/Microsoft.Testing.Platform.MSBuild.resources.dll",
-        "lib/netstandard2.0/it/Microsoft.Testing.Platform.MSBuild.resources.dll",
-        "lib/netstandard2.0/ja/Microsoft.Testing.Platform.MSBuild.resources.dll",
-        "lib/netstandard2.0/ko/Microsoft.Testing.Platform.MSBuild.resources.dll",
-        "lib/netstandard2.0/pl/Microsoft.Testing.Platform.MSBuild.resources.dll",
-        "lib/netstandard2.0/pt-BR/Microsoft.Testing.Platform.MSBuild.resources.dll",
-        "lib/netstandard2.0/ru/Microsoft.Testing.Platform.MSBuild.resources.dll",
-        "lib/netstandard2.0/tr/Microsoft.Testing.Platform.MSBuild.resources.dll",
-        "lib/netstandard2.0/zh-Hans/Microsoft.Testing.Platform.MSBuild.resources.dll",
-        "lib/netstandard2.0/zh-Hant/Microsoft.Testing.Platform.MSBuild.resources.dll",
-        "microsoft.testing.platform.msbuild.1.4.3.nupkg.sha512",
+        "buildTransitive/Microsoft.Testing.Platform.MSBuild.props",
+        "buildTransitive/Microsoft.Testing.Platform.MSBuild.targets",
+        "lib/net6.0/Microsoft.Testing.Extensions.MSBuild.dll",
+        "lib/net6.0/Microsoft.Testing.Extensions.MSBuild.xml",
+        "lib/net6.0/cs/Microsoft.Testing.Extensions.MSBuild.resources.dll",
+        "lib/net6.0/de/Microsoft.Testing.Extensions.MSBuild.resources.dll",
+        "lib/net6.0/es/Microsoft.Testing.Extensions.MSBuild.resources.dll",
+        "lib/net6.0/fr/Microsoft.Testing.Extensions.MSBuild.resources.dll",
+        "lib/net6.0/it/Microsoft.Testing.Extensions.MSBuild.resources.dll",
+        "lib/net6.0/ja/Microsoft.Testing.Extensions.MSBuild.resources.dll",
+        "lib/net6.0/ko/Microsoft.Testing.Extensions.MSBuild.resources.dll",
+        "lib/net6.0/pl/Microsoft.Testing.Extensions.MSBuild.resources.dll",
+        "lib/net6.0/pt-BR/Microsoft.Testing.Extensions.MSBuild.resources.dll",
+        "lib/net6.0/ru/Microsoft.Testing.Extensions.MSBuild.resources.dll",
+        "lib/net6.0/tr/Microsoft.Testing.Extensions.MSBuild.resources.dll",
+        "lib/net6.0/zh-Hans/Microsoft.Testing.Extensions.MSBuild.resources.dll",
+        "lib/net6.0/zh-Hant/Microsoft.Testing.Extensions.MSBuild.resources.dll",
+        "lib/net7.0/Microsoft.Testing.Extensions.MSBuild.dll",
+        "lib/net7.0/Microsoft.Testing.Extensions.MSBuild.xml",
+        "lib/net7.0/cs/Microsoft.Testing.Extensions.MSBuild.resources.dll",
+        "lib/net7.0/de/Microsoft.Testing.Extensions.MSBuild.resources.dll",
+        "lib/net7.0/es/Microsoft.Testing.Extensions.MSBuild.resources.dll",
+        "lib/net7.0/fr/Microsoft.Testing.Extensions.MSBuild.resources.dll",
+        "lib/net7.0/it/Microsoft.Testing.Extensions.MSBuild.resources.dll",
+        "lib/net7.0/ja/Microsoft.Testing.Extensions.MSBuild.resources.dll",
+        "lib/net7.0/ko/Microsoft.Testing.Extensions.MSBuild.resources.dll",
+        "lib/net7.0/pl/Microsoft.Testing.Extensions.MSBuild.resources.dll",
+        "lib/net7.0/pt-BR/Microsoft.Testing.Extensions.MSBuild.resources.dll",
+        "lib/net7.0/ru/Microsoft.Testing.Extensions.MSBuild.resources.dll",
+        "lib/net7.0/tr/Microsoft.Testing.Extensions.MSBuild.resources.dll",
+        "lib/net7.0/zh-Hans/Microsoft.Testing.Extensions.MSBuild.resources.dll",
+        "lib/net7.0/zh-Hant/Microsoft.Testing.Extensions.MSBuild.resources.dll",
+        "lib/net8.0/Microsoft.Testing.Extensions.MSBuild.dll",
+        "lib/net8.0/Microsoft.Testing.Extensions.MSBuild.xml",
+        "lib/net8.0/cs/Microsoft.Testing.Extensions.MSBuild.resources.dll",
+        "lib/net8.0/de/Microsoft.Testing.Extensions.MSBuild.resources.dll",
+        "lib/net8.0/es/Microsoft.Testing.Extensions.MSBuild.resources.dll",
+        "lib/net8.0/fr/Microsoft.Testing.Extensions.MSBuild.resources.dll",
+        "lib/net8.0/it/Microsoft.Testing.Extensions.MSBuild.resources.dll",
+        "lib/net8.0/ja/Microsoft.Testing.Extensions.MSBuild.resources.dll",
+        "lib/net8.0/ko/Microsoft.Testing.Extensions.MSBuild.resources.dll",
+        "lib/net8.0/pl/Microsoft.Testing.Extensions.MSBuild.resources.dll",
+        "lib/net8.0/pt-BR/Microsoft.Testing.Extensions.MSBuild.resources.dll",
+        "lib/net8.0/ru/Microsoft.Testing.Extensions.MSBuild.resources.dll",
+        "lib/net8.0/tr/Microsoft.Testing.Extensions.MSBuild.resources.dll",
+        "lib/net8.0/zh-Hans/Microsoft.Testing.Extensions.MSBuild.resources.dll",
+        "lib/net8.0/zh-Hant/Microsoft.Testing.Extensions.MSBuild.resources.dll",
+        "lib/net9.0/Microsoft.Testing.Extensions.MSBuild.dll",
+        "lib/net9.0/Microsoft.Testing.Extensions.MSBuild.xml",
+        "lib/net9.0/cs/Microsoft.Testing.Extensions.MSBuild.resources.dll",
+        "lib/net9.0/de/Microsoft.Testing.Extensions.MSBuild.resources.dll",
+        "lib/net9.0/es/Microsoft.Testing.Extensions.MSBuild.resources.dll",
+        "lib/net9.0/fr/Microsoft.Testing.Extensions.MSBuild.resources.dll",
+        "lib/net9.0/it/Microsoft.Testing.Extensions.MSBuild.resources.dll",
+        "lib/net9.0/ja/Microsoft.Testing.Extensions.MSBuild.resources.dll",
+        "lib/net9.0/ko/Microsoft.Testing.Extensions.MSBuild.resources.dll",
+        "lib/net9.0/pl/Microsoft.Testing.Extensions.MSBuild.resources.dll",
+        "lib/net9.0/pt-BR/Microsoft.Testing.Extensions.MSBuild.resources.dll",
+        "lib/net9.0/ru/Microsoft.Testing.Extensions.MSBuild.resources.dll",
+        "lib/net9.0/tr/Microsoft.Testing.Extensions.MSBuild.resources.dll",
+        "lib/net9.0/zh-Hans/Microsoft.Testing.Extensions.MSBuild.resources.dll",
+        "lib/net9.0/zh-Hant/Microsoft.Testing.Extensions.MSBuild.resources.dll",
+        "lib/netstandard2.0/Microsoft.Testing.Extensions.MSBuild.dll",
+        "lib/netstandard2.0/Microsoft.Testing.Extensions.MSBuild.xml",
+        "lib/netstandard2.0/cs/Microsoft.Testing.Extensions.MSBuild.resources.dll",
+        "lib/netstandard2.0/de/Microsoft.Testing.Extensions.MSBuild.resources.dll",
+        "lib/netstandard2.0/es/Microsoft.Testing.Extensions.MSBuild.resources.dll",
+        "lib/netstandard2.0/fr/Microsoft.Testing.Extensions.MSBuild.resources.dll",
+        "lib/netstandard2.0/it/Microsoft.Testing.Extensions.MSBuild.resources.dll",
+        "lib/netstandard2.0/ja/Microsoft.Testing.Extensions.MSBuild.resources.dll",
+        "lib/netstandard2.0/ko/Microsoft.Testing.Extensions.MSBuild.resources.dll",
+        "lib/netstandard2.0/pl/Microsoft.Testing.Extensions.MSBuild.resources.dll",
+        "lib/netstandard2.0/pt-BR/Microsoft.Testing.Extensions.MSBuild.resources.dll",
+        "lib/netstandard2.0/ru/Microsoft.Testing.Extensions.MSBuild.resources.dll",
+        "lib/netstandard2.0/tr/Microsoft.Testing.Extensions.MSBuild.resources.dll",
+        "lib/netstandard2.0/zh-Hans/Microsoft.Testing.Extensions.MSBuild.resources.dll",
+        "lib/netstandard2.0/zh-Hant/Microsoft.Testing.Extensions.MSBuild.resources.dll",
+        "microsoft.testing.platform.msbuild.1.5.2.nupkg.sha512",
         "microsoft.testing.platform.msbuild.nuspec"
       ]
     },
@@ -1751,10 +1839,68 @@
         "microsoft.testplatform.testhost.nuspec"
       ]
     },
-    "MSTest.TestAdapter/3.6.3": {
-      "sha512": "i3KbdAjLO0W9xlvbhZa9u0wh6X+VZ1yTBsUVlVKtx8B9CXa4rFXPcx3yPysB9gbALmhgAjFza4RRoNyXY9IoXQ==",
+    "MSTest.Analyzers/3.7.2": {
+      "sha512": "gBMQazU/j4NxfTC32bWXp6aNd0+nYQlWxzRogrtNZ0B0hIGLtE1K8i5gMvf7zZfA2bwfTT9U7WVxtOIgiGjOYA==",
       "type": "package",
-      "path": "mstest.testadapter/3.6.3",
+      "path": "mstest.analyzers/3.7.2",
+      "hasTools": true,
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "Icon.png",
+        "PACKAGE.md",
+        "analyzers/dotnet/cs/MSTest.Analyzers.CodeFixes.dll",
+        "analyzers/dotnet/cs/MSTest.Analyzers.dll",
+        "analyzers/dotnet/cs/cs/MSTest.Analyzers.CodeFixes.resources.dll",
+        "analyzers/dotnet/cs/cs/MSTest.Analyzers.resources.dll",
+        "analyzers/dotnet/cs/de/MSTest.Analyzers.CodeFixes.resources.dll",
+        "analyzers/dotnet/cs/de/MSTest.Analyzers.resources.dll",
+        "analyzers/dotnet/cs/es/MSTest.Analyzers.CodeFixes.resources.dll",
+        "analyzers/dotnet/cs/es/MSTest.Analyzers.resources.dll",
+        "analyzers/dotnet/cs/fr/MSTest.Analyzers.CodeFixes.resources.dll",
+        "analyzers/dotnet/cs/fr/MSTest.Analyzers.resources.dll",
+        "analyzers/dotnet/cs/it/MSTest.Analyzers.CodeFixes.resources.dll",
+        "analyzers/dotnet/cs/it/MSTest.Analyzers.resources.dll",
+        "analyzers/dotnet/cs/ja/MSTest.Analyzers.CodeFixes.resources.dll",
+        "analyzers/dotnet/cs/ja/MSTest.Analyzers.resources.dll",
+        "analyzers/dotnet/cs/ko/MSTest.Analyzers.CodeFixes.resources.dll",
+        "analyzers/dotnet/cs/ko/MSTest.Analyzers.resources.dll",
+        "analyzers/dotnet/cs/pl/MSTest.Analyzers.CodeFixes.resources.dll",
+        "analyzers/dotnet/cs/pl/MSTest.Analyzers.resources.dll",
+        "analyzers/dotnet/cs/pt-BR/MSTest.Analyzers.CodeFixes.resources.dll",
+        "analyzers/dotnet/cs/pt-BR/MSTest.Analyzers.resources.dll",
+        "analyzers/dotnet/cs/ru/MSTest.Analyzers.CodeFixes.resources.dll",
+        "analyzers/dotnet/cs/ru/MSTest.Analyzers.resources.dll",
+        "analyzers/dotnet/cs/tr/MSTest.Analyzers.CodeFixes.resources.dll",
+        "analyzers/dotnet/cs/tr/MSTest.Analyzers.resources.dll",
+        "analyzers/dotnet/cs/zh-Hans/MSTest.Analyzers.CodeFixes.resources.dll",
+        "analyzers/dotnet/cs/zh-Hans/MSTest.Analyzers.resources.dll",
+        "analyzers/dotnet/cs/zh-Hant/MSTest.Analyzers.CodeFixes.resources.dll",
+        "analyzers/dotnet/cs/zh-Hant/MSTest.Analyzers.resources.dll",
+        "analyzers/dotnet/vb/MSTest.Analyzers.dll",
+        "analyzers/dotnet/vb/cs/MSTest.Analyzers.resources.dll",
+        "analyzers/dotnet/vb/de/MSTest.Analyzers.resources.dll",
+        "analyzers/dotnet/vb/es/MSTest.Analyzers.resources.dll",
+        "analyzers/dotnet/vb/fr/MSTest.Analyzers.resources.dll",
+        "analyzers/dotnet/vb/it/MSTest.Analyzers.resources.dll",
+        "analyzers/dotnet/vb/ja/MSTest.Analyzers.resources.dll",
+        "analyzers/dotnet/vb/ko/MSTest.Analyzers.resources.dll",
+        "analyzers/dotnet/vb/pl/MSTest.Analyzers.resources.dll",
+        "analyzers/dotnet/vb/pt-BR/MSTest.Analyzers.resources.dll",
+        "analyzers/dotnet/vb/ru/MSTest.Analyzers.resources.dll",
+        "analyzers/dotnet/vb/tr/MSTest.Analyzers.resources.dll",
+        "analyzers/dotnet/vb/zh-Hans/MSTest.Analyzers.resources.dll",
+        "analyzers/dotnet/vb/zh-Hant/MSTest.Analyzers.resources.dll",
+        "mstest.analyzers.3.7.2.nupkg.sha512",
+        "mstest.analyzers.nuspec",
+        "tools/install.ps1",
+        "tools/uninstall.ps1"
+      ]
+    },
+    "MSTest.TestAdapter/3.7.2": {
+      "sha512": "VA2pLWezR1hJd6rqP9xAD3j4brrc5c2qc5UDMLBBFYdB9jdXu+9WkhcUWsmt7WziwWZwqcytHCCDz4Qufs3cEQ==",
+      "type": "package",
+      "path": "mstest.testadapter/3.7.2",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
@@ -1797,7 +1943,6 @@
         "build/net6.0/Microsoft.TestPlatform.AdapterUtilities.dll",
         "build/net6.0/Microsoft.VisualStudio.TestPlatform.MSTest.TestAdapter.dll",
         "build/net6.0/Microsoft.VisualStudio.TestPlatform.MSTestAdapter.PlatformServices.dll",
-        "build/net6.0/Microsoft.VisualStudio.TestPlatform.TestFramework.dll",
         "build/net6.0/winui/Microsoft.VisualStudio.TestPlatform.MSTest.TestAdapter.dll",
         "build/net6.0/winui/Microsoft.VisualStudio.TestPlatform.MSTestAdapter.PlatformServices.dll",
         "build/net7.0/MSTest.TestAdapter.props",
@@ -1805,39 +1950,39 @@
         "build/net7.0/Microsoft.TestPlatform.AdapterUtilities.dll",
         "build/net7.0/Microsoft.VisualStudio.TestPlatform.MSTest.TestAdapter.dll",
         "build/net7.0/Microsoft.VisualStudio.TestPlatform.MSTestAdapter.PlatformServices.dll",
-        "build/net7.0/Microsoft.VisualStudio.TestPlatform.TestFramework.dll",
         "build/net8.0/MSTest.TestAdapter.props",
         "build/net8.0/MSTest.TestAdapter.targets",
         "build/net8.0/Microsoft.TestPlatform.AdapterUtilities.dll",
         "build/net8.0/Microsoft.VisualStudio.TestPlatform.MSTest.TestAdapter.dll",
         "build/net8.0/Microsoft.VisualStudio.TestPlatform.MSTestAdapter.PlatformServices.dll",
-        "build/net8.0/Microsoft.VisualStudio.TestPlatform.TestFramework.dll",
+        "build/net9.0/MSTest.TestAdapter.props",
+        "build/net9.0/MSTest.TestAdapter.targets",
+        "build/net9.0/Microsoft.TestPlatform.AdapterUtilities.dll",
+        "build/net9.0/Microsoft.VisualStudio.TestPlatform.MSTest.TestAdapter.dll",
+        "build/net9.0/Microsoft.VisualStudio.TestPlatform.MSTestAdapter.PlatformServices.dll",
         "build/netcoreapp3.1/MSTest.TestAdapter.props",
         "build/netcoreapp3.1/MSTest.TestAdapter.targets",
         "build/netcoreapp3.1/Microsoft.TestPlatform.AdapterUtilities.dll",
         "build/netcoreapp3.1/Microsoft.VisualStudio.TestPlatform.MSTest.TestAdapter.dll",
         "build/netcoreapp3.1/Microsoft.VisualStudio.TestPlatform.MSTestAdapter.PlatformServices.dll",
-        "build/netcoreapp3.1/Microsoft.VisualStudio.TestPlatform.TestFramework.dll",
         "build/netstandard2.0/MSTest.TestAdapter.props",
         "build/netstandard2.0/MSTest.TestAdapter.targets",
         "build/netstandard2.0/Microsoft.TestPlatform.AdapterUtilities.dll",
         "build/netstandard2.0/Microsoft.VisualStudio.TestPlatform.MSTest.TestAdapter.dll",
         "build/netstandard2.0/Microsoft.VisualStudio.TestPlatform.MSTestAdapter.PlatformServices.dll",
-        "build/netstandard2.0/Microsoft.VisualStudio.TestPlatform.TestFramework.dll",
         "build/uap10.0/MSTest.TestAdapter.props",
         "build/uap10.0/MSTest.TestAdapter.targets",
         "build/uap10.0/Microsoft.TestPlatform.AdapterUtilities.dll",
         "build/uap10.0/Microsoft.VisualStudio.TestPlatform.MSTest.TestAdapter.dll",
         "build/uap10.0/Microsoft.VisualStudio.TestPlatform.MSTestAdapter.PlatformServices.dll",
-        "build/uap10.0/Microsoft.VisualStudio.TestPlatform.TestFramework.dll",
-        "mstest.testadapter.3.6.3.nupkg.sha512",
+        "mstest.testadapter.3.7.2.nupkg.sha512",
         "mstest.testadapter.nuspec"
       ]
     },
-    "MSTest.TestFramework/3.6.3": {
-      "sha512": "jockRcUoLJMeHzLqFcMnZBrWy7tS32JP7shlepDDJuf5A6HO2PwAefXzhvprcWNkfpEwmR0KihSO2HRXwNbTng==",
+    "MSTest.TestFramework/3.7.2": {
+      "sha512": "sc31bOL0LkoetSMfzqe9vliIzLuKAfFD0AP2aeKcacOC105PYn7K70qOPGZWWeRYmlIM7GogXnuLbiw8rdaIig==",
       "type": "package",
-      "path": "mstest.testframework/3.6.3",
+      "path": "mstest.testframework/3.7.2",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
@@ -1854,6 +1999,9 @@
         "build/net8.0/MSTest.TestFramework.targets",
         "build/net8.0/Microsoft.VisualStudio.TestPlatform.TestFramework.Extensions.dll",
         "build/net8.0/Microsoft.VisualStudio.TestPlatform.TestFramework.Extensions.xml",
+        "build/net9.0/MSTest.TestFramework.targets",
+        "build/net9.0/Microsoft.VisualStudio.TestPlatform.TestFramework.Extensions.dll",
+        "build/net9.0/Microsoft.VisualStudio.TestPlatform.TestFramework.Extensions.xml",
         "lib/net462/Microsoft.VisualStudio.TestPlatform.TestFramework.Extensions.dll",
         "lib/net462/Microsoft.VisualStudio.TestPlatform.TestFramework.Extensions.xml",
         "lib/net462/Microsoft.VisualStudio.TestPlatform.TestFramework.dll",
@@ -1916,6 +2064,21 @@
         "lib/net8.0/tr/Microsoft.VisualStudio.TestPlatform.TestFramework.resources.dll",
         "lib/net8.0/zh-Hans/Microsoft.VisualStudio.TestPlatform.TestFramework.resources.dll",
         "lib/net8.0/zh-Hant/Microsoft.VisualStudio.TestPlatform.TestFramework.resources.dll",
+        "lib/net9.0/Microsoft.VisualStudio.TestPlatform.TestFramework.dll",
+        "lib/net9.0/Microsoft.VisualStudio.TestPlatform.TestFramework.xml",
+        "lib/net9.0/cs/Microsoft.VisualStudio.TestPlatform.TestFramework.resources.dll",
+        "lib/net9.0/de/Microsoft.VisualStudio.TestPlatform.TestFramework.resources.dll",
+        "lib/net9.0/es/Microsoft.VisualStudio.TestPlatform.TestFramework.resources.dll",
+        "lib/net9.0/fr/Microsoft.VisualStudio.TestPlatform.TestFramework.resources.dll",
+        "lib/net9.0/it/Microsoft.VisualStudio.TestPlatform.TestFramework.resources.dll",
+        "lib/net9.0/ja/Microsoft.VisualStudio.TestPlatform.TestFramework.resources.dll",
+        "lib/net9.0/ko/Microsoft.VisualStudio.TestPlatform.TestFramework.resources.dll",
+        "lib/net9.0/pl/Microsoft.VisualStudio.TestPlatform.TestFramework.resources.dll",
+        "lib/net9.0/pt-BR/Microsoft.VisualStudio.TestPlatform.TestFramework.resources.dll",
+        "lib/net9.0/ru/Microsoft.VisualStudio.TestPlatform.TestFramework.resources.dll",
+        "lib/net9.0/tr/Microsoft.VisualStudio.TestPlatform.TestFramework.resources.dll",
+        "lib/net9.0/zh-Hans/Microsoft.VisualStudio.TestPlatform.TestFramework.resources.dll",
+        "lib/net9.0/zh-Hant/Microsoft.VisualStudio.TestPlatform.TestFramework.resources.dll",
         "lib/netcoreapp3.1/Microsoft.VisualStudio.TestPlatform.TestFramework.Extensions.dll",
         "lib/netcoreapp3.1/Microsoft.VisualStudio.TestPlatform.TestFramework.Extensions.xml",
         "lib/netcoreapp3.1/Microsoft.VisualStudio.TestPlatform.TestFramework.dll",
@@ -1967,7 +2130,7 @@
         "lib/uap10.0/tr/Microsoft.VisualStudio.TestPlatform.TestFramework.resources.dll",
         "lib/uap10.0/zh-Hans/Microsoft.VisualStudio.TestPlatform.TestFramework.resources.dll",
         "lib/uap10.0/zh-Hant/Microsoft.VisualStudio.TestPlatform.TestFramework.resources.dll",
-        "mstest.testframework.3.6.3.nupkg.sha512",
+        "mstest.testframework.3.7.2.nupkg.sha512",
         "mstest.testframework.nuspec"
       ]
     },
@@ -2001,10 +2164,10 @@
         "packageIcon.png"
       ]
     },
-    "System.Diagnostics.DiagnosticSource/9.0.0": {
-      "sha512": "ddppcFpnbohLWdYKr/ZeLZHmmI+DXFgZ3Snq+/E7SwcdW4UnvxmaugkwGywvGVWkHPGCSZjCP+MLzu23AL5SDw==",
+    "System.Diagnostics.DiagnosticSource/9.0.1": {
+      "sha512": "yOcDWx4P/s1I83+7gQlgQLmhny2eNcU0cfo1NBWi+en4EAI38Jau+/neT85gUW6w1s7+FUJc2qNOmmwGLIREqA==",
       "type": "package",
-      "path": "system.diagnostics.diagnosticsource/9.0.0",
+      "path": "system.diagnostics.diagnosticsource/9.0.1",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
@@ -2028,7 +2191,7 @@
         "lib/net9.0/System.Diagnostics.DiagnosticSource.xml",
         "lib/netstandard2.0/System.Diagnostics.DiagnosticSource.dll",
         "lib/netstandard2.0/System.Diagnostics.DiagnosticSource.xml",
-        "system.diagnostics.diagnosticsource.9.0.0.nupkg.sha512",
+        "system.diagnostics.diagnosticsource.9.0.1.nupkg.sha512",
         "system.diagnostics.diagnosticsource.nuspec",
         "useSharedDesignerContext.txt"
       ]
@@ -2062,12 +2225,12 @@
   },
   "projectFileDependencyGroups": {
     "net8.0": [
-      "MSTest.TestAdapter >= 3.6.3",
-      "MSTest.TestFramework >= 3.6.3",
-      "Microsoft.Extensions.Logging >= 9.0.0",
+      "MSTest.TestAdapter >= 3.7.2",
+      "MSTest.TestFramework >= 3.7.2",
+      "Microsoft.Extensions.Logging >= 9.0.1",
       "Microsoft.NET.Test.Sdk >= 17.12.0",
       "QPdfNet >= 1.5.0",
-      "coverlet.collector >= 6.0.2"
+      "coverlet.collector >= 6.0.4"
     ]
   },
   "packageFolders": {
@@ -2119,7 +2282,7 @@
       "restoreAuditProperties": {
         "enableAudit": "true",
         "auditLevel": "low",
-        "auditMode": "all"
+        "auditMode": "direct"
       },
       "SdkAnalysisLevel": "9.0.100"
     },
@@ -2129,15 +2292,15 @@
         "dependencies": {
           "MSTest.TestAdapter": {
             "target": "Package",
-            "version": "[3.6.3, )"
+            "version": "[3.7.2, )"
           },
           "MSTest.TestFramework": {
             "target": "Package",
-            "version": "[3.6.3, )"
+            "version": "[3.7.2, )"
           },
           "Microsoft.Extensions.Logging": {
             "target": "Package",
-            "version": "[9.0.0, )"
+            "version": "[9.0.1, )"
           },
           "Microsoft.NET.Test.Sdk": {
             "target": "Package",
@@ -2147,7 +2310,7 @@
             "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
             "suppressParent": "All",
             "target": "Package",
-            "version": "[6.0.2, )"
+            "version": "[6.0.4, )"
           }
         },
         "imports": [
@@ -2166,7 +2329,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.100/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.102/PortableRuntimeIdentifierGraph.json"
       }
     }
   }

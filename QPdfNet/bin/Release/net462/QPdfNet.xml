@@ -98,7 +98,7 @@
                 Use 128 bit encryption
             </summary>
         </member>
-        <member name="M:QPdfNet.Encryption128Bit.#ctor(System.Boolean,System.Boolean,System.Boolean,System.Boolean,System.Boolean,System.Boolean,QPdfNet.Enums.Modify,QPdfNet.Enums.Print,System.Boolean)">
+        <member name="M:QPdfNet.Encryption128Bit.#ctor(System.Boolean,System.Boolean,System.Boolean,System.Boolean,System.Boolean,System.Boolean,QPdfNet.Enums.Modify,QPdfNet.Enums.Print,System.Boolean,System.Boolean)">
             <summary>
                  Encrypt the PDF with 128 bit encryption
             </summary>
@@ -111,6 +111,7 @@
             <param name="modify">Control <see cref="T:QPdfNet.Enums.Modify"/> access by level</param>
             <param name="print">Control printing access</param>
             <param name="cleartextMetaData">Prevent encryption of metadata</param>
+            <param name="useAes">Use AES instead of RC4 encryption</param>
         </member>
         <member name="T:QPdfNet.Encryption256Bit">
             <summary>
@@ -538,249 +539,399 @@
                 <paramref name="fileName"/> is <c>null</c>.
             </exception>
         </member>
-        <member name="T:QPdfNet.Info.Acroform">
+        <member name="T:QPdfNet.Info.AcroForm">
             <summary>
-                Returns information about form fields used in the PDF
+                The acro from fields
             </summary>
         </member>
-        <member name="P:QPdfNet.Info.Acroform.Fields">
+        <member name="P:QPdfNet.Info.AcroForm.Fields">
             <summary>
-                Returns the fields
+                List of fields in the acroform
             </summary>
         </member>
-        <member name="P:QPdfNet.Info.Acroform.HasAcroform">
+        <member name="P:QPdfNet.Info.AcroForm.Hasacroform">
             <summary>
-                Returns <c>true</c> when the PDF has form fields
+                Whether the document has interactive forms
             </summary>
         </member>
-        <member name="P:QPdfNet.Info.Acroform.NeedAppearances">
+        <member name="P:QPdfNet.Info.AcroForm.NeedAppearances">
             <summary>
-                Returns <c>true</c> when appearances are needed
+                Whether the form fields' appearance streams need to be regenerated
             </summary>
         </member>
-        <member name="P:QPdfNet.Info.AttachmentProperties.FileSpec">
+        <member name="P:QPdfNet.Info.Annotation.AnnotationFlags">
             <summary>
-                Returns the file spec
+                Annotation flags from /F -- see pdf_annotation_flag_e in qpdf/Constants.h
             </summary>
         </member>
-        <member name="P:QPdfNet.Info.AttachmentProperties.PreferredContents">
+        <member name="P:QPdfNet.Info.Annotation.AppearanceState">
             <summary>
-                Returns the prefered content
+                Appearance state -- can be used to determine value for checkboxes and radio buttons
             </summary>
         </member>
-        <member name="P:QPdfNet.Info.AttachmentProperties.PreferredName">
+        <member name="P:QPdfNet.Info.Annotation.Object">
             <summary>
-                Returns the prefered name of the attachment
+                Reference to the annotation object
+            </summary>
+        </member>
+        <member name="T:QPdfNet.Info.Attachment">
+            <summary>
+               The attachment
+            </summary>
+        </member>
+        <member name="P:QPdfNet.Info.Attachment.FileSpec">
+            <summary>
+                Object containing the file spec
+            </summary>
+        </member>
+        <member name="P:QPdfNet.Info.Attachment.PreferredContents">
+            <summary>
+                Most preferred embedded file stream
+            </summary>
+        </member>
+        <member name="P:QPdfNet.Info.Attachment.PreferredName">
+            <summary>
+                Most preferred file name
+            </summary>
+        </member>
+        <member name="T:QPdfNet.Info.Capabilities">
+            <summary>
+                Encryption capabilities
             </summary>
         </member>
         <member name="P:QPdfNet.Info.Capabilities.Accessibility">
             <summary>
-                Returns <c>true </c> when accessibility is restricted (usually ignored)
+                Allow extraction for accessibility?
             </summary>
         </member>
         <member name="P:QPdfNet.Info.Capabilities.Extract">
             <summary>
-                Returns <c>true</c> text/graphic extraction is restricted
+                Allow extraction?
             </summary>
         </member>
-        <member name="P:QPdfNet.Info.Capabilities.ModifyAnnotations">
+        <member name="P:QPdfNet.Info.Capabilities.ModdifyAnnotations">
             <summary>
-                Returns <c>tru</c> commenting/filling form fields is restricted
+                Allow modifying annotations?
             </summary>
         </member>
         <member name="P:QPdfNet.Info.Capabilities.Modify">
             <summary>
-                Returns <c>true</c> when modification of the PDF is restricted
+                Allow all modifications?
             </summary>
         </member>
         <member name="P:QPdfNet.Info.Capabilities.ModifyAssembly">
             <summary>
-                Returns <c>true</c> when document assembly is restricted
+                Allow modifying document assembly?
             </summary>
         </member>
         <member name="P:QPdfNet.Info.Capabilities.ModifyForms">
             <summary>
-                Returns <c>true</c> when form field filling is restricted
+                Allow modifying forms?
             </summary>
         </member>
         <member name="P:QPdfNet.Info.Capabilities.ModifyOther">
             <summary>
-                Returns <c>true</c> when all other modifications are restricted
+                Allow other modifications?
             </summary>
         </member>
         <member name="P:QPdfNet.Info.Capabilities.PrintHigh">
             <summary>
-                Returns <c>true</c> when printing is restricted to high quality
+                Allow high resolution printing?
             </summary>
         </member>
         <member name="P:QPdfNet.Info.Capabilities.PrintLow">
             <summary>
-                Returns <c>true</c> when printing is restricted to low quality
+                Allow low resolution printing?
             </summary>
         </member>
         <member name="T:QPdfNet.Info.Encrypt">
             <summary>
-                Returns information about the PDF encryption
+                The encryption information
             </summary>
         </member>
         <member name="P:QPdfNet.Info.Encrypt.Capabilities">
             <summary>
-                <see cref="P:QPdfNet.Info.Encrypt.Capabilities"/>
+                The capabilities of the encryption
             </summary>
         </member>
         <member name="P:QPdfNet.Info.Encrypt.Encrypted">
             <summary>
-                Returns <c>true</c> when the PDF is encrypted
+                Whether the document is encrypted
             </summary>
         </member>
         <member name="P:QPdfNet.Info.Encrypt.OwnerPasswordMatched">
             <summary>
-                Returns <c>true</c> when the given owner password is correct
+                Whether supplied password matched owner password; always false for non-encrypted files
             </summary>
         </member>
         <member name="P:QPdfNet.Info.Encrypt.Parameters">
             <summary>
-                <see cref="T:QPdfNet.Info.EncryptParameters"/>
+                Encryption parameters
             </summary>
         </member>
         <member name="P:QPdfNet.Info.Encrypt.UserPasswordMatched">
             <summary>
-                Returns <c>true</c> when the given user password is correct
+                Whether supplied password matched user password; always false for non-encrypted files
             </summary>
         </member>
-        <member name="P:QPdfNet.Info.EncryptParameters.P">
+        <member name="T:QPdfNet.Info.EncryptParameters">
             <summary>
-            
-            </summary>
-        </member>
-        <member name="P:QPdfNet.Info.EncryptParameters.R">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:QPdfNet.Info.EncryptParameters.V">
-            <summary>
-            
+                The encryption parameters
             </summary>
         </member>
         <member name="P:QPdfNet.Info.EncryptParameters.Bits">
             <summary>
-                Returns the amounts of bits used with the encryption
+                Encryption key bit length
             </summary>
         </member>
         <member name="P:QPdfNet.Info.EncryptParameters.FileMethod">
             <summary>
-                Returns the file method used
+                Encryption method for attachments
             </summary>
         </member>
         <member name="P:QPdfNet.Info.EncryptParameters.Key">
             <summary>
-                Returns the encryption key
+                Encryption key; will be null unless --show-encryption-key was specified
             </summary>
         </member>
         <member name="P:QPdfNet.Info.EncryptParameters.Method">
             <summary>
-                Returns the encryption method used
+                Overall encryption method: none, mixed, RC4, AESv2, AESv3
             </summary>
         </member>
         <member name="P:QPdfNet.Info.EncryptParameters.StreamMethod">
             <summary>
-            
+                Encryption method for streams
             </summary>
         </member>
         <member name="P:QPdfNet.Info.EncryptParameters.StringMethod">
             <summary>
-            
+                Encryption method for string
+            </summary>
+        </member>
+        <member name="T:QPdfNet.Info.Field">
+            <summary>
+                The form fields
+            </summary>
+        </member>
+        <member name="P:QPdfNet.Info.Field.AlternativeName">
+            <summary>
+                Alternative name of field -- this is the one usually shown to users
+            </summary>
+        </member>
+        <member name="P:QPdfNet.Info.Field.Annotation">
+            <summary>
+                Reference to the annotation object
+            </summary>
+        </member>
+        <member name="P:QPdfNet.Info.Field.Choices">
+            <summary>
+                For choices fields, the list of choices presented to the user
+            </summary>
+        </member>
+        <member name="P:QPdfNet.Info.Field.DefaultValue">
+            <summary>
+                Default value of field
+            </summary>
+        </member>
+        <member name="P:QPdfNet.Info.Field.FieldFlags">
+            <summary>
+                Form field flags from /Ff -- see pdf_form_field_flag_e in qpdf/Constants.h
+            </summary>
+        </member>
+        <member name="P:QPdfNet.Info.Field.FieldType">
+            <summary>
+                Field type
+            </summary>
+        </member>
+        <member name="P:QPdfNet.Info.Field.FullName">
+            <summary>
+                Full name of field
+            </summary>
+        </member>
+        <member name="P:QPdfNet.Info.Field.IsCheckbox">
+            <summary>
+                Whether field is a checkbox
+            </summary>
+        </member>
+        <member name="P:QPdfNet.Info.Field.IsChoice">
+            <summary>
+                Whether field is a list, combo, or dropdown
+            </summary>
+        </member>
+        <member name="P:QPdfNet.Info.Field.IsRadiobutton">
+            <summary>
+                Whether field is a radio button -- buttons in a single group share a parent
+            </summary>
+        </member>
+        <member name="P:QPdfNet.Info.Field.IsText">
+            <summary>
+                Whether field is a text field
+            </summary>
+        </member>
+        <member name="P:QPdfNet.Info.Field.MappingName">
+            <summary>
+                Mapping name of field
+            </summary>
+        </member>
+        <member name="P:QPdfNet.Info.Field.Object">
+            <summary>
+                Reference to this form field
+            </summary>
+        </member>
+        <member name="P:QPdfNet.Info.Field.PagePosFrom1">
+            <summary>
+                Position of containing page numbered from 1
+            </summary>
+        </member>
+        <member name="P:QPdfNet.Info.Field.Parent">
+            <summary>
+                Reference to this field's parent
+            </summary>
+        </member>
+        <member name="P:QPdfNet.Info.Field.PartialName">
+            <summary>
+                Partial name of field
+            </summary>
+        </member>
+        <member name="P:QPdfNet.Info.Field.Quadding">
+            <summary>
+                Field quadding -- number indicating left, center, or right
+            </summary>
+        </member>
+        <member name="P:QPdfNet.Info.Field.Value">
+            <summary>
+                Value of field
             </summary>
         </member>
         <member name="T:QPdfNet.Info.Image">
             <summary>
-                Returns information about an <see cref="T:QPdfNet.Info.Image"/> on a <see cref="T:QPdfNet.Info.Page"/>
+               The image data
             </summary>
         </member>
         <member name="P:QPdfNet.Info.Image.Bitspercomponent">
             <summary>
-                Returns the bits per component
+                Bits per component
             </summary>
         </member>
         <member name="P:QPdfNet.Info.Image.Colorspace">
             <summary>
-                Returns information about the color space
+                Color space
             </summary>
         </member>
         <member name="P:QPdfNet.Info.Image.Decodeparms">
             <summary>
-                Returns the used decode parameters
+                Decode parameters for image data
             </summary>
         </member>
         <member name="P:QPdfNet.Info.Image.Filter">
             <summary>
-                Returns the filters used
+                Filters applied to image data
+            </summary>
+        </member>
+        <member name="P:QPdfNet.Info.Image.Filterable">
+            <summary>
+                Whether image data can be decoded using the decode level qpdf was invoked with
             </summary>
         </member>
         <member name="P:QPdfNet.Info.Image.Height">
             <summary>
-                Returns the height of the image
+                Image height
             </summary>
         </member>
         <member name="P:QPdfNet.Info.Image.Width">
             <summary>
-                Returns the width of the image
+                Image width
             </summary>
         </member>
         <member name="P:QPdfNet.Info.Image.Name">
             <summary>
-                Returns the name of the image
+                Name of image in XObject table
             </summary>
         </member>
         <member name="P:QPdfNet.Info.Image.Object">
             <summary>
-                Returns the object
-            </summary>
-        </member>
-        <member name="P:QPdfNet.Info.Objectinfo.Stream">
-            <summary>
-                <see cref="T:QPdfNet.Info.Stream"/>
+                Reference to image stream
             </summary>
         </member>
         <member name="T:QPdfNet.Info.Page">
             <summary>
-                Returns the page
+                The page data
             </summary>
         </member>
         <member name="P:QPdfNet.Info.Page.Contents">
             <summary>
-                Returns information about the content that is found on the page
+                Reference to each content stream
             </summary>
         </member>
         <member name="P:QPdfNet.Info.Page.Images">
             <summary>
-                Returns information about the images found on the page
+                List of images on the page
             </summary>
         </member>
         <member name="P:QPdfNet.Info.Page.Label">
             <summary>
-                Returns the page label
+                Page label dictionary, or null if none
             </summary>
         </member>
         <member name="P:QPdfNet.Info.Page.Object">
             <summary>
-                Returns the object
+                Reference to original page object
             </summary>
         </member>
         <member name="P:QPdfNet.Info.Page.Outlines">
             <summary>
-                Returns the page outlines
+                Outlines that target this page
             </summary>
         </member>
-        <member name="P:QPdfNet.Info.Page.PageNumber">
+        <member name="P:QPdfNet.Info.Page.PagePosFrom1">
             <summary>
-                Returns the page number
+                Position of page in document numbering from 1
             </summary>
         </member>
-        <member name="P:QPdfNet.Info.Parameters.Decodelevel">
+        <member name="T:QPdfNet.Info.PageLabel">
             <summary>
-                Returns the decode level
+                The page label
+            </summary>
+        </member>
+        <member name="P:QPdfNet.Info.PageLabel.Index">
+            <summary>
+                Starting page position starting from zero 
+            </summary>
+        </member>
+        <member name="P:QPdfNet.Info.PageLabel.Label">
+            <summary>
+                Page label dictionary
+            </summary>
+        </member>
+        <member name="T:QPdfNet.Info.PageOutline">
+            <summary>
+                The page outline object
+            </summary>
+        </member>
+        <member name="P:QPdfNet.Info.PageOutline.Dest">
+            <summary>
+                Outline destination dictionary
+            </summary>
+        </member>
+        <member name="P:QPdfNet.Info.PageOutline.Object">
+            <summary>
+                Reference to outline that targets this page
+            </summary>
+        </member>
+        <member name="P:QPdfNet.Info.PageOutline.Title">
+            <summary>
+                Outline title
+            </summary>
+        </member>
+        <member name="T:QPdfNet.Info.Parameters">
+            <summary>
+                Parameters
+            </summary>
+        </member>
+        <member name="P:QPdfNet.Info.Parameters.DecodeLevel">
+            <summary>
+                Decode level used to determine stream filterability
             </summary>
         </member>
         <member name="T:QPdfNet.Info.Pdf">
@@ -788,39 +939,54 @@
                 Returns information about the PDF
             </summary>
         </member>
-        <member name="P:QPdfNet.Info.Pdf.Acroform">
+        <member name="P:QPdfNet.Info.Pdf.Version">
             <summary>
-                <see cref="P:QPdfNet.Info.Pdf.Acroform"/>
+                The JSON version
+            </summary>
+        </member>
+        <member name="P:QPdfNet.Info.Pdf.AcroForm">
+            <summary>
+                The acro form fields
             </summary>
         </member>
         <member name="P:QPdfNet.Info.Pdf.Attachments">
             <summary>
-                Returns a list with the attachments
+                The attachments
             </summary>
         </member>
         <member name="P:QPdfNet.Info.Pdf.Encrypt">
             <summary>
-                Returns information about PDF encryption
+                Encryption information
             </summary>
         </member>
         <member name="P:QPdfNet.Info.Pdf.Objectinfo">
             <summary>
-                Returns information about the objects in the PDF
+                The object information
+            </summary>
+        </member>
+        <member name="P:QPdfNet.Info.Pdf.Objects">
+            <summary>
+                The objects
+            </summary>
+        </member>
+        <member name="P:QPdfNet.Info.Pdf.Outlines">
+            <summary>
+                The outline information
             </summary>
         </member>
         <member name="P:QPdfNet.Info.Pdf.PageLabels">
             <summary>
-                Returns the used page labels in the PDF
+                The page labels
             </summary>
         </member>
         <member name="P:QPdfNet.Info.Pdf.Pages">
             <summary>
-                Returns the pages of the PDF
+                The pages of the document
             </summary>
         </member>
         <member name="P:QPdfNet.Info.Pdf.Parameters">
             <summary>
-                Returns the parameters used
+                The parameters
             </summary>
         </member>
         <member name="M:QPdfNet.Info.Pdf.FromFile(System.String)">
@@ -831,14 +997,34 @@
             <returns></returns>
             <exception cref="T:System.Exception"></exception>
         </member>
-        <member name="P:QPdfNet.Info.Stream.Filter">
+        <member name="T:QPdfNet.Info.PdfOutline">
             <summary>
-                Returns the filters used
+                The outline
             </summary>
         </member>
-        <member name="P:QPdfNet.Info.Stream.Length">
+        <member name="P:QPdfNet.Info.PdfOutline.Dest">
             <summary>
-                Returns the length of the stream
+                Outline destination dictionary
+            </summary>
+        </member>
+        <member name="T:QPdfNet.Json.Stream">
+            <summary>
+                The stream object
+            </summary>
+        </member>
+        <member name="P:QPdfNet.Json.Stream.Filter">
+            <summary>
+                If stream, its filters, otherwise null
+            </summary>
+        </member>
+        <member name="P:QPdfNet.Json.Stream.Is">
+            <summary>
+                Whether the object is a stream
+            </summary>
+        </member>
+        <member name="P:QPdfNet.Json.Stream.Length">
+            <summary>
+                If stream, its length, otherwise null
             </summary>
         </member>
         <member name="T:QPdfNet.Interop.Constants">
@@ -886,7 +1072,7 @@
                 The exported qpdf api signatures.
             </summary>
             <remarks>
-                Please note this is only public for technical reasons (you can't proxy a internal interface).
+                Please note this is only public for technical reasons (you can't proxy an internal interface).
                 It should be considered an internal interface and is NOT part of the public api and may have
                 breaking changes between releases.
             </remarks>
