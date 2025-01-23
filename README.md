@@ -10,7 +10,7 @@ The qpdf Manual is hosted online at https://qpdf.readthedocs.io. The project web
 
 ## License Information
 
-QPdfNet is Copyright (C) 2021-2024 Magic-Sessions and is licensed under the MIT license:
+QPdfNet is Copyright (C) 2021-2025 Magic-Sessions and is licensed under the MIT license:
 
     Permission is hereby granted, free of charge, to any person obtaining a copy
     of this software and associated documentation files (the "Software"), to deal
