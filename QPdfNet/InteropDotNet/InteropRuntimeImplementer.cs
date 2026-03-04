@@ -84,8 +84,7 @@ namespace QPdfNet.InteropDotNet
         #endregion
 
         #region ImplementDelegates
-        private static void ImplementDelegates(string assemblyName, ModuleBuilder moduleBuilder,
-            IEnumerable<MethodItem> methods)
+        private static void ImplementDelegates(string assemblyName, ModuleBuilder moduleBuilder, IEnumerable<MethodItem> methods)
         {
             foreach (var method in methods)
                 method.DelegateType = ImplementMethodDelegate(assemblyName, moduleBuilder, method);
