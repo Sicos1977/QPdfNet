@@ -58,8 +58,11 @@ namespace QPdfNet.InteropDotNet
             ImplementMethods(typeBuilder, methods);
             ImplementConstructor(typeBuilder, methods);
 
+#if (NETSTANDARD2_0)
+            var implementationType = typeBuilder.CreateTypeInfo();
+#else
             var implementationType = typeBuilder.CreateType();
-
+#endif
             return (T)Activator.CreateInstance(implementationType, LibraryLoader.Instance);
         }
         #endregion
@@ -105,8 +108,7 @@ namespace QPdfNet.InteropDotNet
 
             // UnmanagedFunctionPointer
             var importAttribute = method.DllImportAttribute;
-            var attributeCtor =
-                typeof(UnmanagedFunctionPointerAttribute).GetConstructor([typeof(CallingConvention)]);
+            var attributeCtor = typeof(UnmanagedFunctionPointerAttribute).GetConstructor([typeof(CallingConvention)]);
             if (attributeCtor == null)
                 throw new Exception("There is no the target constructor of the UnmanagedFunctionPointerAttribute");
             var attributeBuilder = new CustomAttributeBuilder(attributeCtor,
@@ -154,7 +156,11 @@ namespace QPdfNet.InteropDotNet
             methodBuilder.SetImplementationFlags(MethodImplAttributes.CodeTypeMask);
 
             // Create type
+#if (NETSTANDARD2_0)
+            return delegateBuilder.CreateTypeInfo()!;
+#else
             return delegateBuilder.CreateType();
+#endif            
         }
         #endregion
 

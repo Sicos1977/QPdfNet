@@ -98,7 +98,7 @@
                 Use 128 bit encryption
             </summary>
         </member>
-        <member name="M:QPdfNet.Encryption128Bit.#ctor(System.Boolean,System.Boolean,System.Boolean,System.Boolean,System.Boolean,System.Boolean,QPdfNet.Enums.Modify,QPdfNet.Enums.Print,System.Boolean)">
+        <member name="M:QPdfNet.Encryption128Bit.#ctor(System.Boolean,System.Boolean,System.Boolean,System.Boolean,System.Boolean,System.Boolean,QPdfNet.Enums.Modify,QPdfNet.Enums.Print,System.Boolean,System.Boolean)">
             <summary>
                  Encrypt the PDF with 128 bit encryption
             </summary>
@@ -111,6 +111,7 @@
             <param name="modify">Control <see cref="T:QPdfNet.Enums.Modify"/> access by level</param>
             <param name="print">Control printing access</param>
             <param name="cleartextMetaData">Prevent encryption of metadata</param>
+            <param name="useAes">Use AES instead of RC4 encryption</param>
         </member>
         <member name="T:QPdfNet.Encryption256Bit">
             <summary>

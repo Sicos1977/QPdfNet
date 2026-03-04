@@ -13,11 +13,11 @@ using System.Reflection;
 
 [assembly: System.Reflection.AssemblyCompanyAttribute("QPdfNet")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
-[assembly: System.Reflection.AssemblyCopyrightAttribute("Copyright (c) 2021-2024 Kees van Spelde")]
+[assembly: System.Reflection.AssemblyCopyrightAttribute("Copyright (c) 2021-2026 Kees van Spelde")]
 [assembly: System.Reflection.AssemblyDescriptionAttribute("A C# wrapper around QPDF that gives you all the options that you normally would h" +
     "ave from the QPDF console app")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.5.2.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.5.2+084553aa9e9599aaaec1cd9581da75008cdbaffc")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.5.2+8f5275a31920c1aab2ad5ee29230963851b9607e")]
 [assembly: System.Reflection.AssemblyProductAttribute("QPdfNet")]
 [assembly: System.Reflection.AssemblyTitleAttribute("QPdfNet")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.5.2.0")]
