@@ -14,7 +14,7 @@
 - Updated QPDF to latest version</PackageReleaseNotes>
 		<PackageIcon>qpdf.png</PackageIcon>
 		<PackageReadmeFile>readme.md</PackageReadmeFile>
-		<Copyright>Copyright (c) 2021-2024 Kees van Spelde</Copyright>
+		<Copyright>Copyright (c) 2021-2026 Kees van Spelde</Copyright>
 		<GeneratePackageOnBuild>True</GeneratePackageOnBuild>
 		<AssemblyVersion>1.5.2.0</AssemblyVersion>
 		<FileVersion>1.5.2.0</FileVersion>
