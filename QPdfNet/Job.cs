@@ -2448,7 +2448,7 @@ public class Job : IDisposable
 
         Logger.LogInformation("Output from QPDF: " + Environment.NewLine + output);
 
-        Native.qpdfjob_cleanup(jobHandle);
+        //Native.qpdfjob_cleanup(jobHandle);
 
         Reset();
 
