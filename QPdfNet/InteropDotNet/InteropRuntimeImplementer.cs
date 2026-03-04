@@ -50,7 +50,7 @@ namespace QPdfNet.InteropDotNet
             var moduleBuilder = assemblyBuilder.DefineDynamicModule(assemblyName);
 
             var typeName = GetImplementationTypeName(assemblyName, interfaceType);
-            var typeBuilder = moduleBuilder.DefineType(typeName, TypeAttributes.Public, typeof(object), new[] { interfaceType });
+            var typeBuilder = moduleBuilder.DefineType(typeName, TypeAttributes.Public, typeof(object), [interfaceType]);
             var methods = BuildMethods(interfaceType);
 
             ImplementDelegates(assemblyName, moduleBuilder, methods);
@@ -107,25 +107,23 @@ namespace QPdfNet.InteropDotNet
             // UnmanagedFunctionPointer
             var importAttribute = method.DllImportAttribute;
             var attributeCtor =
-                typeof(UnmanagedFunctionPointerAttribute).GetConstructor(new[] { typeof(CallingConvention) });
+                typeof(UnmanagedFunctionPointerAttribute).GetConstructor([typeof(CallingConvention)]);
             if (attributeCtor == null)
                 throw new Exception("There is no the target constructor of the UnmanagedFunctionPointerAttribute");
             var attributeBuilder = new CustomAttributeBuilder(attributeCtor,
-                new object[] { importAttribute.CallingConvention },
-                new[]
-                {
+                [importAttribute.CallingConvention],
+                [
                     typeof(UnmanagedFunctionPointerAttribute).GetField("CharSet"),
                     typeof(UnmanagedFunctionPointerAttribute).GetField("BestFitMapping"),
                     typeof(UnmanagedFunctionPointerAttribute).GetField("ThrowOnUnmappableChar"),
                     typeof(UnmanagedFunctionPointerAttribute).GetField("SetLastError")
-                },
-                new object[]
-                {
+                ],
+                [
                     importAttribute.CharSet,
                     importAttribute.BestFitMapping,
                     importAttribute.ThrowOnUnmappableChar,
                     importAttribute.SetLastError
-                });
+                ]);
             delegateBuilder.SetCustomAttribute(attributeBuilder);
 
 
@@ -134,7 +132,7 @@ namespace QPdfNet.InteropDotNet
                                                                 MethodAttributes.SpecialName |
                                                                 MethodAttributes.RTSpecialName,
                 CallingConventions.Standard,
-                new[] { typeof(object), typeof(IntPtr) });
+                [typeof(object), typeof(IntPtr)]);
             ctorBuilder.SetImplementationFlags(MethodImplAttributes.CodeTypeMask);
             ctorBuilder.DefineParameter(1, ParameterAttributes.HasDefault, "object");
             ctorBuilder.DefineParameter(2, ParameterAttributes.HasDefault, "method");
@@ -209,7 +207,7 @@ namespace QPdfNet.InteropDotNet
         {
             // Preparing
             var ctorBuilder = typeBuilder.DefineConstructor(MethodAttributes.Public,
-                CallingConventions.Standard, new[] { typeof(LibraryLoader) });
+                CallingConventions.Standard, [typeof(LibraryLoader)]);
             ctorBuilder.DefineParameter(1, ParameterAttributes.HasDefault, "loader");
             if (typeBuilder.BaseType == null)
                 throw new Exception("There is no a BaseType of typeBuilder");
@@ -278,7 +276,7 @@ namespace QPdfNet.InteropDotNet
                 ilGen.Emit(OpCodes.Call, typeof(Type).GetMethod("GetTypeFromHandle"));
                 // Call Marshal.GetDelegateForFunctionPointer(methodHandle, typeof(methodDelegate))
                 ilGen.Emit(OpCodes.Call, typeof(Marshal).GetMethod("GetDelegateForFunctionPointer",
-                    new[] { typeof(IntPtr), typeof(Type) }));
+                    [typeof(IntPtr), typeof(Type)]));
                 // Cast result to typeof(methodDelegate)
                 ilGen.Emit(OpCodes.Castclass, method.DelegateType);
                 // Store result in methodField
