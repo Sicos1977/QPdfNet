@@ -11,14 +11,14 @@
 		<RepositoryType>git</RepositoryType>
 		<PackageTags>qpdf pdf</PackageTags>
 		<PackageReleaseNotes>- Updated nuget packages
-- Better encryption for PDF's</PackageReleaseNotes>
+- Updated QPDF to latest version</PackageReleaseNotes>
 		<PackageIcon>qpdf.png</PackageIcon>
 		<PackageReadmeFile>readme.md</PackageReadmeFile>
 		<Copyright>Copyright (c) 2021-2024 Kees van Spelde</Copyright>
 		<GeneratePackageOnBuild>True</GeneratePackageOnBuild>
-		<AssemblyVersion>1.5.1.0</AssemblyVersion>
-		<FileVersion>1.5.1.0</FileVersion>
-		<Version>1.5.1</Version>
+		<AssemblyVersion>1.5.2.0</AssemblyVersion>
+		<FileVersion>1.5.2.0</FileVersion>
+		<Version>1.5.2</Version>
     <DocumentationFile>bin\$(Configuration)\$(TargetFramework)\$(AssemblyName).xml</DocumentationFile>
     <NoWarn>$(NoWarn);1591</NoWarn>
 	</PropertyGroup>
