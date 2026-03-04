@@ -24,13 +24,12 @@
 // THE SOFTWARE.
 //
 
-namespace QPdfNet.Interop
+namespace QPdfNet.Interop;
+
+/// <summary>
+///     Description of Constants.
+/// </summary>
+internal static class Constants
 {
-    /// <summary>
-    ///     Description of Constants.
-    /// </summary>
-    internal static class Constants
-    {
-        public const string QPdfDllName = "qpdf29.dll";
-    }
+    public const string QPdfDllName = "qpdf30.dll";
 }

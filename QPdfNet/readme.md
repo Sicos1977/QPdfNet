@@ -10,7 +10,7 @@ The QPDF Manual is hosted online at https://qpdf.readthedocs.io. The project web
 
 ## License Information
 
-QPdfNet is Copyright (C) 2021-2022 Magic-Sessions and is licensed under the MIT license:
+QPdfNet is Copyright (C) 2021-2026 Magic-Sessions and is licensed under the MIT license:
 
     Permission is hereby granted, free of charge, to any person obtaining a copy
     of this software and associated documentation files (the "Software"), to deal
@@ -32,7 +32,7 @@ QPdfNet is Copyright (C) 2021-2022 Magic-Sessions and is licensed under the MIT 
 
 ## Microsoft Visual C++ runtimes
 
-The DLL qpdf29.dll is compiled with Visual Studio 2022 you need these C++ runtimes for it on your computer
+The DLL qpdf30.dll is compiled with Visual Studio 2026 you need these C++ runtimes for it on your computer
 
 - X86: https://aka.ms/vs/17/release/vc_redist.x86.exe
 - X64: https://aka.ms/vs/17/release/vc_redist.x64.exe
