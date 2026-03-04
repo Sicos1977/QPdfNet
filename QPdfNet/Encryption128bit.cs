@@ -28,57 +28,56 @@ using Newtonsoft.Json;
 using QPdfNet.Enums;
 using QPdfNet.Loggers;
 
-namespace QPdfNet
+namespace QPdfNet;
+
+/// <summary>
+///     Use 128 bit encryption
+/// </summary>
+public class Encryption128Bit : Encryption256Bit
 {
+    #region Fields
+    [JsonProperty("useAes")] private string _useAes;
+    #endregion
+
+    #region Constructor
     /// <summary>
-    ///     Use 128 bit encryption
+    ///      Encrypt the PDF with 128 bit encryption
     /// </summary>
-    public class Encryption128Bit : Encryption256Bit
+    /// <param name="accessibility">Restrict accessibility (usually ignored)</param>
+    /// <param name="annotate">Restrict commenting/filling form fields</param>
+    /// <param name="assemble">Restrict document assembly</param>
+    /// <param name="extract">Restrict text/graphic extraction</param>
+    /// <param name="form">Restrict filling form fields</param>
+    /// <param name="modifyOther">Restrict other modifications</param>
+    /// <param name="modify">Control <see cref="Enums.Modify"/> access by level</param>
+    /// <param name="print">Control printing access</param>
+    /// <param name="cleartextMetaData">Prevent encryption of metadata</param>
+    /// <param name="useAes">Use AES instead of RC4 encryption</param>
+    public Encryption128Bit(
+        bool accessibility = true,
+        bool annotate = true,
+        bool assemble = true,
+        bool extract = true,
+        bool form = true,
+        bool modifyOther = true,
+        Modify modify = Modify.All,
+        Print print = Print.Full,
+        bool cleartextMetaData = false,
+        bool useAes = false) :
+        base(
+            accessibility,
+            annotate,
+            assemble,
+            extract,
+            form,
+            modifyOther,
+            modify,
+            print, 
+            cleartextMetaData)
     {
-        #region Fields
-        [JsonProperty("useAes")] private string _useAes;
-        #endregion
+        Logger.LogInformation($"128-bit encryption is using {(useAes ? "AES" : "RC4")} encryption");
 
-        #region Constructor
-        /// <summary>
-        ///      Encrypt the PDF with 128 bit encryption
-        /// </summary>
-        /// <param name="accessibility">Restrict accessibility (usually ignored)</param>
-        /// <param name="annotate">Restrict commenting/filling form fields</param>
-        /// <param name="assemble">Restrict document assembly</param>
-        /// <param name="extract">Restrict text/graphic extraction</param>
-        /// <param name="form">Restrict filling form fields</param>
-        /// <param name="modifyOther">Restrict other modifications</param>
-        /// <param name="modify">Control <see cref="Enums.Modify"/> access by level</param>
-        /// <param name="print">Control printing access</param>
-        /// <param name="cleartextMetaData">Prevent encryption of metadata</param>
-        /// <param name="useAes">Use AES instead of RC4 encryption</param>
-        public Encryption128Bit(
-            bool accessibility = true,
-            bool annotate = true,
-            bool assemble = true,
-            bool extract = true,
-            bool form = true,
-            bool modifyOther = true,
-            Modify modify = Modify.All,
-            Print print = Print.Full,
-            bool cleartextMetaData = false,
-            bool useAes = false) :
-            base(
-                accessibility,
-                annotate,
-                assemble,
-                extract,
-                form,
-                modifyOther,
-                modify,
-                print, 
-                cleartextMetaData)
-        {
-            Logger.LogInformation($"128-bit encryption is using {(useAes ? "AES" : "RC4")} encryption");
-
-            _useAes = useAes ? "y" : "n";
-        }
-        #endregion
+        _useAes = useAes ? "y" : "n";
     }
+    #endregion
 }
