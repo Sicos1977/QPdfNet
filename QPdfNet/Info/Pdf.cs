@@ -129,4 +129,28 @@ public class Pdf
         return null;
     }
     #endregion
+
+    #region ContainsJavaScript
+    /// <summary>
+    ///     Returns <c>true</c> when the PDF contains JavaScript, otherwise <c>false</c>
+    /// </summary>
+    /// <param name="fileName">The PDF file to check</param>
+    /// <returns><c>true</c> when JavaScript is found</returns>
+    /// <exception cref="Exception">Thrown when the qpdf operation fails or the file cannot be processed</exception>
+    public static bool ContainsJavaScript(string fileName)
+    {
+        Logger.LogInformation($"Checking if PDF '{fileName}' contains JavaScript");
+
+        var result = new Job().InputFile(fileName).Json().Run(out var output, out var data);
+
+        if (result != ExitCode.Success)
+            throw new Exception(output);
+
+        if (data == null)
+            return false;
+
+        var json = Encoding.ASCII.GetString(data);
+        return json.IndexOf("javascript", StringComparison.OrdinalIgnoreCase) >= 0;
+    }
+    #endregion
 }
