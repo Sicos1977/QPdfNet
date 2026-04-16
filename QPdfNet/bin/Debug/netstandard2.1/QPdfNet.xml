@@ -997,6 +997,14 @@
             <returns></returns>
             <exception cref="T:System.Exception"></exception>
         </member>
+        <member name="M:QPdfNet.Info.Pdf.ContainsJavaScript(System.String)">
+            <summary>
+                Returns <c>true</c> when the PDF contains JavaScript, otherwise <c>false</c>
+            </summary>
+            <param name="fileName">The PDF file to check</param>
+            <returns><c>true</c> when JavaScript is found</returns>
+            <exception cref="T:System.Exception">Thrown when the qpdf operation fails or the file cannot be processed</exception>
+        </member>
         <member name="T:QPdfNet.Info.PdfOutline">
             <summary>
                 The outline

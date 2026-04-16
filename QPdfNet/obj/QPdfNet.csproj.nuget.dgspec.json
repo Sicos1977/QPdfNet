@@ -1,33 +1,27 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Kees\\QPdfNet\\QPdfNet\\QPdfNet.csproj": {}
+    "/home/runner/work/QPdfNet/QPdfNet/QPdfNet/QPdfNet.csproj": {}
   },
   "projects": {
-    "C:\\Kees\\QPdfNet\\QPdfNet\\QPdfNet.csproj": {
+    "/home/runner/work/QPdfNet/QPdfNet/QPdfNet/QPdfNet.csproj": {
       "version": "1.5.3",
       "restore": {
-        "projectUniqueName": "C:\\Kees\\QPdfNet\\QPdfNet\\QPdfNet.csproj",
+        "projectUniqueName": "/home/runner/work/QPdfNet/QPdfNet/QPdfNet/QPdfNet.csproj",
         "projectName": "QPdfNet",
-        "projectPath": "C:\\Kees\\QPdfNet\\QPdfNet\\QPdfNet.csproj",
-        "packagesPath": "C:\\Users\\AO303388\\.nuget\\packages\\",
-        "outputPath": "C:\\Kees\\QPdfNet\\QPdfNet\\obj\\",
+        "projectPath": "/home/runner/work/QPdfNet/QPdfNet/QPdfNet/QPdfNet.csproj",
+        "packagesPath": "/tmp/codeql-scratch-fecfac2a6d71fba3/dbs/csharp/working/packages",
+        "outputPath": "/home/runner/work/QPdfNet/QPdfNet/QPdfNet/obj/",
         "projectStyle": "PackageReference",
         "crossTargeting": true,
-        "fallbackFolders": [
-          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
-        ],
         "configFilePaths": [
-          "C:\\Users\\AO303388\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+          "/home/runner/.nuget/NuGet/NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "netstandard2.0",
           "netstandard2.1"
         ],
         "sources": {
-          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -86,7 +80,7 @@
           ],
           "assetTargetFallback": true,
           "warn": true,
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.103\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "/usr/share/dotnet/sdk/10.0.102/RuntimeIdentifierGraph.json"
         },
         "netstandard2.1": {
           "targetAlias": "netstandard2.1",
@@ -111,12 +105,18 @@
           ],
           "assetTargetFallback": true,
           "warn": true,
+          "downloadDependencies": [
+            {
+              "name": "NETStandard.Library.Ref",
+              "version": "[2.1.0, 2.1.0]"
+            }
+          ],
           "frameworkReferences": {
             "NETStandard.Library": {
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.103\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "/usr/share/dotnet/sdk/10.0.102/RuntimeIdentifierGraph.json"
         }
       }
     }

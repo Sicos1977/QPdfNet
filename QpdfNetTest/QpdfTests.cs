@@ -711,5 +711,19 @@ namespace QpdfNetTest
             var pdf = Pdf.FromFile(Path.Combine("TestFiles", "withimages.pdf"));
             Assert.IsTrue(pdf != null);
         }
+
+        [TestMethod]
+        public void TestContainsJavaScript()
+        {
+            var result = Pdf.ContainsJavaScript(Path.Combine("TestFiles", "withjavascript.pdf"));
+            Assert.IsTrue(result);
+        }
+
+        [TestMethod]
+        public void TestContainsNoJavaScript()
+        {
+            var result = Pdf.ContainsJavaScript(Path.Combine("TestFiles", "test.pdf"));
+            Assert.IsFalse(result);
+        }
     }
 }
