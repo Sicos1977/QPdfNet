@@ -2461,7 +2461,15 @@ public class Job : IDisposable
 
         var jobHandle = Native.qpdfjob_init();
         Native.qpdfjob_set_logger(jobHandle, _loggerHandle);
-        Native.qpdfjob_initialize_from_json(jobHandle, json);
+        var jsonPtr = MarshalHelper.StringToPtr(json);
+        try
+        {
+            Native.qpdfjob_initialize_from_json(jobHandle, jsonPtr);
+        }
+        finally
+        {
+            Marshal.FreeHGlobal(jsonPtr);
+        }
 
         var result = Native.qpdfjob_run(jobHandle);
 

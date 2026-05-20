@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "DNnXpU4jpqw=",
+  "dgSpecHash": "2Ld0vMDKLCU=",
   "success": true,
   "projectFilePath": "/home/runner/work/QPdfNet/QPdfNet/QpdfNetTest/QpdfNetTest.csproj",
   "expectedPackageFiles": [
@@ -28,8 +28,8 @@
     "/tmp/codeql-scratch-fecfac2a6d71fba3/dbs/csharp/working/packages/system.collections.immutable/8.0.0/system.collections.immutable.8.0.0.nupkg.sha512",
     "/tmp/codeql-scratch-fecfac2a6d71fba3/dbs/csharp/working/packages/system.diagnostics.diagnosticsource/5.0.0/system.diagnostics.diagnosticsource.5.0.0.nupkg.sha512",
     "/tmp/codeql-scratch-fecfac2a6d71fba3/dbs/csharp/working/packages/system.reflection.metadata/8.0.0/system.reflection.metadata.8.0.0.nupkg.sha512",
-    "/tmp/codeql-scratch-fecfac2a6d71fba3/dbs/csharp/working/packages/microsoft.netcore.app.ref/10.0.2/microsoft.netcore.app.ref.10.0.2.nupkg.sha512",
-    "/tmp/codeql-scratch-fecfac2a6d71fba3/dbs/csharp/working/packages/microsoft.aspnetcore.app.ref/10.0.2/microsoft.aspnetcore.app.ref.10.0.2.nupkg.sha512"
+    "/tmp/codeql-scratch-fecfac2a6d71fba3/dbs/csharp/working/packages/microsoft.netcore.app.ref/10.0.8/microsoft.netcore.app.ref.10.0.8.nupkg.sha512",
+    "/tmp/codeql-scratch-fecfac2a6d71fba3/dbs/csharp/working/packages/microsoft.aspnetcore.app.ref/10.0.8/microsoft.aspnetcore.app.ref.10.0.8.nupkg.sha512"
   ],
   "logs": []
 }
