@@ -143,6 +143,7 @@ namespace QpdfNetTest
                 .Rotate(Rotation.Rotate0)
                 .GenerateAppearances()
                 .OptimizeImages()
+                .JpegQualityLevel()
                 .OiMinWidth()
                 .OiMinHeight()
                 .OiMinArea()

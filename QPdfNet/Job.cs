@@ -144,6 +144,7 @@ public class Job : IDisposable
     [JsonProperty("staticId")] private string? _staticId;
     [JsonProperty("staticAesIv")] private string? _staticAesIv;
     [JsonProperty("linearizePass1")] private string? _linearizePass1;
+    [JsonProperty("jpegQuality")] private string? _jpegQuality;
 
     private static readonly IQPdfApiSignatures Native = new QPdfApi().Native;
 
@@ -326,6 +327,7 @@ public class Job : IDisposable
         _staticId = null;
         _staticAesIv = null;
         _linearizePass1 = null;
+        _jpegQuality = null;
     }
     #endregion
 
@@ -1684,6 +1686,32 @@ public class Job : IDisposable
     {
         Logger.LogInformation("Optimizing all images that are not compressed with DCT (JPEG)");
         _optimizeImages = string.Empty;
+        return this;
+    }
+    #endregion
+
+    #region JpegQualityLevel
+    /// <summary>
+    ///     When rewriting images with <see cref="OptimizeImages" />, set a quality level from 0 (lowest) to 100 (highest) for writing new images.
+    ///     Higher quality results in larger images, and lower quality results in smaller images. Be sure to check your output to see 
+    ///     if the quality is acceptable. This option is only effective when combined with <see cref="OptimizeImages" />. This option also causes 
+    ///     files that are already compressed with JPEG compression to be uncompressed and recompressed, potentially introducing 
+    ///     additional loss of image quality.
+    /// </summary>
+    /// <returns>
+    ///     <see cref="Job" />
+    /// </returns>
+    public Job JpegQualityLevel(int n = 75)
+    {
+        if(n < 0 || n > 100)
+        {
+            var message = $"The JPEG quality level '{n}' should be between 0 and 100";
+            Logger.LogError(message);
+            throw new ArgumentOutOfRangeException(nameof(n), message);
+        }
+
+        Logger.LogInformation($"Optimizing all JPEG images using quality level {n}.");
+        _jpegQuality = n.ToString();
         return this;
     }
     #endregion
