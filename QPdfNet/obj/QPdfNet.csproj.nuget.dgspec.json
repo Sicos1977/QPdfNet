@@ -1,27 +1,33 @@
 {
   "format": 1,
   "restore": {
-    "/home/runner/work/QPdfNet/QPdfNet/QPdfNet/QPdfNet.csproj": {}
+    "C:\\Kees\\QPdfNet\\QPdfNet\\QPdfNet.csproj": {}
   },
   "projects": {
-    "/home/runner/work/QPdfNet/QPdfNet/QPdfNet/QPdfNet.csproj": {
-      "version": "1.5.3",
+    "C:\\Kees\\QPdfNet\\QPdfNet\\QPdfNet.csproj": {
+      "version": "1.5.4",
       "restore": {
-        "projectUniqueName": "/home/runner/work/QPdfNet/QPdfNet/QPdfNet/QPdfNet.csproj",
+        "projectUniqueName": "C:\\Kees\\QPdfNet\\QPdfNet\\QPdfNet.csproj",
         "projectName": "QPdfNet",
-        "projectPath": "/home/runner/work/QPdfNet/QPdfNet/QPdfNet/QPdfNet.csproj",
-        "packagesPath": "/tmp/codeql-scratch-fecfac2a6d71fba3/dbs/csharp/working/packages",
-        "outputPath": "/home/runner/work/QPdfNet/QPdfNet/QPdfNet/obj/",
+        "projectPath": "C:\\Kees\\QPdfNet\\QPdfNet\\QPdfNet.csproj",
+        "packagesPath": "C:\\Users\\AO303388\\.nuget\\packages\\",
+        "outputPath": "C:\\Kees\\QPdfNet\\QPdfNet\\obj\\",
         "projectStyle": "PackageReference",
         "crossTargeting": true,
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
         "configFilePaths": [
-          "/home/runner/.nuget/NuGet/NuGet.Config"
+          "C:\\Users\\AO303388\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
           "netstandard2.0",
           "netstandard2.1"
         ],
         "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -46,7 +52,7 @@
           "auditLevel": "low",
           "auditMode": "direct"
         },
-        "SdkAnalysisLevel": "10.0.300"
+        "SdkAnalysisLevel": "10.0.200"
       },
       "frameworks": {
         "netstandard2.0": {
@@ -55,7 +61,7 @@
           "dependencies": {
             "Microsoft.Extensions.Logging": {
               "target": "Package",
-              "version": "[10.0.3, )"
+              "version": "[10.0.8, )"
             },
             "NETStandard.Library": {
               "suppressParent": "All",
@@ -83,7 +89,7 @@
           ],
           "assetTargetFallback": true,
           "warn": true,
-          "runtimeIdentifierGraphPath": "/usr/share/dotnet/sdk/10.0.300/RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.204\\RuntimeIdentifierGraph.json"
         },
         "netstandard2.1": {
           "framework": "netstandard2.1",
@@ -91,7 +97,7 @@
           "dependencies": {
             "Microsoft.Extensions.Logging": {
               "target": "Package",
-              "version": "[10.0.3, )"
+              "version": "[10.0.8, )"
             },
             "Newtonsoft.Json": {
               "target": "Package",
@@ -109,18 +115,12 @@
           ],
           "assetTargetFallback": true,
           "warn": true,
-          "downloadDependencies": [
-            {
-              "name": "NETStandard.Library.Ref",
-              "version": "[2.1.0, 2.1.0]"
-            }
-          ],
           "frameworkReferences": {
             "NETStandard.Library": {
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "/usr/share/dotnet/sdk/10.0.300/RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.204\\RuntimeIdentifierGraph.json"
         }
       }
     }
