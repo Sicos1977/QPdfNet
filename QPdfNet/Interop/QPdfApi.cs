@@ -112,7 +112,7 @@ namespace QPdfNet.Interop
         void qpdflogger_set_save(IntPtr loggerHandle, qpdf_log_dest_e destination, IntPtr callBackHandler, IntPtr udata);
 
         [RuntimeDllImport(Constants.QPdfDllName, CallingConvention = CallingConvention.Cdecl, EntryPoint = nameof(qpdfjob_initialize_from_json))]
-        int qpdfjob_initialize_from_json(IntPtr jobHandle, string json);
+        int qpdfjob_initialize_from_json(IntPtr jobHandle, IntPtr json);
 
         [RuntimeDllImport(Constants.QPdfDllName, CallingConvention = CallingConvention.Cdecl, EntryPoint = nameof(qpdfjob_run))]
         int qpdfjob_run(IntPtr jobHandle);

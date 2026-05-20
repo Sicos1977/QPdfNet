@@ -1890,6 +1890,18 @@
                 <see cref="T:QPdfNet.Job" />
             </returns>
         </member>
+        <member name="M:QPdfNet.Job.JpegQualityLevel(System.Int32)">
+            <summary>
+                When rewriting images with <see cref="M:QPdfNet.Job.OptimizeImages" />, set a quality level from 0 (lowest) to 100 (highest) for writing new images.
+                Higher quality results in larger images, and lower quality results in smaller images. Be sure to check your output to see 
+                if the quality is acceptable. This option is only effective when combined with <see cref="M:QPdfNet.Job.OptimizeImages" />. This option also causes 
+                files that are already compressed with JPEG compression to be uncompressed and recompressed, potentially introducing 
+                additional loss of image quality.
+            </summary>
+            <returns>
+                <see cref="T:QPdfNet.Job" />
+            </returns>
+        </member>
         <member name="M:QPdfNet.Job.OiMinWidth(System.Int32)">
             <summary>
                 Avoid optimizing images whose width is below the specified amount. If omitted, the default is <b>128</b> pixels. Use
