@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "aGEUmOmOy0E=",
+  "dgSpecHash": "bTIVolPdtWQ=",
   "success": true,
   "projectFilePath": "C:\\Kees\\QPdfNet\\QpdfNetTest\\QpdfNetTest.csproj",
   "expectedPackageFiles": [
@@ -23,8 +23,7 @@
     "C:\\Users\\AO303388\\.nuget\\packages\\mstest.analyzers\\4.5.1\\mstest.analyzers.4.5.1.nupkg.sha512",
     "C:\\Users\\AO303388\\.nuget\\packages\\mstest.testadapter\\4.5.1\\mstest.testadapter.4.5.1.nupkg.sha512",
     "C:\\Users\\AO303388\\.nuget\\packages\\mstest.testframework\\4.5.1\\mstest.testframework.4.5.1.nupkg.sha512",
-    "C:\\Users\\AO303388\\.nuget\\packages\\newtonsoft.json\\13.0.4\\newtonsoft.json.13.0.4.nupkg.sha512",
-    "C:\\Users\\AO303388\\.nuget\\packages\\qpdfnet\\1.5.4\\qpdfnet.1.5.4.nupkg.sha512"
+    "C:\\Users\\AO303388\\.nuget\\packages\\newtonsoft.json\\13.0.4\\newtonsoft.json.13.0.4.nupkg.sha512"
   ],
   "logs": []
 }

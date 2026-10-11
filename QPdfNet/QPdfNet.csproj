@@ -11,14 +11,14 @@
 		<RepositoryType>git</RepositoryType>
 		<PackageTags>qpdf pdf</PackageTags>
 		<PackageReleaseNotes>- Updated nuget packages
-- Fixed unicode issue</PackageReleaseNotes>
+- Updated to latest 12.x qpdf version</PackageReleaseNotes>
 		<PackageIcon>qpdf.png</PackageIcon>
 		<PackageReadmeFile>readme.md</PackageReadmeFile>
 		<Copyright>Copyright (c) 2021-2026 Kees van Spelde</Copyright>
 		<GeneratePackageOnBuild>True</GeneratePackageOnBuild>
-		<AssemblyVersion>1.5.3.0</AssemblyVersion>
-		<FileVersion>1.5.3.0</FileVersion>
-		<Version>1.5.4</Version>
+		<AssemblyVersion>1.6.0.0</AssemblyVersion>
+		<FileVersion>1.6.0.0</FileVersion>
+		<Version>1.6.0</Version>
     <DocumentationFile>bin\$(Configuration)\$(TargetFramework)\$(AssemblyName).xml</DocumentationFile>
     <NoWarn>$(NoWarn);1591</NoWarn>
 	</PropertyGroup>

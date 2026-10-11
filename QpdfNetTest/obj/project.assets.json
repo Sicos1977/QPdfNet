@@ -713,7 +713,7 @@
           }
         }
       },
-      "QPdfNet/1.5.4": {
+      "QPdfNet/1.6.0": {
         "type": "project",
         "framework": ".NETStandard,Version=v2.1",
         "dependencies": {
@@ -2071,7 +2071,7 @@
         "packageIcon.png"
       ]
     },
-    "QPdfNet/1.5.4": {
+    "QPdfNet/1.6.0": {
       "type": "project",
       "path": "../QPdfNet/QPdfNet.csproj",
       "msbuildProject": "../QPdfNet/QPdfNet.csproj"
@@ -2083,7 +2083,7 @@
       "MSTest.TestFramework >= 4.5.1",
       "Microsoft.Extensions.Logging >= 10.0.12",
       "Microsoft.NET.Test.Sdk >= 18.10.1",
-      "QPdfNet >= 1.5.4",
+      "QPdfNet >= 1.6.0",
       "coverlet.collector >= 10.1.0"
     ]
   },
