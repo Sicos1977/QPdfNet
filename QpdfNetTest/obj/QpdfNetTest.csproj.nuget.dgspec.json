@@ -49,7 +49,7 @@
           "auditLevel": "low",
           "auditMode": "all"
         },
-        "SdkAnalysisLevel": "10.0.200"
+        "SdkAnalysisLevel": "10.0.400"
       },
       "frameworks": {
         "net10.0": {
@@ -58,25 +58,25 @@
           "dependencies": {
             "MSTest.TestAdapter": {
               "target": "Package",
-              "version": "[4.2.3, )"
+              "version": "[4.5.1, )"
             },
             "MSTest.TestFramework": {
               "target": "Package",
-              "version": "[4.2.3, )"
+              "version": "[4.5.1, )"
             },
             "Microsoft.Extensions.Logging": {
               "target": "Package",
-              "version": "[10.0.8, )"
+              "version": "[10.0.12, )"
             },
             "Microsoft.NET.Test.Sdk": {
               "target": "Package",
-              "version": "[18.5.1, )"
+              "version": "[18.10.1, )"
             },
             "coverlet.collector": {
               "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
               "suppressParent": "All",
               "target": "Package",
-              "version": "[10.0.1, )"
+              "version": "[10.1.0, )"
             }
           },
           "imports": [
@@ -95,7 +95,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.204/PortableRuntimeIdentifierGraph.json",
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.401/PortableRuntimeIdentifierGraph.json",
           "packagesToPrune": {
             "Microsoft.CSharp": "(,4.7.32767]",
             "Microsoft.VisualBasic": "(,10.4.32767]",
@@ -421,7 +421,7 @@
           "auditLevel": "low",
           "auditMode": "direct"
         },
-        "SdkAnalysisLevel": "10.0.200"
+        "SdkAnalysisLevel": "10.0.400"
       },
       "frameworks": {
         "netstandard2.0": {
@@ -430,7 +430,7 @@
           "dependencies": {
             "Microsoft.Extensions.Logging": {
               "target": "Package",
-              "version": "[10.0.8, )"
+              "version": "[10.0.12, )"
             },
             "NETStandard.Library": {
               "suppressParent": "All",
@@ -458,7 +458,7 @@
           ],
           "assetTargetFallback": true,
           "warn": true,
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.204\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.401\\RuntimeIdentifierGraph.json"
         },
         "netstandard2.1": {
           "framework": "netstandard2.1",
@@ -466,7 +466,7 @@
           "dependencies": {
             "Microsoft.Extensions.Logging": {
               "target": "Package",
-              "version": "[10.0.8, )"
+              "version": "[10.0.12, )"
             },
             "Newtonsoft.Json": {
               "target": "Package",
@@ -489,7 +489,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.204\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.401\\RuntimeIdentifierGraph.json"
         }
       }
     }
