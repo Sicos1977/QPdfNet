@@ -145,6 +145,12 @@ public class Job : IDisposable
     [JsonProperty("staticAesIv")] private string? _staticAesIv;
     [JsonProperty("linearizePass1")] private string? _linearizePass1;
     [JsonProperty("jpegQuality")] private string? _jpegQuality;
+    [JsonProperty("progress")] private string? _progress;
+    [JsonProperty("removeAcroform")] private string? _removeAcroform;
+    [JsonProperty("removeInfo")] private string? _removeInfo;
+    [JsonProperty("removeMetadata")] private string? _removeMetadata;
+    [JsonProperty("removeStructure")] private string? _removeStructure;
+    [JsonProperty("reportMemoryUsage")] private string? _reportMemoryUsage;
 
     private static readonly IQPdfApiSignatures Native = new QPdfApi().Native;
 
@@ -328,6 +334,12 @@ public class Job : IDisposable
         _staticAesIv = null;
         _linearizePass1 = null;
         _jpegQuality = null;
+        _progress = null;
+        _removeAcroform = null;
+        _removeInfo = null;
+        _removeMetadata = null;
+        _removeStructure = null;
+        _reportMemoryUsage = null;
     }
     #endregion
 
@@ -2427,6 +2439,104 @@ public class Job : IDisposable
     {
         Logger.LogInformation("Writing the first pass of linearization to the named file. The resulting file is not a valid PDF file");
         _linearizePass1 = fileName;
+        return this;
+    }
+    #endregion
+
+    #region Progress
+    /// <summary>
+    ///     Indicate progress while writing output files. Progress indication does not start until writing starts, so there
+    ///     may be a delay before progress indicators are seen if complicated transformations are being applied before the
+    ///     write process begins.
+    /// </summary>
+    /// <returns>
+    ///     <see cref="Job" />
+    /// </returns>
+    public Job Progress()
+    {
+        Logger.LogInformation("Indicate progress while writing the output file");
+        _progress = string.Empty;
+        return this;
+    }
+    #endregion
+
+    #region RemoveAcroform
+    /// <summary>
+    ///     Exclude the interactive form dictionary from the <see cref="OutputFile"/>. This option only removes the
+    ///     interactive form dictionary from the document catalog. It does not remove form field dictionaries or the
+    ///     associated widget annotations.
+    /// </summary>
+    /// <returns>
+    ///     <see cref="Job" />
+    /// </returns>
+    public Job RemoveAcroform()
+    {
+        Logger.LogInformation("Exclude the interactive form dictionary from the output file");
+        _removeAcroform = string.Empty;
+        return this;
+    }
+    #endregion
+
+    #region RemoveInfo
+    /// <summary>
+    ///     Exclude file information (except modification date) from the <see cref="OutputFile"/> by omitting all entries
+    ///     (except <c>/ModDate</c>) from the <c>/Info</c> dictionary in the document trailer.
+    /// </summary>
+    /// <returns>
+    ///     <see cref="Job" />
+    /// </returns>
+    public Job RemoveInfo()
+    {
+        Logger.LogInformation("Exclude file information (except modification date) from the output file");
+        _removeInfo = string.Empty;
+        return this;
+    }
+    #endregion
+
+    #region RemoveMetadata
+    /// <summary>
+    ///     Exclude metadata from the <see cref="OutputFile"/> by omitting the <c>/Metadata</c> dictionary in the document
+    ///     catalog.
+    /// </summary>
+    /// <returns>
+    ///     <see cref="Job" />
+    /// </returns>
+    public Job RemoveMetadata()
+    {
+        Logger.LogInformation("Exclude metadata from the output file");
+        _removeMetadata = string.Empty;
+        return this;
+    }
+    #endregion
+
+    #region RemoveStructure
+    /// <summary>
+    ///     Exclude the structure tree from the <see cref="OutputFile"/> by omitting the <c>/StructTreeRoot</c> and
+    ///     <c>/MarkInfo</c> dictionaries in the document catalog.
+    /// </summary>
+    /// <returns>
+    ///     <see cref="Job" />
+    /// </returns>
+    public Job RemoveStructure()
+    {
+        Logger.LogInformation("Exclude the structure tree from the output file");
+        _removeStructure = string.Empty;
+        return this;
+    }
+    #endregion
+
+    #region ReportMemoryUsage
+    /// <summary>
+    ///     This is used by qpdf's performance test suite to report the maximum amount of memory used in supported
+    ///     environments.
+    /// </summary>
+    /// <returns>
+    ///     <see cref="Job" />
+    /// </returns>
+    public Job ReportMemoryUsage()
+    {
+        Logger.LogInformation("Report the maximum amount of memory used in supported environments");
+        _reportMemoryUsage = string.Empty;
         return this;
     }
     #endregion

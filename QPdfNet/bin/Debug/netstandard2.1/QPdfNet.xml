@@ -2339,6 +2339,62 @@
                 <see cref="T:QPdfNet.Job" />
             </returns>
         </member>
+        <member name="M:QPdfNet.Job.Progress">
+            <summary>
+                Indicate progress while writing output files. Progress indication does not start until writing starts, so there
+                may be a delay before progress indicators are seen if complicated transformations are being applied before the
+                write process begins.
+            </summary>
+            <returns>
+                <see cref="T:QPdfNet.Job" />
+            </returns>
+        </member>
+        <member name="M:QPdfNet.Job.RemoveAcroform">
+            <summary>
+                Exclude the interactive form dictionary from the <see cref="M:QPdfNet.Job.OutputFile(System.String)"/>. This option only removes the
+                interactive form dictionary from the document catalog. It does not remove form field dictionaries or the
+                associated widget annotations.
+            </summary>
+            <returns>
+                <see cref="T:QPdfNet.Job" />
+            </returns>
+        </member>
+        <member name="M:QPdfNet.Job.RemoveInfo">
+            <summary>
+                Exclude file information (except modification date) from the <see cref="M:QPdfNet.Job.OutputFile(System.String)"/> by omitting all entries
+                (except <c>/ModDate</c>) from the <c>/Info</c> dictionary in the document trailer.
+            </summary>
+            <returns>
+                <see cref="T:QPdfNet.Job" />
+            </returns>
+        </member>
+        <member name="M:QPdfNet.Job.RemoveMetadata">
+            <summary>
+                Exclude metadata from the <see cref="M:QPdfNet.Job.OutputFile(System.String)"/> by omitting the <c>/Metadata</c> dictionary in the document
+                catalog.
+            </summary>
+            <returns>
+                <see cref="T:QPdfNet.Job" />
+            </returns>
+        </member>
+        <member name="M:QPdfNet.Job.RemoveStructure">
+            <summary>
+                Exclude the structure tree from the <see cref="M:QPdfNet.Job.OutputFile(System.String)"/> by omitting the <c>/StructTreeRoot</c> and
+                <c>/MarkInfo</c> dictionaries in the document catalog.
+            </summary>
+            <returns>
+                <see cref="T:QPdfNet.Job" />
+            </returns>
+        </member>
+        <member name="M:QPdfNet.Job.ReportMemoryUsage">
+            <summary>
+                This is used by qpdf's performance test suite to report the maximum amount of memory used in supported
+                environments.
+            </summary>
+            <returns>
+                <see cref="T:QPdfNet.Job" />
+            </returns>
+        </member>
         <member name="M:QPdfNet.Job.InternalRun(System.String@,System.Byte[]@)">
             <summary>
                 Runs the job with the given parameters

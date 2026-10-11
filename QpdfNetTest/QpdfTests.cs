@@ -149,6 +149,71 @@ namespace QpdfNetTest
                 .OiMinArea()
                 .KeepInlineImages()
                 .RemovePageLabels()
+                .Progress()
+                .Run(out _);
+
+            Assert.AreEqual(ExitCode.Success, result);
+            Assert.IsTrue(File.Exists(outputFile));
+        }
+
+        [TestMethod]
+        public void TestRemoveAcroform()
+        {
+            var outputFile = Path.Combine(_testFolder, "output.pdf");
+
+            var job = new Job();
+            var result = job
+                .InputFile(Path.Combine("TestFiles", "test.pdf"))
+                .OutputFile(outputFile)
+                .RemoveAcroform()
+                .Run(out _);
+
+            Assert.AreEqual(ExitCode.Success, result);
+            Assert.IsTrue(File.Exists(outputFile));
+        }
+
+        [TestMethod]
+        public void TestRemoveInfo()
+        {
+            var outputFile = Path.Combine(_testFolder, "output.pdf");
+
+            var job = new Job();
+            var result = job
+                .InputFile(Path.Combine("TestFiles", "test.pdf"))
+                .OutputFile(outputFile)
+                .RemoveInfo()
+                .Run(out _);
+
+            Assert.AreEqual(ExitCode.Success, result);
+            Assert.IsTrue(File.Exists(outputFile));
+        }
+
+        [TestMethod]
+        public void TestRemoveMetadata()
+        {
+            var outputFile = Path.Combine(_testFolder, "output.pdf");
+
+            var job = new Job();
+            var result = job
+                .InputFile(Path.Combine("TestFiles", "test.pdf"))
+                .OutputFile(outputFile)
+                .RemoveMetadata()
+                .Run(out _);
+
+            Assert.AreEqual(ExitCode.Success, result);
+            Assert.IsTrue(File.Exists(outputFile));
+        }
+
+        [TestMethod]
+        public void TestRemoveStructure()
+        {
+            var outputFile = Path.Combine(_testFolder, "output.pdf");
+
+            var job = new Job();
+            var result = job
+                .InputFile(Path.Combine("TestFiles", "test.pdf"))
+                .OutputFile(outputFile)
+                .RemoveStructure()
                 .Run(out _);
 
             Assert.AreEqual(ExitCode.Success, result);
