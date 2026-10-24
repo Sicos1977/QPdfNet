@@ -143,8 +143,8 @@
             </summary>
             <param name="annotate">Restrict comments, filling forms, and signing</param>
             <param name="extract">Restrict text/graphic extraction</param>
-            <param name="modify">Restrict document <see cref="T:QPdfNet.Enums.Modify"/></param>
-            <param name="print">Restrict <see cref="T:QPdfNet.Enums.Print"/></param>
+            <param name="modify">Restrict document <see cref="P:QPdfNet.Encryption40Bit.Modify"/></param>
+            <param name="print">Restrict <see cref="P:QPdfNet.Encryption40Bit.Print"/></param>
         </member>
         <member name="T:QPdfNet.Enums.AutoYesNo">
             <summary>
@@ -559,6 +559,13 @@
                 Whether the form fields' appearance streams need to be regenerated
             </summary>
         </member>
+        <member name="T:QPdfNet.Info.Annotation">
+            <summary>
+                Represents a PDF annotation, including its flags, appearance state, and a reference to the underlying annotation object.
+            </summary>
+            <remarks>Used to model annotation data from qpdf JSON output, including the /F annotation flags and appearance
+            state values used by controls such as check boxes and radio buttons.</remarks>
+        </member>
         <member name="P:QPdfNet.Info.Annotation.AnnotationFlags">
             <summary>
                 Annotation flags from /F -- see pdf_annotation_flag_e in qpdf/Constants.h
@@ -609,7 +616,7 @@
                 Allow extraction?
             </summary>
         </member>
-        <member name="P:QPdfNet.Info.Capabilities.ModdifyAnnotations">
+        <member name="P:QPdfNet.Info.Capabilities.ModifyAnnotations">
             <summary>
                 Allow modifying annotations?
             </summary>
@@ -854,6 +861,68 @@
                 Reference to image stream
             </summary>
         </member>
+        <member name="T:QPdfNet.Info.Metadata">
+            <summary>
+                Represents the document information dictionary (<c>/Info</c>) of a PDF file,
+                exposing the most common meta-data fields such as title, author and producer,
+                together with per page information such as size, rotation and annotations.
+            </summary>
+        </member>
+        <member name="P:QPdfNet.Info.Metadata.Title">
+            <summary>
+                The document's title (<c>/Title</c>)
+            </summary>
+        </member>
+        <member name="P:QPdfNet.Info.Metadata.Author">
+            <summary>
+                The name of the person who created the document (<c>/Author</c>)
+            </summary>
+        </member>
+        <member name="P:QPdfNet.Info.Metadata.Subject">
+            <summary>
+                The subject of the document (<c>/Subject</c>)
+            </summary>
+        </member>
+        <member name="P:QPdfNet.Info.Metadata.Keywords">
+            <summary>
+                Keywords associated with the document (<c>/Keywords</c>)
+            </summary>
+        </member>
+        <member name="P:QPdfNet.Info.Metadata.Application">
+            <summary>
+                The name of the application that created the original document (<c>/Creator</c>)
+            </summary>
+        </member>
+        <member name="P:QPdfNet.Info.Metadata.Producer">
+            <summary>
+                The name of the application that produced the PDF (<c>/Producer</c>)
+            </summary>
+        </member>
+        <member name="P:QPdfNet.Info.Metadata.CreationDate">
+            <summary>
+                The date and time the document was created (<c>/CreationDate</c>), or <c>null</c> when not set
+            </summary>
+        </member>
+        <member name="P:QPdfNet.Info.Metadata.ModificationDate">
+            <summary>
+                The date and time the document was most recently modified (<c>/ModDate</c>), or <c>null</c> when not set
+            </summary>
+        </member>
+        <member name="P:QPdfNet.Info.Metadata.Trapped">
+            <summary>
+                The document's trapped state (<c>/Trapped</c>), e.g. <c>/True</c>, <c>/False</c> or <c>/Unknown</c>
+            </summary>
+        </member>
+        <member name="P:QPdfNet.Info.Metadata.PageCount">
+            <summary>
+                The number of pages in the document
+            </summary>
+        </member>
+        <member name="P:QPdfNet.Info.Metadata.Pages">
+            <summary>
+                Information about each page in the document
+            </summary>
+        </member>
         <member name="T:QPdfNet.Info.Page">
             <summary>
                 The page data
@@ -887,6 +956,46 @@
         <member name="P:QPdfNet.Info.Page.PagePosFrom1">
             <summary>
                 Position of page in document numbering from 1
+            </summary>
+        </member>
+        <member name="T:QPdfNet.Info.PageInfo">
+            <summary>
+                Size, rotation and annotation information about a single page in a PDF document.
+            </summary>
+        </member>
+        <member name="P:QPdfNet.Info.PageInfo.Number">
+            <summary>
+                The page number, starting from 1
+            </summary>
+        </member>
+        <member name="P:QPdfNet.Info.PageInfo.Left">
+            <summary>
+                The left coordinate of the page's media box
+            </summary>
+        </member>
+        <member name="P:QPdfNet.Info.PageInfo.Top">
+            <summary>
+                The top coordinate of the page's media box
+            </summary>
+        </member>
+        <member name="P:QPdfNet.Info.PageInfo.Width">
+            <summary>
+                The width of the page's media box
+            </summary>
+        </member>
+        <member name="P:QPdfNet.Info.PageInfo.Height">
+            <summary>
+                The height of the page's media box
+            </summary>
+        </member>
+        <member name="P:QPdfNet.Info.PageInfo.Rotate">
+            <summary>
+                The clockwise rotation of the page in degrees (<c>/Rotate</c>)
+            </summary>
+        </member>
+        <member name="P:QPdfNet.Info.PageInfo.Annotations">
+            <summary>
+                <c>true</c> when the page has one or more annotations (<c>/Annots</c>)
             </summary>
         </member>
         <member name="T:QPdfNet.Info.PageLabel">
@@ -1035,10 +1144,39 @@
                 If stream, its length, otherwise null
             </summary>
         </member>
+        <member name="M:QPdfNet.InteropDotNet.SystemManager.GetArchitectureName">
+            <summary>
+                Returns the processor architecture part of a runtime identifier (e.g. <c>x64</c>, <c>x86</c>,
+                <c>arm64</c> or <c>arm</c>).
+            </summary>
+        </member>
+        <member name="M:QPdfNet.InteropDotNet.SystemManager.GetRuntimeIdentifier">
+            <summary>
+                Returns the RID (runtime identifier) for the current operating system and process
+                architecture, e.g. <c>win-x64</c>, <c>win-x86</c>, <c>linux-x64</c>, <c>linux-arm64</c>,
+                <c>osx-x64</c> or <c>osx-arm64</c>. This is used to resolve native assets from the
+                <c>runtimes/&lt;rid&gt;/native</c> folder layout.
+            </summary>
+        </member>
         <member name="T:QPdfNet.Interop.Constants">
             <summary>
                 Description of Constants.
             </summary>
+        </member>
+        <member name="F:QPdfNet.Interop.Constants.QPdfDllName">
+            <summary>
+                The platform-neutral base name of the native qpdf library.
+            </summary>
+            <remarks>
+                The name is intentionally without a file extension or <c>lib</c> prefix so that the
+                platform specific <see cref="M:QPdfNet.InteropDotNet.ILibraryLoaderLogic.FixUpLibraryName(System.String)"/>
+                implementations can turn it into the correct file name for the current operating system:
+                <list type="bullet">
+                    <item><description>Windows: <c>qpdf30.dll</c></description></item>
+                    <item><description>Linux: <c>libqpdf30.so</c></description></item>
+                    <item><description>macOS: <c>libqpdf30.dylib</c></description></item>
+                </list>
+            </remarks>
         </member>
         <member name="M:QPdfNet.Interop.MarshalHelper.StrLength(System.IntPtr)">
             <summary>
@@ -2306,6 +2444,85 @@
                 <see cref="T:QPdfNet.Job" />
             </returns>
         </member>
+        <member name="M:QPdfNet.Job.GetMetadata(System.String)">
+            <summary>
+                Returns the document meta-data (the <c>/Info</c> dictionary) of the given <paramref name="fileName" />,
+                such as the title, author, subject, keywords, creating application and PDF producer.
+            </summary>
+            <param name="fileName">The PDF file to read the meta-data from</param>
+            <returns>A <see cref="T:QPdfNet.Info.Metadata" /> object with the meta-data of the PDF</returns>
+            <exception cref="T:System.Exception">Thrown when the qpdf operation fails or the file cannot be processed</exception>
+        </member>
+        <member name="M:QPdfNet.Job.UpdateMetadata(System.String,QPdfNet.Info.Metadata,System.String)">
+            <summary>
+                Updates the document meta-data (the <c>/Info</c> dictionary) of the given <paramref name="fileName" /> and
+                writes the result to <paramref name="outputFile" />. Only the properties that are set (non <c>null</c>) on the
+                given <paramref name="metadata" /> are written; set a property to an empty string to clear it.
+            </summary>
+            <param name="fileName">The input PDF file</param>
+            <param name="metadata">The <see cref="T:QPdfNet.Info.Metadata" /> to write into the PDF</param>
+            <param name="outputFile">The output PDF file</param>
+            <returns><see cref="T:QPdfNet.Enums.ExitCode" /></returns>
+            <exception cref="T:System.Exception">Thrown when the qpdf operation fails or the file cannot be processed</exception>
+        </member>
+        <member name="M:QPdfNet.Job.GetInfoDictionary(System.Text.Json.Nodes.JsonObject)">
+            <summary>
+                Returns the <c>/Info</c> dictionary from the qpdf JSON <paramref name="root" /> or <c>null</c> when
+                the PDF does not contain a document information dictionary.
+            </summary>
+        </member>
+        <member name="M:QPdfNet.Job.CreateInfoDictionary(System.Text.Json.Nodes.JsonObject)">
+            <summary>
+                Creates a new <c>/Info</c> dictionary, adds it to the qpdf JSON <paramref name="root" /> and references
+                it from the trailer. Returns the newly created dictionary.
+            </summary>
+        </member>
+        <member name="M:QPdfNet.Job.DecodePdfString(System.Text.Json.Nodes.JsonNode)">
+            <summary>
+                Decodes a qpdf JSON string value into a plain .NET string. qpdf prefixes Unicode strings with
+                <c>u:</c> and binary strings with <c>b:</c>.
+            </summary>
+        </member>
+        <member name="M:QPdfNet.Job.GetStringValue(System.Text.Json.Nodes.JsonNode)">
+            <summary>
+                Returns the string value of the given <paramref name="token" /> or <c>null</c> when it is not a JSON string.
+            </summary>
+        </member>
+        <member name="M:QPdfNet.Job.SetPdfString(System.Text.Json.Nodes.JsonObject,System.String,System.String)">
+            <summary>
+                Sets or removes a PDF string value on the given <paramref name="info" /> dictionary. A <c>null</c>
+                <paramref name="value" /> leaves the existing value untouched, while an empty string clears it.
+            </summary>
+        </member>
+        <member name="M:QPdfNet.Job.ParsePdfDate(System.String)">
+            <summary>
+                Parses a PDF date string (e.g. <c>D:20240131123000+01'00'</c>) into a <see cref="T:System.DateTimeOffset" />.
+                Returns <c>null</c> when the value is empty or cannot be parsed.
+            </summary>
+        </member>
+        <member name="M:QPdfNet.Job.ReadPages(System.Text.Json.Nodes.JsonObject,QPdfNet.Info.Metadata)">
+            <summary>
+                Reads the page tree from the qpdf JSON <paramref name="root" /> and populates the
+                <see cref="P:QPdfNet.Info.Metadata.Pages" /> collection and <see cref="P:QPdfNet.Info.Metadata.PageCount" />.
+            </summary>
+        </member>
+        <member name="M:QPdfNet.Job.CollectPages(System.Text.Json.Nodes.JsonObject,System.Text.Json.Nodes.JsonObject,System.Text.Json.Nodes.JsonObject,System.Collections.Generic.List{QPdfNet.Info.PageInfo},System.Int32@)">
+            <summary>
+                Recursively walks the page tree, applying inheritable attributes (<c>/MediaBox</c> and <c>/Rotate</c>)
+                from parent nodes, and adds a <see cref="T:QPdfNet.Info.PageInfo" /> for each leaf page.
+            </summary>
+        </member>
+        <member name="M:QPdfNet.Job.GetDoubleValue(System.Text.Json.Nodes.JsonNode)">
+            <summary>
+                Returns the numeric value of the given <paramref name="token" /> or <c>0</c> when it is not a JSON number.
+            </summary>
+        </member>
+        <member name="M:QPdfNet.Job.ResolveObject(System.Text.Json.Nodes.JsonObject,System.Text.Json.Nodes.JsonNode)">
+            <summary>
+                Resolves a qpdf JSON token that is either an indirect reference (<c>"n 0 R"</c>) or an inline object
+                into the dictionary it points at. Returns <c>null</c> when it cannot be resolved.
+            </summary>
+        </member>
         <member name="M:QPdfNet.Job.StaticId">
             <summary>
                 Use a fixed value for the document ID (/ID in the trailer). This is intended for testing only. <b>Never</b> use it for
@@ -2745,6 +2962,60 @@
             <param name="file">The file</param>
             <param name="range">The page range</param>
             <param name="password">The password or <c>null</c> when not needed</param>
+        </member>
+        <member name="T:QPdfNet.Serialization.EnumMemberConverter">
+            <summary>
+                A <see cref="T:System.Text.Json.Serialization.JsonConverterFactory" /> that serializes and deserializes enum values by using the string
+                specified in their <see cref="T:System.Runtime.Serialization.EnumMemberAttribute" />. This restores the behaviour that Newtonsoft.Json
+                provided through its <c>StringEnumConverter</c> combined with <see cref="T:System.Runtime.Serialization.EnumMemberAttribute" />, so that
+                qpdf JSON values such as <c>preserve</c>, <c>auto</c> or <c>hex-bytes</c> are written and read correctly.
+                Enum members without an <see cref="T:System.Runtime.Serialization.EnumMemberAttribute" /> (for example <c>NotSet</c>) fall back to their
+                literal name.
+            </summary>
+        </member>
+        <member name="T:QPdfNet.Serialization.JsonOptions">
+            <summary>
+                Centralizes the <see cref="T:System.Text.Json.JsonSerializerOptions" /> that are used throughout QPdfNet. These options
+                reproduce the behaviour that was previously provided by Newtonsoft.Json: private fields that are annotated
+                with <see cref="T:System.Text.Json.Serialization.JsonPropertyNameAttribute" /> are serialized, <c>null</c> values are omitted, enum values
+                are written using their <see cref="T:System.Runtime.Serialization.EnumMemberAttribute" /> and enum members that have not been set
+                (<c>NotSet</c>, the default value) are skipped.
+            </summary>
+        </member>
+        <member name="F:QPdfNet.Serialization.JsonOptions.Serialize">
+            <summary>
+                The options used to serialize a <c>Job</c> into the JSON that is passed to qpdf
+            </summary>
+        </member>
+        <member name="F:QPdfNet.Serialization.JsonOptions.Deserialize">
+            <summary>
+                The options used to deserialize qpdf JSON output
+            </summary>
+        </member>
+        <member name="F:QPdfNet.Serialization.JsonOptions.JsonNodeWrite">
+            <summary>
+                The options used to write a <see cref="T:System.Text.Json.Nodes.JsonNode" /> back to disk
+            </summary>
+        </member>
+        <member name="M:QPdfNet.Serialization.JsonOptions.IncludePrivateFields(System.Text.Json.Serialization.Metadata.JsonTypeInfo)">
+            <summary>
+                Adds private fields that are annotated with <see cref="T:System.Text.Json.Serialization.JsonPropertyNameAttribute" /> to the serialization
+                contract. System.Text.Json does not serialize private fields out of the box, while Newtonsoft.Json did.
+            </summary>
+        </member>
+        <member name="M:QPdfNet.Serialization.JsonOptions.IgnoreUnsetEnums(System.Text.Json.Serialization.Metadata.JsonTypeInfo)">
+            <summary>
+                Skips enum properties whose value equals the default (<c>NotSet</c>) value so that unset options are not
+                written into the qpdf JSON.
+            </summary>
+        </member>
+        <member name="T:QPdfNet.Serialization.NumberToStringConverter">
+            <summary>
+                A <see cref="T:System.Text.Json.Serialization.JsonConverter`1" /> that reads a JSON value that may be either a string or a number into a
+                <see cref="T:System.String" />. Newtonsoft.Json automatically coerced numeric JSON values into strings; this converter
+                restores that behaviour for System.Text.Json so that qpdf JSON fields such as <c>version</c> (which qpdf emits
+                as a number) can still be deserialized into string properties.
+            </summary>
         </member>
     </members>
 </doc>
