@@ -1,4 +1,4 @@
-﻿//
+//
 // QPdfApi.cs
 //
 // Author: Kees van Spelde <sicos2002@hotmail.com>
@@ -131,9 +131,15 @@ namespace QPdfNet.Interop
             {
                 if (_native != null) 
                     return _native;
-                
+
+#if NET6_0_OR_GREATER
+                // On modern .NET use standard P/Invoke (DllImport) with a custom import resolver.
+                // This avoids the reflection-emit based loader and is trimming/NativeAOT friendly.
+                _native = new QPdfNativeApi();
+#else
                 Helper.SetPath();
                 _native = InteropRuntimeImplementer.CreateInstance<IQPdfApiSignatures>();
+#endif
                 return _native;
             }
         }

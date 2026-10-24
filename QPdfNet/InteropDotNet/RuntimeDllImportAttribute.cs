@@ -1,4 +1,4 @@
-﻿//
+//
 // RuntimeDllImportAttribute.cs
 //
 // Project URL: https://github.com/AndreyAkinshin/InteropDotNet

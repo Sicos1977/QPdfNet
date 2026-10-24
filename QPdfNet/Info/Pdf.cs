@@ -1,4 +1,4 @@
-﻿//
+//
 // Pdf.cs
 //
 // Author: Kees van Spelde <sicos2002@hotmail.com>
@@ -26,12 +26,12 @@
 
 using System;
 using System.Collections.Generic;
-using System.Globalization;
 using System.Text;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using QPdfNet.Enums;
 using QPdfNet.Loggers;
+using QPdfNet.Serialization;
 
 namespace QPdfNet.Info;
 
@@ -44,61 +44,61 @@ public class Pdf
     /// <summary>
     ///     The JSON version
     /// </summary>
-    [JsonProperty("version", DefaultValueHandling = DefaultValueHandling.Ignore)] 
+    [JsonPropertyName("version")]
     public string? Version { get; set; }
 
     /// <summary>
     ///     The acro form fields
     /// </summary>
-    [JsonProperty("acroform", DefaultValueHandling = DefaultValueHandling.Ignore)] 
+    [JsonPropertyName("acroform")] 
     public AcroForm? AcroForm { get; set; }
 
     /// <summary>
     ///     The attachments
     /// </summary>
-    [JsonProperty("attachments", DefaultValueHandling = DefaultValueHandling.Ignore)] 
+    [JsonPropertyName("attachments")] 
     public Dictionary<string, Attachment>? Attachments { get; set; }
 
     /// <summary>
     ///     Encryption information
     /// </summary>
-    [JsonProperty("encrypt", DefaultValueHandling = DefaultValueHandling.Ignore)] 
+    [JsonPropertyName("encrypt")] 
     public Encrypt? Encrypt { get; set; }
 
     /// <summary>
     ///     The object information
     /// </summary>
-    [JsonProperty("objectinfo", DefaultValueHandling = DefaultValueHandling.Ignore)] 
+    [JsonPropertyName("objectinfo")] 
     public Dictionary<string, Stream>? Objectinfo { get; set; }
 
     /// <summary>
     ///     The objects
     /// </summary>
-    [JsonProperty("objects", DefaultValueHandling = DefaultValueHandling.Ignore)] 
+    [JsonPropertyName("objects")] 
     public string? Objects { get; set; }
 
     /// <summary>
     ///     The outline information
     /// </summary>
-    [JsonProperty("outlines", DefaultValueHandling = DefaultValueHandling.Ignore)] 
+    [JsonPropertyName("outlines")] 
     public List<PdfOutline>? Outlines { get; set; }
 
     /// <summary>
     ///     The page labels
     /// </summary>
-    [JsonProperty("pagelabels", DefaultValueHandling = DefaultValueHandling.Ignore)] 
+    [JsonPropertyName("pagelabels")] 
     public List<PageLabel>? PageLabels { get; set; }
 
     /// <summary>
     ///     The pages of the document
     /// </summary>
-    [JsonProperty("pages", DefaultValueHandling = DefaultValueHandling.Ignore)] 
+    [JsonPropertyName("pages")] 
     public List<Page>? Pages { get; set; }
 
     /// <summary>
     ///     The parameters
     /// </summary>
-    [JsonProperty("parameters", DefaultValueHandling = DefaultValueHandling.Ignore)] 
+    [JsonPropertyName("parameters")] 
     public Parameters? Parameters { get; set; }
     #endregion
 
@@ -119,12 +119,7 @@ public class Pdf
             throw new Exception(output);
 
         if (output != null)
-            return JsonConvert.DeserializeObject<Pdf>(Encoding.ASCII.GetString(data!), new JsonSerializerSettings
-            {
-                MetadataPropertyHandling = MetadataPropertyHandling.Ignore,
-                DateParseHandling = DateParseHandling.None,
-                Converters = { new IsoDateTimeConverter { DateTimeStyles = DateTimeStyles.AssumeUniversal } }
-            });
+            return JsonSerializer.Deserialize<Pdf>(Encoding.ASCII.GetString(data!), JsonOptions.Deserialize);
 
         return null;
     }

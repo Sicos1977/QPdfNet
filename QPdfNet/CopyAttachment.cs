@@ -1,5 +1,5 @@
-﻿using System.IO;
-using Newtonsoft.Json;
+using System.IO;
+using System.Text.Json.Serialization;
 
 namespace QPdfNet;
 
@@ -8,9 +8,12 @@ namespace QPdfNet;
 /// </summary>
 internal class CopyAttachment
 {
-    #region Fields
-    [JsonProperty("file")] private string _file;
-    [JsonProperty("prefix")] private string? _prefix;
+    #region Properties
+    [JsonPropertyName("file")]
+    public string File { get; private set; }
+
+    [JsonPropertyName("prefix")]
+    public string? Prefix { get; private set; }
     #endregion
 
     #region Constructor
@@ -27,8 +30,8 @@ internal class CopyAttachment
     /// <exception cref="FileNotFoundException"></exception>
     public CopyAttachment(string file, string? prefix = null)
     {
-        _file = file;
-        _prefix = prefix;
+        File = file;
+        Prefix = prefix;
     }
     #endregion
 }

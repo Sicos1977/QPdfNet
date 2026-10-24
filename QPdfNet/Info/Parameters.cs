@@ -1,4 +1,4 @@
-﻿//
+//
 // Parameters.cs
 //
 // Author: Kees van Spelde <sicos2002@hotmail.com>
@@ -24,7 +24,7 @@
 // THE SOFTWARE.
 //
 
-using Newtonsoft.Json;
+using System.Text.Json.Serialization;
 
 namespace QPdfNet.Info;
 
@@ -37,7 +37,7 @@ public class Parameters
     /// <summary>
     ///     Decode level used to determine stream filterability
     /// </summary>
-    [JsonProperty("decodelevel", DefaultValueHandling = DefaultValueHandling.Ignore)]
+    [JsonPropertyName("decodelevel")]
     public string? DecodeLevel { get; set; }
     #endregion
 }

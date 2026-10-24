@@ -1,4 +1,4 @@
-﻿//
+//
 // Encrypt.cs
 //
 // Author: Kees van Spelde <sicos2002@hotmail.com>
@@ -24,7 +24,7 @@
 // THE SOFTWARE.
 //
 
-using Newtonsoft.Json;
+using System.Text.Json.Serialization;
 
 namespace QPdfNet.Info;
 
@@ -37,31 +37,31 @@ public class Encrypt
     /// <summary>
     ///     The capabilities of the encryption
     /// </summary>
-    [JsonProperty("capabilities", DefaultValueHandling = DefaultValueHandling.Ignore)] 
+    [JsonPropertyName("capabilities")]
     public Capabilities? Capabilities { get; set; }
 
     /// <summary>
     ///     Whether the document is encrypted
     /// </summary>
-    [JsonProperty("encrypted", DefaultValueHandling = DefaultValueHandling.Ignore)]
+    [JsonPropertyName("encrypted")]
     public bool Encrypted { get; set; }
 
     /// <summary>
     ///     Whether supplied password matched owner password; always false for non-encrypted files
     /// </summary>
-    [JsonProperty("ownerpasswordmatched", DefaultValueHandling = DefaultValueHandling.Ignore)]
+    [JsonPropertyName("ownerpasswordmatched")]
     public bool OwnerPasswordMatched { get; set; }
 
     /// <summary>
     ///     Encryption parameters
     /// </summary>
-    [JsonProperty("parameters", DefaultValueHandling = DefaultValueHandling.Ignore)] 
+    [JsonPropertyName("parameters")]
     public EncryptParameters? Parameters { get; set; }
 
     /// <summary>
     ///     Whether supplied password matched user password; always false for non-encrypted files
     /// </summary>
-    [JsonProperty("userpasswordmatched", DefaultValueHandling = DefaultValueHandling.Ignore)]
+    [JsonPropertyName("userpasswordmatched")]
     public bool UserPasswordMatched { get; set; }
     #endregion
 }

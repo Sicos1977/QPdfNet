@@ -1,4 +1,4 @@
-﻿//
+//
 // PdfOutline.cs
 //
 // Author: Kees van Spelde <sicos2002@hotmail.com>
@@ -25,7 +25,7 @@
 //
 
 using System.Collections.Generic;
-using Newtonsoft.Json;
+using System.Text.Json.Serialization;
 
 namespace QPdfNet.Info;
 
@@ -38,22 +38,22 @@ public class PdfOutline
     /// <summary>
     ///     Outline destination dictionary
     /// </summary>
-    [JsonProperty("dest")]
+    [JsonPropertyName("dest")]
     public List<string>? Dest { get; set; }
 
-    [JsonProperty("destpageposfrom1")]
+    [JsonPropertyName("destpageposfrom1")]
     public long PageNumber { get; private set; }
 
-    [JsonProperty("kids")]
+    [JsonPropertyName("kids")]
     public List<object>? Kids { get; private set; }
 
-    [JsonProperty("object")]
+    [JsonPropertyName("object")]
     public string? Object { get; private set; }
 
-    [JsonProperty("open")]
+    [JsonPropertyName("open")]
     public bool Open { get; private set; }
 
-    [JsonProperty("title")]
+    [JsonPropertyName("title")]
     public string? Title { get; private set; }
     #endregion
 }

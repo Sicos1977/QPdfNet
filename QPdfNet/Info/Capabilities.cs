@@ -1,4 +1,4 @@
-﻿//
+//
 // Capabilities.cs
 //
 // Author: Kees van Spelde <sicos2002@hotmail.com>
@@ -24,7 +24,7 @@
 // THE SOFTWARE.
 //
 
-using Newtonsoft.Json;
+using System.Text.Json.Serialization;
 
 namespace QPdfNet.Info;
 
@@ -37,55 +37,55 @@ public class Capabilities
     /// <summary>
     ///     Allow extraction for accessibility?
     /// </summary>
-    [JsonProperty("accessibility", DefaultValueHandling = DefaultValueHandling.Ignore)]
+    [JsonPropertyName("accessibility")]
     public bool Accessibility { get; set; }
 
     /// <summary>
     ///     Allow extraction?
     /// </summary>
-    [JsonProperty("extract", DefaultValueHandling = DefaultValueHandling.Ignore)]
+    [JsonPropertyName("extract")]
     public bool Extract { get; set; }
 
     /// <summary>
     ///     Allow modifying annotations?
     /// </summary>
-    [JsonProperty("moddifyannotations", DefaultValueHandling = DefaultValueHandling.Ignore)]
-    public bool ModdifyAnnotations { get; set; }
+    [JsonPropertyName("modifyannotations")]
+    public bool ModifyAnnotations { get; set; }
 
     /// <summary>
     ///     Allow all modifications?
     /// </summary>
-    [JsonProperty("modify", DefaultValueHandling = DefaultValueHandling.Ignore)]
+    [JsonPropertyName("modify")]
     public bool Modify { get; set; }
 
     /// <summary>
     ///     Allow modifying document assembly?
     /// </summary>
-    [JsonProperty("modifyassembly", DefaultValueHandling = DefaultValueHandling.Ignore)]
+    [JsonPropertyName("modifyassembly")]
     public bool ModifyAssembly { get; set; }
 
     /// <summary>
     ///     Allow modifying forms?
     /// </summary>
-    [JsonProperty("modifyforms", DefaultValueHandling = DefaultValueHandling.Ignore)]
+    [JsonPropertyName("modifyforms")]
     public bool ModifyForms { get; set; }
 
     /// <summary>
     ///     Allow other modifications?
     /// </summary>
-    [JsonProperty("modifyother", DefaultValueHandling = DefaultValueHandling.Ignore)]
+    [JsonPropertyName("modifyother")]
     public bool ModifyOther { get; set; }
 
     /// <summary>
     ///     Allow high resolution printing?
     /// </summary>
-    [JsonProperty("printhigh", DefaultValueHandling = DefaultValueHandling.Ignore)]
+    [JsonPropertyName("printhigh")]
     public bool PrintHigh { get; set; }
 
     /// <summary>
     ///     Allow low resolution printing?
     /// </summary>
-    [JsonProperty("printlow", DefaultValueHandling = DefaultValueHandling.Ignore)]
+    [JsonPropertyName("printlow")]
     public bool PrintLow { get; set; }
     #endregion
 }

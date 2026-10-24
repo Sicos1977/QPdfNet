@@ -1,4 +1,4 @@
-﻿//
+//
 // SystemManager.cs
 //
 // Project URL: https://github.com/AndreyAkinshin/InteropDotNet
@@ -25,6 +25,7 @@
 //
 
 using System;
+using System.Runtime.InteropServices;
 
 namespace QPdfNet.InteropDotNet
 {
@@ -50,39 +51,65 @@ namespace QPdfNet.InteropDotNet
         }
         #endregion
 
+        #region GetArchitectureName
+        /// <summary>
+        ///     Returns the processor architecture part of a runtime identifier (e.g. <c>x64</c>, <c>x86</c>,
+        ///     <c>arm64</c> or <c>arm</c>).
+        /// </summary>
+        public static string GetArchitectureName()
+        {
+            switch (RuntimeInformation.ProcessArchitecture)
+            {
+                case Architecture.X86:
+                    return "x86";
+                case Architecture.X64:
+                    return "x64";
+                case Architecture.Arm:
+                    return "arm";
+                case Architecture.Arm64:
+                    return "arm64";
+                default:
+                    return IntPtr.Size == sizeof(int) ? "x86" : "x64";
+            }
+        }
+        #endregion
+
+        #region GetRuntimeIdentifier
+        /// <summary>
+        ///     Returns the RID (runtime identifier) for the current operating system and process
+        ///     architecture, e.g. <c>win-x64</c>, <c>win-x86</c>, <c>linux-x64</c>, <c>linux-arm64</c>,
+        ///     <c>osx-x64</c> or <c>osx-arm64</c>. This is used to resolve native assets from the
+        ///     <c>runtimes/&lt;rid&gt;/native</c> folder layout.
+        /// </summary>
+        public static string GetRuntimeIdentifier()
+        {
+            var architecture = GetArchitectureName();
+
+            switch (GetOperatingSystem())
+            {
+                case OperatingSystem.Windows:
+                    return "win-" + architecture;
+                case OperatingSystem.Unix:
+                    return "linux-" + architecture;
+                case OperatingSystem.MacOSX:
+                    return "osx-" + architecture;
+                default:
+                    return architecture;
+            }
+        }
+        #endregion
+
         #region GetOperatingSystem
         public static OperatingSystem GetOperatingSystem()
         {
-#if(NETCORE)
-            if(RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
+            if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
                 return OperatingSystem.Windows;
-            if(RuntimeInformation.IsOSPlatform(OSPlatform.Linux))
+            if (RuntimeInformation.IsOSPlatform(OSPlatform.Linux))
                 return OperatingSystem.Unix;
-            if(RuntimeInformation.IsOSPlatform(OSPlatform.OSX))
+            if (RuntimeInformation.IsOSPlatform(OSPlatform.OSX))
                 return OperatingSystem.MacOSX;
-            
+
             return OperatingSystem.Unknown;
-#else
-            var pid = (int)Environment.OSVersion.Platform;
-            switch (pid)
-            {
-                case (int)PlatformID.Win32NT:
-                case (int)PlatformID.Win32S:
-                case (int)PlatformID.Win32Windows:
-                case (int)PlatformID.WinCE:
-                    return OperatingSystem.Windows;
-
-                case (int)PlatformID.Unix:
-                case 128:
-                    return OperatingSystem.Unix;
-
-                case (int)PlatformID.MacOSX:
-                    return OperatingSystem.MacOSX;
-
-                default:
-                    return OperatingSystem.Unknown;
-            }
-#endif
         }
         #endregion
     }

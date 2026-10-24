@@ -1,4 +1,4 @@
-﻿//
+//
 // LibraryLoader.cs
 //
 // Project URL: https://github.com/AndreyAkinshin/InteropDotNet
@@ -68,8 +68,9 @@ namespace QPdfNet.InteropDotNet
                         break;
 
                     case OperatingSystem.MacOSX:
-                        Logger.LogError(notSupported);
-                        throw new NotSupportedException(notSupported);
+                        Logger.LogInformation("Current OS is macOS");
+                        _instance = new LibraryLoader(new UnixLibraryLoaderLogic());
+                        break;
 
                     case OperatingSystem.Unknown:
                     default:
@@ -203,6 +204,22 @@ namespace QPdfNet.InteropDotNet
         #region InternalLoadLibrary
         private IntPtr InternalLoadLibrary(string baseDirectory, string platformName, string fileName)
         {
+            // First try the RID-specific "runtimes/<rid>/native" layout used by cross-platform
+            // native packages (e.g. runtimes/linux-x64/native/libqpdf30.so). This is the preferred
+            // location and makes QPdfNet work out of the box on Windows, Linux and macOS.
+            var runtimeIdentifier = SystemManager.GetRuntimeIdentifier();
+            var runtimeNativePath = Path.Combine(baseDirectory, Path.Combine("runtimes", Path.Combine(runtimeIdentifier, Path.Combine("native", fileName))));
+
+            Logger.LogInformation($"Trying to load file from '{runtimeNativePath}'");
+
+            if (File.Exists(runtimeNativePath))
+            {
+                var runtimeHandle = _logic.LoadLibrary(runtimeNativePath);
+                if (runtimeHandle != IntPtr.Zero)
+                    return runtimeHandle;
+            }
+
+            // Fall back to the legacy platform specific folder (e.g. x64/qpdf30.dll).
             var fullPath = Path.Combine(baseDirectory, Path.Combine(platformName, fileName));
 
             Logger.LogInformation($"Trying to load file from '{fullPath}'");

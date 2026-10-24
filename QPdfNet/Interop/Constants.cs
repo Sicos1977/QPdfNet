@@ -1,4 +1,4 @@
-﻿//
+//
 // Constants.cs
 //
 // Author: Kees van Spelde <sicos2002@hotmail.com>
@@ -31,5 +31,18 @@ namespace QPdfNet.Interop;
 /// </summary>
 internal static class Constants
 {
-    public const string QPdfDllName = "qpdf30.dll";
+    /// <summary>
+    ///     The platform-neutral base name of the native qpdf library.
+    /// </summary>
+    /// <remarks>
+    ///     The name is intentionally without a file extension or <c>lib</c> prefix so that the
+    ///     platform specific <see cref="QPdfNet.InteropDotNet.ILibraryLoaderLogic.FixUpLibraryName"/>
+    ///     implementations can turn it into the correct file name for the current operating system:
+    ///     <list type="bullet">
+    ///         <item><description>Windows: <c>qpdf30.dll</c></description></item>
+    ///         <item><description>Linux: <c>libqpdf30.so</c></description></item>
+    ///         <item><description>macOS: <c>libqpdf30.dylib</c></description></item>
+    ///     </list>
+    /// </remarks>
+    public const string QPdfDllName = "qpdf30";
 }

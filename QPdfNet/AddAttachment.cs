@@ -1,6 +1,6 @@
-﻿using System;
+using System;
 using System.IO;
-using Newtonsoft.Json;
+using System.Text.Json.Serialization;
 using QPdfNet.Helpers;
 
 namespace QPdfNet;
@@ -10,15 +10,30 @@ namespace QPdfNet;
 /// </summary>
 internal class AddAttachment
 {
-    #region Fields
-    [JsonProperty("key")] private string _key;
-    [JsonProperty("file")] private string _file;
-    [JsonProperty("filename")] private string _filename;
-    [JsonProperty("creationdate")] private string _creationdate;
-    [JsonProperty("moddate")] private string _moddate;
-    [JsonProperty("mimetype")] private string _mimetype;
-    [JsonProperty("description")] private string? _description;
-    [JsonProperty("replace")] private string? _replace;
+    #region Properties
+    [JsonPropertyName("key")] 
+    public string Key { get; private set; }
+    
+    [JsonPropertyName("file")] 
+    public string File { get; private set; }
+    
+    [JsonPropertyName("filename")] 
+    public string FileName { get; private set; }
+    
+    [JsonPropertyName("creationdate")] 
+    public string CreationDate { get; private set; }
+
+    [JsonPropertyName("moddate")] 
+    public string ModDate { get; private set; }
+
+    [JsonPropertyName("mimetype")] 
+    public string MimeType { get; private set; }
+
+    [JsonPropertyName("description")] 
+    public string? Description { get; private set; }
+
+    [JsonPropertyName("replace")] 
+    public string? Replace { get; private set; }
     #endregion
 
     #region Constructor
@@ -43,16 +58,16 @@ internal class AddAttachment
         if (!file.Exists)
             throw new FileNotFoundException($"The file '{fileName}' could not be found");
 
-        _file = file.FullName;
-        _key = Path.GetFileName(fileName);
-        _filename = file.Name;
-        _creationdate = $"D:{file.CreationTimeUtc:yyyyMMddHHmmsss}Z";
-        _moddate = $"D:{file.CreationTimeUtc:yyyyMMddHHmmsss}Z";
-        _mimetype = MimeTypes.GetMimeType(fileName);
-        _description = description;
+        File = file.FullName;
+        Key = Path.GetFileName(fileName);
+        FileName = file.Name;
+        CreationDate = $"D:{file.CreationTimeUtc:yyyyMMddHHmmsss}Z";
+        ModDate = $"D:{file.CreationTimeUtc:yyyyMMddHHmmsss}Z";
+        MimeType = MimeTypes.GetMimeType(fileName);
+        Description = description;
 
         if (replace)
-            _replace = string.Empty;
+            Replace = string.Empty;
     }
 
     /// <summary>
@@ -90,19 +105,19 @@ internal class AddAttachment
         string? description = null,
         bool replace = false)
     {
-        if (!File.Exists(fileName))
+        if (!System.IO.File.Exists(fileName))
             throw new FileNotFoundException($"The file '{fileName}' could not be found");
 
-        _file = file;
-        _key = key;
-        _filename = fileName;
-        _creationdate = $"D:{creationDate.ToUniversalTime():yyyyMMddHHmmsss}Z";
-        _moddate = $"D:{modData.ToUniversalTime():yyyyMMddHHmmss}Z";
-        _mimetype = mimeType;
-        _description = description;
+        File = file;
+        Key = key;
+        FileName = fileName;
+        CreationDate = $"D:{creationDate.ToUniversalTime():yyyyMMddHHmmsss}Z";
+        ModDate = $"D:{modData.ToUniversalTime():yyyyMMddHHmmss}Z";
+        MimeType = mimeType;
+        Description = description;
 
         if (replace)
-            _replace = string.Empty;
+            Replace = string.Empty;
     }
     #endregion
 }

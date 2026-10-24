@@ -1,4 +1,4 @@
-﻿//
+//
 // EncryptParameters.cs
 //
 // Author: Kees van Spelde <sicos2002@hotmail.com>
@@ -24,7 +24,7 @@
 // THE SOFTWARE.
 //
 
-using Newtonsoft.Json;
+using System.Text.Json.Serialization;
 
 namespace QPdfNet.Info;
 
@@ -34,49 +34,49 @@ namespace QPdfNet.Info;
 public class EncryptParameters
 {
     #region Properties
-    [JsonProperty("P", DefaultValueHandling = DefaultValueHandling.Ignore)] 
+    [JsonPropertyName("P")] 
     public string? P { get; set; }
 
-    [JsonProperty("R", DefaultValueHandling = DefaultValueHandling.Ignore)] 
+    [JsonPropertyName("R")] 
     public string? R { get; set; }
 
-    [JsonProperty("V", DefaultValueHandling = DefaultValueHandling.Ignore)] 
+    [JsonPropertyName("V")] 
     public string? V { get; set; }
 
     /// <summary>
     ///     Encryption key bit length
     /// </summary>
-    [JsonProperty("bits", DefaultValueHandling = DefaultValueHandling.Ignore)]
+    [JsonPropertyName("bits")]
     public string? Bits { get; set; }
 
     /// <summary>
     ///     Encryption method for attachments
     /// </summary>
-    [JsonProperty("filemethod", DefaultValueHandling = DefaultValueHandling.Ignore)]
+    [JsonPropertyName("filemethod")]
     public string? FileMethod { get; set; }
 
     /// <summary>
     ///     Encryption key; will be null unless --show-encryption-key was specified
     /// </summary>
-    [JsonProperty("key", DefaultValueHandling = DefaultValueHandling.Ignore)]
+    [JsonPropertyName("key")]
     public string? Key { get; set; }
 
     /// <summary>
     ///     Overall encryption method: none, mixed, RC4, AESv2, AESv3
     /// </summary>
-    [JsonProperty("method", DefaultValueHandling = DefaultValueHandling.Ignore)]
+    [JsonPropertyName("method")]
     public string? Method { get; set; }
 
     /// <summary>
     ///     Encryption method for streams
     /// </summary>
-    [JsonProperty("streammethod", DefaultValueHandling = DefaultValueHandling.Ignore)]
+    [JsonPropertyName("streammethod")]
     public string? StreamMethod { get; set; }
 
     /// <summary>
     ///     Encryption method for string
     /// </summary>
-    [JsonProperty("stringmethod", DefaultValueHandling = DefaultValueHandling.Ignore)]
+    [JsonPropertyName("stringmethod")]
     public string? StringMethod { get; set; }
     #endregion
 }

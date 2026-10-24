@@ -1,4 +1,4 @@
-﻿//
+//
 // Encryption40Bit.cs
 //
 // Author: Kees van Spelde <sicos2002@hotmail.com>
@@ -24,7 +24,7 @@
 // THE SOFTWARE.
 //
 
-using Newtonsoft.Json;
+using System.Text.Json.Serialization;
 using QPdfNet.Enums;
 using QPdfNet.Interfaces;
 
@@ -35,18 +35,18 @@ namespace QPdfNet;
 /// </summary>
 public class Encryption40Bit : IEncryption
 {
-    #region Fields
-    [JsonProperty("annotate")]
-    private string _annotate;
+    #region Properties
+    [JsonPropertyName("annotate")]
+    public string Annotate { get; private set; }
 
-    [JsonProperty("extract")]
-    private string _extract;
+    [JsonPropertyName("extract")]
+    public string Extract { get; private set; }
 
-    [JsonProperty("modify")]
-    private Modify _modify;
+    [JsonPropertyName("modify")]
+    public Modify Modify { get; private set; }
 
-    [JsonProperty("print")]
-    private Print _print;
+    [JsonPropertyName("print")]
+    public Print Print { get; private set; }
     #endregion
 
     #region Constructor
@@ -63,10 +63,10 @@ public class Encryption40Bit : IEncryption
         Modify modify = Modify.All, 
         Print print = Print.Full)
     {
-        _annotate = annotate ? "y" : "n";
-        _extract = extract ? "y" : "n";
-        _modify = modify;
-        _print = print;
+        Annotate = annotate ? "y" : "n";
+        Extract = extract ? "y" : "n";
+        Modify = modify;
+        Print = print;
     }
     #endregion
 }

@@ -1,4 +1,4 @@
-﻿//
+//
 // Stream.cs
 //
 // Author: Kees van Spelde <sicos2002@hotmail.com>
@@ -24,7 +24,7 @@
 // THE SOFTWARE.
 //
 
-using Newtonsoft.Json;
+using System.Text.Json.Serialization;
 
 namespace QPdfNet.Json;
 
@@ -37,19 +37,19 @@ public class Stream
     /// <summary>
     ///     If stream, its filters, otherwise null
     /// </summary>
-    [JsonProperty("filter", DefaultValueHandling = DefaultValueHandling.Ignore)]
+    [JsonPropertyName("filter")]
     public string? Filter { get; set; }
 
     /// <summary>
     ///     Whether the object is a stream
     /// </summary>
-    [JsonProperty("is", DefaultValueHandling = DefaultValueHandling.Ignore)]
+    [JsonPropertyName("is")]
     public bool? Is { get; set; }
 
     /// <summary>
     ///     If stream, its length, otherwise null
     /// </summary>
-    [JsonProperty("length", DefaultValueHandling = DefaultValueHandling.Ignore)]
+    [JsonPropertyName("length")]
     public int? Length { get; set; }
     #endregion
 }

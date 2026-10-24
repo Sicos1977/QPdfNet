@@ -1,4 +1,4 @@
-﻿namespace QPdfNet.Enums;
+namespace QPdfNet.Enums;
 
 /// <summary>
 ///     Sets the JSON output version when showing a PDF as JSON

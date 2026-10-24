@@ -1,4 +1,4 @@
-﻿//
+//
 // UnixLibraryLoaderLogic.cs
 //
 // Project URL: https://github.com/AndreyAkinshin/InteropDotNet

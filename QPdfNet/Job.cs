@@ -1,4 +1,4 @@
-﻿//
+//
 // Job.cs
 //
 // Author: Kees van Spelde <sicos2002@hotmail.com>
@@ -26,16 +26,20 @@
 
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.IO;
 using System.Runtime.InteropServices;
 using System.Text;
 using Microsoft.Extensions.Logging;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json.Nodes;
+using System.Text.Json.Serialization;
 using QPdfNet.Enums;
+using QPdfNet.Info;
 using QPdfNet.Interfaces;
 using QPdfNet.Interop;
 using QPdfNet.Loggers;
+using QPdfNet.Serialization;
+// ReSharper disable NotAccessedField.Local
 
 // ReSharper disable UnusedMember.Global
 
@@ -55,102 +59,293 @@ public class Job : IDisposable
     #endregion
 
     #region Fields
-    [JsonProperty("inputFile")] private string? _inputFile;
-    [JsonProperty("outputFile")] private string? _outputFile;
-    [JsonProperty("empty")] private string? _empty;
-    [JsonProperty("replaceInput")] private string? _replaceInput;
-    [JsonProperty("warningExit0")] private string? _warningExit0;
-    [JsonProperty("password")] private string? _password;
-    [JsonProperty("passwordFile")] private string? _passwordFile;
-    [JsonProperty("verbose")] private string? _verbose;
-    [JsonProperty("noWarn")] private string? _noWarn;
-    [JsonProperty("deterministicId")] private string? _deterministicId;
-    [JsonProperty("allowWeakCrypto")] private string? _allowWeakCrypto;
-    [JsonProperty("keepFilesOpen")] private string? _keepFilesOpen;
-    [JsonProperty("keepFilesOpenThreshold")] private string? _keepFilesOpenThreshold;
-    [JsonProperty("passwordIsHexKey")] private string? _passwordIsHexKey;
-    [JsonProperty("suppressPasswordRecovery")] private string? _suppressPasswordRecovery;
-    [JsonProperty("passwordMode")] private PasswordMode _passwordMode;
-    [JsonProperty("suppressRecovery")] private string? _suppressRecovery;
-    [JsonProperty("ignoreXrefStreams")] private string? _ignoreXrefStreams;
-    [JsonProperty("linearize")] private string? _linearize;
-    [JsonProperty("encrypt")] private Encryption? _encryption;
-    [JsonProperty("decrypt")] private string? _decrypt;
-    [JsonProperty("removeRestrictions")] private string? _removeRestrictions;
-    [JsonProperty("copyEncryption")] private string? _copyEncryption;
-    [JsonProperty("encryptionFilePassword")] private string? _encryptionFilePassword;
-    [JsonProperty("qdf")] private string? _qdf;
-    [JsonProperty("noOriginalObjectIds")] private string? _noOriginalObjectIds;
-    [JsonProperty("compressStreams")] private string? _compressStreams;
-    [JsonProperty("decodeLevel")] private DecodeLevel _decodeLevel;
-    [JsonProperty("streamData")] private StreamData _streamData;
-    [JsonProperty("recompressFlate")] private string? _recompressFlate;
-    [JsonProperty("compressionLevel")] private string? _compressionLevel;
-    [JsonProperty("normalizeContent")] private string? _normalizeContent;
-    [JsonProperty("objectStreams")] private ObjectStreams _objectStreams;
-    [JsonProperty("preserveUnreferenced")] private string? _preserveUnreferenced;
-    [JsonProperty("removeUnreferencedResources")] private AutoYesNo _removeUnreferencedResources;
-    [JsonProperty("preserveUnreferencedResources")] private string? _preserveUnreferencedResources;
-    [JsonProperty("newlineBeforeEndstream")] private string? _newlineBeforeEndstream;
-    [JsonProperty("coalesceContents")] private string? _coalesceContents;
-    [JsonProperty("externalizeInlineImages")] private string? _externalizeInlineImages;
-    [JsonProperty("iiMinBytes")] private string? _iiMinBytes;
-    [JsonProperty("minVersion")] private string? _minVersion;
-    [JsonProperty("forceVersion")] private string? _forceVersion;
-    [JsonProperty("collate")] private string? _collate;
-    [JsonProperty("pages")] private List<Pages>? _pages;
-    [JsonProperty("splitPages")] private string? _splitPages;
-    [JsonProperty("overlay")] private Dictionary<string, string>? _overlay;
-    [JsonProperty("underlay")] private Dictionary<string, string>? _underlay;
-    [JsonProperty("addAttachment")] private List<AddAttachment>? _addAttachment;
-    [JsonProperty("copyAttachments")] private List<CopyAttachment>? _copyAttachments;
-    [JsonProperty("removeAttachment")] private List<string>? _removeAttachment;
-    [JsonProperty("flattenRotation")] private string? _flattenRotation;
-    [JsonProperty("flattenAnnotations")] private FlattenAnnotations _flattenAnnotation;
-    [JsonProperty("rotate")] private string? _rotate;
-    [JsonProperty("generateAppearances")] private string? _generateAppearances;
-    [JsonProperty("optimizeImages")] private string? _optimizeImages;
-    [JsonProperty("oiMinWidth")] private string? _oiMinWidth;
-    [JsonProperty("oiMinHeight")] private string? _oiMinHeight;
-    [JsonProperty("oiMinArea")] private string? _oiMinArea;
-    [JsonProperty("keepInlineImages")] private string? _keepInlineImages;
-    [JsonProperty("removePageLabels")] private string? _removePageLabels;
-    [JsonProperty("setPageLabels")] private string? _setPageLabels;
-    [JsonProperty("isEncrypted")] private string? _isEncrypted;
-    [JsonProperty("requiresPassword")] private string? _requiresPassword;
-    [JsonProperty("check")] private string? _check;
-    [JsonProperty("showEncryption")] private string? _showEncryption;
-    [JsonProperty("showEncryptionKey")] private string? _showEncryptionKey;
-    [JsonProperty("checkLinearization")] private string? _checkLinearization;
-    [JsonProperty("showLinearization")] private string? _showLinearization;
-    [JsonProperty("showXref")] private string? _showXref;
-    [JsonProperty("showObject")] private string? _showObject;
-    [JsonProperty("rawStreamData")] private string? _rawStreamData;
-    [JsonProperty("filteredStreamData")] private string? _filteredStreamData;
-    [JsonProperty("showNpages")] private string? _showNpages;
-    [JsonProperty("showPages")] private string? _showPages;
-    [JsonProperty("withImages")] private string? _withImages;
-    [JsonProperty("listAttachments")] private string? _listAttachments;
-    [JsonProperty("showAttachment")] private string? _showAttachment;
-    [JsonProperty("json")] private string? _json;
-    [JsonProperty("jsonHelp")] private string? _jsonHelp;
-    [JsonProperty("jsonStreamData")] private string? _jsonStreamData;
-    [JsonProperty("jsonStreamPrefix")] private string? _jsonStreamPrefix;
-    [JsonProperty("jsonKey")] private List<string>? _jsonKey;
-    [JsonProperty("jsonObject")] private List<string>? _jsonObject;
-    [JsonProperty("jsonOutput")] private string? _jsonOutput;
-    [JsonProperty("jsonInput")] private string? _jsonInput;
-    [JsonProperty("updateFromJson")] private string? _updateFromJson;
-    [JsonProperty("staticId")] private string? _staticId;
-    [JsonProperty("staticAesIv")] private string? _staticAesIv;
-    [JsonProperty("linearizePass1")] private string? _linearizePass1;
-    [JsonProperty("jpegQuality")] private string? _jpegQuality;
-    [JsonProperty("progress")] private string? _progress;
-    [JsonProperty("removeAcroform")] private string? _removeAcroform;
-    [JsonProperty("removeInfo")] private string? _removeInfo;
-    [JsonProperty("removeMetadata")] private string? _removeMetadata;
-    [JsonProperty("removeStructure")] private string? _removeStructure;
-    [JsonProperty("reportMemoryUsage")] private string? _reportMemoryUsage;
+    [JsonPropertyName("inputFile")]
+    private string? _inputFile;
+
+    [JsonPropertyName("outputFile")]
+    private string? _outputFile;
+
+    [JsonPropertyName("empty")]
+    private string? _empty;
+
+    [JsonPropertyName("replaceInput")]
+    private string? _replaceInput;
+
+    [JsonPropertyName("warningExit0")]
+    private string? _warningExit0;
+
+    [JsonPropertyName("password")]
+    private string? _password;
+
+    [JsonPropertyName("passwordFile")]
+    private string? _passwordFile;
+
+    [JsonPropertyName("verbose")]
+    private string? _verbose;
+
+    [JsonPropertyName("noWarn")]
+    private string? _noWarn;
+
+    [JsonPropertyName("deterministicId")]
+    private string? _deterministicId;
+
+    [JsonPropertyName("allowWeakCrypto")]
+    private string? _allowWeakCrypto;
+
+    [JsonPropertyName("keepFilesOpen")]
+    private string? _keepFilesOpen;
+
+    [JsonPropertyName("keepFilesOpenThreshold")]
+    private string? _keepFilesOpenThreshold;
+
+    [JsonPropertyName("passwordIsHexKey")]
+    private string? _passwordIsHexKey;
+
+    [JsonPropertyName("suppressPasswordRecovery")]
+    private string? _suppressPasswordRecovery;
+
+    [JsonPropertyName("passwordMode")]
+    private PasswordMode _passwordMode;
+
+    [JsonPropertyName("suppressRecovery")]
+    private string? _suppressRecovery;
+
+    [JsonPropertyName("ignoreXrefStreams")]
+    private string? _ignoreXrefStreams;
+
+    [JsonPropertyName("linearize")]
+    private string? _linearize;
+
+    [JsonPropertyName("encrypt")]
+    private Encryption? _encryption;
+
+    [JsonPropertyName("decrypt")]
+    private string? _decrypt;
+
+    [JsonPropertyName("removeRestrictions")]
+    private string? _removeRestrictions;
+
+    [JsonPropertyName("copyEncryption")]
+    private string? _copyEncryption;
+
+    [JsonPropertyName("encryptionFilePassword")]
+    private string? _encryptionFilePassword;
+
+    [JsonPropertyName("qdf")]
+    private string? _qdf;
+
+    [JsonPropertyName("noOriginalObjectIds")]
+    private string? _noOriginalObjectIds;
+
+    [JsonPropertyName("compressStreams")]
+    private string? _compressStreams;
+
+    [JsonPropertyName("decodeLevel")]
+    private DecodeLevel _decodeLevel;
+
+    [JsonPropertyName("streamData")]
+    private StreamData _streamData;
+
+    [JsonPropertyName("recompressFlate")]
+    private string? _recompressFlate;
+
+    [JsonPropertyName("compressionLevel")]
+    private string? _compressionLevel;
+
+    [JsonPropertyName("normalizeContent")]
+    private string? _normalizeContent;
+
+    [JsonPropertyName("objectStreams")]
+    private ObjectStreams _objectStreams;
+
+    [JsonPropertyName("preserveUnreferenced")]
+    private string? _preserveUnreferenced;
+
+    [JsonPropertyName("removeUnreferencedResources")]
+    private AutoYesNo _removeUnreferencedResources;
+
+    [JsonPropertyName("preserveUnreferencedResources")]
+    private string? _preserveUnreferencedResources;
+
+    [JsonPropertyName("newlineBeforeEndstream")]
+    private string? _newlineBeforeEndstream;
+
+    [JsonPropertyName("coalesceContents")]
+    private string? _coalesceContents;
+
+    [JsonPropertyName("externalizeInlineImages")]
+    private string? _externalizeInlineImages;
+
+    [JsonPropertyName("iiMinBytes")]
+    private string? _iiMinBytes;
+
+    [JsonPropertyName("minVersion")]
+    private string? _minVersion;
+
+    [JsonPropertyName("forceVersion")]
+    private string? _forceVersion;
+
+    [JsonPropertyName("collate")]
+    private string? _collate;
+
+    [JsonPropertyName("pages")]
+    private List<Pages>? _pages;
+
+    [JsonPropertyName("splitPages")]
+    private string? _splitPages;
+
+    [JsonPropertyName("overlay")]
+    private Dictionary<string, string>? _overlay;
+
+    [JsonPropertyName("underlay")]
+    private Dictionary<string, string>? _underlay;
+
+    [JsonPropertyName("addAttachment")]
+    private List<AddAttachment>? _addAttachment;
+
+    [JsonPropertyName("copyAttachments")]
+    private List<CopyAttachment>? _copyAttachments;
+
+    [JsonPropertyName("removeAttachment")]
+    private List<string>? _removeAttachment;
+
+    [JsonPropertyName("flattenRotation")]
+    private string? _flattenRotation;
+
+    [JsonPropertyName("flattenAnnotations")]
+    private FlattenAnnotations _flattenAnnotation;
+
+    [JsonPropertyName("rotate")]
+    private string? _rotate;
+
+    [JsonPropertyName("generateAppearances")]
+    private string? _generateAppearances;
+
+    [JsonPropertyName("optimizeImages")]
+    private string? _optimizeImages;
+
+    [JsonPropertyName("oiMinWidth")]
+    private string? _oiMinWidth;
+
+    [JsonPropertyName("oiMinHeight")]
+    private string? _oiMinHeight;
+
+    [JsonPropertyName("oiMinArea")]
+    private string? _oiMinArea;
+
+    [JsonPropertyName("keepInlineImages")]
+    private string? _keepInlineImages;
+
+    [JsonPropertyName("removePageLabels")]
+    private string? _removePageLabels;
+
+    [JsonPropertyName("setPageLabels")]
+    private string? _setPageLabels;
+
+    [JsonPropertyName("isEncrypted")]
+    private string? _isEncrypted;
+
+    [JsonPropertyName("requiresPassword")]
+    private string? _requiresPassword;
+
+    [JsonPropertyName("check")]
+    private string? _check;
+
+    [JsonPropertyName("showEncryption")]
+    private string? _showEncryption;
+
+    [JsonPropertyName("showEncryptionKey")]
+    private string? _showEncryptionKey;
+
+    [JsonPropertyName("checkLinearization")]
+    private string? _checkLinearization;
+
+    [JsonPropertyName("showLinearization")]
+    private string? _showLinearization;
+
+    [JsonPropertyName("showXref")]
+    private string? _showXref;
+
+    [JsonPropertyName("showObject")]
+    private string? _showObject;
+
+    [JsonPropertyName("rawStreamData")]
+    private string? _rawStreamData;
+
+    [JsonPropertyName("filteredStreamData")]
+    private string? _filteredStreamData;
+
+    [JsonPropertyName("showNpages")]
+    private string? _showNpages;
+
+    [JsonPropertyName("showPages")]
+    private string? _showPages;
+
+    [JsonPropertyName("withImages")]
+    private string? _withImages;
+
+    [JsonPropertyName("listAttachments")]
+    private string? _listAttachments;
+
+    [JsonPropertyName("showAttachment")]
+    private string? _showAttachment;
+
+    [JsonPropertyName("json")]
+    private string? _json;
+
+    [JsonPropertyName("jsonHelp")]
+    private string? _jsonHelp;
+
+    [JsonPropertyName("jsonStreamData")]
+    private string? _jsonStreamData;
+
+    [JsonPropertyName("jsonStreamPrefix")]
+    private string? _jsonStreamPrefix;
+
+    [JsonPropertyName("jsonKey")]
+    private List<string>? _jsonKey;
+
+    [JsonPropertyName("jsonObject")]
+    private List<string>? _jsonObject;
+
+    [JsonPropertyName("jsonOutput")]
+    private string? _jsonOutput;
+
+    [JsonPropertyName("jsonInput")]
+    private string? _jsonInput;
+
+    [JsonPropertyName("updateFromJson")]
+    private string? _updateFromJson;
+
+    [JsonPropertyName("staticId")]
+    private string? _staticId;
+
+    [JsonPropertyName("staticAesIv")]
+    private string? _staticAesIv;
+
+    [JsonPropertyName("linearizePass1")]
+    private string? _linearizePass1;
+
+    [JsonPropertyName("jpegQuality")]
+    private string? _jpegQuality;
+
+    [JsonPropertyName("progress")]
+    private string? _progress;
+
+    [JsonPropertyName("removeAcroform")]
+    private string? _removeAcroform;
+
+    [JsonPropertyName("removeInfo")]
+    private string? _removeInfo;
+
+    [JsonPropertyName("removeMetadata")]
+    private string? _removeMetadata;
+
+    [JsonPropertyName("removeStructure")]
+    private string? _removeStructure;
+
+    [JsonPropertyName("reportMemoryUsage")]
+    private string? _reportMemoryUsage;
 
     private static readonly IQPdfApiSignatures Native = new QPdfApi().Native;
 
@@ -2389,6 +2584,350 @@ public class Job : IDisposable
     }
     #endregion
 
+    #region GetMetadata
+    /// <summary>
+    ///     Returns the document meta-data (the <c>/Info</c> dictionary) of the given <paramref name="fileName" />,
+    ///     such as the title, author, subject, keywords, creating application and PDF producer.
+    /// </summary>
+    /// <param name="fileName">The PDF file to read the meta-data from</param>
+    /// <returns>A <see cref="Metadata" /> object with the meta-data of the PDF</returns>
+    /// <exception cref="Exception">Thrown when the qpdf operation fails or the file cannot be processed</exception>
+    public Metadata GetMetadata(string fileName)
+    {
+        Logger.LogInformation($"Getting meta-data from PDF '{fileName}'");
+
+        Reset();
+
+        var result = InputFile(fileName).JsonOutput().InternalRun(out var output, out var data);
+
+        if (result != (int)ExitCode.Success)
+            throw new Exception(output);
+
+        var metadata = new Metadata();
+
+        if (data == null)
+            return metadata;
+
+        var root = JsonNode.Parse(Encoding.UTF8.GetString(data))!.AsObject();
+        var info = GetInfoDictionary(root);
+
+        if (info != null)
+        {
+            metadata.Title = DecodePdfString(info["/Title"]);
+            metadata.Author = DecodePdfString(info["/Author"]);
+            metadata.Subject = DecodePdfString(info["/Subject"]);
+            metadata.Keywords = DecodePdfString(info["/Keywords"]);
+            metadata.Application = DecodePdfString(info["/Creator"]);
+            metadata.Producer = DecodePdfString(info["/Producer"]);
+            metadata.CreationDate = ParsePdfDate(DecodePdfString(info["/CreationDate"]));
+            metadata.ModificationDate = ParsePdfDate(DecodePdfString(info["/ModDate"]));
+            metadata.Trapped = (info["/Trapped"] as JsonValue)?.GetValue<string>();
+        }
+
+        ReadPages(root, metadata);
+
+        return metadata;
+    }
+    #endregion
+
+    #region UpdateMetadata
+    /// <summary>
+    ///     Updates the document meta-data (the <c>/Info</c> dictionary) of the given <paramref name="fileName" /> and
+    ///     writes the result to <paramref name="outputFile" />. Only the properties that are set (non <c>null</c>) on the
+    ///     given <paramref name="metadata" /> are written; set a property to an empty string to clear it.
+    /// </summary>
+    /// <param name="fileName">The input PDF file</param>
+    /// <param name="metadata">The <see cref="Metadata" /> to write into the PDF</param>
+    /// <param name="outputFile">The output PDF file</param>
+    /// <returns><see cref="ExitCode" /></returns>
+    /// <exception cref="Exception">Thrown when the qpdf operation fails or the file cannot be processed</exception>
+    public ExitCode UpdateMetadata(string fileName, Metadata metadata, string outputFile)
+    {
+        Logger.LogInformation($"Updating meta-data of PDF '{fileName}'");
+
+        Reset();
+
+        // Step 1 - Get a complete qpdf JSON representation of the input PDF
+        var result = InputFile(fileName).JsonOutput().InternalRun(out var output, out var data);
+
+        if (result != (int)ExitCode.Success)
+            throw new Exception(output);
+
+        if (data == null)
+            throw new Exception("qpdf did not return any JSON output for the input file");
+
+        var root = JsonNode.Parse(Encoding.UTF8.GetString(data))!.AsObject();
+        var info = GetInfoDictionary(root) ?? CreateInfoDictionary(root);
+
+        SetPdfString(info, "/Title", metadata.Title);
+        SetPdfString(info, "/Author", metadata.Author);
+        SetPdfString(info, "/Subject", metadata.Subject);
+        SetPdfString(info, "/Keywords", metadata.Keywords);
+        SetPdfString(info, "/Creator", metadata.Application);
+        SetPdfString(info, "/Producer", metadata.Producer);
+
+        // Step 2 - Write the modified JSON back into a PDF via qpdf's JSON input mechanism
+        var tempJsonFile = Path.Combine(Path.GetTempPath(), $"qpdf-{Guid.NewGuid():N}.json");
+
+        try
+        {
+            System.IO.File.WriteAllText(tempJsonFile, root.ToJsonString(JsonOptions.JsonNodeWrite), new UTF8Encoding(false));
+
+            Reset();
+
+            var updateResult = InputFile(tempJsonFile).JsonInput().OutputFile(outputFile)
+                .InternalRun(out var updateOutput, out _);
+
+            if (updateResult != (int)ExitCode.Success)
+                throw new Exception(updateOutput);
+
+            return (ExitCode)updateResult;
+        }
+        finally
+        {
+            if (System.IO.File.Exists(tempJsonFile))
+                System.IO.File.Delete(tempJsonFile);
+        }
+    }
+    #endregion
+
+    #region Metadata helpers
+    /// <summary>
+    ///     Returns the <c>/Info</c> dictionary from the qpdf JSON <paramref name="root" /> or <c>null</c> when
+    ///     the PDF does not contain a document information dictionary.
+    /// </summary>
+    private static JsonObject? GetInfoDictionary(JsonObject root)
+    {
+        if (root["qpdf"]?[1] is not JsonObject objects)
+            return null;
+
+        var infoReference = GetStringValue(objects["trailer"]?["value"]?["/Info"]);
+
+        if (infoReference == null)
+            return null;
+
+        return objects[$"obj:{infoReference}"]?["value"] as JsonObject;
+    }
+
+    /// <summary>
+    ///     Creates a new <c>/Info</c> dictionary, adds it to the qpdf JSON <paramref name="root" /> and references
+    ///     it from the trailer. Returns the newly created dictionary.
+    /// </summary>
+    private static JsonObject CreateInfoDictionary(JsonObject root)
+    {
+        if (root["qpdf"]?[1] is not JsonObject objects)
+            throw new Exception("The qpdf JSON output does not contain an objects section");
+
+        var header = root["qpdf"]?[0] as JsonObject;
+        var maxObjectId = header?["maxobjectid"] is JsonValue maxValue && maxValue.TryGetValue(out int id) ? id : 0;
+        var newObjectId = maxObjectId + 1;
+
+        if (header != null)
+            header["maxobjectid"] = newObjectId;
+
+        var info = new JsonObject();
+        objects[$"obj:{newObjectId} 0 R"] = new JsonObject { ["value"] = info };
+
+        if (objects["trailer"]?["value"] is JsonObject trailerValue)
+            trailerValue["/Info"] = $"{newObjectId} 0 R";
+
+        return info;
+    }
+
+    /// <summary>
+    ///     Decodes a qpdf JSON string value into a plain .NET string. qpdf prefixes Unicode strings with
+    ///     <c>u:</c> and binary strings with <c>b:</c>.
+    /// </summary>
+    private static string? DecodePdfString(JsonNode? token)
+    {
+        var value = GetStringValue(token);
+
+        if (value == null)
+            return null;
+
+        if (value.StartsWith("u:", StringComparison.Ordinal) || value.StartsWith("b:", StringComparison.Ordinal))
+            return value.Substring(2);
+
+        return value;
+    }
+
+    /// <summary>
+    ///     Returns the string value of the given <paramref name="token" /> or <c>null</c> when it is not a JSON string.
+    /// </summary>
+    private static string? GetStringValue(JsonNode? token)
+    {
+        if (token is JsonValue value && value.TryGetValue(out string? result))
+            return result;
+
+        return null;
+    }
+
+    /// <summary>
+    ///     Sets or removes a PDF string value on the given <paramref name="info" /> dictionary. A <c>null</c>
+    ///     <paramref name="value" /> leaves the existing value untouched, while an empty string clears it.
+    /// </summary>
+    private static void SetPdfString(JsonObject info, string key, string? value)
+    {
+        if (value == null)
+            return;
+
+        if (value.Length == 0)
+            info.Remove(key);
+        else
+            info[key] = "u:" + value;
+    }
+
+    /// <summary>
+    ///     Parses a PDF date string (e.g. <c>D:20240131123000+01'00'</c>) into a <see cref="DateTimeOffset" />.
+    ///     Returns <c>null</c> when the value is empty or cannot be parsed.
+    /// </summary>
+    private static DateTimeOffset? ParsePdfDate(string? value)
+    {
+        if (string.IsNullOrEmpty(value))
+            return null;
+
+        var text = value!.Trim();
+
+        if (text.StartsWith("D:", StringComparison.Ordinal))
+            text = text.Substring(2);
+
+        // Format: YYYYMMDDHHmmSSOHH'mm' where O is +, - or Z
+        if (text.Length < 4)
+            return null;
+
+        try
+        {
+            var year = int.Parse(text.Substring(0, 4), CultureInfo.InvariantCulture);
+            var month = text.Length >= 6 ? int.Parse(text.Substring(4, 2), CultureInfo.InvariantCulture) : 1;
+            var day = text.Length >= 8 ? int.Parse(text.Substring(6, 2), CultureInfo.InvariantCulture) : 1;
+            var hour = text.Length >= 10 ? int.Parse(text.Substring(8, 2), CultureInfo.InvariantCulture) : 0;
+            var minute = text.Length >= 12 ? int.Parse(text.Substring(10, 2), CultureInfo.InvariantCulture) : 0;
+            var second = text.Length >= 14 ? int.Parse(text.Substring(12, 2), CultureInfo.InvariantCulture) : 0;
+
+            var offset = TimeSpan.Zero;
+
+            if (text.Length > 14)
+            {
+                var sign = text[14];
+
+                if (sign == '+' || sign == '-')
+                {
+                    var rest = text.Substring(15).Replace("'", string.Empty);
+                    var offsetHours = rest.Length >= 2 ? int.Parse(rest.Substring(0, 2), CultureInfo.InvariantCulture) : 0;
+                    var offsetMinutes = rest.Length >= 4 ? int.Parse(rest.Substring(2, 2), CultureInfo.InvariantCulture) : 0;
+                    offset = new TimeSpan(offsetHours, offsetMinutes, 0);
+                    if (sign == '-')
+                        offset = offset.Negate();
+                }
+            }
+
+            return new DateTimeOffset(year, month, day, hour, minute, second, offset);
+        }
+        catch
+        {
+            return null;
+        }
+    }
+
+    /// <summary>
+    ///     Reads the page tree from the qpdf JSON <paramref name="root" /> and populates the
+    ///     <see cref="Metadata.Pages" /> collection and <see cref="Metadata.PageCount" />.
+    /// </summary>
+    private static void ReadPages(JsonObject root, Metadata metadata)
+    {
+        if (root["qpdf"]?[1] is not JsonObject objects)
+            return;
+
+        var trailer = objects["trailer"]?["value"] as JsonObject;
+        var catalog = ResolveObject(objects, trailer?["/Root"]);
+        var pagesRoot = ResolveObject(objects, catalog?["/Pages"]);
+
+        if (pagesRoot == null)
+            return;
+
+        var number = 1;
+        CollectPages(objects, pagesRoot, new JsonObject(), metadata.Pages, ref number);
+        metadata.PageCount = metadata.Pages.Count;
+    }
+
+    /// <summary>
+    ///     Recursively walks the page tree, applying inheritable attributes (<c>/MediaBox</c> and <c>/Rotate</c>)
+    ///     from parent nodes, and adds a <see cref="PageInfo" /> for each leaf page.
+    /// </summary>
+    private static void CollectPages(JsonObject objects, JsonObject node, JsonObject inherited, List<PageInfo> pages, ref int number)
+    {
+        var effective = (JsonObject)inherited.DeepClone();
+
+        if (node["/MediaBox"] != null)
+            effective["/MediaBox"] = node["/MediaBox"]!.DeepClone();
+        if (node["/Rotate"] != null)
+            effective["/Rotate"] = node["/Rotate"]!.DeepClone();
+
+        var type = GetStringValue(node["/Type"]);
+        var kids = node["/Kids"] as JsonArray;
+
+        if (kids != null && type != "/Page")
+        {
+            foreach (var kid in kids)
+            {
+                var kidNode = ResolveObject(objects, kid);
+                if (kidNode != null)
+                    CollectPages(objects, kidNode, effective, pages, ref number);
+            }
+
+            return;
+        }
+
+        var page = new PageInfo { Number = number++ };
+
+        if ((effective["/MediaBox"] ?? node["/MediaBox"]) is JsonArray mediaBox && mediaBox.Count >= 4)
+        {
+            page.Left = (float)GetDoubleValue(mediaBox[0]);
+            page.Top = (float)GetDoubleValue(mediaBox[1]);
+            page.Width = (float)GetDoubleValue(mediaBox[2]);
+            page.Height = (float)GetDoubleValue(mediaBox[3]);
+        }
+
+        var rotate = effective["/Rotate"] ?? node["/Rotate"];
+        if (rotate is JsonValue)
+            page.Rotate = (float)GetDoubleValue(rotate);
+
+        page.Annotations = node["/Annots"] is JsonArray { Count: > 0 };
+
+        pages.Add(page);
+    }
+
+    /// <summary>
+    ///     Returns the numeric value of the given <paramref name="token" /> or <c>0</c> when it is not a JSON number.
+    /// </summary>
+    private static double GetDoubleValue(JsonNode? token)
+    {
+        if (token is JsonValue value && value.TryGetValue(out double result))
+            return result;
+
+        return 0;
+    }
+
+    /// <summary>
+    ///     Resolves a qpdf JSON token that is either an indirect reference (<c>"n 0 R"</c>) or an inline object
+    ///     into the dictionary it points at. Returns <c>null</c> when it cannot be resolved.
+    /// </summary>
+    private static JsonObject? ResolveObject(JsonObject objects, JsonNode? token)
+    {
+        switch (token)
+        {
+            case null:
+                return null;
+            case JsonObject obj:
+                return obj;
+            case JsonValue value when value.TryGetValue(out string? reference):
+                return objects[$"obj:{reference}"]?["value"] as JsonObject;
+            default:
+                return null;
+        }
+    }
+    #endregion
+
     #region StaticId
     /// <summary>
     ///     Use a fixed value for the document ID (/ID in the trailer). This is intended for testing only. <b>Never</b> use it for
@@ -2551,15 +3090,7 @@ public class Job : IDisposable
     {
         data = null;
 
-        var settings = new JsonSerializerSettings
-        {
-            DefaultValueHandling = DefaultValueHandling.Ignore,
-            Formatting = Formatting.Indented
-        };
-
-        settings.Converters.Add(new StringEnumConverter());
-
-        var json = JsonConvert.SerializeObject(this, settings);
+        var json = System.Text.Json.JsonSerializer.Serialize(this, JsonOptions.Serialize);
 
         Logger.LogDebug($"JSON input for QPDF: {Environment.NewLine}{json}");
 
@@ -2590,7 +3121,7 @@ public class Job : IDisposable
         output = _output.ToString().TrimEnd();
 
         if (_save.Count > 0)
-            data = _save.ToArray();
+            data = [.. _save];
 
         Logger.LogInformation("Output from QPDF: " + Environment.NewLine + output);
 

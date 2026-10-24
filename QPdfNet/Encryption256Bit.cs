@@ -1,4 +1,4 @@
-﻿//
+//
 // Encryption256Bit.cs
 //
 // Author: Kees van Spelde <sicos2002@hotmail.com>
@@ -24,7 +24,7 @@
 // THE SOFTWARE.
 //
 
-using Newtonsoft.Json;
+using System.Text.Json.Serialization;
 using QPdfNet.Enums;
 using QPdfNet.Interfaces;
 using QPdfNet.Loggers;
@@ -37,15 +37,32 @@ namespace QPdfNet;
 public class Encryption256Bit : IEncryption
 {
     #region Fields
-    [JsonProperty("accessibility")] private string _accessibility;
-    [JsonProperty("annotate")] private string _annotate;
-    [JsonProperty("assemble")] private string _assemble;
-    [JsonProperty("extract")] private string _extract;
-    [JsonProperty("form")] private string _form;
-    [JsonProperty("modifyOther")] private string _modifyOther;
-    [JsonProperty("modify")] private Modify _modify;
-    [JsonProperty("print")] private Print _print;
-    [JsonProperty("cleartextMetadata")] private string? _cleartextMetadata;
+    [JsonPropertyName("accessibility")]
+    private string _accessibility;
+
+    [JsonPropertyName("annotate")]
+    private string _annotate;
+
+    [JsonPropertyName("assemble")]
+    private string _assemble;
+
+    [JsonPropertyName("extract")]
+    private string _extract;
+
+    [JsonPropertyName("form")]
+    private string _form;
+
+    [JsonPropertyName("modifyOther")]
+    private string _modifyOther;
+
+    [JsonPropertyName("modify")]
+    private Modify _modify;
+
+    [JsonPropertyName("print")]
+    private Print _print;
+
+    [JsonPropertyName("cleartextMetadata")]
+    private string? _cleartextMetadata;
     #endregion
 
     #region Constructor

@@ -1,4 +1,4 @@
-﻿namespace QPdfNet.Enums;
+namespace QPdfNet.Enums;
 
 /// <summary>
 ///     JSON stream data formatting

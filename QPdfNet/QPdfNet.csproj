@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
-		<TargetFrameworks>netstandard2.0;netstandard2.1</TargetFrameworks>
+		<TargetFrameworks>netstandard2.0;netstandard2.1;net10.0</TargetFrameworks>
 		<Nullable>enable</Nullable>
 		<LangVersion>latest</LangVersion>
 		<AllowUnsafeBlocks>True</AllowUnsafeBlocks>
@@ -10,22 +10,24 @@
 		<RepositoryUrl>https://github.com/Sicos1977/QPdfNet</RepositoryUrl>
 		<RepositoryType>git</RepositoryType>
 		<PackageTags>qpdf pdf</PackageTags>
-		<PackageReleaseNotes>- Updated nuget packages
-- Updated to latest 12.x qpdf version</PackageReleaseNotes>
+		<PackageReleaseNotes>- Replaced Newtonsoft.Json with System.Text.Json for all (de)serialization, removing the Newtonsoft.Json dependency
+- Added native qpdf 12.4.2 runtimes for Linux ARM64 (linux-arm64) and macOS ARM64 (osx-arm64); these are resolved automatically alongside the existing win-x64, win-x86, linux-x64 and osx-x64 runtimes
+- Updated NuGet packages to the latest versions
+- Updated to the latest 12.x qpdf version</PackageReleaseNotes>
 		<PackageIcon>qpdf.png</PackageIcon>
 		<PackageReadmeFile>readme.md</PackageReadmeFile>
 		<Copyright>Copyright (c) 2021-2026 Kees van Spelde</Copyright>
 		<GeneratePackageOnBuild>True</GeneratePackageOnBuild>
-		<AssemblyVersion>1.6.0.0</AssemblyVersion>
-		<FileVersion>1.6.0.0</FileVersion>
-		<Version>1.6.0</Version>
+		<AssemblyVersion>1.7.0.0</AssemblyVersion>
+		<FileVersion>1.7.0.0</FileVersion>
+		<Version>1.7.0</Version>
     <DocumentationFile>bin\$(Configuration)\$(TargetFramework)\$(AssemblyName).xml</DocumentationFile>
-    <NoWarn>$(NoWarn);1591</NoWarn>
+    <NoWarn>$(NoWarn);1591;SYSLIB0044</NoWarn>
 	</PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.Extensions.Logging" Version="10.0.12" />
-    <PackageReference Include="Newtonsoft.Json" Version="13.0.4" />
+    <PackageReference Include="Microsoft.Extensions.Logging" Version="10.0.13" />
+    <PackageReference Include="System.Text.Json" Version="10.0.13" />
   </ItemGroup>
 
   <ItemGroup Condition="'$(TargetFramework)' == 'netstandard2.0'">
@@ -33,15 +35,19 @@
   </ItemGroup>
 
 	<ItemGroup>
-		<Content Include="x64/**/*.*" copyToOutput="true">
+		<!--
+			RID-specific native assets (runtimes/<rid>/native/...), e.g.
+			runtimes/win-x64/native/qpdf30.dll, runtimes/linux-x64/native/libqpdf.so.30,
+			runtimes/osx-x64/native/libqpdf.30.dylib.
+			These are copied to the output directory preserving their folder structure and packed
+			into the standard NuGet "runtimes" layout so consumers get the correct native library
+			for their platform automatically.
+		-->
+		<Content Include="runtimes/**/*.*" copyToOutput="true">
+			<Link>runtimes/%(RecursiveDir)%(Filename)%(Extension)</Link>
 			<IncludeInPackage>true</IncludeInPackage>
-			<PackagePath>x64;lib</PackagePath>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-		</Content>
-		<Content Include="x86/**/*.*" copyToOutput="true">
-			<IncludeInPackage>true</IncludeInPackage>
-			<PackagePath>x86;lib</PackagePath>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+			<PackagePath>runtimes/%(RecursiveDir)</PackagePath>
+			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
 		</Content>
     <None Include="qpdf.png">
       <Pack>True</Pack>

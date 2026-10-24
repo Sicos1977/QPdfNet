@@ -1,0 +1,4 @@
+<Solution>
+  <Project Path="QPdfNet/QPdfNet.csproj" />
+  <Project Path="QpdfNetTest/QpdfNetTest.csproj" />
+</Solution>

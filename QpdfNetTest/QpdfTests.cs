@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using System.IO;
 using System.Text;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -790,6 +791,88 @@ namespace QpdfNetTest
         {
             var result = Pdf.ContainsJavaScript(Path.Combine("TestFiles", "test.pdf"));
             Assert.IsFalse(result);
+        }
+
+        [TestMethod]
+        public void TestUpdateAndGetMetadata()
+        {
+            var outputFile = Path.Combine(_testFolder, "output.pdf");
+
+            var metadata = new Metadata
+            {
+                Title = "QPdfNet title",
+                Author = "QPdfNet author",
+                Subject = "QPdfNet subject",
+                Keywords = "qpdf, metadata, test",
+                Application = "QPdfNet application",
+                Producer = "QPdfNet producer"
+            };
+
+            using var job = new Job();
+            var result = job.UpdateMetadata(Path.Combine("TestFiles", "test.pdf"), metadata, outputFile);
+
+            Assert.AreEqual(ExitCode.Success, result);
+            Assert.IsTrue(File.Exists(outputFile));
+
+            using var readJob = new Job();
+            var readMetadata = readJob.GetMetadata(outputFile);
+
+            Assert.AreEqual(metadata.Title, readMetadata.Title);
+            Assert.AreEqual(metadata.Author, readMetadata.Author);
+            Assert.AreEqual(metadata.Subject, readMetadata.Subject);
+            Assert.AreEqual(metadata.Keywords, readMetadata.Keywords);
+            Assert.AreEqual(metadata.Application, readMetadata.Application);
+            Assert.AreEqual(metadata.Producer, readMetadata.Producer);
+        }
+
+        [TestMethod]
+        public void TestGetMetadata()
+        {
+            using var job = new Job();
+            var metadata = job.GetMetadata(Path.Combine("TestFiles", "test.pdf"));
+
+            Assert.IsNotNull(metadata);
+        }
+
+        [TestMethod]
+        public void TestGetMetadataPages()
+        {
+            using var job = new Job();
+            var metadata = job.GetMetadata(Path.Combine("TestFiles", "test.pdf"));
+
+            Assert.IsNotNull(metadata);
+            Assert.IsTrue(metadata.PageCount > 0);
+            Assert.AreEqual(metadata.PageCount, metadata.Pages.Count);
+
+            var firstPage = metadata.Pages[0];
+            Assert.AreEqual(1, firstPage.Number);
+            Assert.IsTrue(firstPage.Width > 0);
+            Assert.IsTrue(firstPage.Height > 0);
+        }
+
+        [TestMethod]
+        public void TestGetMetadataPages1000()
+        {
+            var stopwatch = Stopwatch.StartNew();
+            using var job = new Job();
+
+            for (var i = 0; i < 1000; i++)
+            {
+                var metadata = job.GetMetadata(Path.Combine("TestFiles", "test.pdf"));
+
+                Assert.IsNotNull(metadata);
+                Assert.IsTrue(metadata.PageCount > 0);
+                Assert.AreEqual(metadata.PageCount, metadata.Pages.Count);
+
+                var firstPage = metadata.Pages[0];
+                Assert.AreEqual(1, firstPage.Number);
+                Assert.IsTrue(firstPage.Width > 0);
+                Assert.IsTrue(firstPage.Height > 0);
+            }
+
+            stopwatch.Stop();
+            Console.WriteLine($"Time taken to get metadata for 1000 iterations: '{stopwatch.ElapsedMilliseconds}' ms, average {stopwatch.ElapsedMilliseconds / 1000.0} ms");
+            Assert.IsTrue(stopwatch.ElapsedMilliseconds < 10000);
         }
     }
 }

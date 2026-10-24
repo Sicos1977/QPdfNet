@@ -1,4 +1,4 @@
-﻿//
+//
 // PageOutline.cs
 //
 // Author: Kees van Spelde <sicos2002@hotmail.com>
@@ -25,7 +25,7 @@
 //
 
 using System.Collections.Generic;
-using Newtonsoft.Json;
+using System.Text.Json.Serialization;
 
 namespace QPdfNet.Info;
 
@@ -38,19 +38,19 @@ public class PageOutline
     /// <summary>
     ///     Outline destination dictionary
     /// </summary>
-    [JsonProperty("dest", DefaultValueHandling = DefaultValueHandling.Ignore)]
+    [JsonPropertyName("dest")]
     public List<string>? Dest { get; set; }
 
     /// <summary>
     ///     Reference to outline that targets this page
     /// </summary>
-    [JsonProperty("object", DefaultValueHandling = DefaultValueHandling.Ignore)]
+    [JsonPropertyName("object")]
     public string? Object { get; set; }
 
     /// <summary>
     ///     Outline title
     /// </summary>
-    [JsonProperty("title", DefaultValueHandling = DefaultValueHandling.Ignore)]
+    [JsonPropertyName("title")]
     public string? Title { get; set; }
     #endregion
 }

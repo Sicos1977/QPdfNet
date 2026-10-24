@@ -1,4 +1,4 @@
-﻿//
+//
 // Helper.cs
 //
 // Author: Kees van Spelde <sicos2002@hotmail.com>
@@ -26,6 +26,8 @@
 
 using System;
 using System.IO;
+using System.Runtime.InteropServices;
+using QPdfNet.InteropDotNet;
 
 namespace QPdfNet.Interop
 {
@@ -33,15 +35,33 @@ namespace QPdfNet.Interop
     {
         internal static void SetPath()
         {
-            var dllDirectory =
-                Path.Combine(
-                    Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location) ?? string.Empty,
-                    Environment.Is64BitProcess ? "x64" : "x86");
+            // Adding a directory to the PATH so that the operating system can locate the native
+            // qpdf library and its dependent DLLs (vcruntime, msvcp, ...) is only relevant on
+            // Windows. On Linux and macOS dependent shared libraries are resolved through the
+            // system loader / rpath, so there is nothing to do here.
+            if (!RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
+                return;
 
-            var path = Environment.GetEnvironmentVariable("path") ?? string.Empty;
+            var baseDirectory =
+                Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location) ?? string.Empty;
 
-            if (!path.Contains(dllDirectory))
-                Environment.SetEnvironmentVariable("path", Environment.GetEnvironmentVariable("path") + ";" + dllDirectory);
+            // Preferred RID-specific layout (runtimes/win-x64/native) and the legacy x64/x86 folder.
+            var nativeDirectories = new[]
+            {
+                Path.Combine(baseDirectory, Path.Combine("runtimes", Path.Combine(SystemManager.GetRuntimeIdentifier(), "native"))),
+                Path.Combine(baseDirectory, Environment.Is64BitProcess ? "x64" : "x86")
+            };
+
+            foreach (var nativeDirectory in nativeDirectories)
+            {
+                if (!Directory.Exists(nativeDirectory))
+                    continue;
+
+                var path = Environment.GetEnvironmentVariable("path") ?? string.Empty;
+
+                if (!path.Contains(nativeDirectory))
+                    Environment.SetEnvironmentVariable("path", path + ";" + nativeDirectory);
+            }
         }
     }
 }

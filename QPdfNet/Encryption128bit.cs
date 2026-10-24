@@ -1,4 +1,4 @@
-﻿//
+//
 // Encryption128Bit.cs
 //
 // Author: Kees van Spelde <sicos2002@hotmail.com>
@@ -24,7 +24,7 @@
 // THE SOFTWARE.
 //
 
-using Newtonsoft.Json;
+using System.Text.Json.Serialization;
 using QPdfNet.Enums;
 using QPdfNet.Loggers;
 
@@ -35,8 +35,9 @@ namespace QPdfNet;
 /// </summary>
 public class Encryption128Bit : Encryption256Bit
 {
-    #region Fields
-    [JsonProperty("useAes")] private string _useAes;
+    #region Properties
+    [JsonPropertyName("useAes")]
+    public string UseAes { get; private set; }
     #endregion
 
     #region Constructor
@@ -77,7 +78,7 @@ public class Encryption128Bit : Encryption256Bit
     {
         Logger.LogInformation($"128-bit encryption is using {(useAes ? "AES" : "RC4")} encryption");
 
-        _useAes = useAes ? "y" : "n";
+        UseAes = useAes ? "y" : "n";
     }
     #endregion
 }

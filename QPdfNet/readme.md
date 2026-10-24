@@ -37,6 +37,35 @@ The DLL qpdf30.dll is compiled with Visual Studio 2026 you need these C++ runtim
 - X86: https://aka.ms/vs/17/release/vc_redist.x86.exe
 - X64: https://aka.ms/vs/17/release/vc_redist.x64.exe
 
+## Cross-platform support (Windows, Linux and macOS)
+
+QPdfNet loads the native qpdf library at runtime and resolves it per platform, so the same
+package can run on Windows, Linux and macOS. In addition to the legacy Windows `x64`/`x86`
+folders, the loader looks for native assets in the standard RID-specific
+`runtimes/<rid>/native/` layout used by other native-binding packages (SkiaSharp, zlib, ...).
+
+The loader derives the base name `qpdf30` and turns it into the correct file name for the
+current platform, so place the native binaries like this:
+
+```
+runtimes/win-x64/native/qpdf30.dll
+runtimes/win-x86/native/qpdf30.dll
+runtimes/linux-x64/native/libqpdf.so.30      (+ its dependency .so files)
+runtimes/osx-x64/native/libqpdf.30.dylib
+```
+
+Notes:
+
+- qpdf uses versioned sonames on Unix, so the expected file name is `libqpdf.so.30` on Linux
+  and `libqpdf.30.dylib` on macOS (the loader also probes `libqpdf30.so`/`libqpdf30.dylib` and
+  `libqpdf.so`/`libqpdf.dylib` as fall-backs).
+- On Linux the official qpdf binary distribution ships several dependent shared libraries
+  (`libgnutls.so.30`, `libjpeg.so.8`, ...). Place them next to `libqpdf.so.30` in the same
+  `native` folder so the dynamic loader can resolve them.
+- On Windows the Visual C++ runtime DLLs are still required (see the section above).
+- The existing Windows `x64`/`x86` folders keep working, so this is a non-breaking change.
+- The resolution order is `runtimes/<rid>/native/` first, then the legacy `x64`/`x86` folder.
+
 How to use
 ==========
 

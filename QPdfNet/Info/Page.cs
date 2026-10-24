@@ -1,4 +1,4 @@
-﻿//
+//
 // Page.cs
 //
 // Author: Kees van Spelde <sicos2002@hotmail.com>
@@ -25,7 +25,7 @@
 //
 
 using System.Collections.Generic;
-using Newtonsoft.Json;
+using System.Text.Json.Serialization;
 
 namespace QPdfNet.Info;
 
@@ -38,37 +38,37 @@ public class Page
     /// <summary>
     ///     Reference to each content stream
     /// </summary>
-    [JsonProperty("contents", DefaultValueHandling = DefaultValueHandling.Ignore)]
+    [JsonPropertyName("contents")]
     public List<string>? Contents { get; set; }
 
     /// <summary>
     ///     List of images on the page
     /// </summary>
-    [JsonProperty("images", DefaultValueHandling = DefaultValueHandling.Ignore)] 
+    [JsonPropertyName("images")] 
     public List<Image>? Images { get; set; }
 
     /// <summary>
     ///     Page label dictionary, or null if none
     /// </summary>
-    [JsonProperty("label", DefaultValueHandling = DefaultValueHandling.Ignore)]
+    [JsonPropertyName("label")]
     public string? Label { get; set; }
 
     /// <summary>
     ///     Reference to original page object
     /// </summary>
-    [JsonProperty("object", DefaultValueHandling = DefaultValueHandling.Ignore)]
+    [JsonPropertyName("object")]
     public string? Object { get; set; }
     
     /// <summary>
     ///     Outlines that target this page
     /// </summary>
-    [JsonProperty("outlines", DefaultValueHandling = DefaultValueHandling.Ignore)] 
+    [JsonPropertyName("outlines")] 
     public List<PageOutline>? Outlines { get; set; }
 
     /// <summary>
     ///     Position of page in document numbering from 1
     /// </summary>
-    [JsonProperty("pageposfrom1", DefaultValueHandling = DefaultValueHandling.Ignore)]
+    [JsonPropertyName("pageposfrom1")]
     public int? PagePosFrom1 { get; set; }
     #endregion
 }

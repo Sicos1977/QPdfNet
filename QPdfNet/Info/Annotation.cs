@@ -1,4 +1,4 @@
-﻿//
+//
 // Annotation.cs
 //
 // Author: Kees van Spelde <sicos2002@hotmail.com>
@@ -24,29 +24,34 @@
 // THE SOFTWARE.
 //
 
-using Newtonsoft.Json;
+using System.Text.Json.Serialization;
 
 namespace QPdfNet.Info;
 
+/// <summary>
+///     Represents a PDF annotation, including its flags, appearance state, and a reference to the underlying annotation object.
+/// </summary>
+/// <remarks>Used to model annotation data from qpdf JSON output, including the /F annotation flags and appearance
+/// state values used by controls such as check boxes and radio buttons.</remarks>
 public class Annotation
 {
     #region Properties
     /// <summary>
     ///     Annotation flags from /F -- see pdf_annotation_flag_e in qpdf/Constants.h
     /// </summary>
-    [JsonProperty("annotationflags", DefaultValueHandling = DefaultValueHandling.Ignore)]
+    [JsonPropertyName("annotationflags")]
     public string? AnnotationFlags { get; set; }
 
     /// <summary>
     ///     Appearance state -- can be used to determine value for checkboxes and radio buttons
     /// </summary>
-    [JsonProperty("appearancestate", DefaultValueHandling = DefaultValueHandling.Ignore)]
+    [JsonPropertyName("appearancestate")]
     public string? AppearanceState { get; set; }
 
     /// <summary>
     ///     Reference to the annotation object
     /// </summary>
-    [JsonProperty("object", DefaultValueHandling = DefaultValueHandling.Ignore)]
+    [JsonPropertyName("object")]
     public string? Object { get; set; }
     #endregion
 }

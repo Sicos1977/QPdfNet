@@ -1,4 +1,4 @@
-﻿//
+//
 // AttachmentProperties.cs
 //
 // Author: Kees van Spelde <sicos2002@hotmail.com>
@@ -24,7 +24,7 @@
 // THE SOFTWARE.
 //
 
-using Newtonsoft.Json;
+using System.Text.Json.Serialization;
 
 namespace QPdfNet.Info;
 
@@ -37,19 +37,19 @@ public class Attachment
     /// <summary>
     ///     Object containing the file spec
     /// </summary>
-    [JsonProperty("filespec", DefaultValueHandling = DefaultValueHandling.Ignore)]
+    [JsonPropertyName("filespec")]
     public string? FileSpec { get; set; }
 
     /// <summary>
     ///     Most preferred embedded file stream
     /// </summary>
-    [JsonProperty("preferredcontents", DefaultValueHandling = DefaultValueHandling.Ignore)]
+    [JsonPropertyName("preferredcontents")]
     public string? PreferredContents { get; set; }
 
     /// <summary>
     ///     Most preferred file name
     /// </summary>
-    [JsonProperty("preferredname", DefaultValueHandling = DefaultValueHandling.Ignore)]
+    [JsonPropertyName("preferredname")]
     public string? PreferredName { get; set; }
     #endregion
 }

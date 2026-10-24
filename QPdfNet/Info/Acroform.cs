@@ -1,4 +1,4 @@
-﻿//
+//
 // Acroform.cs
 //
 // Author: Kees van Spelde <sicos2002@hotmail.com>
@@ -25,7 +25,7 @@
 //
 
 using System.Collections.Generic;
-using Newtonsoft.Json;
+using System.Text.Json.Serialization;
 
 namespace QPdfNet.Info;
 
@@ -38,19 +38,19 @@ public class AcroForm
     /// <summary>
     ///     List of fields in the acroform
     /// </summary>
-    [JsonProperty("fields", DefaultValueHandling = DefaultValueHandling.Ignore)]
+    [JsonPropertyName("fields")]
     public List<Field>? Fields { get; set; }
 
     /// <summary>
     ///     Whether the document has interactive forms
     /// </summary>
-    [JsonProperty("hasacroform", DefaultValueHandling = DefaultValueHandling.Ignore)]
+    [JsonPropertyName("hasacroform")]
     public bool? Hasacroform { get; set; }
 
     /// <summary>
     ///     Whether the form fields' appearance streams need to be regenerated
     /// </summary>
-    [JsonProperty("needappearances", DefaultValueHandling = DefaultValueHandling.Ignore)]
+    [JsonPropertyName("needappearances")]
     public bool? NeedAppearances { get; set; }
     #endregion
 }

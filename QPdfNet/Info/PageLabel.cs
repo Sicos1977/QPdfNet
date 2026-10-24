@@ -1,4 +1,4 @@
-﻿//
+//
 // PageLabel.cs
 //
 // Author: Kees van Spelde <sicos2002@hotmail.com>
@@ -24,7 +24,7 @@
 // THE SOFTWARE.
 //
 
-using Newtonsoft.Json;
+using System.Text.Json.Serialization;
 
 namespace QPdfNet.Info;
 
@@ -37,13 +37,13 @@ public class PageLabel
     /// <summary>
     ///     Starting page position starting from zero 
     /// </summary>
-    [JsonProperty("index", DefaultValueHandling = DefaultValueHandling.Ignore)]
+    [JsonPropertyName("index")]
     public string? Index { get; set; }
 
     /// <summary>
     ///     Page label dictionary
     /// </summary>
-    [JsonProperty("label", DefaultValueHandling = DefaultValueHandling.Ignore)]
+    [JsonPropertyName("label")]
     public string? Label { get; set; }
     #endregion
 }

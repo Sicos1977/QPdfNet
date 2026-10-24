@@ -1,4 +1,4 @@
-﻿//
+//
 // Encryption.cs
 //
 // Author: Kees van Spelde <sicos2002@hotmail.com>
@@ -25,7 +25,7 @@
 //
 
 using System;
-using Newtonsoft.Json;
+using System.Text.Json.Serialization;
 using QPdfNet.Interfaces;
 using QPdfNet.Loggers;
 
@@ -36,23 +36,30 @@ namespace QPdfNet
     /// </summary>
     internal class Encryption
     {
-        #region Fields
-        [JsonProperty("40bit")] private IEncryption? _options40;
-        [JsonProperty("128bit")] private IEncryption? _options128;
-        [JsonProperty("256bit")] private IEncryption? _options256;
-        #endregion
-
         #region Properties
+        // Typed as object so System.Text.Json serializes the concrete runtime type
+        // (Encryption40Bit/128Bit/256Bit), including all of their members. When typed as
+        // IEncryption only the interface members (none) would be written.
+
+        [JsonPropertyName("40bit")]
+        public object? Options40 { get; private set; }
+
+        [JsonPropertyName("128bit")]
+        public object? Options128 { get; private set; }
+
+        [JsonPropertyName("256bit")]
+        public object? Options256 { get; private set; }
+
         /// <summary>
         ///     The user password
         /// </summary>
-        [JsonProperty("userPassword")]
+        [JsonPropertyName("userPassword")]
         public string? UserPassword { get; private set; }
 
         /// <summary>
         ///     The owner password
         /// </summary>
-        [JsonProperty("ownerPassword")]
+        [JsonPropertyName("ownerPassword")]
         public string OwnerPassword { get; private set; }
 
         [JsonIgnore]
@@ -79,20 +86,20 @@ namespace QPdfNet
             switch (options.GetType().Name)
             {
                 case "Encryption40Bit":
-                    _options40 = options;
-                    Options = _options40;
+                    Options40 = options;
+                    Options = (IEncryption)Options40;
                     Logger.LogInformation("Setting encryption to 40 bits");
                     break;
 
                 case "Encryption128Bit":
-                    _options128 = options;
-                    Options = _options128;
+                    Options128 = options;
+                    Options = (IEncryption)Options128;
                     Logger.LogInformation("Setting encryption to 128 bits");
                     break;
 
                 case "Encryption256Bit":
-                    _options256 = options;
-                    Options = _options256;
+                    Options256 = options;
+                    Options = (IEncryption)Options256;
                     Logger.LogInformation("Setting encryption to 256 bits");
                     break;
 

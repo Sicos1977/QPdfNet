@@ -1,4 +1,4 @@
-﻿//
+//
 // Fields.cs
 //
 // Author: Kees van Spelde <sicos2002@hotmail.com>
@@ -24,7 +24,7 @@
 // THE SOFTWARE.
 //
 
-using Newtonsoft.Json;
+using System.Text.Json.Serialization;
 
 namespace QPdfNet.Info;
 
@@ -37,109 +37,109 @@ public class Field
     /// <summary>
     ///     Alternative name of field -- this is the one usually shown to users
     /// </summary>
-    [JsonProperty("alternativename", DefaultValueHandling = DefaultValueHandling.Ignore)]
+    [JsonPropertyName("alternativename")]
     public string? AlternativeName { get; set; }
 
     /// <summary>
     ///     Reference to the annotation object
     /// </summary>
-    [JsonProperty("annotation", DefaultValueHandling = DefaultValueHandling.Ignore)]
+    [JsonPropertyName("annotation")]
     public Annotation? Annotation { get; set; }
 
     /// <summary>
     ///     For choices fields, the list of choices presented to the user
     /// </summary>
-    [JsonProperty("choices", DefaultValueHandling = DefaultValueHandling.Ignore)]
+    [JsonPropertyName("choices")]
     public string? Choices { get; set; }
 
     /// <summary>
     ///     Default value of field
     /// </summary>
-    [JsonProperty("defaultvalue", DefaultValueHandling = DefaultValueHandling.Ignore)]
+    [JsonPropertyName("defaultvalue")]
     public string? DefaultValue { get; set; }
 
     /// <summary>
     ///     Form field flags from /Ff -- see pdf_form_field_flag_e in qpdf/Constants.h
     /// </summary>
-    [JsonProperty("fieldflags", DefaultValueHandling = DefaultValueHandling.Ignore)]
+    [JsonPropertyName("fieldflags")]
     public string? FieldFlags { get; set; }
 
     /// <summary>
     ///     Field type
     /// </summary>
-    [JsonProperty("fieldtype", DefaultValueHandling = DefaultValueHandling.Ignore)]
+    [JsonPropertyName("fieldtype")]
     public string? FieldType { get; set; }
 
     /// <summary>
     ///     Full name of field
     /// </summary>
-    [JsonProperty("fullname", DefaultValueHandling = DefaultValueHandling.Ignore)]
+    [JsonPropertyName("fullname")]
     public string? FullName { get; set; }
 
     /// <summary>
     ///     Whether field is a checkbox
     /// </summary>
-    [JsonProperty("ischeckbox", DefaultValueHandling = DefaultValueHandling.Ignore)]
+    [JsonPropertyName("ischeckbox")]
     public bool? IsCheckbox { get; set; }
 
     /// <summary>
     ///     Whether field is a list, combo, or dropdown
     /// </summary>
-    [JsonProperty("ischoice", DefaultValueHandling = DefaultValueHandling.Ignore)]
+    [JsonPropertyName("ischoice")]
     public bool? IsChoice { get; set; }
 
     /// <summary>
     ///     Whether field is a radio button -- buttons in a single group share a parent
     /// </summary>
-    [JsonProperty("isradiobutton", DefaultValueHandling = DefaultValueHandling.Ignore)]
+    [JsonPropertyName("isradiobutton")]
     public bool? IsRadiobutton { get; set; }
 
     /// <summary>
     ///     Whether field is a text field
     /// </summary>
-    [JsonProperty("istext", DefaultValueHandling = DefaultValueHandling.Ignore)]
+    [JsonPropertyName("istext")]
     public bool? IsText { get; set; }
 
     /// <summary>
     ///     Mapping name of field
     /// </summary>
-    [JsonProperty("mappingname", DefaultValueHandling = DefaultValueHandling.Ignore)]
+    [JsonPropertyName("mappingname")]
     public string? MappingName { get; set; }
 
     /// <summary>
     ///     Reference to this form field
     /// </summary>
-    [JsonProperty("object", DefaultValueHandling = DefaultValueHandling.Ignore)]
+    [JsonPropertyName("object")]
     public string? Object { get; set; }
 
     /// <summary>
     ///     Position of containing page numbered from 1
     /// </summary>
-    [JsonProperty("pageposfrom1", DefaultValueHandling = DefaultValueHandling.Ignore)]
+    [JsonPropertyName("pageposfrom1")]
     public int PagePosFrom1 { get; set; }
 
     /// <summary>
     ///     Reference to this field's parent
     /// </summary>
-    [JsonProperty("parent", DefaultValueHandling = DefaultValueHandling.Ignore)]
+    [JsonPropertyName("parent")]
     public string? Parent { get; set; }
 
     /// <summary>
     ///     Partial name of field
     /// </summary>
-    [JsonProperty("partialname", DefaultValueHandling = DefaultValueHandling.Ignore)]
+    [JsonPropertyName("partialname")]
     public string? PartialName { get; set; }
 
     /// <summary>
     ///     Field quadding -- number indicating left, center, or right
     /// </summary>
-    [JsonProperty("quadding", DefaultValueHandling = DefaultValueHandling.Ignore)]
+    [JsonPropertyName("quadding")]
     public string? Quadding { get; set; }
 
     /// <summary>
     ///     Value of field
     /// </summary>
-    [JsonProperty("value", DefaultValueHandling = DefaultValueHandling.Ignore)]
+    [JsonPropertyName("value")]
     public string? Value { get; set; }
     #endregion
 }

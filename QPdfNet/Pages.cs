@@ -1,4 +1,4 @@
-﻿//
+//
 // Pages.cs
 //
 // Author: Kees van Spelde <sicos2002@hotmail.com>
@@ -24,7 +24,7 @@
 // THE SOFTWARE.
 //
 
-using Newtonsoft.Json;
+using System.Text.Json.Serialization;
 
 namespace QPdfNet;
 
@@ -33,10 +33,15 @@ namespace QPdfNet;
 /// </summary>
 internal class Pages
 {
-    #region Fields
-    [JsonProperty("file")] private string _file;
-    [JsonProperty("range")] private string _range;
-    [JsonProperty("password")] private string? _password;
+    #region Properties
+    [JsonPropertyName("file")]
+    public string File { get; private set; }
+
+    [JsonPropertyName("range")]
+    public string Range { get; private set; }
+
+    [JsonPropertyName("password")]
+    public string? Password { get; private set; }
     #endregion
 
     #region Constructor
@@ -48,9 +53,9 @@ internal class Pages
     /// <param name="password">The password or <c>null</c> when not needed</param>
     public Pages(string file, string range, string? password = null)
     {
-        _file = file;
-        _password = password;
-        _range = range;
+        File = file;
+        Password = password;
+        Range = range;
     }
     #endregion
 }
