@@ -7,7 +7,7 @@
   "targets": {
     ".NETStandard,Version=v2.1": {},
     ".NETStandard,Version=v2.1/": {
-      "QPdfNet/1.6.0": {
+      "QPdfNet/1.7.0": {
         "dependencies": {
           "Microsoft.Extensions.Logging": "10.0.13",
           "System.Text.Json": "10.0.13"
@@ -156,7 +156,7 @@
     }
   },
   "libraries": {
-    "QPdfNet/1.6.0": {
+    "QPdfNet/1.7.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""

@@ -104,6 +104,7 @@ internal static class JsonOptions
         };
 
         options.Converters.Add(EnumConverter);
+        options.Converters.Add(new NumberToStringConverter());
 
         return options;
     }

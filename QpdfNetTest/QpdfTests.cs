@@ -779,6 +779,7 @@ namespace QpdfNetTest
             Assert.IsTrue(pdf != null);
         }
 
+
         [TestMethod]
         public void TestContainsJavaScript()
         {
@@ -838,7 +839,7 @@ namespace QpdfNetTest
         public void TestGetMetadataPages()
         {
             using var job = new Job();
-            var metadata = job.GetMetadata(Path.Combine("TestFiles", "test.pdf"));
+            var metadata = job.GetMetadata(Path.Combine("TestFiles", "acrobat_8_help.pdf"));
 
             Assert.IsNotNull(metadata);
             Assert.IsTrue(metadata.PageCount > 0);

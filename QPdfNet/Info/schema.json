@@ -31,17 +31,29 @@
   },
   "attachments": {
     "<attachment-key>": {
+      "description": "description of attachment",
       "filespec": "object containing the file spec",
+      "names": {
+        "<name-key>": "file name for key"
+      },
       "preferredcontents": "most preferred embedded file stream",
-      "preferredname": "most preferred file name"
+      "preferredname": "most preferred file name",
+      "streams": {
+        "<stream-key>": {
+          "checksum": "MD5 checksum or null",
+          "creationdate": "ISO-8601 creation date or null",
+          "mimetype": "mime type or null",
+          "modificationdate": "ISO-8601 modification date or null"
+        }
+      }
     }
   },
   "encrypt": {
     "capabilities": {
       "accessibility": "allow extraction for accessibility?",
       "extract": "allow extraction?",
-      "moddifyannotations": "allow modifying annotations?",
       "modify": "allow all modifications?",
+      "modifyannotations": "allow modifying annotations?",
       "modifyassembly": "allow modifying document assembly?",
       "modifyforms": "allow modifying forms?",
       "modifyother": "allow other modifications?",
@@ -61,18 +73,9 @@
       "streammethod": "encryption method for streams",
       "stringmethod": "encryption method for string"
     },
+    "recovereduserpassword": "If the owner password was used to recover the user password, reveal user password; otherwise null",
     "userpasswordmatched": "whether supplied password matched user password; always false for non-encrypted files"
   },
-  "objectinfo": {
-    "<object-id>": {
-      "stream": {
-        "filter": "if stream, its filters, otherwise null",
-        "is": "whether the object is a stream",
-        "length": "if stream, its length, otherwise null"
-      }
-    }
-  },
-  "objects": "dictionary of original objects; keys are 'trailer' or 'n n R'",
   "outlines": [
     {
       "dest": "outline destination dictionary",
@@ -126,5 +129,17 @@
   "parameters": {
     "decodelevel": "decode level used to determine stream filterability"
   },
+  "qpdf": [
+    {
+      "calledgetallpages": "whether getAllPages was called",
+      "jsonversion": "numeric JSON version",
+      "maxobjectid": "highest object ID in output, ignored on input",
+      "pdfversion": "PDF version as x.y",
+      "pushedinheritedpageresources": "whether inherited attributes were pushed to the page level"
+    },
+    {
+      "<obj:n n R|trailer>": "json representation of object"
+    }
+  ],
   "version": "JSON format serial number; increased for non-compatible changes"
 }

@@ -42,10 +42,32 @@ public class Pdf
 {
     #region Properties
     /// <summary>
-    ///     The JSON version
+    ///     The raw <c>qpdf</c> array as returned by qpdf JSON output version 2. The first element contains
+    ///     the <see cref="QpdfInfo" /> header information, the second element contains the dictionary with
+    ///     all objects. Use the <see cref="Information" /> and <see cref="Objects" /> properties for easy access.
     /// </summary>
-    [JsonPropertyName("version")]
-    public string? Version { get; set; }
+    [JsonPropertyName("qpdf")]
+    public List<JsonElement>? Qpdf { get; set; }
+
+    /// <summary>
+    ///     The header information from the <c>qpdf</c> JSON output (version 2). This is the first element of
+    ///     the <see cref="Qpdf" /> array.
+    /// </summary>
+    [JsonIgnore]
+    public QpdfInfo? Information =>
+        Qpdf is { Count: > 0 }
+            ? Qpdf[0].Deserialize<QpdfInfo>(JsonOptions.Deserialize)
+            : null;
+
+    /// <summary>
+    ///     The objects of the PDF. The keys are either <c>trailer</c> or <c>obj:n n R</c>. This is the second
+    ///     element of the <see cref="Qpdf" /> array in the qpdf JSON output (version 2).
+    /// </summary>
+    [JsonIgnore]
+    public Dictionary<string, PdfObject>? Objects =>
+        Qpdf is { Count: > 1 }
+            ? Qpdf[1].Deserialize<Dictionary<string, PdfObject>>(JsonOptions.Deserialize)
+            : null;
 
     /// <summary>
     ///     The acro form fields
@@ -64,18 +86,6 @@ public class Pdf
     /// </summary>
     [JsonPropertyName("encrypt")] 
     public Encrypt? Encrypt { get; set; }
-
-    /// <summary>
-    ///     The object information
-    /// </summary>
-    [JsonPropertyName("objectinfo")] 
-    public Dictionary<string, Stream>? Objectinfo { get; set; }
-
-    /// <summary>
-    ///     The objects
-    /// </summary>
-    [JsonPropertyName("objects")] 
-    public string? Objects { get; set; }
 
     /// <summary>
     ///     The outline information
@@ -115,11 +125,11 @@ public class Pdf
 
         var result = new Job().InputFile(fileName).Json().Run(out var output, out var data);
 
-        if (result != ExitCode.Success)
+        if (result != ExitCode.Success && result != ExitCode.WarningsWereFoundFileProcessed)
             throw new Exception(output);
 
-        if (output != null)
-            return JsonSerializer.Deserialize<Pdf>(Encoding.ASCII.GetString(data!), JsonOptions.Deserialize);
+        if (data != null)
+            return JsonSerializer.Deserialize<Pdf>(Encoding.UTF8.GetString(data), JsonOptions.Deserialize);
 
         return null;
     }
@@ -138,13 +148,13 @@ public class Pdf
 
         var result = new Job().InputFile(fileName).Json().Run(out var output, out var data);
 
-        if (result != ExitCode.Success)
+        if (result != ExitCode.Success && result != ExitCode.WarningsWereFoundFileProcessed)
             throw new Exception(output);
 
         if (data == null)
             return false;
 
-        var json = Encoding.ASCII.GetString(data);
+        var json = Encoding.UTF8.GetString(data);
         return json.IndexOf("javascript", StringComparison.OrdinalIgnoreCase) >= 0;
     }
     #endregion

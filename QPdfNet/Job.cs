@@ -40,7 +40,6 @@ using QPdfNet.Interop;
 using QPdfNet.Loggers;
 using QPdfNet.Serialization;
 // ReSharper disable NotAccessedField.Local
-
 // ReSharper disable UnusedMember.Global
 
 namespace QPdfNet;
@@ -290,12 +289,6 @@ public class Job : IDisposable
     [JsonPropertyName("showAttachment")]
     private string? _showAttachment;
 
-    [JsonPropertyName("json")]
-    private string? _json;
-
-    [JsonPropertyName("jsonHelp")]
-    private string? _jsonHelp;
-
     [JsonPropertyName("jsonStreamData")]
     private string? _jsonStreamData;
 
@@ -408,25 +401,44 @@ public class Job : IDisposable
     #endregion
 
     #region Callbacks
+    /// <summary>
+    ///     Copies bytes from an unmanaged buffer, decodes them as ASCII text, and appends the result to the StringBuilder
+    ///     referenced by the user data handle.
+    /// </summary>
+    /// <remarks>Intended for native callback interop where user data carries a GCHandle to a managed
+    /// StringBuilder.</remarks>
+    /// <param name="data">Pointer to the unmanaged buffer that contains the log message bytes.</param>
+    /// <param name="length">Number of bytes to copy from the buffer.</param>
+    /// <param name="udata">Pointer to a GCHandle whose target is the StringBuilder that receives the decoded text.</param>
+    /// <returns>Always returns 0.</returns>
     private static int LoggingCallback(IntPtr data, int length, IntPtr udata)
     {
         var bytes = new byte[length];
         Marshal.Copy(data, bytes, 0, length);
 
         var handle = GCHandle.FromIntPtr(udata);
-        var stringBuilder = (StringBuilder)handle.Target;
+        var stringBuilder = (StringBuilder)handle.Target!;
         stringBuilder.Append(Encoding.ASCII.GetString(bytes));
 
         return 0;
     }
 
+    /// <summary>
+    ///     Copies a block of unmanaged data into a managed byte buffer and appends it to the target byte list.
+    /// </summary>
+    /// <remarks>Expects <paramref name="udata"/> to reference a valid <see
+    /// cref="System.Runtime.InteropServices.GCHandle"/> for a <see cref="byte"/>.</remarks>
+    /// <param name="data">A pointer to the unmanaged data to copy.</param>
+    /// <param name="length">The number of bytes to copy from <paramref name="data"/>.</param>
+    /// <param name="udata">A pointer to a <see cref="System.Runtime.InteropServices.GCHandle"/> whose target is the destination <see cref="byte"/>.</param>
+    /// <returns>0 to indicate the callback completed successfully.</returns>
     private static int SaveCallback(IntPtr data, int length, IntPtr udata)
     {
         var bytes = new byte[length];
         Marshal.Copy(data, bytes, 0, length);
 
         var handle = GCHandle.FromIntPtr(udata);
-        var save = (List<byte>)handle.Target;
+        var save = (List<byte>)handle.Target!;
         save.AddRange(bytes);
 
         return 0;
@@ -516,8 +528,6 @@ public class Job : IDisposable
         _withImages = null;
         _listAttachments = null;
         _showAttachment = null;
-        _json = null;
-        _jsonHelp = null;
         _jsonStreamData = null;
         _jsonStreamPrefix = null;
         _jsonKey = null;
@@ -2409,27 +2419,16 @@ public class Job : IDisposable
 
     #region Json
     /// <summary>
-    ///     Generate a JSON representation of the file. This is described in depth in qpdf JSON. The version parameter can be used to
-    ///     specify which version of the qpdf JSON format should be output. The version number be a number or latest. The default is
-    ///     latest. As of qpdf 11, the latest version is 2. If you have code that reads qpdf JSON output, you can tell what version
-    ///     of the JSON output you have from the "version" key in the output. Use the --json-help option to get a description of the
-    ///     JSON object. Starting with qpdf 11, when this option is specified, an output file is optional (for backward compatibility)
-    ///     and defaults to standard output. You may specify an output file to write the JSON to a file rather than standard output
+    ///     Generate a JSON representation of the file. The output format will always be version 2. The output will be written to standard
+    ///     output. If you want to write the JSON output to a file, use the <see cref="OutputFile(string)"/> method.
     /// </summary>
-    /// <param name="version"><see cref="JsonVersion"/></param>
-    /// <remarks>
-    ///     Use the <see cref="Info.Pdf"/> class if you want to get a nice object orientated output
-    /// </remarks>
-    /// <remarks>
-    ///     Use <see cref="Run(out string?, out byte[])"/> instead of <see cref="Run(out string?)"/> when using this method 
-    /// </remarks>
-    /// <returns>
-    ///     <see cref="Job" />
-    /// </returns>
-    public Job Json(JsonVersion version = JsonVersion.Version2)
+    /// <remarks>Use the <see cref="Info.Pdf"/> class if you want to get a nice object orientated output</remarks>
+    /// <remarks>Use <see cref="Run(out string?, out byte[])"/> instead of <see cref="Run(out string?)"/> when using this method</remarks>
+    /// <returns><see cref="Job" /></returns>
+    public Job Json()
     {
-        Logger.LogInformation($"Generating a JSON {version} representation of the input PDF file");
-        _json = ((int)version).ToString();
+        Logger.LogInformation("Generating a JSON representation of the input PDF file");
+        _jsonOutput = "2";
         return this;
     }
     #endregion
@@ -2525,30 +2524,6 @@ public class Job : IDisposable
     }
     #endregion
 
-    #region JsonOutput
-    /// <summary>
-    ///     Implies <see cref="Json"/> at the specified version. This option changes several default values, all of
-    ///     which can be overridden by specifying the stated option:<br/>
-    ///     - The default value for <see cref="JsonStreamData"/> changes from none to inline.<br/>
-    ///     - The default value for <see cref="DecodeLevel"/> changes from generalized to none.<br/>
-    ///     - By default, only the "qpdf" key is included in the JSON output, but you can add additional keys with <see cref="JsonKey"/>.
-    ///     - The "version" and "parameters" keys will be excluded from the JSON output.
-    ///
-    ///     If you want to look at the contents of streams easily as you would in QDF mode (see QDF Mode), you can use
-    ///     <see cref="DecodeLevel"/> generalized and <see cref="JsonStreamData"/> file for a convenient way to do that.
-    /// </summary>
-    /// <param name="version"><see cref="JsonVersion"/></param>
-    /// <returns>
-    ///     <see cref="Job" />
-    /// </returns>
-    public Job JsonOutput(JsonVersion version = JsonVersion.Version2)
-    {
-        Logger.LogInformation($"Setting JSON output format to version {version}");
-        _jsonOutput = ((int)version).ToString();
-        return this;
-    }
-    #endregion
-
     #region JsonInput
     /// <summary>
     ///     Treat the input file as a JSON file in qpdf JSON format. The input file must be complete and include all stream data.
@@ -2598,7 +2573,7 @@ public class Job : IDisposable
 
         Reset();
 
-        var result = InputFile(fileName).JsonOutput().InternalRun(out var output, out var data);
+        var result = InputFile(fileName).Json().InternalRun(out var output, out var data);
 
         if (result != (int)ExitCode.Success)
             throw new Exception(output);
@@ -2648,7 +2623,7 @@ public class Job : IDisposable
         Reset();
 
         // Step 1 - Get a complete qpdf JSON representation of the input PDF
-        var result = InputFile(fileName).JsonOutput().InternalRun(out var output, out var data);
+        var result = InputFile(fileName).Json().InternalRun(out var output, out var data);
 
         if (result != (int)ExitCode.Success)
             throw new Exception(output);
@@ -2786,7 +2761,7 @@ public class Job : IDisposable
         if (string.IsNullOrEmpty(value))
             return null;
 
-        var text = value!.Trim();
+        var text = value.Trim();
 
         if (text.StartsWith("D:", StringComparison.Ordinal))
             text = text.Substring(2);
@@ -2806,20 +2781,16 @@ public class Job : IDisposable
 
             var offset = TimeSpan.Zero;
 
-            if (text.Length > 14)
-            {
-                var sign = text[14];
+            if (text.Length <= 14) return new DateTimeOffset(year, month, day, hour, minute, second, offset);
+            var sign = text[14];
 
-                if (sign == '+' || sign == '-')
-                {
-                    var rest = text.Substring(15).Replace("'", string.Empty);
-                    var offsetHours = rest.Length >= 2 ? int.Parse(rest.Substring(0, 2), CultureInfo.InvariantCulture) : 0;
-                    var offsetMinutes = rest.Length >= 4 ? int.Parse(rest.Substring(2, 2), CultureInfo.InvariantCulture) : 0;
-                    offset = new TimeSpan(offsetHours, offsetMinutes, 0);
-                    if (sign == '-')
-                        offset = offset.Negate();
-                }
-            }
+            if (sign is not ('+' or '-')) return new DateTimeOffset(year, month, day, hour, minute, second, offset);
+            var rest = text.Substring(15).Replace("'", string.Empty);
+            var offsetHours = rest.Length >= 2 ? int.Parse(rest.Substring(0, 2), CultureInfo.InvariantCulture) : 0;
+            var offsetMinutes = rest.Length >= 4 ? int.Parse(rest.Substring(2, 2), CultureInfo.InvariantCulture) : 0;
+            offset = new TimeSpan(offsetHours, offsetMinutes, 0);
+            if (sign == '-')
+                offset = offset.Negate();
 
             return new DateTimeOffset(year, month, day, hour, minute, second, offset);
         }
@@ -2864,9 +2835,8 @@ public class Job : IDisposable
             effective["/Rotate"] = node["/Rotate"]!.DeepClone();
 
         var type = GetStringValue(node["/Type"]);
-        var kids = node["/Kids"] as JsonArray;
 
-        if (kids != null && type != "/Page")
+        if (node["/Kids"] is JsonArray kids && type != "/Page")
         {
             foreach (var kid in kids)
             {
@@ -2880,7 +2850,7 @@ public class Job : IDisposable
 
         var page = new PageInfo { Number = number++ };
 
-        if ((effective["/MediaBox"] ?? node["/MediaBox"]) is JsonArray mediaBox && mediaBox.Count >= 4)
+        if ((effective["/MediaBox"] ?? node["/MediaBox"]) is JsonArray { Count: >= 4 } mediaBox)
         {
             page.Left = (float)GetDoubleValue(mediaBox[0]);
             page.Top = (float)GetDoubleValue(mediaBox[1]);
@@ -3138,9 +3108,7 @@ public class Job : IDisposable
     ///     Runs the <see cref="Job" /> with the given parameters
     /// </summary>
     /// <param name="output">Returns any output that is generated by qpdf</param>
-    /// <returns>
-    ///     <see cref="ExitCode" />
-    /// </returns>
+    /// <returns><see cref="ExitCode" /></returns>
     public ExitCode Run(out string? output)
     {
         if (_isEncrypted == string.Empty)
@@ -3157,9 +3125,7 @@ public class Job : IDisposable
     /// </summary>
     /// <param name="output">Returns any output that is generated by qpdf</param>
     /// <param name="data">Returns the data or <c>null</c> when something goes wrong</param>
-    /// <returns>
-    ///     <see cref="ExitCode" />
-    /// </returns>
+    /// <returns><see cref="ExitCode" /></returns>
     public ExitCode Run(out string? output, out byte[]? data)
     {
         if (_isEncrypted == string.Empty)
@@ -3177,9 +3143,7 @@ public class Job : IDisposable
     ///     Runs the <see cref="Job" /> with the given parameters
     /// </summary>
     /// <param name="output">Returns any output that is generated by qpdf</param>
-    /// <returns>
-    ///     <see cref="ExitCode" />
-    /// </returns>
+    /// <returns><see cref="ExitCode" /></returns>
     public ExitCodeIsEncrypted RunIsEncrypted(out string? output)
     {
         if (_requiresPassword == string.Empty)
@@ -3195,9 +3159,7 @@ public class Job : IDisposable
     ///     Runs the <see cref="Job" /> with the given parameters
     /// </summary>
     /// <param name="output">Returns any output that is generated by qpdf</param>
-    /// <returns>
-    ///     <see cref="ExitCode" />
-    /// </returns>
+    /// <returns><see cref="ExitCode" /></returns>
     public ExitCodeRequiresPassword RunRequiresPassword(out string? output)
     {
         if (_isEncrypted == string.Empty)

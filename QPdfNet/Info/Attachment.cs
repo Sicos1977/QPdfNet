@@ -24,6 +24,7 @@
 // THE SOFTWARE.
 //
 
+using System.Collections.Generic;
 using System.Text.Json.Serialization;
 
 namespace QPdfNet.Info;
@@ -35,10 +36,22 @@ public class Attachment
 {
     #region Proprties
     /// <summary>
+    ///     The description of the attachment, or null if none
+    /// </summary>
+    [JsonPropertyName("description")]
+    public string? Description { get; set; }
+
+    /// <summary>
     ///     Object containing the file spec
     /// </summary>
     [JsonPropertyName("filespec")]
     public string? FileSpec { get; set; }
+
+    /// <summary>
+    ///     The names by which the attachment is known, keyed by the name key (e.g. <c>/F</c>, <c>/UF</c>)
+    /// </summary>
+    [JsonPropertyName("names")]
+    public Dictionary<string, string>? Names { get; set; }
 
     /// <summary>
     ///     Most preferred embedded file stream
@@ -51,5 +64,11 @@ public class Attachment
     /// </summary>
     [JsonPropertyName("preferredname")]
     public string? PreferredName { get; set; }
+
+    /// <summary>
+    ///     The embedded file streams, keyed by the name key (e.g. <c>/F</c>, <c>/UF</c>)
+    /// </summary>
+    [JsonPropertyName("streams")]
+    public Dictionary<string, AttachmentStream>? Streams { get; set; }
     #endregion
 }

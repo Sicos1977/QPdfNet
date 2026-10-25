@@ -17,7 +17,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyDescriptionAttribute("A C# wrapper around QPDF that gives you all the options that you normally would h" +
     "ave from the QPDF console app")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.7.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.7.0+c256161adcf6c84b9c090fd90e107d668f074b66")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.7.0+10752ecedad345e212e4fde3207da1316fd0c529")]
 [assembly: System.Reflection.AssemblyProductAttribute("QPdfNet")]
 [assembly: System.Reflection.AssemblyTitleAttribute("QPdfNet")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.7.0.0")]

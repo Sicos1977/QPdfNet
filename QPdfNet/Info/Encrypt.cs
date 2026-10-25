@@ -59,6 +59,12 @@ public class Encrypt
     public EncryptParameters? Parameters { get; set; }
 
     /// <summary>
+    ///     The recovered user password; will be null unless it could be recovered
+    /// </summary>
+    [JsonPropertyName("recovereduserpassword")]
+    public string? RecoveredUserPassword { get; set; }
+
+    /// <summary>
     ///     Whether supplied password matched user password; always false for non-encrypted files
     /// </summary>
     [JsonPropertyName("userpasswordmatched")]
