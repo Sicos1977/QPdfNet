@@ -5,6 +5,11 @@
     &lt;TestId&gt;MSTest::DB3F7D68-A29A-3C38-2C54-366337439BFE::net10.0::QpdfNetTest.QpdfTests&lt;/TestId&gt;&#xD;
   &lt;/TestAncestor&gt;&#xD;
 &lt;/SessionState&gt;</s:String>
+	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=ef6e80e9_002Dd49f_002D431e_002D8ce0_002D4b8c5137e105/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" Name="TestSplitPagesWithMetadata" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
+  &lt;TestAncestor&gt;&#xD;
+    &lt;TestId&gt;MSTest::DB3F7D68-A29A-3C38-2C54-366337439BFE::net10.0::QpdfNetTest.QpdfTests.TestSplitPagesWithMetadata&lt;/TestId&gt;&#xD;
+  &lt;/TestAncestor&gt;&#xD;
+&lt;/SessionState&gt;</s:String>
 	<s:Boolean x:Key="/Default/ResxEditorPersonal/Initialized/@EntryValue">True</s:Boolean>
 	
 	

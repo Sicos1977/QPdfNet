@@ -2951,9 +2951,9 @@ public class Job : IDisposable
     /// <returns>
     ///     <see cref="Job" />
     /// </returns>
-    public Job Title(string value)
+    public Job Title(string? value)
     {
-        Logger.LogInformation($"Setting '/Info' title to '{value}'");
+        Logger.LogInformation(value == null ? "Ignoring '/Info' title" : $"Setting '/Info' title to '{value}'");
         _title = value;
         return this;
     }
@@ -2968,7 +2968,7 @@ public class Job : IDisposable
     /// <returns>
     ///     <see cref="Job" />
     /// </returns>
-    public Job Author(string value)
+    public Job Author(string? value)
     {
         Logger.LogInformation($"Setting '/Info' author to '{value}'");
         _author = value;
@@ -2985,9 +2985,9 @@ public class Job : IDisposable
     /// <returns>
     ///     <see cref="Job" />
     /// </returns>
-    public Job Subject(string value)
+    public Job Subject(string? value)
     {
-        Logger.LogInformation($"Setting '/Info' subject to '{value}'");
+        Logger.LogInformation(value == null ? "Ignoring '/Info' subject" : $"Setting '/Info' subject to '{value}'");
         _subject = value;
         return this;
     }
@@ -3000,9 +3000,9 @@ public class Job : IDisposable
     /// </summary>
     /// <param name="value">The keywords value</param>
     /// <returns><see cref="Job" /></returns>
-    public Job Keywords(string value)
+    public Job Keywords(string? value)
     {
-        Logger.LogInformation($"Setting '/Info' keywords to '{value}'");
+        Logger.LogInformation(value == null ? "Ignoring '/Info' keywords" : $"Setting '/Info' keywords to '{value}'");
         _keywords = value;
         return this;
     }
@@ -3015,9 +3015,9 @@ public class Job : IDisposable
     /// </summary>
     /// <param name="value">The creator value</param>
     /// <returns><see cref="Job" /></returns>
-    public Job Creator(string value)
+    public Job Creator(string? value)
     {
-        Logger.LogInformation($"Setting '/Info' creator to '{value}'");
+        Logger.LogInformation(value == null ? "Ignoring '/Info' creator" : $"Setting '/Info' creator to '{value}'");
         _creator = value;
         return this;
     }
@@ -3030,9 +3030,9 @@ public class Job : IDisposable
     /// </summary>
     /// <param name="value">The producer value</param>
     /// <returns><see cref="Job" /></returns>
-    public Job Producer(string value)
+    public Job Producer(string? value)
     {
-        Logger.LogInformation($"Setting '/Info' producer to '{value}'");
+        Logger.LogInformation(value == null ? "Ignoring '/Info' producer" : $"Setting '/Info' producer to '{value}'");
         _producer = value;
         return this;
     }
@@ -3046,7 +3046,7 @@ public class Job : IDisposable
     /// <returns><see cref="Job" /></returns>
     public Job RemoveMetadata()
     {
-        Logger.LogInformation("Exclude metadata from the output file");
+        Logger.LogInformation("Removing metadata from the output file");
         _removeMetadata = string.Empty;
         return this;
     }

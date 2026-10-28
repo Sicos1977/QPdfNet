@@ -10,17 +10,18 @@
 		<RepositoryUrl>https://github.com/Sicos1977/QPdfNet</RepositoryUrl>
 		<RepositoryType>git</RepositoryType>
 		<PackageTags>qpdf pdf</PackageTags>
-		<PackageReleaseNotes>- Replaced Newtonsoft.Json with System.Text.Json for all (de)serialization, removing the Newtonsoft.Json dependency
-- Added native qpdf 12.4.2 runtimes for Linux ARM64 (linux-arm64) and macOS ARM64 (osx-arm64); these are resolved automatically alongside the existing win-x64, win-x86, linux-x64 and osx-x64 runtimes
-- Updated NuGet packages to the latest versions
-- Updated to the latest 12.x qpdf version</PackageReleaseNotes>
+		<PackageReleaseNotes>- Added support for qpdf job JSON document info fields: title, author, subject, keywords, creator, and producer
+- Added fluent Job methods for setting document info metadata: Title(), Author(), Subject(), Keywords(), Creator(), and Producer()
+- Metadata fields are serialized as lowercase top-level JSON keys and null values are omitted
+- Added tests for lowercase metadata keys, null omission, and split-pages metadata payload generation
+- Added XML documentation notes that metadata setters currently work on Windows only</PackageReleaseNotes>
 		<PackageIcon>qpdf.png</PackageIcon>
 		<PackageReadmeFile>readme.md</PackageReadmeFile>
 		<Copyright>Copyright (c) 2021-2026 Kees van Spelde</Copyright>
 		<GeneratePackageOnBuild>True</GeneratePackageOnBuild>
-		<AssemblyVersion>1.7.2.0</AssemblyVersion>
-		<FileVersion>1.7.2.0</FileVersion>
-		<Version>1.7.2</Version>
+		<AssemblyVersion>1.7.3.0</AssemblyVersion>
+		<FileVersion>1.7.3.0</FileVersion>
+		<Version>1.7.3</Version>
     <DocumentationFile>bin\$(Configuration)\$(TargetFramework)\$(AssemblyName).xml</DocumentationFile>
     <NoWarn>$(NoWarn);1591;SYSLIB0044</NoWarn>
 	</PropertyGroup>

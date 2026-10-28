@@ -700,7 +700,7 @@
           "buildTransitive/net9.0/MSTest.TestFramework.targets": {}
         }
       },
-      "QPdfNet/1.7.2": {
+      "QPdfNet/1.7.3": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v10.0",
         "dependencies": {
@@ -2027,7 +2027,7 @@
         "mstest.testframework.nuspec"
       ]
     },
-    "QPdfNet/1.7.2": {
+    "QPdfNet/1.7.3": {
       "type": "project",
       "path": "../QPdfNet/QPdfNet.csproj",
       "msbuildProject": "../QPdfNet/QPdfNet.csproj"
@@ -2039,7 +2039,7 @@
       "MSTest.TestFramework >= 4.5.1",
       "Microsoft.Extensions.Logging >= 10.0.13",
       "Microsoft.NET.Test.Sdk >= 18.11.0",
-      "QPdfNet >= 1.7.2",
+      "QPdfNet >= 1.7.3",
       "coverlet.collector >= 10.1.0"
     ]
   },
