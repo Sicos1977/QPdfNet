@@ -304,6 +304,21 @@
                 To a file
             </summary>
         </member>
+        <member name="T:QPdfNet.Enums.JsonVersion">
+            <summary>
+                Sets the JSON output version when showing a PDF as JSON
+            </summary>
+        </member>
+        <member name="F:QPdfNet.Enums.JsonVersion.Version1">
+            <summary>
+                Version 1
+            </summary>
+        </member>
+        <member name="F:QPdfNet.Enums.JsonVersion.Version2">
+            <summary>
+                Version 2
+            </summary>
+        </member>
         <member name="T:QPdfNet.Enums.Modify">
             <summary>
                 Values for modify
@@ -1147,6 +1162,51 @@
             <param name="fileName">The PDF file to check</param>
             <returns><c>true</c> when JavaScript is found</returns>
             <exception cref="T:System.Exception">Thrown when the qpdf operation fails or the file cannot be processed</exception>
+        </member>
+        <member name="T:QPdfNet.Info.PdfMetadata">
+            <summary>
+                Represents the values stored inside a PDF document information dictionary (<c>/Info</c>).
+            </summary>
+        </member>
+        <member name="P:QPdfNet.Info.PdfMetadata.Title">
+            <summary>
+                The document title (<c>/Title</c>).
+            </summary>
+        </member>
+        <member name="P:QPdfNet.Info.PdfMetadata.Author">
+            <summary>
+                The author of the document (<c>/Author</c>).
+            </summary>
+        </member>
+        <member name="P:QPdfNet.Info.PdfMetadata.Subject">
+            <summary>
+                The subject of the document (<c>/Subject</c>).
+            </summary>
+        </member>
+        <member name="P:QPdfNet.Info.PdfMetadata.Keywords">
+            <summary>
+                The keywords associated with the document (<c>/Keywords</c>).
+            </summary>
+        </member>
+        <member name="P:QPdfNet.Info.PdfMetadata.Creator">
+            <summary>
+                The document creator (<c>/Creator</c>).
+            </summary>
+        </member>
+        <member name="P:QPdfNet.Info.PdfMetadata.Producer">
+            <summary>
+                The PDF producer (<c>/Producer</c>).
+            </summary>
+        </member>
+        <member name="P:QPdfNet.Info.PdfMetadata.CreationDate">
+            <summary>
+                The creation date (<c>/CreationDate</c>), serialized as a PDF date string.
+            </summary>
+        </member>
+        <member name="P:QPdfNet.Info.PdfMetadata.ModDate">
+            <summary>
+                The modification date (<c>/ModDate</c>), serialized as a PDF date string.
+            </summary>
         </member>
         <member name="T:QPdfNet.Info.PdfObject">
             <summary>
@@ -2548,37 +2608,18 @@
                 <see cref="T:QPdfNet.Job" />
             </returns>
         </member>
-        <member name="M:QPdfNet.Job.GetMetadata(System.String)">
+        <member name="M:QPdfNet.Job.GetMetadata">
             <summary>
                 Returns the document meta-data (the <c>/Info</c> dictionary) of the given <paramref name="fileName" />,
                 such as the title, author, subject, keywords, creating application and PDF producer.
             </summary>
-            <param name="fileName">The PDF file to read the meta-data from</param>
             <returns>A <see cref="T:QPdfNet.Info.Metadata" /> object with the meta-data of the PDF</returns>
-            <exception cref="T:System.Exception">Thrown when the qpdf operation fails or the file cannot be processed</exception>
-        </member>
-        <member name="M:QPdfNet.Job.UpdateMetadata(System.String,QPdfNet.Info.Metadata,System.String)">
-            <summary>
-                Updates the document meta-data (the <c>/Info</c> dictionary) of the given <paramref name="fileName" /> and
-                writes the result to <paramref name="outputFile" />. Only the properties that are set (non <c>null</c>) on the
-                given <paramref name="metadata" /> are written; set a property to an empty string to clear it.
-            </summary>
-            <param name="fileName">The input PDF file</param>
-            <param name="metadata">The <see cref="T:QPdfNet.Info.Metadata" /> to write into the PDF</param>
-            <param name="outputFile">The output PDF file</param>
-            <returns><see cref="T:QPdfNet.Enums.ExitCode" /></returns>
             <exception cref="T:System.Exception">Thrown when the qpdf operation fails or the file cannot be processed</exception>
         </member>
         <member name="M:QPdfNet.Job.GetInfoDictionary(System.Text.Json.Nodes.JsonObject)">
             <summary>
                 Returns the <c>/Info</c> dictionary from the qpdf JSON <paramref name="root" /> or <c>null</c> when
                 the PDF does not contain a document information dictionary.
-            </summary>
-        </member>
-        <member name="M:QPdfNet.Job.CreateInfoDictionary(System.Text.Json.Nodes.JsonObject)">
-            <summary>
-                Creates a new <c>/Info</c> dictionary, adds it to the qpdf JSON <paramref name="root" /> and references
-                it from the trailer. Returns the newly created dictionary.
             </summary>
         </member>
         <member name="M:QPdfNet.Job.DecodePdfString(System.Text.Json.Nodes.JsonNode)">
@@ -2590,12 +2631,6 @@
         <member name="M:QPdfNet.Job.GetStringValue(System.Text.Json.Nodes.JsonNode)">
             <summary>
                 Returns the string value of the given <paramref name="token" /> or <c>null</c> when it is not a JSON string.
-            </summary>
-        </member>
-        <member name="M:QPdfNet.Job.SetPdfString(System.Text.Json.Nodes.JsonObject,System.String,System.String)">
-            <summary>
-                Sets or removes a PDF string value on the given <paramref name="info" /> dictionary. A <c>null</c>
-                <paramref name="value" /> leaves the existing value untouched, while an empty string clears it.
             </summary>
         </member>
         <member name="M:QPdfNet.Job.ParsePdfDate(System.String)">
@@ -2689,6 +2724,60 @@
                 <see cref="T:QPdfNet.Job" />
             </returns>
         </member>
+        <member name="M:QPdfNet.Job.Title(System.String)">
+            <summary>
+                Sets the <c>/Title</c> value in the PDF <c>/Info</c> dictionary.
+            </summary>
+            <param name="value">The title value</param>
+            <returns>
+                <see cref="T:QPdfNet.Job" />
+            </returns>
+        </member>
+        <member name="M:QPdfNet.Job.Author(System.String)">
+            <summary>
+                Sets the <c>/Author</c> value in the PDF <c>/Info</c> dictionary.
+            </summary>
+            <param name="value">The author value</param>
+            <returns>
+                <see cref="T:QPdfNet.Job" />
+            </returns>
+        </member>
+        <member name="M:QPdfNet.Job.Subject(System.String)">
+            <summary>
+                Sets the <c>/Subject</c> value in the PDF <c>/Info</c> dictionary.
+            </summary>
+            <param name="value">The subject value</param>
+            <returns>
+                <see cref="T:QPdfNet.Job" />
+            </returns>
+        </member>
+        <member name="M:QPdfNet.Job.Keywords(System.String)">
+            <summary>
+                Sets the <c>/Keywords</c> value in the PDF <c>/Info</c> dictionary.
+            </summary>
+            <param name="value">The keywords value</param>
+            <returns>
+                <see cref="T:QPdfNet.Job" />
+            </returns>
+        </member>
+        <member name="M:QPdfNet.Job.Creator(System.String)">
+            <summary>
+                Sets the <c>/Creator</c> value in the PDF <c>/Info</c> dictionary.
+            </summary>
+            <param name="value">The creator value</param>
+            <returns>
+                <see cref="T:QPdfNet.Job" />
+            </returns>
+        </member>
+        <member name="M:QPdfNet.Job.Producer(System.String)">
+            <summary>
+                Sets the <c>/Producer</c> value in the PDF <c>/Info</c> dictionary.
+            </summary>
+            <param name="value">The producer value</param>
+            <returns>
+                <see cref="T:QPdfNet.Job" />
+            </returns>
+        </member>
         <member name="M:QPdfNet.Job.RemoveMetadata">
             <summary>
                 Exclude metadata from the <see cref="M:QPdfNet.Job.OutputFile(System.String)"/> by omitting the <c>/Metadata</c> dictionary in the document
@@ -2714,6 +2803,14 @@
             </summary>
             <returns>
                 <see cref="T:QPdfNet.Job" />
+            </returns>
+        </member>
+        <member name="M:QPdfNet.Job.ToJson">
+            <summary>
+                Returns the JSON payload that is passed to qpdf.
+            </summary>
+            <returns>
+                A JSON string containing the configured job options.
             </returns>
         </member>
         <member name="M:QPdfNet.Job.InternalRun(System.String@,System.Byte[]@)">

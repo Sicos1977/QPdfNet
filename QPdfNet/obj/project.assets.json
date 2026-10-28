@@ -1598,7 +1598,7 @@
     "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
-    "version": "1.7.1",
+    "version": "1.7.2",
     "restore": {
       "projectUniqueName": "C:\\Kees\\QPdfNet\\QPdfNet\\QPdfNet.csproj",
       "projectName": "QPdfNet",
@@ -1683,7 +1683,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.402/PortableRuntimeIdentifierGraph.json",
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.403/PortableRuntimeIdentifierGraph.json",
         "packagesToPrune": {
           "Microsoft.CSharp": "(,4.7.32767]",
           "Microsoft.VisualBasic": "(,10.4.32767]",
@@ -1993,7 +1993,7 @@
         ],
         "assetTargetFallback": true,
         "warn": true,
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.402\\RuntimeIdentifierGraph.json",
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.403\\RuntimeIdentifierGraph.json",
         "packagesToPrune": {
           "Microsoft.Win32.Primitives": "(,4.3.0]",
           "System.AppContext": "(,4.3.0]",
@@ -2118,7 +2118,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.402\\RuntimeIdentifierGraph.json",
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.403\\RuntimeIdentifierGraph.json",
         "packagesToPrune": {
           "Microsoft.Win32.Primitives": "(,4.3.0]",
           "System.AppContext": "(,4.3.0]",

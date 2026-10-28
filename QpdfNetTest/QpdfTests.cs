@@ -2,6 +2,7 @@
 using System.Diagnostics;
 using System.IO;
 using System.Text;
+using System.Text.Json;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using QPdfNet;
 using QPdfNet.Enums;
@@ -611,6 +612,123 @@ namespace QpdfNetTest
         }
 
         [TestMethod]
+        public void TestSplitPagesWithMetadata()
+        {
+            var outputFile = Path.Combine(_testFolder, "%d.pdf");
+
+            var job = new Job();
+            var result = job.InputFile(Path.Combine("TestFiles", "acrobat_8_help.pdf"))
+                .OutputFile(outputFile)
+                .SplitPages(100)
+                .Title("QPdfNet split title")
+                .Author("QPdfNet split author")
+                .Subject("QPdfNet split subject")
+                .Keywords("qpdf,split,metadata")
+                .Creator("QPdfNet split creator")
+                .Producer("QPdfNet split producer")
+                .Run(out _);
+
+            Assert.AreEqual(ExitCode.Success, result);
+
+            var firstOutputFile = Path.Combine(_testFolder, "001-100.pdf");
+            Assert.IsTrue(File.Exists(firstOutputFile));
+
+            using var metadataJob = new Job();
+            var metadata = metadataJob.InputFile(firstOutputFile).GetMetadata();
+
+            Assert.AreEqual("QPdfNet split title", metadata.Title);
+            Assert.AreEqual("QPdfNet split author", metadata.Author);
+            Assert.AreEqual("QPdfNet split subject", metadata.Subject);
+            Assert.AreEqual("qpdf,split,metadata", metadata.Keywords);
+            Assert.AreEqual("QPdfNet split creator", metadata.Application);
+            Assert.AreEqual("QPdfNet split producer", metadata.Producer);
+        }
+
+        [TestMethod]
+        public void TestInfoMetadataJsonUsesLowercaseKeys()
+        {
+            using var job = new Job();
+            var json = job
+                .InputFile(Path.Combine("TestFiles", "test.pdf"))
+                .OutputFile(Path.Combine(_testFolder, "output.pdf"))
+                .Title("QPdfNet title")
+                .Author("QPdfNet author")
+                .Subject("QPdfNet subject")
+                .Keywords("qpdf,metadata")
+                .Creator("QPdfNet creator")
+                .Producer("QPdfNet producer")
+                .ToJson();
+
+            using var document = JsonDocument.Parse(json);
+            var root = document.RootElement;
+
+            Assert.IsTrue(root.TryGetProperty("title", out var title));
+            Assert.AreEqual("QPdfNet title", title.GetString());
+            Assert.IsTrue(root.TryGetProperty("author", out var author));
+            Assert.AreEqual("QPdfNet author", author.GetString());
+            Assert.IsTrue(root.TryGetProperty("subject", out var subject));
+            Assert.AreEqual("QPdfNet subject", subject.GetString());
+            Assert.IsTrue(root.TryGetProperty("keywords", out var keywords));
+            Assert.AreEqual("qpdf,metadata", keywords.GetString());
+            Assert.IsTrue(root.TryGetProperty("creator", out var creator));
+            Assert.AreEqual("QPdfNet creator", creator.GetString());
+            Assert.IsTrue(root.TryGetProperty("producer", out var producer));
+            Assert.AreEqual("QPdfNet producer", producer.GetString());
+
+            Assert.IsFalse(root.TryGetProperty("Title", out _));
+            Assert.IsFalse(root.TryGetProperty("Author", out _));
+            Assert.IsFalse(root.TryGetProperty("Subject", out _));
+            Assert.IsFalse(root.TryGetProperty("Keywords", out _));
+            Assert.IsFalse(root.TryGetProperty("Creator", out _));
+            Assert.IsFalse(root.TryGetProperty("Producer", out _));
+        }
+
+        [TestMethod]
+        public void TestInfoMetadataJsonOmitsNullValues()
+        {
+            using var job = new Job();
+            var json = job
+                .InputFile(Path.Combine("TestFiles", "test.pdf"))
+                .OutputFile(Path.Combine(_testFolder, "output.pdf"))
+                .Title("QPdfNet title")
+                .ToJson();
+
+            using var document = JsonDocument.Parse(json);
+            var root = document.RootElement;
+
+            Assert.IsTrue(root.TryGetProperty("title", out var title));
+            Assert.AreEqual("QPdfNet title", title.GetString());
+            Assert.IsFalse(root.TryGetProperty("author", out _));
+            Assert.IsFalse(root.TryGetProperty("subject", out _));
+            Assert.IsFalse(root.TryGetProperty("keywords", out _));
+            Assert.IsFalse(root.TryGetProperty("creator", out _));
+            Assert.IsFalse(root.TryGetProperty("producer", out _));
+        }
+
+        [TestMethod]
+        public void TestSplitPagesJsonContainsInfoMetadataFields()
+        {
+            using var job = new Job();
+            var json = job
+                .InputFile(Path.Combine("TestFiles", "acrobat_8_help.pdf"))
+                .OutputFile(Path.Combine(_testFolder, "%d.pdf"))
+                .SplitPages(100)
+                .Title("Split title")
+                .Producer("Split producer")
+                .ToJson();
+
+            using var document = JsonDocument.Parse(json);
+            var root = document.RootElement;
+
+            Assert.IsTrue(root.TryGetProperty("splitPages", out var splitPages));
+            Assert.AreEqual("100", splitPages.GetString());
+            Assert.IsTrue(root.TryGetProperty("title", out var title));
+            Assert.AreEqual("Split title", title.GetString());
+            Assert.IsTrue(root.TryGetProperty("producer", out var producer));
+            Assert.AreEqual("Split producer", producer.GetString());
+        }
+
+        [TestMethod]
         public void TestOverlay()
         {
             var outputFile = Path.Combine(_testFolder, "output.pdf");
@@ -795,42 +913,10 @@ namespace QpdfNetTest
         }
 
         [TestMethod]
-        public void TestUpdateAndGetMetadata()
-        {
-            var outputFile = Path.Combine(_testFolder, "output.pdf");
-
-            var metadata = new Metadata
-            {
-                Title = "QPdfNet title",
-                Author = "QPdfNet author",
-                Subject = "QPdfNet subject",
-                Keywords = "qpdf, metadata, test",
-                Application = "QPdfNet application",
-                Producer = "QPdfNet producer"
-            };
-
-            using var job = new Job();
-            var result = job.UpdateMetadata(Path.Combine("TestFiles", "test.pdf"), metadata, outputFile);
-
-            Assert.AreEqual(ExitCode.Success, result);
-            Assert.IsTrue(File.Exists(outputFile));
-
-            using var readJob = new Job();
-            var readMetadata = readJob.GetMetadata(outputFile);
-
-            Assert.AreEqual(metadata.Title, readMetadata.Title);
-            Assert.AreEqual(metadata.Author, readMetadata.Author);
-            Assert.AreEqual(metadata.Subject, readMetadata.Subject);
-            Assert.AreEqual(metadata.Keywords, readMetadata.Keywords);
-            Assert.AreEqual(metadata.Application, readMetadata.Application);
-            Assert.AreEqual(metadata.Producer, readMetadata.Producer);
-        }
-
-        [TestMethod]
         public void TestGetMetadata()
         {
             using var job = new Job();
-            var metadata = job.GetMetadata(Path.Combine("TestFiles", "test.pdf"));
+            var metadata = job.InputFile(Path.Combine("TestFiles", "test.pdf")).GetMetadata();
 
             Assert.IsNotNull(metadata);
         }
@@ -839,7 +925,7 @@ namespace QpdfNetTest
         public void TestGetMetadataPages()
         {
             using var job = new Job();
-            var metadata = job.GetMetadata(Path.Combine("TestFiles", "acrobat_8_help.pdf"));
+            var metadata = job.InputFile(Path.Combine("TestFiles", "acrobat_8_help.pdf")).GetMetadata();
 
             Assert.IsNotNull(metadata);
             Assert.IsTrue(metadata.PageCount > 0);
@@ -859,7 +945,7 @@ namespace QpdfNetTest
 
             for (var i = 0; i < 1000; i++)
             {
-                var metadata = job.GetMetadata(Path.Combine("TestFiles", "test.pdf"));
+                var metadata = job.InputFile(Path.Combine("TestFiles", "test.pdf")).GetMetadata();
 
                 Assert.IsNotNull(metadata);
                 Assert.IsTrue(metadata.PageCount > 0);

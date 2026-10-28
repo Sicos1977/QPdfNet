@@ -18,9 +18,9 @@
 		<PackageReadmeFile>readme.md</PackageReadmeFile>
 		<Copyright>Copyright (c) 2021-2026 Kees van Spelde</Copyright>
 		<GeneratePackageOnBuild>True</GeneratePackageOnBuild>
-		<AssemblyVersion>1.7.1.0</AssemblyVersion>
-		<FileVersion>1.7.1.0</FileVersion>
-		<Version>1.7.1</Version>
+		<AssemblyVersion>1.7.2.0</AssemblyVersion>
+		<FileVersion>1.7.2.0</FileVersion>
+		<Version>1.7.2</Version>
     <DocumentationFile>bin\$(Configuration)\$(TargetFramework)\$(AssemblyName).xml</DocumentationFile>
     <NoWarn>$(NoWarn);1591;SYSLIB0044</NoWarn>
 	</PropertyGroup>
@@ -30,9 +30,15 @@
     <PackageReference Include="System.Text.Json" Version="10.0.13" />
   </ItemGroup>
 
-  <ItemGroup Condition="'$(TargetFramework)' == 'netstandard2.0'">
-    <PackageReference Include="System.Reflection.Emit" Version="4.7.0" />
-  </ItemGroup>
+	<ItemGroup Condition="'$(TargetFramework)' == 'netstandard2.0'">
+		<PackageReference Include="System.Reflection.Emit" Version="4.7.0" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<AssemblyAttribute Include="System.Runtime.CompilerServices.InternalsVisibleTo">
+			<_Parameter1>QpdfNetTest</_Parameter1>
+		</AssemblyAttribute>
+	</ItemGroup>
 
 	<ItemGroup>
 		<!--

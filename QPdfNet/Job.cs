@@ -302,7 +302,9 @@ public class Job : IDisposable
     private List<string>? _jsonObject;
 
     [JsonPropertyName("jsonOutput")]
+#pragma warning disable CS0414 // Field is assigned but its value is never used
     private string? _jsonOutput;
+#pragma warning restore CS0414 // Field is assigned but its value is never used
 
     [JsonPropertyName("jsonInput")]
     private string? _jsonInput;
@@ -330,6 +332,24 @@ public class Job : IDisposable
 
     [JsonPropertyName("removeInfo")]
     private string? _removeInfo;
+
+    [JsonPropertyName("title")]
+    private string? _title;
+
+    [JsonPropertyName("author")]
+    private string? _author;
+
+    [JsonPropertyName("subject")]
+    private string? _subject;
+
+    [JsonPropertyName("keywords")]
+    private string? _keywords;
+
+    [JsonPropertyName("creator")]
+    private string? _creator;
+
+    [JsonPropertyName("producer")]
+    private string? _producer;
 
     [JsonPropertyName("removeMetadata")]
     private string? _removeMetadata;
@@ -542,6 +562,12 @@ public class Job : IDisposable
         _progress = null;
         _removeAcroform = null;
         _removeInfo = null;
+        _title = null;
+        _author = null;
+        _subject = null;
+        _keywords = null;
+        _creator = null;
+        _producer = null;
         _removeMetadata = null;
         _removeStructure = null;
         _reportMemoryUsage = null;
@@ -553,12 +579,15 @@ public class Job : IDisposable
     ///     The input PDF file
     /// </summary>
     /// <param name="fileName">The input file</param>
-    /// <returns>
-    ///     <see cref="Job" />
-    /// </returns>
+    /// <returns><see cref="Job" /></returns>
+    /// <exception cref="FileNotFoundException">Thrown if the input file does not exist.</exception>
     public Job InputFile(string fileName)
     {
         Logger.LogInformation($"Opening PDF file '{fileName}'");
+
+        if (!System.IO.File.Exists(fileName))
+            throw new FileNotFoundException(fileName);
+
         _inputFile = fileName;
         return this;
     }
@@ -2548,12 +2577,14 @@ public class Job : IDisposable
     ///     between PDF and JSON, please see qpdf JSON.
     /// </summary>
     /// <param name="jsonFile">an input JSON file in qpdf format</param>
-    /// <returns>
-    ///     <see cref="Job" />
-    /// </returns>
+    /// <returns><see cref="Job" /></returns>
+    /// <exception cref="FileNotFoundException">Thrown if the input JSON file does not exist.</exception>
     public Job UpdateFromJson(string jsonFile)
     {
         Logger.LogInformation($"Updating PDF with qpdf JSON input file '{jsonFile}'");
+        if (!System.IO.File.Exists(jsonFile))
+            throw new FileNotFoundException(jsonFile);
+
         _updateFromJson = jsonFile;
         return this;
     }
@@ -2561,19 +2592,15 @@ public class Job : IDisposable
 
     #region GetMetadata
     /// <summary>
-    ///     Returns the document meta-data (the <c>/Info</c> dictionary) of the given <paramref name="fileName" />,
-    ///     such as the title, author, subject, keywords, creating application and PDF producer.
+    ///     Returns the document meta-data (the <c>/Info</c> dictionary) such as the title, author, subject, keywords, creating application and PDF producer.
     /// </summary>
-    /// <param name="fileName">The PDF file to read the meta-data from</param>
     /// <returns>A <see cref="Metadata" /> object with the meta-data of the PDF</returns>
     /// <exception cref="Exception">Thrown when the qpdf operation fails or the file cannot be processed</exception>
-    public Metadata GetMetadata(string fileName)
+    public Metadata GetMetadata()
     {
-        Logger.LogInformation($"Getting meta-data from PDF '{fileName}'");
+        Logger.LogInformation("Getting meta-data from PDF");
 
-        Reset();
-
-        var result = InputFile(fileName).Json().InternalRun(out var output, out var data);
+        var result = Json().InternalRun(out var output, out var data);
 
         if (result != (int)ExitCode.Success)
             throw new Exception(output);
@@ -2604,69 +2631,8 @@ public class Job : IDisposable
         return metadata;
     }
     #endregion
-
-    #region UpdateMetadata
-    /// <summary>
-    ///     Updates the document meta-data (the <c>/Info</c> dictionary) of the given <paramref name="fileName" /> and
-    ///     writes the result to <paramref name="outputFile" />. Only the properties that are set (non <c>null</c>) on the
-    ///     given <paramref name="metadata" /> are written; set a property to an empty string to clear it.
-    /// </summary>
-    /// <param name="fileName">The input PDF file</param>
-    /// <param name="metadata">The <see cref="Metadata" /> to write into the PDF</param>
-    /// <param name="outputFile">The output PDF file</param>
-    /// <returns><see cref="ExitCode" /></returns>
-    /// <exception cref="Exception">Thrown when the qpdf operation fails or the file cannot be processed</exception>
-    public ExitCode UpdateMetadata(string fileName, Metadata metadata, string outputFile)
-    {
-        Logger.LogInformation($"Updating meta-data of PDF '{fileName}'");
-
-        Reset();
-
-        // Step 1 - Get a complete qpdf JSON representation of the input PDF
-        var result = InputFile(fileName).Json().InternalRun(out var output, out var data);
-
-        if (result != (int)ExitCode.Success)
-            throw new Exception(output);
-
-        if (data == null)
-            throw new Exception("qpdf did not return any JSON output for the input file");
-
-        var root = JsonNode.Parse(Encoding.UTF8.GetString(data))!.AsObject();
-        var info = GetInfoDictionary(root) ?? CreateInfoDictionary(root);
-
-        SetPdfString(info, "/Title", metadata.Title);
-        SetPdfString(info, "/Author", metadata.Author);
-        SetPdfString(info, "/Subject", metadata.Subject);
-        SetPdfString(info, "/Keywords", metadata.Keywords);
-        SetPdfString(info, "/Creator", metadata.Application);
-        SetPdfString(info, "/Producer", metadata.Producer);
-
-        // Step 2 - Write the modified JSON back into a PDF via qpdf's JSON input mechanism
-        var tempJsonFile = Path.Combine(Path.GetTempPath(), $"qpdf-{Guid.NewGuid():N}.json");
-
-        try
-        {
-            System.IO.File.WriteAllText(tempJsonFile, root.ToJsonString(JsonOptions.JsonNodeWrite), new UTF8Encoding(false));
-
-            Reset();
-
-            var updateResult = InputFile(tempJsonFile).JsonInput().OutputFile(outputFile)
-                .InternalRun(out var updateOutput, out _);
-
-            if (updateResult != (int)ExitCode.Success)
-                throw new Exception(updateOutput);
-
-            return (ExitCode)updateResult;
-        }
-        finally
-        {
-            if (System.IO.File.Exists(tempJsonFile))
-                System.IO.File.Delete(tempJsonFile);
-        }
-    }
-    #endregion
-
-    #region Metadata helpers
+    
+    #region GetInfoDictionary
     /// <summary>
     ///     Returns the <c>/Info</c> dictionary from the qpdf JSON <paramref name="root" /> or <c>null</c> when
     ///     the PDF does not contain a document information dictionary.
@@ -2683,32 +2649,9 @@ public class Job : IDisposable
 
         return objects[$"obj:{infoReference}"]?["value"] as JsonObject;
     }
+    #endregion
 
-    /// <summary>
-    ///     Creates a new <c>/Info</c> dictionary, adds it to the qpdf JSON <paramref name="root" /> and references
-    ///     it from the trailer. Returns the newly created dictionary.
-    /// </summary>
-    private static JsonObject CreateInfoDictionary(JsonObject root)
-    {
-        if (root["qpdf"]?[1] is not JsonObject objects)
-            throw new Exception("The qpdf JSON output does not contain an objects section");
-
-        var header = root["qpdf"]?[0] as JsonObject;
-        var maxObjectId = header?["maxobjectid"] is JsonValue maxValue && maxValue.TryGetValue(out int id) ? id : 0;
-        var newObjectId = maxObjectId + 1;
-
-        if (header != null)
-            header["maxobjectid"] = newObjectId;
-
-        var info = new JsonObject();
-        objects[$"obj:{newObjectId} 0 R"] = new JsonObject { ["value"] = info };
-
-        if (objects["trailer"]?["value"] is JsonObject trailerValue)
-            trailerValue["/Info"] = $"{newObjectId} 0 R";
-
-        return info;
-    }
-
+    #region DecodePdfString
     /// <summary>
     ///     Decodes a qpdf JSON string value into a plain .NET string. qpdf prefixes Unicode strings with
     ///     <c>u:</c> and binary strings with <c>b:</c>.
@@ -2725,7 +2668,9 @@ public class Job : IDisposable
 
         return value;
     }
+    #endregion
 
+    #region GetStringValue
     /// <summary>
     ///     Returns the string value of the given <paramref name="token" /> or <c>null</c> when it is not a JSON string.
     /// </summary>
@@ -2736,22 +2681,9 @@ public class Job : IDisposable
 
         return null;
     }
+    #endregion
 
-    /// <summary>
-    ///     Sets or removes a PDF string value on the given <paramref name="info" /> dictionary. A <c>null</c>
-    ///     <paramref name="value" /> leaves the existing value untouched, while an empty string clears it.
-    /// </summary>
-    private static void SetPdfString(JsonObject info, string key, string? value)
-    {
-        if (value == null)
-            return;
-
-        if (value.Length == 0)
-            info.Remove(key);
-        else
-            info[key] = "u:" + value;
-    }
-
+    #region ParsePdfDate
     /// <summary>
     ///     Parses a PDF date string (e.g. <c>D:20240131123000+01'00'</c>) into a <see cref="DateTimeOffset" />.
     ///     Returns <c>null</c> when the value is empty or cannot be parsed.
@@ -2799,7 +2731,9 @@ public class Job : IDisposable
             return null;
         }
     }
+    #endregion
 
+    #region ReadPages
     /// <summary>
     ///     Reads the page tree from the qpdf JSON <paramref name="root" /> and populates the
     ///     <see cref="Metadata.Pages" /> collection and <see cref="Metadata.PageCount" />.
@@ -2820,7 +2754,9 @@ public class Job : IDisposable
         CollectPages(objects, pagesRoot, new JsonObject(), metadata.Pages, ref number);
         metadata.PageCount = metadata.Pages.Count;
     }
+    #endregion
 
+    #region CollectPages
     /// <summary>
     ///     Recursively walks the page tree, applying inheritable attributes (<c>/MediaBox</c> and <c>/Rotate</c>)
     ///     from parent nodes, and adds a <see cref="PageInfo" /> for each leaf page.
@@ -2866,7 +2802,9 @@ public class Job : IDisposable
 
         pages.Add(page);
     }
+    #endregion
 
+    #region GetDoubleValue
     /// <summary>
     ///     Returns the numeric value of the given <paramref name="token" /> or <c>0</c> when it is not a JSON number.
     /// </summary>
@@ -2877,7 +2815,9 @@ public class Job : IDisposable
 
         return 0;
     }
+    #endregion
 
+    #region ResolveObject
     /// <summary>
     ///     Resolves a qpdf JSON token that is either an indirect reference (<c>"n 0 R"</c>) or an inline object
     ///     into the dictionary it points at. Returns <c>null</c> when it cannot be resolved.
@@ -3002,14 +2942,108 @@ public class Job : IDisposable
     }
     #endregion
 
+    #region Title
+    /// <summary>
+    ///     Sets the <c>/Title</c> value in the PDF <c>/Info</c> dictionary.
+    ///     Currently this only works on Windows.
+    /// </summary>
+    /// <param name="value">The title value</param>
+    /// <returns>
+    ///     <see cref="Job" />
+    /// </returns>
+    public Job Title(string value)
+    {
+        Logger.LogInformation($"Setting '/Info' title to '{value}'");
+        _title = value;
+        return this;
+    }
+    #endregion
+
+    #region Author
+    /// <summary>
+    ///     Sets the <c>/Author</c> value in the PDF <c>/Info</c> dictionary.
+    ///     Currently this only works on Windows.
+    /// </summary>
+    /// <param name="value">The author value</param>
+    /// <returns>
+    ///     <see cref="Job" />
+    /// </returns>
+    public Job Author(string value)
+    {
+        Logger.LogInformation($"Setting '/Info' author to '{value}'");
+        _author = value;
+        return this;
+    }
+    #endregion
+
+    #region Subject
+    /// <summary>
+    ///     Sets the <c>/Subject</c> value in the PDF <c>/Info</c> dictionary.
+    ///     Currently this only works on Windows.
+    /// </summary>
+    /// <param name="value">The subject value</param>
+    /// <returns>
+    ///     <see cref="Job" />
+    /// </returns>
+    public Job Subject(string value)
+    {
+        Logger.LogInformation($"Setting '/Info' subject to '{value}'");
+        _subject = value;
+        return this;
+    }
+    #endregion
+
+    #region Keywords
+    /// <summary>
+    ///     Sets the <c>/Keywords</c> value in the PDF <c>/Info</c> dictionary.
+    ///     Currently this only works on Windows.
+    /// </summary>
+    /// <param name="value">The keywords value</param>
+    /// <returns><see cref="Job" /></returns>
+    public Job Keywords(string value)
+    {
+        Logger.LogInformation($"Setting '/Info' keywords to '{value}'");
+        _keywords = value;
+        return this;
+    }
+    #endregion
+
+    #region Creator
+    /// <summary>
+    ///     Sets the <c>/Creator</c> value in the PDF <c>/Info</c> dictionary.
+    ///     Currently this only works on Windows.
+    /// </summary>
+    /// <param name="value">The creator value</param>
+    /// <returns><see cref="Job" /></returns>
+    public Job Creator(string value)
+    {
+        Logger.LogInformation($"Setting '/Info' creator to '{value}'");
+        _creator = value;
+        return this;
+    }
+    #endregion
+
+    #region Producer
+    /// <summary>
+    ///     Sets the <c>/Producer</c> value in the PDF <c>/Info</c> dictionary.
+    ///     Currently this only works on Windows.
+    /// </summary>
+    /// <param name="value">The producer value</param>
+    /// <returns><see cref="Job" /></returns>
+    public Job Producer(string value)
+    {
+        Logger.LogInformation($"Setting '/Info' producer to '{value}'");
+        _producer = value;
+        return this;
+    }
+    #endregion
+
     #region RemoveMetadata
     /// <summary>
     ///     Exclude metadata from the <see cref="OutputFile"/> by omitting the <c>/Metadata</c> dictionary in the document
     ///     catalog.
     /// </summary>
-    /// <returns>
-    ///     <see cref="Job" />
-    /// </returns>
+    /// <returns><see cref="Job" /></returns>
     public Job RemoveMetadata()
     {
         Logger.LogInformation("Exclude metadata from the output file");
@@ -3050,6 +3084,19 @@ public class Job : IDisposable
     }
     #endregion
 
+    #region ToJson
+    /// <summary>
+    ///     Returns the JSON payload that is passed to qpdf.
+    /// </summary>
+    /// <returns>
+    ///     A JSON string containing the configured job options.
+    /// </returns>
+    internal string ToJson()
+    {
+        return System.Text.Json.JsonSerializer.Serialize(this, JsonOptions.Serialize);
+    }
+    #endregion
+
     #region InternalRun
     /// <summary>
     ///     Runs the job with the given parameters
@@ -3060,7 +3107,7 @@ public class Job : IDisposable
     {
         data = null;
 
-        var json = System.Text.Json.JsonSerializer.Serialize(this, JsonOptions.Serialize);
+        var json = ToJson();
 
         Logger.LogDebug($"JSON input for QPDF: {Environment.NewLine}{json}");
 
